@@ -1,0 +1,59 @@
+extends css
+
+##########################
+#  Convinience snippets  #
+##########################
+
+snippet bg "background-color" i
+background-color: $1;
+endsnippet
+
+snippet dis "display: block" i
+display: block;
+endsnippet
+
+snippet dis "display: inline-block" i
+display: inline-block;
+endsnippet
+
+snippet h "height" i
+height: $1;
+endsnippet
+
+snippet w "width" i
+width: $1;
+endsnippet
+
+snippet pos "position: relative" i
+position: relative;$0
+endsnippet
+
+snippet pos "position: absolute" i
+position: absolute;$0
+endsnippet
+
+snippet pos "position: fixed" i
+position: fixed;$0
+endsnippet
+
+#############
+#  @ rules  #
+#############
+
+snippet @k "@keyframe" i
+@keyframes ${1:animation_name} {
+  ${2://steps}
+}$0
+endsnippet
+
+snippet @m "@media max-width"
+@media (max-width: ${1}) {
+  ${2}
+}
+
+endsnippet
+snippet @m "@media min-width max-width"
+@media (min-width: ${1}) and (max-width: ${2}) {
+  ${3}
+}
+endsnippet

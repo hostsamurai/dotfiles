@@ -1,0 +1,17 @@
+[ui]
+username = USERNAME <EMAIL>
+
+[extdiff]
+cmd.vimdiff = gvim
+opts.vimdiff = -f '+next' '+execute "DirDiff" argv(0) argv(1)'
+
+[extensions]
+bookmarks=
+churn=
+color=
+extdiff=
+graphlog=
+mq=
+pager=
+progress=
+rebase=

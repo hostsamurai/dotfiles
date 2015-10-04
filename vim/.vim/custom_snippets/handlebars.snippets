@@ -1,0 +1,44 @@
+extends mustache
+
+snippet if "if helper"
+{{#if ${1:context}}}
+  ${2:block}
+{{/if}}
+endsnippet
+
+snippet ife "if/else helper"
+{{#if ${1:context}}}
+  ${2:block}
+{{else}}
+  ${3:other block}
+{{/if}}
+endsnippet
+
+snippet el "else helper"
+{{else}}
+  ${1:block}
+endsnippet
+
+snippet u "unless"
+{{#unless ${1:context}}}
+  ${2:block}
+{{/unless}}
+endsnippet
+
+snippet w "with"
+{{#with ${1:context}}}
+	${2:block}
+{{/with}}
+endsnippet
+
+snippet ea "#each" b
+{{#each ${1:list}}}
+  ${2:block}
+{{/each}}
+endsnippet
+
+snippet !-- "multiline comment" b
+{{!--
+  ${1:block}
+--}}
+endsnippet

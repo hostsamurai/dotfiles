@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sed -r "s/(name\s*\=\s*)(.*)/\1USERNAME/; \
+        s/(email\s*\=\s*)(.*)/\1EMAIL/; \
+        s/^(username\s*\=\s*)(.*)\s*(.*)/\1USERNAME <EMAIL>/"

@@ -1,0 +1,43 @@
+snippet v "variable" !i
+{{${1:var}}}$0
+endsnippet
+
+snippet # "conditional (inine)" !i
+{{#${1:name}}}${2:content}{{/$1}}$0
+endsnippet
+
+snippet # "list"
+{{#${1:name}}}
+  ${2:content}
+{{/$1}}
+$0
+endsnippet
+
+snippet ^ "inverted section (inline)" !i
+{{^${1:name}}}${2:content}{{/$1}}$0
+endsnippet
+
+snippet ^ "inverted section"
+{{^${1:name}}}
+  ${2:content}
+{{/$1}}
+$0
+endsnippet
+
+snippet ? "non-false values (inline)" !i
+{{#${1:name}?}}${2:content}{{/$1?}}$0
+endsnippet
+
+snippet ? "non-false values"
+{{#${1:name}?}}
+  ${2:content}
+{{/$1?}}$0
+endsnippet
+
+snippet > "partial" !i
+{{>${1:var}}}$0
+endsnippet
+
+snippet ! "comment" !i
+{{!${1:comment}}}
+endsnippet

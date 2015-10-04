@@ -1,0 +1,67 @@
+extends javascript
+
+snippet () "Closure"
+(function(${1:args}) {
+	${2}
+})(${3:args});$0
+endsnippet
+
+snippet use "use strict"
+'use strict';$0
+endsnippet
+
+snippet fun "Inlined named function" !i
+function ${1:name}(${2:args}) {
+  ${3}
+}
+endsnippet
+
+snippet fn "Anonymous function" !i
+function(${1}) {
+  ${2}
+}$0
+endsnippet
+
+snippet =f "var = fn" !i
+${1:varname} = function(${2:args}) {
+  ${3:// body}
+};$0
+endsnippet
+
+snippet con "console.log"
+console.log(${1});$0
+endsnippet
+
+snippet fea "forEach" !i
+forEach(function(${1:elem}${2:, ${3:index}}) {
+	${4}
+});
+endsnippet
+
+snippet e "e.preventDefault()"
+e.preventDefault();
+endsnippet
+
+
+# ES6 snippets
+snippet im "import (simple)"
+import ${1:module} from '${2:path}';
+endsnippet
+
+snippet ce "class extends"
+class ${1:name} extends ${2:obj} {
+	constructor() {
+		${3}
+	}
+}
+endsnippet
+
+snippet exd "export default"
+export default ${1};
+endsnippet
+
+snippet fn "method declaration shorthand"
+${1:method}(${2:args}) {
+	$0
+}${3:,}
+endsnippet

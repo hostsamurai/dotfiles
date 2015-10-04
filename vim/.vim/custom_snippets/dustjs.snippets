@@ -1,0 +1,23 @@
+snippet v "variable" !i
+{${1:var}}$0
+endsnippet
+
+snippet # "inline check" !i
+{#${1:var}}${2:statement}{/$1}
+endsnippet
+
+snippet # "inline existence check" !i
+{#${1:var}}{$1}{/$1}
+endsnippet
+
+snippet #e "inline existence check w/ else" !i
+{#${1:var}}{$1}${2:{:else}{${3:other_var}}}{/$1}$0
+endsnippet
+
+snippet if "if statement (inline)" !i
+{@if ${1:condition}}${2:statements}${3:{:else}${4:other statements}}{/if}$0
+endsnippet
+
+snippet eq "eq helper" !i
+{@eq key="${1:key}" value="${2:value}" ${3:type="${4:type}"}}${5:statement}{/eq}
+endsnippet

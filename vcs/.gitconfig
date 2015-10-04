@@ -1,0 +1,43 @@
+[user]
+  name = USERNAME
+  email = EMAIL
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status --column=
+  br = branch
+  db = diff -b
+  lo = log --oneline
+  hist = log --pretty=format:\"%h %d | %s%d [%an]\" --graph --date=short
+  sl = shortlog --format='%C(auto)%h %s'
+  ac = apply --check --ignore-whitespace --verbose
+  type = cat-file -t
+  dump = cat-file -p
+
+[color]
+  ui = true
+
+[core]
+  autocrlf = input
+  editor = vim
+  excludesfile = ~/.gitignore_global
+
+[mergetool "mvimdiff"]
+  cmd = /usr/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+
+[merge]
+  tool = mvimdiff
+  conflictstyle = diff3
+
+[diff]
+  tool = vimdiff
+  guitool = gvimdiff
+
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
+
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true

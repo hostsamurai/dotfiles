@@ -1,0 +1,110 @@
+#autoload
+
+#
+# Loads the prompt theme
+#
+
+typeset -gA VCS_SYMBOLS
+
+VCS_SYMBOLS[git]='±'
+VCS_SYMBOLS[svn]='🐢'
+VCS_SYMBOLS[hg]='☿'
+VCS_SYMBOLS[default]='○'
+
+prompt_git_status() {
+  local git_state_color='{green}'
+
+  # check for untracked or modified files
+  if [[ -n $(git ls-files --other --exclude-standard 2>/dev/null) ]]; then
+    git_state_color='{red}'
+  fi
+
+  if ! git diff --quiet 2>/dev/null; then
+    git_state_color='{red}'
+  fi
+
+  # in the middle of merging or rebasing
+  local git_dir="$(git rev-parse --git-dir 2>/dev/null)"
+  if [ -n $git_dir ] && test -r $git_dir/MERGE_HEAD; then
+    git_state_color='{yellow}'
+  fi
+
+  echo $git_state_color
+}
+
+prompt_svn_status() {
+  local svn_state_color='{green}'
+
+  # check for untracked or modified files
+  local change_count=`svn status --ignore-externals | grep "?\|\!\|M\|A" | wc -l | xargs`
+  if [[ $change_count -gt 0 ]]; then
+    svn_state_color='{red}'
+  fi
+
+  echo $svn_state_color
+}
+
+prompt_hg_status() {
+  local hg_state_color='{green}'
+  echo $hg_state_color
+}
+
+prompt_vcs_status() {
+  local status_start='%B%F'
+  local status_color='{green}'
+  local status_end='%f%b'
+
+  local vcs_char=$(prompt_vcs_char)
+
+  case $vcs_char in
+    ${VCS_SYMBOLS[git]})
+      status_color=$(prompt_git_status)
+      ;;
+    ${VCS_SYMBOLS[svn]})
+      status_color=$(prompt_svn_status)
+      ;;
+    ${VCS_SYMBOLS[hg]})
+      status_color=$(prompt_hg_status)
+      ;;
+    *)
+  esac
+
+  echo "$status_start$status_color$vcs_char$status_end"
+}
+
+prompt_vcs_char() {
+  git branch >/dev/null 2>/dev/null && echo ${VCS_SYMBOLS[git]} && return
+  svn info   >/dev/null 2>/dev/null && echo ${VCS_SYMBOLS[svn]} && return
+  hg root    >/dev/null 2>/dev/null && echo ${VCS_SYMBOLS[hg]}  && return
+}
+
+prompt_precmd() {
+  # shows the full path in the title
+  print -Pn '\e]0;%!\a'
+
+  local preprompt="\n%2~"
+
+  if [[ $vcs_info_msg_0_ ]]; then
+    preprompt+="%B%F{yellow} ❬%b%f$vcs_info_msg_0_ `prompt_vcs_status` %B%F{yellow}❭%f%b"
+  fi
+
+  print -P $preprompt
+}
+
+prompt_setup() {
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  zstyle ':vcs_info:*' enable git svn hg
+  zstyle ':vcs_info:(hg|git*):*' formats ' %b'
+  zstyle ':vcs_info:(hg|git*):*' actionformats '%b|%a'
+  zstyle ':vcs_info:svn:*' formats ' %i'
+  zstyle ':vcs_info:svn:*' actionformats ' %i|%a'
+
+  add-zsh-hook precmd vcs_info
+  add-zsh-hook precmd prompt_precmd
+
+  PROMPT="%F{red}★%f "
+}
+
+prompt_setup "$@"
