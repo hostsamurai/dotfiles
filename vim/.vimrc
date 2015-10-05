@@ -144,8 +144,8 @@ set hidden
 set laststatus=2
 set cmdheight=2
 set number
-set sessionoptions = resize,winpos,winsize,buffers,tabpages,folds,curdir,localoptions,help
-set statusline = %<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,localoptions,help
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 set expandtab " turn tabs into spaces
 set formatoptions=tcqrn
@@ -318,7 +318,7 @@ let g:tagbar_type_scss = {
 \ ]
 \}
 
-let g:EditorConfig_exec_path = '/usr/local/bin/editorconfig'
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:EditorConfig_core_mode = 'external_command'
 
 let g:syntastic_javascript_checkers = ['eslint']
