@@ -14,9 +14,9 @@ export WORDCHARS='*?_~=&;!#$%^(){}<>'
 # Path modifications
 # ------------------------------------------------
 if [[ -d "$HOME/.rbenv" ]]; then
-    path+=("$HOME/.rbenv/bin")
-    export PATH
-    eval "$(rbenv init -)"
+  path+=("$HOME/.rbenv/bin")
+  export PATH
+  eval "$(rbenv init -)"
 fi
 
 
@@ -24,12 +24,12 @@ fi
 # Aliases
 # ------------------------------------------------
 alias ls='ls -hF --color=auto'
-alias lr='ls -R'	 # recursive ls
+alias lr='ls -R'   # recursive ls
 alias ll='ls -la'
 alias la='ls -A'
-alias lx='ll -BX'	 # sort by extension
-alias lz='ll -rS'	 # sort by size
-alias lt='ll -rt'	 # sort by date
+alias lx='ll -BX'  # sort by extension
+alias lz='ll -rS'  # sort by size
+alias lt='ll -rt'  # sort by date
 alias less='less -R'
 
 alias -g L='| less'
@@ -40,9 +40,9 @@ alias -g M='| more'
 # Custom functions
 # ------------------------------------------------
 fpath=(
-    $fpath
-    ~/.zsh/functions
-    ~/.zsh/functions/**
+  $fpath
+  ~/.zsh/functions
+  ~/.zsh/functions/**
 )
 
 
@@ -54,32 +54,34 @@ source "${HOME}/zgen/zgen.zsh"
 
 # check if there's no init script
 if ! zgen saved; then
-    echo "Creating a zgen save"
+  echo "Creating a zgen save"
 
-    # prezto options
-    zgen prezto editor key-bindings "emacs"
+  # prezto options
+  zgen prezto editor key-bindings "emacs"
 
-    # prezto and modules
-    zgen prezto
-    zgen prezto utility
-    zgen prezto completion
-    zgen prezto history
-    zgen prezto archive
-    zgen prezto git
-    zgen prezto command-not-found
-    zgen prezto syntax-highlighting
-    zgen prezto history-substring-search
-    zgen prezto spectrum
+  # prezto and modules
+  zgen prezto
+  zgen prezto utility
+  zgen prezto completion
+  zgen prezto history
+  zgen prezto archive
+  zgen prezto git
+  zgen prezto command-not-found
+  zgen prezto syntax-highlighting
+  zgen prezto history-substring-search
+  zgen prezto spectrum
 
-    # plugins
-    zgen load rupa/z
-    zgen load tarruda/zsh-autosuggestions
-    zgen load jocelynmallon/zshmarks
+  # plugins
+  zgen load rupa/z
+  zgen load tarruda/zsh-autosuggestions
+  zgen load jocelynmallon/zshmarks
+
+  zgen save
 fi
 
 # Enable autosuggestions automatically.
 zle-line-init() {
-    zle autosuggest-start
+  zle autosuggest-start
 }
 zle -N zle-line-init
 
