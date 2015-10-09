@@ -11,13 +11,45 @@ export WORDCHARS='*?_~=&;!#$%^(){}<>'
 
 
 # ------------------------------------------------
-# Path modifications
+# Plugins
 # ------------------------------------------------
-if [[ -d "$HOME/.rbenv" ]]; then
-  path+=("$HOME/.rbenv/bin")
-  export PATH
-  eval "$(rbenv init -)"
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
+
+# check if there's no init script
+if ! zgen saved; then
+  echo "Creating a zgen save"
+
+  # prezto options
+  zgen prezto editor key-bindings "emacs"
+
+  # prezto and modules
+  zgen prezto
+  zgen prezto completion
+  zgen prezto history
+  zgen prezto archive
+  zgen prezto git
+  zgen prezto command-not-found
+  zgen prezto syntax-highlighting
+  zgen prezto history-substring-search
+  zgen prezto spectrum
+
+  # plugins
+  zgen load rupa/z
+  zgen load jocelynmallon/zshmarks
+
+  zgen save
 fi
+
+# bind P and N for EMACS mode
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+
+# ------------------------------------------------
+# Options
+# ------------------------------------------------
+setopt clobber
 
 
 # ------------------------------------------------
@@ -44,56 +76,6 @@ fpath=(
   ~/.zsh/functions
   ~/.zsh/functions/**
 )
-
-
-# ------------------------------------------------
-# Plugins
-# ------------------------------------------------
-# load zgen
-source "${HOME}/zgen/zgen.zsh"
-
-# check if there's no init script
-if ! zgen saved; then
-  echo "Creating a zgen save"
-
-  # prezto options
-  zgen prezto editor key-bindings "emacs"
-
-  # prezto and modules
-  zgen prezto
-  zgen prezto utility
-  zgen prezto completion
-  zgen prezto history
-  zgen prezto archive
-  zgen prezto git
-  zgen prezto command-not-found
-  zgen prezto syntax-highlighting
-  zgen prezto history-substring-search
-  zgen prezto spectrum
-
-  # plugins
-  zgen load rupa/z
-  zgen load tarruda/zsh-autosuggestions
-  zgen load jocelynmallon/zshmarks
-
-  zgen save
-fi
-
-# Enable autosuggestions automatically.
-zle-line-init() {
-  zle autosuggest-start
-}
-zle -N zle-line-init
-
-# prevent erasing the previous line in the shell when
-# hitting TAB due to the editor plugin not playing
-# nice with autosuggestions
-bindkey "^I" expand-or-complete
-
-# bind P and N for EMACS mode
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-
 
 # Render the prompt
 autoload -Uz star_prompt
