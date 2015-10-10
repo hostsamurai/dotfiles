@@ -5,6 +5,10 @@
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration."
   (setq-default
+   ;; Base distribution to use. This is a layer contained in the directory
+   ;; `+distribution'. For now available distributions are `spacemacs-base'
+   ;; or `spacemacs'. (default 'spacemacs)
+   dotspacemacs-distribution 'spacemacs
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
@@ -17,17 +21,15 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     spacemacs
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t)
-     ;; better-defaults
      git
      org
      (shell :variables
             shell-default-term-shell "/usr/bin/zsh"
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; syntax-checking
+     syntax-checking
      unimpaired
      version-control
 
@@ -42,6 +44,7 @@
      racket
      react
      ruby
+     scheme
      shell-scripts
 
      ;; appearance
@@ -170,27 +173,31 @@ before layers configuration."
    ;; specified with an installed package.
    ;; Not used for now.
    dotspacemacs-default-package-repository nil
-   ;; Customizations go below this comment
-   evil-escape-key-sequence "jk"
-   )
-  ;; User initialization goes here
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  ;; save all buffers when emacs loses focus
-  (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
-  )
+   ))
 
-(defun dotspacemacs/config ()
-  "Configuration function.
- This function is called at the very end of Spacemacs initialization after
-layers configuration."
+(defun dotspacemacs/user-init ()
+  "Initialization function for user code.
+It is called immediately after `dotspacemacs/init'.  You are free to put any
+user code."
+  (setq-default evil-escape-key-sequence "jk")
+
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
+  ;; general mode settings
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
+  )
+
+(defun dotspacemacs/user-config ()
+  "Configuration function.
+ This function is called at the very end of Spacemacs initialization after
+layers configuration."
   (setq-default
    ;; indentation settings
    indent-tabs-mode nil
-   default-tab-width 2
    tab-width 2
+   standard-indent 2
 
    ;; whitepace settings
    whitespace-action '(auto-cleanup)
@@ -198,7 +205,7 @@ layers configuration."
 
   ;; extra mode settings
   (add-hook 'markdown-mode-hook 'auto-fill-mode)
-)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
