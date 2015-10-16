@@ -1,8 +1,10 @@
 extends css
 
+
 ##########################
 #  Convinience snippets  #
 ##########################
+
 
 snippet bg "background-color" i
 background-color: $1;
@@ -36,9 +38,11 @@ snippet pos "position: fixed" i
 position: fixed;$0
 endsnippet
 
+
 #############
 #  @ rules  #
 #############
+
 
 snippet @k "@keyframe" i
 @keyframes ${1:animation_name} {
@@ -56,4 +60,24 @@ snippet @m "@media min-width max-width"
 @media (min-width: ${1}) and (max-width: ${2}) {
   ${3}
 }
+endsnippet
+
+
+############################
+#  Documentation snippets  #
+############################
+
+snippet /** "ruleset documentation"
+/**
+ * ${1:description}
+ */
+endsnippet
+
+snippet /- "section marker" b
+/*
+ ------------------------------------------------------------------
+ ${1:section}
+ ------------------------------------------------------------------
+ */
+$0
 endsnippet
