@@ -93,7 +93,7 @@ if [[ `uname` = "Darwin" ]]; then
     /usr/local/bin
     $path
   )
-  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  export -U MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
 if [[ -d "$HOME/.rbenv" ]]; then
