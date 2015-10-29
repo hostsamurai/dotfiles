@@ -8,7 +8,7 @@
   st = status --column=
   br = branch
   db = diff -b
-  lo = log --oneline
+  lo = log --oneline --decorate=full
   hist = log --pretty=format:\"%h %d | %s%d [%an]\" --graph --date=short
   sl = shortlog --format='%C(auto)%h %s'
   ac = apply --check --ignore-whitespace --verbose
