@@ -181,9 +181,6 @@ It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   (setq-default evil-escape-key-sequence "jk")
 
-  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-
   ;; general mode settings
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
@@ -202,6 +199,9 @@ layers configuration."
    ;; whitepace settings
    whitespace-action '(auto-cleanup)
   )
+
+  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
   ;; extra mode settings
   (add-hook 'markdown-mode-hook 'auto-fill-mode)
