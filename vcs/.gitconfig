@@ -7,13 +7,19 @@
   ci = commit
   st = status --column=
   br = branch
-  db = diff -b
+  df = diff -b
   lo = log --oneline --decorate=full
-  hist = log --pretty=format:\"%h %d | %s%d [%an]\" --graph --date=short
+  hist = log --pretty=format:'%h %d | %s%d [%an]' --graph --date=short
   sl = shortlog --format='%C(auto)%h %s'
   ac = apply --check --ignore-whitespace --verbose
   type = cat-file -t
   dump = cat-file -p
+  stls = stash list
+  stp = stash pop
+  sts = stash save --include-untracked
+  stsh = "!f() { git stash show stash@{$1}; }; f"
+  sta = "!f() { git stash apply stash@{$1}; }; f"
+  std = "!f() { git stash drop stash@{$1}; }; f"
 
 [color]
   ui = true
@@ -35,9 +41,9 @@
   guitool = gvimdiff
 
 [difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  cmd = opendiff "$LOCAL" "$REMOTE"
   path =
 
 [mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh "$LOCAL" "$REMOTE" -ancestor "$BASE" -merge "$MERGED"
   trustExitCode = true
