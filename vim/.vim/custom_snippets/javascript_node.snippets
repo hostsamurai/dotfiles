@@ -1,0 +1,13 @@
+priority -10
+
+snippet util "require('util')" i
+const util = require('util')
+endsnippet
+
+snippet ins "util.ispect short" w
+util.inspect(${1:object})
+endsnippet
+
+snippet ins "util.ispect long" w
+util.inspect(${1:object}, { depth: ${2:null} })
+endsnippet

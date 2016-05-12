@@ -1,79 +1,75 @@
-" Bundle stuff {{{
-set nocompatible
-filetype off
+" Plugin stuff {{{
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Utility
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'rking/ag.vim'
+Plug 'gregsexton/VimCalc'
+Plug 'vim-scripts/visincr'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/syntastic'
+Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
+Plug 'Townk/vim-autoclose'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'acustodioo/vim-tmux'
+Plug 'bronson/vim-visual-star-search'
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-"Plugin 'Shougo/vimproc'
-Plugin 'gregsexton/VimCalc'
-Plugin 'godlygeek/tabular'
-Plugin 'sjl/gundo.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-dispatch'
-Plugin 'rking/ag.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'kikijump/tslime.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-fireplace'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
-Plugin 'mattn/emmet-vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'VisIncr'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'Valloric/YouCompleteMe'
+" Snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-" syntax
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'nono/jquery.vim'
-Plugin 'othree/html5.vim'
-Plugin 'ap/vim-css-color'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'groenewege/vim-less'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'hallison/vim-ruby-sinatra'
-Plugin 'pangloss/vim-javascript'
-"Plugin 'elzr/vim-json'
-Plugin 'guileen/vim-node'
-Plugin 'myhere/vim-nodejs-complete'
-Plugin 'claco/jasmine.vim'
-Plugin 'mxw/vim-jsx'
-"Plugin 'marijnh/tern_for_vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'guns/vim-clojure-static'
-Plugin 'dgrnbrg/vim-redl'
-Plugin 'tpope/vim-haml'
-Plugin 'timcharper/textile.vim'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'acustodioo/vim-tmux'
-Plugin 'mutewinter/nginx.vim'
-Plugin 'kurayama/systemd-vim-syntax'
-Plugin 'freitass/todo.txt-vim.git'
-Plugin 'Townk/vim-autoclose'
-Plugin 'alunny/pegjs-vim'
-Plugin 'OrangeT/vim-csharp'
-Plugin 'tomasr/molokai'
-Plugin 'fruity.vim'
+" Language
+Plug 'othree/html5.vim'
+Plug 'mattn/emmet-vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'tpope/vim-haml'
 
-call vundle#end()
-filetype plugin indent on
-syntax on
+Plug 'plasticboy/vim-markdown'
+Plug 'timcharper/textile.vim'
+
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace',     { 'for': 'clojure' }
+Plug 'dgrnbrg/vim-redl',        { 'for': 'clojure' }
+
+Plug 'OrangeT/vim-csharp'
+
+Plug 'ap/vim-css-color',       { 'for': ['css', 'sass', 'scss'] }
+Plug 'hail2u/vim-css3-syntax', { 'for': ['css', 'sass', 'scss'] }
+
+Plug 'alunny/pegjs-vim'
+Plug 'guileen/vim-node'
+Plug 'myhere/vim-nodejs-complete'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+Plug 'vim-ruby/vim-ruby'
+Plug 'hallison/vim-ruby-sinatra'
+Plug 'tpope/vim-rails'
+
+Plug 'mutewinter/nginx.vim'
+Plug 'kurayama/systemd-vim-syntax'
+
+" Themes
+Plug 'tomasr/molokai'
+Plug 'vim-scripts/fruity.vim'
+Plug 'altercation/vim-colors-solarized'
+
+
+call plug#end()
+
 runtime macros/matchit.vim
 " }}}
 
@@ -91,6 +87,8 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set showmatch
 set hlsearch
+set nocompatible
+set hidden
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
@@ -146,6 +144,9 @@ set cmdheight=2
 set number
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,localoptions,help
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+" hide the tabline - rely on ctrlspace for navigation instead
+set showtabline=0
 
 set expandtab " turn tabs into spaces
 set formatoptions=tcqrn
@@ -281,6 +282,17 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 
 let g:gundo_prefer_python3 = 1
 
+" ctrlspace settings
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+
+if executable("ag")
+  let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+
+nnoremap <silent><C-p> :CtrlSpace 0<CR>
+
 " ultisnips settings
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit = "horizontal"
@@ -327,6 +339,9 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " Utility functions {{{
 " -----------------------------------------------------------------------------
+" Upgrade vim-plug after updating all plugins
+command! PU PlugUpdate | PlugUpgrade
+
 function! Preserve(command)
   " Preparation: save last search and cursor position
   let _s = @/

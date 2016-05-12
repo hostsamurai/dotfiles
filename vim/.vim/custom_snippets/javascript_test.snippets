@@ -1,0 +1,41 @@
+priority -10
+
+snippet desc "describe"
+describe('${1:test case}', () => {
+  ${2:// body}
+});
+endsnippet
+
+snippet it "it"
+it('${1:cond}', (${2}) => {
+  ${3:// body}
+});$0
+endsnippet
+
+snippet bef "before hook"
+before(${1:'${2:description}', }() => {
+  ${3:// body}
+});
+$0
+endsnippet
+
+snippet bef "beforeEach hook"
+beforeEach(${1:'${2:description}', }() => {
+  ${3:// body}
+});
+$0
+endsnippet
+
+snippet af "after hook"
+after(${1:'${2:description}', }() => {
+  ${3:// body}
+});
+$0
+endsnippet
+
+snippet af "after hook"
+afterEach(${1:'${2:description}', }() => {
+  ${3:// body}
+});
+$0
+endsnippet

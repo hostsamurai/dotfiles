@@ -3,11 +3,11 @@ extends javascript
 snippet () "Closure"
 (function(${1:args}) {
 	${2}
-})(${3:args});$0
+})(${3:args})$0
 endsnippet
 
 snippet use "use strict"
-'use strict';$0
+'use strict'$0
 endsnippet
 
 snippet fun "Inlined named function" !i
@@ -25,43 +25,95 @@ endsnippet
 snippet =f "var = fn" !i
 ${1:varname} = function(${2:args}) {
   ${3:// body}
-};$0
+}$0
 endsnippet
 
 snippet con "console.log"
-console.log(${1});$0
+console.log(${1})
 endsnippet
 
 snippet fea "forEach" !i
 forEach(function(${1:elem}${2:, ${3:index}}) {
-	${4}
-});
+  ${4}
+})
 endsnippet
 
 snippet e "e.preventDefault()"
-e.preventDefault();
+e.preventDefault()
 endsnippet
 
 
-# ES6 snippets
-snippet im "import (simple)"
-import ${1:module} from '${2:path}';
-endsnippet
-
+# ES2015 snippets
 snippet ce "class extends"
 class ${1:name} extends ${2:obj} {
-	constructor() {
-		${3}
-	}
+  constructor() {
+    ${3}
+  }
 }
 endsnippet
 
+snippet im "import (simple)"
+import ${1:module} from '${2:path}'
+endsnippet
+
+snippet im "import (named)"
+import \{ ${1} \} from '${2:path}'
+endsnippet
+
+snippet as "rename an import" b
+${1:import} as ${2:renamed}
+endsnippet
+
+snippet ex "export"
+export ${1}
+endsnippet
+
 snippet exd "export default"
-export default ${1};
+export default ${1}
 endsnippet
 
 snippet fn "method declaration shorthand"
 ${1:method}(${2:args}) {
-	$0
+  $0
 }${3:,}
+endsnippet
+
+snippet fn*	"longhand generator function declaration" !i
+function* ${1:name}(${2:args}) {
+	yield ${3:value}
+}
+endsnippet
+
+snippet y "yield" !i
+yield${1:*} ${2:next}
+endsnippet
+
+snippet => "arrow function" !i
+${1:(${2:args})} => {
+  ${3:// body}
+}$0
+endsnippet
+
+snippet => "arrow function (immediate return)" !i
+${1:(${2:args})} => ({
+  ${3:// body}
+})$0
+endsnippet
+
+snippet c=> "ES2015 function declaration"
+const ${1:name} = ${2:(${3:args})} => {
+  ${4://body}
+}$0
+endsnippet
+
+snippet $ "template" !i
+\$\{${1}\}
+endsnippet
+
+snippet l "let"
+let ${1:var} = ${2}
+endsnippet
+
+snippet c "const"
+const ${1:var} = ${2}
 endsnippet
