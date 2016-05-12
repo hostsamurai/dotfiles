@@ -1,7 +1,7 @@
 UNAME_S := $(shell uname -s)
 black := 0
 green := 2
-cyan	:= 6
+cyan  := 6
 white := 7
 command-width := 15
 
@@ -29,6 +29,7 @@ define print-bold-text
 	tput setaf $1
 	echo $2
 	tput sgr0
+	echo
 endef
 
 define print-help-text
@@ -38,30 +39,24 @@ define print-help-text
 	tput sgr0
 	printf "%s" $2
 	tput sgr0
+	echo
 endef
 
 .PHONY: all
-all: zsh vcs tmux vim spacemacs
+all: zsh vcs tmux vim spacemacs configs
 
 .PHONY: help
 help:
 	@echo
 	@$(call print-bold-text, ${green}, "Usage:")
-	@echo
 	@$(call print-help-text, "make all",       "stow all the things!")
-	@echo
 	@$(call print-help-text, "make zsh",       "stow ZSH configuration files")
-	@echo
 	@$(call print-help-text, "make vcs",       "stow version control configuration files")
-	@echo
 	@$(call print-help-text, "make tmux",      "stow tmux configuration files")
-	@echo
 	@$(call print-help-text, "make vim",       "stow Vim configuration files and .vim directory")
-	@echo
 	@$(call print-help-text, "make spacemacs", "stow spacemacs config")
-	@echo
+	@$(call print-help-text, "make configs",   "stow miscellaneous dotfiles")
 	@$(call print-help-text, "make clean",     "unstow everything")
-	@echo
 	@echo
 
 .PHONY: zsh
@@ -98,6 +93,10 @@ spacemacs:
 	@$(call print-bold-header, "Stowing spacemacs...")
 	stow -R spacemacs
 
+.PHONY: configs
+configs:
+	stow -R configs
+
 .PHONY: clean
 clean:
-	stow -D zsh vcs tmux vim spacemacs
+	stow -D zsh vcs tmux vim spacemacs configs
