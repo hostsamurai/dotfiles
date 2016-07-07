@@ -71,34 +71,6 @@ alias -g M='| more'
 # ------------------------------------------------
 # Custom functions
 # ------------------------------------------------
-fpath=(
-  $fpath
-  ~/.zsh/functions
-  ~/.zsh/functions/**
-)
-
 # Render the prompt
 autoload -Uz star_prompt
 star_prompt "$@"
-
-
-# ------------------------------------------------
-# Path modifications
-# ------------------------------------------------
-if [[ `uname` = "Darwin" ]]; then
-  # Programs installed by homebrew should appear before the
-  # system-provided equivalents.
-  path=(
-    /usr/local/opt/coreutils/libexec/gnubin
-    /usr/local/bin
-    $path
-  )
-  export -U MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-fi
-
-if [[ -d "$HOME/.rbenv" ]]; then
-  path+=("$HOME/.rbenv/bin")
-  eval "$(rbenv init -)"
-fi
-
-export -U PATH
