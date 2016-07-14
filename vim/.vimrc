@@ -334,6 +334,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:EditorConfig_core_mode = 'external_command'
 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:javascript_plugin_jsdoc = 1
 " }}}
 
 
