@@ -16,6 +16,10 @@ export WORDCHARS='*?_~=&;!#$%^(){}<>'
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
+# The autopair plugin needs this or it won't work with prezto.
+# See https://github.com/hlissner/zsh-autopair/issues/6
+AUTOPAIR_INHIBIT_INIT=1
+
 # check if there's no init script
 if ! zgen saved; then
   echo "Creating a zgen save"
@@ -26,24 +30,39 @@ if ! zgen saved; then
   # prezto and modules
   zgen prezto
   zgen prezto completion
+  zgen prezto directory
   zgen prezto history
   zgen prezto archive
   zgen prezto git
   zgen prezto command-not-found
+  zgen prezto spectrum
   zgen prezto syntax-highlighting
   zgen prezto history-substring-search
-  zgen prezto spectrum
 
   # plugins
   zgen load rupa/z
   zgen load jocelynmallon/zshmarks
+  zgen load hlissner/zsh-autopair 'autopair.zsh'
+  zgen load lukechilds/zsh-better-npm-completion
 
   zgen save
 fi
 
-# bind P and N for EMACS mode
+zstyle ':prezto:module:syntax-highlighting' color 'yes'
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+       'main' \
+       'brackets' \
+       'pattern' \
+       'cursor' \
+       'root'
+zstyle ':prezto:module:history-substring-search' color 'yes'
+
+# bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
+
+# manually start the autopair plugin
+autopair-init
 
 
 # ------------------------------------------------
