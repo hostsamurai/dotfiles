@@ -3,6 +3,8 @@ HISTSIZE=51000
 SAVEHIST=21000
 
 zstyle :compinstall filename "/home/$USER/.zshrc"
+# the NPM plugin needs this for w/e reason
+autoload -Uz compinit && compinit
 
 # Better path movement
 # by default, export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
@@ -90,6 +92,11 @@ alias -g M='| more'
 # ------------------------------------------------
 # Custom functions
 # ------------------------------------------------
+fpath=(
+    $fpath
+    ~/.zsh/functions
+    ~/.zsh/functions/**
+)
 # Render the prompt
 autoload -Uz star_prompt
 star_prompt "$@"
