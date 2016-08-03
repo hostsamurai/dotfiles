@@ -1,4 +1,0 @@
-[submodule "zsh/.zgen"]
-  path = zsh/.zgen
-  url = http://github.com/tarjoilija/zgen
-  ignore = dirty
