@@ -269,7 +269,8 @@ you should place your code here."
    ;; indentation settings
    indent-tabs-mode nil
    tab-width 2
-   standard-indent 2)
+   standard-indent 2
+   sh-indentation 2)
 
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
