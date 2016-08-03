@@ -2,10 +2,6 @@ HISTFILE=$HOME/.histfile
 HISTSIZE=51000
 SAVEHIST=21000
 
-zstyle :compinstall filename "/home/$USER/.zshrc"
-# the NPM plugin needs this for w/e reason
-autoload -Uz compinit && compinit
-
 # Better path movement
 # by default, export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 # we take out '/', '.', '-', '[', ']'
@@ -15,56 +11,35 @@ export WORDCHARS='*?_~=&;!#$%^(){}<>'
 # ------------------------------------------------
 # Plugins
 # ------------------------------------------------
-# load zgen
-source "${HOME}/.zgen/zgen.zsh"
+source ~/.zplug/init.zsh
 
-# The autopair plugin needs this or it won't work with prezto.
-# See https://github.com/hlissner/zsh-autopair/issues/6
-AUTOPAIR_INHIBIT_INIT=1
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
 
-# check if there's no init script
-if ! zgen saved; then
-  echo "Creating a zgen save"
+zplug "plugins/extract", from:oh-my-zsh
+zplug "plugins/lein",    from:oh-my-zsh
+zplug "plugins/emacs",   from:oh-my-zsh
 
-  # prezto options
-  zgen prezto editor key-bindings "emacs"
+zplug "rupa/z"
+zplug "jocelynmallon/zshmarks"
+zplug "hlissner/zsh-autopair"
+zplug "lukechilds/zsh-better-npm-completion"
+zplug "arzzen/calc.plugin.zsh"
+zplug "joepvd/zsh-hints"
 
-  # prezto and modules
-  zgen prezto
-  zgen prezto completion
-  zgen prezto directory
-  zgen prezto history
-  zgen prezto archive
-  zgen prezto git
-  zgen prezto command-not-found
-  zgen prezto spectrum
-  zgen prezto syntax-highlighting
-  zgen prezto history-substring-search
-
-  # plugins
-  zgen load rupa/z
-  zgen load jocelynmallon/zshmarks
-  zgen load hlissner/zsh-autopair 'autopair.zsh'
-  zgen load lukechilds/zsh-better-npm-completion
-
-  zgen save
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
 fi
 
-zstyle ':prezto:module:syntax-highlighting' color 'yes'
-zstyle ':prezto:module:syntax-highlighting' highlighters \
-       'main' \
-       'brackets' \
-       'pattern' \
-       'cursor' \
-       'root'
-zstyle ':prezto:module:history-substring-search' color 'yes'
+zplug load
 
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
-
-# manually start the autopair plugin
-autopair-init
 
 
 # ------------------------------------------------
