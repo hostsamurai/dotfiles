@@ -2,6 +2,9 @@ HISTFILE=$HOME/.histfile
 HISTSIZE=51000
 SAVEHIST=21000
 
+autoload -Uz compinit
+compinit
+
 # Better path movement
 # by default, export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 # we take out '/', '.', '-', '[', ']'
