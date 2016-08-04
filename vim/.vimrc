@@ -283,7 +283,6 @@ nnoremap <Leader>t :NERDTreeToggle<CR>
 let g:gundo_prefer_python3 = 1
 
 " ctrlspace settings
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
 

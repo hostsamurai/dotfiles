@@ -42,10 +42,11 @@ define print-help-text
 	echo
 endef
 
-.PHONY: all
-all: zsh vcs tmux vim spacemacs configs
+define run-post-hook
+	echo "Running post hook"
+	./lib/hooks/post_$1.sh
+endef
 
-.PHONY: help
 help:
 	@echo
 	@$(call print-bold-text, ${green}, "Usage:")
@@ -59,17 +60,17 @@ help:
 	@$(call print-help-text, "make clean",     "unstow everything")
 	@echo
 
-.PHONY: zsh
+all: zsh vcs tmux vim spacemacs configs
+
 zsh:
 	@$(call print-bold-header, "Stowing zsh...")
 	stow -R zsh
+	@$(call run-post-hook,zsh)
 
-.PHONY: tmux
 tmux:
 	@$(call print-bold-header, "Stowing tmux...")
 	stow -R tmux --ignore $(ignore)
 
-.PHONY: vcs
 vcs:
 	@$(call print-bold-header, "Stowing version control stuff...")
 	@echo
@@ -83,20 +84,19 @@ vcs:
 		sed -i "s/USERNAME/$$USERNAME/;s/EMAIL/$$EMAIL/" vcs/.gitconfig vcs/.hgrc;
 	@echo
 
-.PHONY: vim
 vim:
 	@$(call print-bold-header, "Stowing vim...")
 	stow -R vim --ignore $(ignore)
+	@$(call run-post-hook,vim)
 
-.PHONY: spacemacs
 spacemacs:
 	@$(call print-bold-header, "Stowing spacemacs...")
 	stow -R spacemacs
 
-.PHONY: configs
 configs:
 	stow -R configs
 
-.PHONY: clean
 clean:
 	stow -D zsh vcs tmux vim spacemacs configs
+
+.PHONY: all zsh vcs tmux vim spacemacs configs clean
