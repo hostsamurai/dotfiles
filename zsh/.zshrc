@@ -40,6 +40,8 @@ fi
 
 zplug load
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
