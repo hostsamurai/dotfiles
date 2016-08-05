@@ -2,8 +2,9 @@ HISTFILE=$HOME/.histfile
 HISTSIZE=51000
 SAVEHIST=21000
 
-autoload -Uz compinit
-compinit
+# Source completions first to keep any plugins that depend
+# on them from complaining.
+source ~/.zsh/completion.zsh
 
 # Better path movement
 # by default, export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
