@@ -1,7 +1,7 @@
 'use strict'
 
-
-const jump = 0.25
+const { utils: Cu } = Components;
+const { require } = Cu.import('resource://gre/modules/commonjs/toolkit/require.js', {})
 
 
 // Helper functions
@@ -9,6 +9,8 @@ const jump = 0.25
 const map = (name, keys) => {
   vimfx.set(`custom.mode.normal.${name}`, keys)
 }
+
+const jump = 0.25
 
 const changeMediaProperty = (defaultArgs, prop, notification) => {
   const { vim, count } = defaultArgs
@@ -109,9 +111,44 @@ vimfx.addCommand({
 })
 
 
+vimfx.addCommand({
+  name: 'misc_set_search_engines',
+  description: 'Set the order and keywords of the preferred search engines',
+  category: 'misc',
+  order: 10000
+}, ({ vim }) => {
+  const defaultEngines = Services.search.getEngines()
+  const engineSettings = require(`${__dirname}/search_engine.js`)
+
+  engineSettings.forEach((engine, i) => {
+    const { search: s } = Services
+    const nameChunk = new RegExp(engine.name)
+    let e = defaultEngines.find(e => nameChunk.test(e.name))
+
+    if (e && engine.remove) {
+      s.removeEngine(e)
+    } else if (e && engine.alias) {
+      e.alias = engine.alias
+      s.moveEngine(e, i)
+    } else {
+      s.addEngine(engine.url, 3, engine.icon, false, {
+        onSuccess(newEngine) {
+          newEngine.hidden = false
+          newEngine.alias = engine.alias
+          s.moveEngine(newEngine, i)
+        },
+        onError(error) {
+          console.error(`Could not add search engine ${engine.name}`, error)
+        }
+      })
+    }
+  })
+})
+
+
 // Mappings
 
-map('media_loop_playing',           '+ml')
+map('media_loop_playing',           ',ml')
 map('media_pause',                  '+mp')
 map('media_decrease_playback_rate', '-mr')
 map('media_increase_playback_rate', '+mr')
@@ -119,3 +156,4 @@ map('media_decrease_volume',        '-mv')
 map('media_increase_volume',        '+mv')
 map('tabs_save_to_pocket',          'gsp')
 map('tabs_find_first_playing',      'gmp')
+map('misc_set_search_engines',      ',ms')
