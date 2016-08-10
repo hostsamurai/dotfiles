@@ -32,9 +32,10 @@ values."
             shell-default-term-shell "/bin/zsh"
             shell-default-height 30
             shell-default-position 'bottom)
-     syntax-checking
+     (syntax-checking :variables syntax-checking-enable-tooltips nil)
      unimpaired
      version-control
+     eyebrowse
 
      ;; language support
      common-lisp
@@ -42,7 +43,7 @@ values."
      emacs-lisp
      clojure
      html
-     javascript
+     (javascript :variables js2-strict-missing-semi-warning nil)
      markdown
      racket
      react
@@ -51,8 +52,8 @@ values."
      shell-scripts
 
      ;; appearance
-     themes-megapack
-     )
+     themes-megapack)
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -270,7 +271,11 @@ you should place your code here."
    indent-tabs-mode nil
    tab-width 2
    standard-indent 2
-   sh-indentation 2)
+
+   sh-indentation 2
+
+   js2-basic-offset 2
+   js-indent-level 2)
 
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
