@@ -52,6 +52,7 @@ values."
      shell-scripts
 
      ;; appearance
+     colors
      themes-megapack)
 
    ;; List of additional packages that will be installed without being
