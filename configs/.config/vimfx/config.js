@@ -31,6 +31,30 @@ const changeMediaVolume = defaultArgs => {
   changeMediaProperty(defaultArgs, 'volume', 'Volume set to {volume}')
 }
 
+const setLocationBarSearch = (args, ...searchTerms) => {
+  const { commands } = vimfx.modes.normal
+  const { searchType, vim } = args
+  const keywords = {
+    tabs:      '%',
+    title:     '#',
+    url:       '@',
+    history:   '^',
+    bookmarks: '*'
+  }
+
+  commands['focus_location_bar'].run(args)
+  vim.window.gURLBar.value = `${keywords[searchType]} ${searchTerms}`
+}
+
+const createSearchCommand = (name, searchType, description) => {
+  vimfx.addCommand({
+    name,
+    description,
+    category: 'location',
+    order: 1000
+  }, args => setLocationBarSearch(Object.assign({}, args, { searchType })))
+}
+
 
 // Media shortcuts
 
@@ -87,18 +111,6 @@ vimfx.addCommand({
 // Tab shortcuts
 
 vimfx.addCommand({
-  name: 'tabs_save_to_pocket',
-  description: 'Save to Pocket',
-  category: 'tabs',
-  order: 10000
-}, ({ vim }) => {
-  const { window, window: { content: { document } } } = vim
-  window.Pocket.savePage(vim.browser, document.location.href, document.title)
-  // TODO: How to autofocus the input element inside the Pocket menu?
-})
-
-
-vimfx.addCommand({
   name: 'tabs_find_first_playing',
   description: 'Finds the first tab containing a playing media element',
   category: 'tabs',
@@ -146,6 +158,115 @@ vimfx.addCommand({
 })
 
 
+// Location bar search
+
+createSearchCommand(
+  'search_by_tabs',
+  'tabs',
+  'Search for text in any open tabs'
+)
+
+createSearchCommand(
+  'search_by_page_title',
+  'title',
+  'Search for text that matches the title of a previously opened page'
+)
+
+createSearchCommand(
+  'search_by_url',
+  'url',
+  'Search for text that matches part of a URL'
+)
+
+createSearchCommand(
+  'search_by_history',
+  'history',
+  'Search for text that matches results from the browser\'s history'
+)
+
+createSearchCommand(
+  'search_by_bookmarks',
+  'bookmarks',
+  'Search for text that matches any bookmarks'
+)
+
+
+// Misc
+
+vimfx.addCommand({
+  name: 'misc_save_to_pocket',
+  description: 'Save current page to Pocket',
+  category: 'misc',
+  order: 10000
+}, ({ vim }) => {
+  const { window, window: { document: doc } } = vim
+  const pocketButton = doc.getElementById('pocket-button')
+  let iframe;
+
+  const focusPanelInput = e => {
+    const tagInput = e.target.getElementById('token-input-')
+    const { focus: FS } = Services
+
+    // focus the tag input
+    FS.moveFocus(window, e.target.activeElement, FS.MOVEFOCUS_ROOT, FS.FLAG_BYMOUSE)
+    FS.setFocus(tagInput, FS.MOVEFOCUS_CARET)
+
+    iframe.removeEventListener('DOMContentLoaded', focusPanelInput, false)
+  }
+
+  const iframeObserver = {
+    observe(newIframe) {
+      Services.obs.removeObserver(this, 'document-element-inserted')
+
+      iframe = doc.getElementById('PanelUI-pocketView').querySelector('iframe')
+      iframe.addEventListener('DOMContentLoaded', focusPanelInput, false)
+    }
+  }
+
+  if (!iframe) {
+    Services.obs.addObserver(iframeObserver, 'document-element-inserted', false)
+  }
+
+  pocketButton.click()
+})
+
+
+vimfx.addCommand({
+  name: 'misc_toggle_ublock',
+  description: 'Toggle µBlock₀',
+  category: 'misc',
+  order: 10000
+}, ({ vim }) => {
+  const { window, window: { document, setTimeout } } = vim
+  const ublockButton = document.getElementById('ublock0-button')
+  let iframe
+
+  const toggleUBlock = e => {
+    const switchButton = e.target.getElementById('switch')
+    const refreshButton = e.target.getElementById('refresh')
+
+    setTimeout(() => {
+      switchButton.click()
+      refreshButton.click()
+    }, 0)
+
+    iframe.removeEventListener('DOMContentLoaded', toggleUBlock, false)
+  }
+
+  const iframeObserver = {
+    observe(popup) {
+      Services.obs.removeObserver(this, 'document-element-inserted')
+
+      iframe = document.querySelector('#ublock0-panel').firstChild
+      iframe.addEventListener('DOMContentLoaded', toggleUBlock, false)
+    }
+  }
+
+  Services.obs.addObserver(iframeObserver, 'document-element-inserted', false)
+  ublockButton.click()
+})
+
+
 // Mappings
 
 map('media_loop_playing',           ',ml')
@@ -154,6 +275,12 @@ map('media_decrease_playback_rate', '-mr')
 map('media_increase_playback_rate', '+mr')
 map('media_decrease_volume',        '-mv')
 map('media_increase_volume',        '+mv')
-map('tabs_save_to_pocket',          'gsp')
 map('tabs_find_first_playing',      'gmp')
 map('misc_set_search_engines',      ',ms')
+map('misc_save_to_pocket',          ',zp')
+map('misc_toggle_ublock',           ',tu')
+map('search_by_tabs',               ',st')
+map('search_by_page_title',         ',sp')
+map('search_by_url',                ',su')
+map('search_by_history',            ',sh')
+map('search_by_bookmarks',          ',sb')
