@@ -1,0 +1,48 @@
+tap 'caskroom/cask'
+tap 'd12frosted/emacs-plus'
+tap 'homebrew/bundle'
+tap 'homebrew/core'
+tap 'homebrew/services'
+
+# Essentials
+brew 'git', args: ['with-brewed-svn', 'with-pcre']
+brew 'tig'
+
+brew 'automake'
+brew 'cmake'
+brew 'readline'
+
+brew 'coreutils'
+brew 'dos2unix'
+brew 'editorconfig'
+brew 'gnu-sed', args: ['with-default-names']
+brew 'htop-osx'
+brew 'lesspipe', args: ['with-syntax-highlighting']
+
+brew 'imagemagick'
+brew 'librsvg' # for emacs
+brew 'nmap'
+brew 'tmux'
+brew 'tree'
+brew 'reattach-to-user-namespace', args: ['HEAD', 'with-wrap-launchctl', 'with-wrap-pbcopy-and-pbpaste']
+brew 'stow'
+brew 'the_silver_searcher'
+brew 'zsh'
+
+# Languages
+brew 'boot-clj'
+brew 'leiningen'
+brew 'lua'
+brew 'luajit'
+brew 'node'
+brew 'python'
+brew 'python3'
+brew 'pyenv'
+cask 'racket'
+
+# Editors
+brew 'vim', args: ['HEAD', 'override-system-vi', 'with-client-server', 'with-lua', 'with-mzscheme', 'with-python3']
+brew 'macvim', args: ['with-lua', 'with-python3']
+brew 'd12frosted/emacs-plus/emacs-plus', args: ['with-cocoa', 'with-gnutls', 'with-imagemagick', 'with-librsvg', 'with-spacemacs-icon']
+
+linkapps
