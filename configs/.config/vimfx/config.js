@@ -3,6 +3,16 @@
 const { utils: Cu } = Components;
 const { require } = Cu.import('resource://gre/modules/commonjs/toolkit/require.js', {})
 
+// TODO: use a loader here
+const { once } = require(`file://${__dirname}/helpers/fn.js`)
+const { searchCommandWrapper } = require(`file://${__dirname}/helpers/search.js`)
+const { listenersWrapper } = require(`file://${__dirname}/helpers/listeners.js`)
+const { observersWrapper } = require(`file://${__dirname}/helpers/observers.js`)
+
+const createSearchCommand = searchCommandWrapper(vimfx)
+const { addListener, removeAllListeners } = listenersWrapper(Services)
+const { addObserver, removeAllObservers } = observersWrapper(Services)
+
 
 // Helper functions
 
@@ -31,28 +41,10 @@ const changeMediaVolume = defaultArgs => {
   changeMediaProperty(defaultArgs, 'volume', 'Volume set to {volume}')
 }
 
-const setLocationBarSearch = (args, ...searchTerms) => {
-  const { commands } = vimfx.modes.normal
-  const { searchType, vim } = args
-  const keywords = {
-    tabs:      '%',
-    title:     '#',
-    url:       '@',
-    history:   '^',
-    bookmarks: '*'
-  }
-
-  commands['focus_location_bar'].run(args)
-  vim.window.gURLBar.value = `${keywords[searchType]} ${searchTerms}`
-}
-
-const createSearchCommand = (name, searchType, description) => {
-  vimfx.addCommand({
-    name,
-    description,
-    category: 'location',
-    order: 1000
-  }, args => setLocationBarSearch(Object.assign({}, args, { searchType })))
+const scrollTabScrollbox = (vim, amount) => {
+  const { window: { gBrowser } } = vim
+  const scrollbox = gBrowser.tabContainer.mTabstrip._scrollbox
+  scrollbox.scrollLeft += amount
 }
 
 
@@ -121,6 +113,22 @@ vimfx.addCommand({
 
   playing && gBrowser.selectTabAtIndex(playing._tPos)
 })
+
+
+vimfx.addCommand({
+  name: 'tabs_scroll_scrollbox_left',
+  description: 'Scroll the tabs scrollbox to the left',
+  category: 'tabs',
+  order: 10000
+}, ({ vim, count = 1 }) => scrollTabScrollbox(vim, -200 * count))
+
+
+vimfx.addCommand({
+  name: 'tabs_scroll_scrollbox_right',
+  description: 'Scroll the tabs scrollbox to the right',
+  category: 'tabs',
+  order: 10000
+}, ({ vim, count = 1 }) => scrollTabScrollbox(vim, 200 * count))
 
 
 vimfx.addCommand({
@@ -193,6 +201,8 @@ createSearchCommand(
 
 // Misc
 
+const addPocketIframeObserver = once(addObserver)
+
 vimfx.addCommand({
   name: 'misc_save_to_pocket',
   description: 'Save current page to Pocket',
@@ -210,26 +220,22 @@ vimfx.addCommand({
     // focus the tag input
     FS.moveFocus(window, e.target.activeElement, FS.MOVEFOCUS_ROOT, FS.FLAG_BYMOUSE)
     FS.setFocus(tagInput, FS.MOVEFOCUS_CARET)
-
-    iframe.removeEventListener('DOMContentLoaded', focusPanelInput, false)
   }
 
   const iframeObserver = {
     observe(newIframe) {
-      Services.obs.removeObserver(this, 'document-element-inserted')
-
       iframe = doc.getElementById('PanelUI-pocketView').querySelector('iframe')
-      iframe.addEventListener('DOMContentLoaded', focusPanelInput, false)
+      addListener(iframe, 'DOMContentLoaded', focusPanelInput)
     }
   }
 
-  if (!iframe) {
-    Services.obs.addObserver(iframeObserver, 'document-element-inserted', false)
-  }
+  addPocketIframeObserver(iframeObserver, 'document-element-inserted')
 
   pocketButton.click()
 })
 
+
+const addUblockIframeObserver = once(addObserver)
 
 vimfx.addCommand({
   name: 'misc_toggle_ublock',
@@ -239,31 +245,54 @@ vimfx.addCommand({
 }, ({ vim }) => {
   const { window, window: { document, setTimeout } } = vim
   const ublockButton = document.getElementById('ublock0-button')
-  let iframe
 
   const toggleUBlock = e => {
     const switchButton = e.target.getElementById('switch')
     const refreshButton = e.target.getElementById('refresh')
 
     setTimeout(() => {
-      switchButton.click()
-      refreshButton.click()
+      switchButton && switchButton.click()
+      refreshButton && refreshButton.click()
     }, 0)
-
-    iframe.removeEventListener('DOMContentLoaded', toggleUBlock, false)
   }
 
   const iframeObserver = {
     observe(popup) {
-      Services.obs.removeObserver(this, 'document-element-inserted')
-
-      iframe = document.querySelector('#ublock0-panel').firstChild
-      iframe.addEventListener('DOMContentLoaded', toggleUBlock, false)
+      const iframe = document.querySelector('#ublock0-panel').firstChild
+      addListener(iframe, 'DOMContentLoaded', toggleUBlock)
     }
   }
 
-  Services.obs.addObserver(iframeObserver, 'document-element-inserted', false)
+  addUblockIframeObserver(iframeObserver, 'document-element-inserted')
   ublockButton.click()
+})
+
+
+vimfx.addCommand({
+  name: 'misc_toggle_sync_tabs_menu',
+  description: 'Display the synced tabs menu',
+  category: 'misc',
+  order: 10000
+}, ({ vim }) => {
+  const { window, window: { document, SidebarUI } } = vim
+  const { browser } = SidebarUI
+
+  const sidebarLoaded = e => {
+    if (/sidebar\.xhtml$/.test(e.target.URL)) {
+      SidebarUI._fireFocusedEvent()
+    }
+  }
+
+  addListener(browser, 'DOMContentLoaded', sidebarLoaded)
+  SidebarUI.toggle('viewTabsSidebar')
+})
+
+
+// Events
+
+vimfx.on('shutdown', () => {
+  removeAllListeners()
+  removeAllObservers()
 })
 
 
@@ -276,9 +305,12 @@ map('media_increase_playback_rate', '+mr')
 map('media_decrease_volume',        '-mv')
 map('media_increase_volume',        '+mv')
 map('tabs_find_first_playing',      'gmp')
+map('tabs_scroll_scrollbox_right',  ',tr')
+map('tabs_scroll_scrollbox_left',   ',tl')
 map('misc_set_search_engines',      ',ms')
 map('misc_save_to_pocket',          ',zp')
 map('misc_toggle_ublock',           ',tu')
+map('misc_toggle_sync_tabs_menu',   ',tt')
 map('search_by_tabs',               ',st')
 map('search_by_page_title',         ',sp')
 map('search_by_url',                ',su')
