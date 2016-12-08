@@ -53,6 +53,10 @@ zplug load
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+if [[ $TERMINIX_ID ]]; then
+  source /etc/profile.d/vte.sh
+fi
+
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
@@ -102,8 +106,31 @@ alias lz='ll -rS'  # sort by size
 alias lt='ll -rt'  # sort by date
 alias less='less -R'
 
+alias diff='colordiff'
+alias grep='grep --color=auto'
+
 alias -g L='| less'
 alias -g M='| more'
+
+# apply aliases when running commands with sudo
+alias sudo='sudo '
+
+if [ -d ~/.atom -a -d ~/.proton.d ]; then
+  alias atomm='ATOM_HOME=~/.atom-backup atom'
+  alias atomd='ATOM_HOME=~/.atom-backup atom --dev'
+  alias proton='ATOM_HOME=~/.proton.d atom'
+  alias protond='ATOM_HOME=~/.proton.d atom --dev'
+fi
+
+if [[ `uname` == 'Linux' ]]; then
+  alias pls='pacman -Qen'
+  alias plsaur='pacman -Qm'
+  alias pS='sudo pacman -S '
+  alias psyu='sudo pacman -Syu'
+  alias pps='sudo powerpill -S '
+  alias ppsyu='sudo powerpill -Syu'
+fi
+
 
 
 # ------------------------------------------------
