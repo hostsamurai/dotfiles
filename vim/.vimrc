@@ -211,6 +211,11 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" move visual selection up and down
+" see: https://twitter.com/MasteringVim/status/800982553943543809?s=09
+vnoremap J :m '>+1<CR>gv=gv'
+vnoremap K :m '<-2<CR>gv=gv'
+
 " heretical mappings for command-line mode
 cnoremap <C-A> <Home>
 " back one character

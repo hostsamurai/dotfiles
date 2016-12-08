@@ -16,6 +16,6 @@ if has('gui_running')
   set guioptions-=R "no right scrollbar
   set guioptions-=r "same as above - never present
 
-  set guifont=Dejavu\ Sans\ Mono\ 8.3
+  set guifont=Dejavu\ Sans\ Mono\ 13
   colorscheme fruity
 endif
