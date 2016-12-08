@@ -1,0 +1,3 @@
+# for Solid State Drives : Activate Deadline for SSDs
+# see: http://www.linux-magazine.com/Issues/2015/172/Tuning-Your-SSD/(offset)/3
+ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="deadline"
