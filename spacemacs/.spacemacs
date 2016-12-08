@@ -52,7 +52,7 @@ values."
      common-lisp
      elm
      emacs-lisp
-     clojure
+     (clojure :variables clojure-align-forms-automatically t)
      html
      (javascript :variables js2-strict-missing-semi-warning nil)
      markdown
@@ -328,6 +328,8 @@ you should place your code here."
    standard-indent 2
 
    sh-indentation 2
+
+   css-mode-offset 2
 
    js2-basic-offset 2
    js-indent-level 2)
