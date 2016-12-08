@@ -12,6 +12,9 @@ function () {
     eval "$(rbenv init -)"
   fi
 
+  export NVM_DIR="/home/lou/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
   local kernel=`uname`
 
   if [[ kernel = "Darwin" ]]; then
