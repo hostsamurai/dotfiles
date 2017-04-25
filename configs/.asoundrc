@@ -1,0 +1,47 @@
+defaults.pcm.rate_converter "speexrate_best"
+
+pcm.!default {
+  type plug
+  slave.pcm "dmixer"
+}
+
+pcm.mpv {
+  type plug
+  slave {
+    pcm "hw:0,1"
+    format "S32_LE"
+    rate 192000
+  }
+}
+
+pcm_slave.claro {
+  type hw
+  card 0
+  device 1
+}
+
+pcm.dmixer {
+  type dmix
+  ipc_key 1024
+  ipc_key_add_uid 1
+  ipc_perm 0660
+  slave {
+    pcm "hw:0,1"
+    period_size 9216
+    buffer_size 262144
+    rate 192000
+  }
+}
+
+pcm.nvidiahdmi {
+  type hw
+  card 2
+  device 3
+}
+
+ctl.nvidiahdmi {
+  type plug
+  slave.pcm "nvidiahdmi"
+}
+
+# vim:set ft=alsaconf:
