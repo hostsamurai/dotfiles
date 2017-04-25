@@ -27,6 +27,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'acustodioo/vim-tmux'
 Plug 'bronson/vim-visual-star-search'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 't9md/vim-textmanip'
 
 " Snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
