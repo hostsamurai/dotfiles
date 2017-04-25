@@ -18,25 +18,24 @@ export WORDCHARS='*?_~=&;!#$%^(){}<>'
 source ~/.zplug/init.zsh
 
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
 
 zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/lein",    from:oh-my-zsh
-zplug "plugins/emacs",   from:oh-my-zsh
 
 zplug "rupa/z", use:z.sh
 zplug "Tarrasch/zsh-bd", use:bd.zsh
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "jocelynmallon/zshmarks"
-zplug "hlissner/zsh-autopair", nice:11
+zplug "hlissner/zsh-autopair", defer:2
 zplug "paulirish/git-open", as:command
 zplug "alexdavid/git-branch-status", as:command
 zplug "lukechilds/zsh-better-npm-completion"
 zplug "arzzen/calc.plugin.zsh"
 zplug "joepvd/zsh-hints"
 
-zplug "zplug/zplug"
+zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "

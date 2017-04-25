@@ -1,7 +1,9 @@
 # ------------------------------------------------
 # Path modifications
 # ------------------------------------------------
-function () {
+function {
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
   if [[ -d "$HOME/.boot" ]]; then
     path+=("$HOME/.boot/bin")
   fi
@@ -25,5 +27,7 @@ function () {
   elif [[ kernel = "Linux" ]]; then
     # Reference the environment variable created by the systemd unit
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    # Optimization for NVIDIA card
+    export __GL_THREADED_OPTIMISATIONS=1
   fi
 }
