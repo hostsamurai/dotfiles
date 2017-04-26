@@ -9,7 +9,7 @@ const { searchCommandWrapper } = require(`file://${__dirname}/helpers/search.js`
 const { listenersWrapper } = require(`file://${__dirname}/helpers/listeners.js`)
 const { observersWrapper } = require(`file://${__dirname}/helpers/observers.js`)
 
-const createSearchCommand = searchCommandWrapper(vimfx)
+const { createSearchCommand, ddgBangSearch } = searchCommandWrapper(vimfx)
 const { addListener, removeAllListeners } = listenersWrapper(Services)
 const { addObserver, removeAllObservers } = observersWrapper(Services)
 
@@ -198,6 +198,17 @@ createSearchCommand(
   'Search for text that matches any bookmarks'
 )
 
+// DuckDuckGo bang! searches
+ddgBangSearch('search_google',    'Google',        '!g')
+ddgBangSearch('search_gmaps',     'GMaps',         '!gm')
+ddgBangSearch('search_gimages',   'Google Images', '!gi')
+ddgBangSearch('search_wikipedia', 'Wikipedia',     '!w')
+ddgBangSearch('search_clojure',   'Clojure',       '!clojure')
+ddgBangSearch('search_clojars',   'Clojars',       '!clojars')
+ddgBangSearch('search_youtube',   'Youtube',       '!yt')
+ddgBangSearch('search_bandcamp',  'Bandcamp',      '!bandcamp')
+ddgBangSearch('search_amazon',    'Amazon',        '!amazon')
+
 
 // Misc
 
@@ -295,7 +306,6 @@ vimfx.on('shutdown', () => {
   removeAllObservers()
 })
 
-
 // Mappings
 
 map('media_loop_playing',           ',ml')
@@ -316,3 +326,12 @@ map('search_by_page_title',         ',sp')
 map('search_by_url',                ',su')
 map('search_by_history',            ',sh')
 map('search_by_bookmarks',          ',sb')
+map('search_google',                ',gg')
+map('search_gmaps',                 ',dgm')
+map('search_gimages',               ',gi')
+map('search_wikipedia',             ',w')
+map('search_clojure',               ',cd')
+map('search_clojars',               ',cj')
+map('search_youtube',               ',yt')
+map('search_bandcamp',              ',bc')
+map('search_amazon',                ',a')

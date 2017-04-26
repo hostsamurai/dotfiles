@@ -14,7 +14,9 @@ module.exports.searchCommandWrapper = vimfx => {
     }
 
     commands['focus_location_bar'].run(args)
-    vim.window.gURLBar.value = `${keywords[searchType]} ${searchTerms}`
+    vim.window.gURLBar.value =
+      keywords[searchType] ? `${keywords[searchType]} ${searchTerms}`
+                           : `${searchType} `
   }
 
   const createSearchCommand = (name, searchType, description) => {
@@ -22,9 +24,18 @@ module.exports.searchCommandWrapper = vimfx => {
       name,
       description,
       category: 'location',
-      order: 1000
+      order: 5000
     }, args => setLocationBarSearch(Object.assign({}, args, { searchType })))
   }
 
-  return createSearchCommand
+  const ddgBangSearch = (name, website, bang) => {
+    vimfx.addCommand({
+      name,
+      description: `Search ${website}`,
+      category: 'location',
+      order: 5000
+    }, args => setLocationBarSearch(Object.assign({}, args, { searchType: bang })))
+  }
+
+  return { createSearchCommand, ddgBangSearch }
 }
