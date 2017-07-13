@@ -52,7 +52,7 @@ zplug load
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [[ $TERMINIX_ID ]]; then
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
 
@@ -131,15 +131,6 @@ if [[ `uname` == 'Linux' ]]; then
 fi
 
 
-
-# ------------------------------------------------
-# Custom functions
-# ------------------------------------------------
-fpath=(
-    $fpath
-    ~/.zsh/functions
-    ~/.zsh/functions/**
-)
 # Render the prompt
 autoload -Uz star_prompt
 star_prompt "$@"
