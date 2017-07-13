@@ -44,4 +44,15 @@ ctl.nvidiahdmi {
   slave.pcm "nvidiahdmi"
 }
 
+pcm.dp {
+  type hw
+  card 2
+  device 7
+}
+
+ctl.dp {
+  type plug
+  slave.pcm "dp"
+}
+
 # vim:set ft=alsaconf:

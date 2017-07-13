@@ -30,7 +30,7 @@
     load-module module-alsa-source device="claro" tsched=0
 
     # OUTPUT/PLAYBACK
-    load-module module-alsa-sink device="default" tsched=1
+    load-module module-alsa-sink device="claro" tsched=1
 
     # Accept clients -- very important
     load-module module-native-protocol-unix
