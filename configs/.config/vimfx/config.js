@@ -203,11 +203,13 @@ ddgBangSearch('search_google',    'Google',        '!g')
 ddgBangSearch('search_gmaps',     'GMaps',         '!gm')
 ddgBangSearch('search_gimages',   'Google Images', '!gi')
 ddgBangSearch('search_wikipedia', 'Wikipedia',     '!w')
+ddgBangSearch('search_github',    'Github',        '!gh')
 ddgBangSearch('search_clojure',   'Clojure',       '!clojure')
 ddgBangSearch('search_clojars',   'Clojars',       '!clojars')
 ddgBangSearch('search_youtube',   'Youtube',       '!yt')
 ddgBangSearch('search_bandcamp',  'Bandcamp',      '!bandcamp')
 ddgBangSearch('search_amazon',    'Amazon',        '!amazon')
+ddgBangSearch('search_synonyms',  'Thesaurus',     '!syn')
 
 
 // Misc
