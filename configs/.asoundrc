@@ -1,24 +1,6 @@
 defaults.pcm.rate_converter "speexrate_best"
 
-pcm.!default {
-  type plug
-  slave.pcm "dmixer"
-}
-
-pcm.mpv {
-  type plug
-  slave {
-    pcm "hw:0,1"
-    format "S32_LE"
-    rate 192000
-  }
-}
-
-pcm_slave.claro {
-  type hw
-  card 0
-  device 1
-}
+pcm.!default iec958
 
 pcm.dmixer {
   type dmix
