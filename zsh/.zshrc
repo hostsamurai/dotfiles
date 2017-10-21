@@ -52,10 +52,6 @@ zplug load
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte.sh
-fi
-
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
@@ -103,7 +99,14 @@ alias la='ls -A'
 alias lx='ll -BX'  # sort by extension
 alias lz='ll -rS'  # sort by size
 alias lt='ll -rt'  # sort by date
+
 alias less='less -R'
+
+alias xl='exa -la'
+alias xr='xl -R'           # recursive exa
+alias xs='xl -s=size'      # sort by modified time
+alias xt='xl -s=modified'  # sort by modified time
+alias xx='xl -s=extension' # sort by extension
 
 alias diff='colordiff'
 alias grep='grep --color=auto'
@@ -128,9 +131,14 @@ if [[ `uname` == 'Linux' ]]; then
   alias psyu='sudo pacman -Syu'
   alias pps='sudo powerpill -S '
   alias ppsyu='sudo powerpill -Syu'
+  alias ppss='powerpill -Ss'
 fi
 
 
 # Render the prompt
 autoload -Uz star_prompt
 star_prompt "$@"
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
