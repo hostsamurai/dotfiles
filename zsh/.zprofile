@@ -8,7 +8,7 @@ load-nvmrc() {
     if [ "$nvmrc_node_version" = "N/A" ]; then
     nvm install
     elif [ "$nvmrc_node_version" != "$node_version" ]; then
-    nvm use
+    nvm use --silent
     fi
   elif [ "$node_version" != "$(nvm version default)" ]; then
     echo "Reverting to nvm default version"
@@ -34,7 +34,7 @@ function {
 
   # NVM config stuff
   export NVM_DIR="/home/lou/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
 
   autoload -U add-zsh-hook
   add-zsh-hook chpwd load-nvmrc

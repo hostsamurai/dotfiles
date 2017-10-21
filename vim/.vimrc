@@ -432,6 +432,7 @@ augroup ft_javascript
   au Filetype javascript,json set sw=2 sts=2 et smarttab smartindent
   au Filetype javascript,json set foldmethod=syntax
   au Filetype javascript,json set omnifunc=jscomplete#CompleteJS
+  au Filetype javascript let g:AutoClsoePairs_add="'"
 
   au Filetype json set formatoptions=tcq2l
 augroup END
