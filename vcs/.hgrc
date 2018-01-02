@@ -1,5 +1,5 @@
 [ui]
-username = USERNAME <EMAIL>
+username = Lou Gonzalez <lgonzalez1@homeaway.com>
 
 [extdiff]
 cmd.vimdiff = gvim

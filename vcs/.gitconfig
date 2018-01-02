@@ -1,23 +1,29 @@
 [user]
-  name = USERNAME
-  email = EMAIL
+  name = Lou Gonzalez
+  email = lgonzalez1@homeaway.com
 
 [alias]
   co = checkout
   ci = commit
+  can = commit --amend --no-edit -a
   st = status --column=
   br = branch
+  bra = branch --all
   df = diff -b
+  fe = fetch
+  fep = fetch -p
+  p = pull
   lo = log --oneline --decorate=full
   hist = log --pretty=format:'%h %d | %s%d [%an]' --graph --date=short
   sl = shortlog --format='%C(auto)%h %s'
   ac = apply --check --ignore-whitespace --verbose
   type = cat-file -t
   dump = cat-file -p
+  rh = reset --hard
   stls = stash list
   stp = stash pop
   sts = stash save --include-untracked
-  stsh = "!f() { git stash show stash@{$1}; }; f"
+  stsh = "!f() { git stash show -p stash@{$1}; }; f"
   sta = "!f() { git stash apply stash@{$1}; }; f"
   std = "!f() { git stash drop stash@{$1}; }; f"
 
