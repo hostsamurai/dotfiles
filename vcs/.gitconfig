@@ -35,6 +35,9 @@
   editor = vim
   excludesfile = ~/.gitignore_global
 
+[credential]
+	helper = /usr/lib/git-core/git-credential-libsecret
+
 [mergetool "mvimdiff"]
   cmd = /usr/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
 
