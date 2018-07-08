@@ -1,0 +1,14 @@
+[Unit]
+Description=Emacs: the extensible, self-documenting text editor
+Wants=pulseaudio.service
+After=pulseaudio.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+Restart=always
+
+[Install]
+WantedBy=default.target
