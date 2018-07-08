@@ -1,6 +1,18 @@
 defaults.pcm.rate_converter "speexrate_best"
+defaults.pcm.rate 192000
 
-pcm.!default iec958
+pcm.device {
+  type hw
+  card 0
+  device 1
+  format S16_LE
+  rate 192000
+}
+
+pcm.!default {
+  type plug
+  slave.pcm "device"
+}
 
 pcm.dmixer {
   type dmix
