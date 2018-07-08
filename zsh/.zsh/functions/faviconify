@@ -1,0 +1,68 @@
+#!/usr/bin/zsh
+#autoload
+
+favicon_sizes=(16 24 32 48 64)
+mobile_sizes=(57 72 114 120 144 152)
+
+create_favicon() {
+    print "Creating favicon.ico..."
+
+    local favicon_source=$1
+    local destination=$2
+
+    convert -background transparent $favicon_source -define icon:auto-resize=$(print ${(j.,.)favicon_sizes}) $destination/favicon.ico
+}
+
+create_browser_icons() {
+    local original=$1
+    local basefilename=$(basename $1)
+    local destination=$2
+    local prefix=$3
+
+    print "Creating site icons for iOS and Android..."
+
+    for s in $mobile_sizes; do
+        if [[ $prefix ]]; then
+            convert $original -resize ${s}x${s} $destination/$prefix-$s.png
+        else
+            convert $original -resize ${s}x${s} $destination/$basefilename:r-$s.png
+        fi
+    done
+}
+
+print_usage() {
+    echo Usage: $(basename "$0") "-i FAVICON_SOURCE -d DESTINATION [-acp]"
+    exit 1
+}
+
+debug_options() {
+    # Assumes $1 is the options associative array
+    local optshash=$1
+
+    for k in "${(@k)optshash}"; do
+        echo "$k -> $optshash[$k]"
+    done
+}
+
+faviconify() {
+    zparseopts -A optshash i:=input d:=destination p:=prefix h c
+
+    if [[ $? != 0 || $+h != 0  ]]; then
+        print_usage
+    fi
+
+    local original=$input[2]
+    local dest_dir=$destination[2]
+    local new_name=$prefix[2]
+
+    if [[ $+c != 0 ]]; then
+        create_browser_icons $original $dest_dir $new_name
+        exit 1
+    fi
+
+    # TODO: Spit out HTML templates after each command
+    create_favicon $original $dest_dir
+    create_browser_icons $original $dest_dir $new_name
+}
+
+faviconify $*

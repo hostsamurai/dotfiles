@@ -99,6 +99,7 @@ setopt clobber
 # ------------------------------------------------
 # Aliases
 # ------------------------------------------------
+
 alias ls='ls -hF --color=auto'
 alias lr='ls -R'   # recursive ls
 alias ll='ls -la'
@@ -124,13 +125,6 @@ alias -g M='| more'
 # apply aliases when running commands with sudo
 alias sudo='sudo '
 
-if [ -d ~/.atom -a -d ~/.proton.d ]; then
-  alias atomm='ATOM_HOME=~/.atom-backup atom'
-  alias atomd='ATOM_HOME=~/.atom-backup atom --dev'
-  alias proton='ATOM_HOME=~/.proton.d atom'
-  alias protond='ATOM_HOME=~/.proton.d atom --dev'
-fi
-
 if [[ `uname` == 'Linux' ]]; then
   alias pls='pacman -Qen'
   alias plsaur='pacman -Qm'
@@ -141,6 +135,14 @@ if [[ `uname` == 'Linux' ]]; then
   alias ppss='powerpill -Ss'
 fi
 
+alias cljs='clj -Sdeps "{:deps {org.clojure/clojurescript {:mvn/version \"1.9.946\"}}}" -m cljs.repl.node'
+
+
+# ------------------------------------------------
+# Autoloaded Functions
+# ------------------------------------------------
+
+autoload -Uz faviconify
 
 # Render the prompt
 autoload -Uz star_prompt
