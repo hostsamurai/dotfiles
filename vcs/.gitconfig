@@ -1,9 +1,10 @@
 [user]
-  name = Lou Gonzalez
-  email = lgonzalez1@homeaway.com
+  name = USERNAME
+  email = EMAIL
 
 [alias]
   co = checkout
+  copr = "!f() { git fetch origin pull/$1/head:pr$1 && git co pr$1; }; f"
   ci = commit
   can = commit --amend --no-edit -a
   st = status --column=
