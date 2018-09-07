@@ -9,7 +9,9 @@ source ~/.zsh/completion.zsh
 # Better path movement
 # by default, export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 # we take out '/', '.', '-', '[', ']'
-export WORDCHARS='*?_~=&;!#$%^(){}<>'
+export WORDCHARS='*?_~=&;!#$%^(){}<>='
+# Set bat theme
+export BAT_THEME='Monochai Extended Origin'
 
 
 # ------------------------------------------------
@@ -151,3 +153,5 @@ star_prompt "$@"
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
