@@ -11,7 +11,7 @@ source ~/.zsh/completion.zsh
 # we take out '/', '.', '-', '[', ']'
 export WORDCHARS='*?_~=&;!#$%^(){}<>='
 # Set bat theme
-export BAT_THEME='Monochai Extended Origin'
+export BAT_THEME='Monokai Extended Origin'
 
 
 # ------------------------------------------------
@@ -43,6 +43,8 @@ zplug "alexdavid/git-branch-status", as:command
 zplug "lukechilds/zsh-better-npm-completion"
 zplug "arzzen/calc.plugin.zsh"
 zplug "joepvd/zsh-hints"
+
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
@@ -145,10 +147,6 @@ alias cljs='clj -Sdeps "{:deps {org.clojure/clojurescript {:mvn/version \"1.9.94
 # ------------------------------------------------
 
 autoload -Uz faviconify
-
-# Render the prompt
-autoload -Uz star_prompt
-star_prompt "$@"
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
