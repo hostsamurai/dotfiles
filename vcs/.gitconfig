@@ -5,6 +5,7 @@
 [alias]
   co = checkout
   copr = "!f() { git fetch origin pull/$1/head:pr$1 && git co pr$1; }; f"
+  comp = "!f() { git co master && git pull; }; f"
   ci = commit
   can = commit --amend --no-edit -a
   st = status --column=
