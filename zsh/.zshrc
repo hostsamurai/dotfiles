@@ -13,6 +13,10 @@ export WORDCHARS='*?_~=&;!#$%^(){}<>='
 # Set bat theme
 export BAT_THEME='Monokai Extended Origin'
 
+# Modules to load
+autoload -z edit-command-line
+zle -N edit-command-line
+
 
 # ------------------------------------------------
 # Plugins
@@ -66,7 +70,7 @@ zplug load
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
-
+bindkey -M emacs '^X^E' edit-command-line
 
 # ------------------------------------------------
 # Options
