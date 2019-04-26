@@ -5,7 +5,9 @@
 [alias]
   co = checkout
   copr = "!f() { git fetch origin pull/$1/head:pr$1 && git co pr$1; }; f"
+  com = git checkout master
   comp = "!f() { git co master && git pull; }; f"
+  compp = "!f() { git rh && git co master && git pull; }; f"
   ci = commit
   can = commit --amend --no-edit -a
   st = status --column=
@@ -15,12 +17,15 @@
   fe = fetch
   fep = fetch -p
   p = pull
+  pu = push
+  puf = push --force
   lo = log --oneline --decorate=full
   hist = log --pretty=format:'%h %d | %s%d [%an]' --graph --date=short
   sl = shortlog --format='%C(auto)%h %s'
   ac = apply --check --ignore-whitespace --verbose
   type = cat-file -t
   dump = cat-file -p
+  rc = rebase --continue
   rh = reset --hard
   stls = stash list
   stp = stash pop
