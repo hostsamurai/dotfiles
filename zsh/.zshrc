@@ -70,7 +70,11 @@ zplug load
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
-bindkey -M emacs '^X^E' edit-command-line
+
+# Edit the current command line in $EDITOR
+bindkey '^X^E' edit-command-line
+
+bindkey '^U' backward-kill-line
 
 # ------------------------------------------------
 # Options
