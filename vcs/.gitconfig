@@ -10,6 +10,8 @@
   compp = "!f() { git rh && git co master && git pull; }; f"
   ci = commit
   can = commit --amend --no-edit -a
+  d = diff
+  dc = diff --cached
   st = status --column=
   br = branch
   bra = branch --all
@@ -25,8 +27,12 @@
   ac = apply --check --ignore-whitespace --verbose
   type = cat-file -t
   dump = cat-file -p
-  rc = rebase --continue
+  rb = rebase
+  rbc = rebase --continue
+  rbm = rebase master
   rh = reset --hard
+  rml = remote prune origin
+  rmld = remote prune origin --dry-run
   stls = stash list
   stp = stash pop
   sts = stash save --include-untracked
@@ -37,10 +43,25 @@
 [color]
   ui = true
 
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
 [core]
   autocrlf = input
   editor = vim
   excludesfile = ~/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
