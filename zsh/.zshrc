@@ -12,6 +12,9 @@ source ~/.zsh/completion.zsh
 export WORDCHARS='*?_~=&;!#$%^(){}<>='
 # Set bat theme
 export BAT_THEME='Monokai Extended Origin'
+# Lazy load nvm flag
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
 
 # Modules to load
 autoload -z edit-command-line
@@ -40,6 +43,7 @@ zplug "plugins/lein",    from:oh-my-zsh
 zplug "rupa/z", use:z.sh
 zplug "Tarrasch/zsh-bd", use:bd.zsh
 zplug "b4b4r07/enhancd", use:init.sh
+zplug "jamesob/desk", as:command, use:"desk.sh", hook-load:"shell_plugins/zsh/**" defer:2
 zplug "jocelynmallon/zshmarks"
 zplug "hlissner/zsh-autopair", defer:2
 zplug "paulirish/git-open", as:command
@@ -47,6 +51,7 @@ zplug "alexdavid/git-branch-status", as:command
 zplug "lukechilds/zsh-better-npm-completion"
 zplug "arzzen/calc.plugin.zsh"
 zplug "joepvd/zsh-hints"
+zplug "lukechilds/zsh-nvm", use:"zsh-nvm.plugin.zsh"
 
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
@@ -63,9 +68,19 @@ if zplug check b4b4r07/enhancd; then
   export ENHANCD_FILTER=fzf-tmux:fzf
 fi
 
-zplug load
+if zplug check jamesob/desk; then
+  # Hook for desk activation
+  [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
+fi
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if type "fasd" > /dev/null; then
+  eval "$(fasd --init auto)"
+fi
+
+zplug load
 
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
