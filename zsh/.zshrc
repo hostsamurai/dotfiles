@@ -2,6 +2,8 @@ HISTFILE=$HOME/.histfile
 HISTSIZE=51000
 SAVEHIST=21000
 
+setopt extendedglob
+
 # Source completions first to keep any plugins that depend
 # on them from complaining.
 source ~/.zsh/completion.zsh
@@ -176,3 +178,8 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export VOLTA_HOME="$HOME/.volta"
+[ -s "$VOLTA_HOME/load.sh" ] && . "$VOLTA_HOME/load.sh"
+
+export PATH="$VOLTA_HOME/bin:$PATH"

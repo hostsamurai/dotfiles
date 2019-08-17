@@ -12,10 +12,6 @@ function {
     eval "$(rbenv init -)"
   fi
 
-  # NVM config stuff
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
-
   local kernel=`uname`
 
   if [[ $kernel = "Darwin" ]]; then
