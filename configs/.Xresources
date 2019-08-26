@@ -1,9 +1,3 @@
-Xft.antialias: 1
-Xft.autohint: 0
-Xft.hinting: 1
-Xft.hintstyle: hintslight
-Xft.lcdfilter: lcddefault
-Xft.rgba: rgb
-
-Emacs.FontBackend: xft,x
-Emacs.font: Source Code Pro
+#include "./.Xresources.d/gonvim"
+#include "./.Xresources.d/firefox"
+#include "./.Xresources.d/hyper"
