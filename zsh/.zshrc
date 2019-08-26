@@ -14,9 +14,6 @@ source ~/.zsh/completion.zsh
 export WORDCHARS='*?_~=&;!#$%^(){}<>='
 # Set bat theme
 export BAT_THEME='Monokai Extended Origin'
-# Lazy load nvm flag
-export NVM_LAZY_LOAD=true
-export NVM_AUTO_USE=true
 
 # Modules to load
 autoload -z edit-command-line
@@ -53,7 +50,6 @@ zplug "alexdavid/git-branch-status", as:command
 zplug "lukechilds/zsh-better-npm-completion"
 zplug "arzzen/calc.plugin.zsh"
 zplug "joepvd/zsh-hints"
-zplug "lukechilds/zsh-nvm", use:"zsh-nvm.plugin.zsh"
 
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
