@@ -1,0 +1,350 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+
+# - Coding ---------------------------------------
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+merge = 0
+build = 'yarn install --frozen-lockfile'
+
+[[plugins]]
+repo = 'liuchengxu/vista.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_add = '''
+  let g:neosnippet#disable_runtime_snippets = {'_': 1}
+  let g:neosnippet#snippets_directory = ['~/.vim/plugged/vim-snippets/snippets', '~/.vim/custom_snippets']
+'''
+on_event = 'InsertEnter'
+on_ft = 'snippet'
+depends = ['vim-snippets', 'context_filetype.vim']
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'jsfaint/gen_tags.vim'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  nnoremap <Leader>t :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+hook_add = '''
+  let g:NERDSpaceDelim = 0
+  let g:NERDTrimTrailingWhitespace = 1
+'''
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+hook_add = '''
+  let g:syntastic_javascript_checkers = ['eslint']
+'''
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+hook_add = '''
+  let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+  let g:EditorConfig_core_mode = 'external_command'
+'''
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'tpope/vim-classpath'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'amix/open_file_under_cursor.vim'
+
+[[plugins]]
+repo = 'tpope/vim-dispatch'
+
+
+# - Text Manipulation ----------------------------
+
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
+
+[[plugins]]
+repo = 't9md/vim-textmanip'
+
+[[plugins]]
+repo = 'tpope/vim-speeddating'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+on_event = "InsertEnter"
+
+[[plugins]]
+repo = 'vim-scripts/visincr'
+
+[[plugins]]
+repo = 'AndrewRadev/switch.vim'
+on_cmd = 'Switch'
+hook_add = '''
+  let g:switch_mapping = '<Space>tt'
+'''
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+add_hook = '''
+  " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+  vmap <Enter> <Plug>(EasyAlign)
+  " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+  nmap ga <Plug>(EasyAlign)
+'''
+
+
+# - Language -------------------------------------
+
+[[plugins]]
+## Ultimate syntax collection
+repo = 'sheerun/vim-polyglot'
+add_hook = '''
+  let g:javascript_plugin_jsdoc = 1
+  let g:jscomplete_use = ['dom', 'moz', 'es6th']
+
+  let g:clojure_align_multiline_strings = 0
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fireplace'
+on_ft = 'clojure'
+
+[[plugins]]
+repo = 'dgrnbrg/vim-redl'
+on_ft = 'clojure'
+
+[[plugins]]
+repo = 'kovisoft/paredit'
+on_ft = ['clojure', 'scheme', 'racket']
+
+[[plugins]]
+repo = 'guileen/vim-node'
+on_ft = 'javascript'
+
+[[plugins]]
+repo = 'myhere/vim-nodejs-complete'
+on_ft = 'javascript'
+
+[[plugins]]
+repo = 'prettier/vim-prettier'
+on_ft = ['javascript', 'typescript', 'less', 'css', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html']
+
+[[plugins]]
+repo = 'hallison/vim-ruby-sinatra'
+on_ft = 'ruby'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = 'ruby'
+
+
+# - Applications ---------------------------------
+
+[[plugins]]
+repo = 'gregsexton/VimCalc'
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+hook_add = '''
+  let g:gundo_prefer_python3 = 1
+'''
+
+[[plugins]]
+repo = 'xolox/vim-session'
+hook_add = '''
+  let g:session_autosave = 'yes'
+  let g:session_autoload = 'no'
+'''
+on_cmd = ['SaveSesion', 'OpenSession', 'RestartVim']
+depends = 'vim-misc'
+
+[[plugins]]
+repo = 'xolox/vim-misc'
+
+[[plugins]]
+repo = 'acustodioo/vim-tmux'
+
+
+# - Version Control ------------------------------
+
+[[plugins]]
+repo = 'jreybert/vimagit'
+
+[[plugins]]
+repo = 'mhinz/vim-signify'
+add_hook = '''
+  let g:signify_vcs_list = ['git', 'hg']
+
+  " hunk jumping
+  nmap <leader>gj <plug>(signify-next-hunk)
+  nmap <leader>gk <plug>(signify-prev-hunk)
+'''
+
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
+on_cmd = 'Gina'
+
+
+# - Search ---------------------------------------
+
+[[plugins]]
+repo = 'jremmen/vim-ripgrep'
+hook_add = '''
+  " run a ripgrep query in a new tab
+  nnoremap <Leader>rg :tabnew<CR>:Rg -i<Space>'
+  " run a ripgrep query in a new tab using the word under the cursor
+  nnoremap <Leader>Rg yaw:tabnew<CR>:Rg -i '<C-R>"'<Space>
+'''
+
+[[plugins]]
+repo = 'bronson/vim-visual-star-search'
+
+[[plugins]]
+repo = 'Lokaltog/vim-easymotion'
+
+[[plugins]]
+repo = 'thinca/vim-qfreplace'
+
+
+# - UI -------------------------------------------
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+augroup = 'makyoConfig#Plugin#denite'
+
+[[plugins]]
+repo = 'jlanzarotta/bufexplorer'
+
+[[plugins]]
+repo = 'wsdjeg/dein-ui.vim'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+  let g:indentLine_fileTypeExclude = ['text', 'help']
+  let g:indentLine_bufNameExclude = ['_.*', 'Startify*']
+  let g:indentLine_char = '┊'
+'''
+
+[[plugins]]
+repo = 'tomtom/quickfixsigns_vim'
+hook_add = '''
+  let g:quickfixsigns_classes = ['qfl', 'marks', 'breakpoints']
+'''
+
+[[plugins]]
+repo = 'yuttie/comfortable-motion.vim'
+on_func = 'comfortable_motion#flick'
+hook_add = '''
+  let g:comfortable_motion_impulse_multiplier = 1
+'''
+
+[[plugins]]
+repo = 't9md/vim-choosewin'
+on_map = '<Plug>'
+hook_add = '''
+  let g:choosewin_overlay_enable = 1
+  nnoremap <Space>wc <Plug>(choosewin)
+'''
+
+
+# - Themes ---------------------------------------
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'vim-scripts/fruity.vim'
+
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'
+
+[[plugins]]
+repo = 'atelierbram/Base2Tone-vim'
+
+[[plugins]]
+repo = 'ntk148v/vim-horizon'
+
+[[plugins]]
+repo = 'yuttie/hydrangea-vim'
+
+[[plugins]]
+repo = 'cseelus/vim-colors-lucid'
+
+[[plugins]]
+repo = 'cseelus/vim-colors-tone'
+
+[[plugins]]
+repo = 'flrnprz/candid.vim'
+
+[[plugins]]
+repo = 'colepeters/spacemacs-theme.vim'
+
+[[plugins]]
+repo = 'phanviet/vim-monokai-pro'
+
+[[plugins]]
+repo = 'cideM/yui'
+
+[[plugins]]
+repo = 'bruth/vim-newsprint-theme'
+
+
+# - Filetype Settings ----------------------------
+
+[ftplugin]
+_ = '''
+  set sw=2 sts=2 ts=2 et smarttab smartindent
+'''
+
+text = '''
+  setlocal textwidth=78
+'''
+
+markdown_mkd = '''
+  setlocal tw=80
+'''
+
+vim = '''
+  setlocal foldmethod=marker
+'''
+
+javascript_ruby_erb = '''
+  set foldmethod=syntax
+'''
+
+sass_scss_less_css = '''
+  set foldmethod=indent
+'''
+
+json_json5 = '''
+  let g:AutoClosePairs_add = "\""
+'''

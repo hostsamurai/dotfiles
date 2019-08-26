@@ -1,0 +1,82 @@
+{
+  "nnoremap": {
+    // -- Applications ------------------------
+    // Space + a + c --> Opens calculator
+    // Space + a + u --> Opens undo tree visualizer
+    // TODO: open a terminal
+    // TODO: add "<CR>" to the end of these in the JS handler
+    // ----------------------------------------
+    "<Space>ac": ":Calc",
+    "<Space>au": ":GundoToggle",
+
+
+    // -- Buffers -----------------------------
+    // Space + b + b --> Opens the buffer list via denite
+    // Space + b + d --> Deletes the current active buffer
+    // Space + b + h --> Opens the startup page
+    // Space + b + s --> Switch to scratch buffer
+    // TODO: put denite-specific mappings here, under
+    // 'ftplugin' or something similar
+    // ----------------------------------------
+    "<Space>bb": ":Denite buffer",
+
+
+    // -- Files -------------------------------
+    // Space + f + f --> Opens a list of project files via denite
+    // Space + f + r --> Opens a MRU via denite
+    // Space + f + t --> Opens a NERDTree
+    // ----------------------------------------
+    "<Space>ff": ":DeniteProjectDir file/rec",
+
+
+    // -- Insertion ---------------------------
+    // Space + i + S + c --> Create a new snippet
+    // Space + i + S + e --> See all snippets for filetype
+    // ----------------------------------------
+
+
+    // -- Version Control ---------------------
+    // Space + g + b + # --> git blame
+    // Space + g + b + c --> git checkout -b
+    // Space + g + c + - --> git checkout --
+    // Space + g + p + p --> git push
+    // Space + g + p + f --> git push --force
+    // Space + g + s --> git status
+    // Space + g + m --> Invoke magit
+    // ----------------------------------------
+
+
+    // -- Search ------------------------------
+    // Space + s + c --> Clear search highlight
+    // ----------------------------------------
+
+
+    // -- Text --------------------------------
+    // Space + t + a --> Align text
+    // ----------------------------------------
+
+
+    // -- Toggles -----------------------------
+    // Space + t + c --> Cycle through color schemes via denite
+    // ----------------------------------------
+
+
+    // -- Windows -----------------------------
+    // Space + w + - --> Split window below
+    // Space + w + | --> Split window right
+    // Space + w + d --> Kill current window
+    // Space + w + q --> Open quickfix window
+    // Space + w + W --> Choose window
+    // ----------------------------------------
+
+
+    // -- Modes -------------------------------
+    // ----------------------------------------
+  },
+
+  "noremap": {},
+
+  "cnoremap": {},
+
+  "inoremap": {},
+}

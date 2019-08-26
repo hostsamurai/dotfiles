@@ -1,0 +1,97 @@
+{
+  "noremap": {
+    "j": "gj",
+    "k": "gk",
+    "gj": "j",
+    "gk": "j",
+
+  /*" toggle folds*/
+  /*noremap <Space> zA*/
+
+  /*" clear search highlights*/
+  /*noremap <silent> <Leader>/ :nohls<CR>*/
+
+  /*" search for word under the cursor*/
+  /*noremap <Leader>g :exe "Ag! -R " . shellescape(expand("<cWORD>")) . " ."<cr>*/
+  },
+
+  "nnoremap": {
+    /* easier window navigation */
+    "<C-h>": "<C-w>h",
+    "<C-j>": "<C-w>j",
+    "<C-k>": "<C-w>k",
+    "<C-l>": "<C-w>l",
+  },
+
+  "vnoremap": {
+
+    /* move visual selection up and down */
+    /* see: https://twitter.com/MasteringVim/status/800982553943543809?s=09 */
+    "J": ":m '>+1<CR>gv=gv'",
+    "K": ":m '<-2<CR>gv=gv'",
+
+    /* easier tab creation */
+    "tc": ":tabnew<CR>",
+
+    /* moving around tabs */
+    "<Leader>(": ":tabprev<cr>",
+    "<Leader>)": ":tabnext<cr>",
+  },
+
+  "cnoremap": {
+    /* heretical mappings for command-line mode */
+    "<C-A>": "<Home>",
+    /*" back one character*/
+    "<C-B>": "<Left>",
+    /*" delete character under cursor*/
+    "<C-D>": "<Del>",
+    /*" end of line*/
+    "<C-E>": "<End>",
+    /*" forward one character*/
+    "<C-F>": "<Right>",
+    /*" recall newer command-line*/
+    "<C-N>": "<Down>",
+    /*" recall previous (older) command-line*/
+    "<C-P>": "<Up>",
+
+  /*" using sudo to write a file*/
+  /*cnoremap w!! w !sudo tee % >/dev/null*/
+  },
+
+  "inoremap": {
+
+  /*" Delete text after the cusor position in insert mode.*/
+  /*" Useful for deleting superflous quote marks left by auto-closing plugins.*/
+  /*inoremap <C-d> <C-[>ld$A*/
+
+  /*" escape from insert mode w/out stretching your fingers*/
+  /*inoremap jk <esc>*/
+
+  },
+
+
+
+
+  /*" use sane regexes*/
+  /*nnoremap / /\v*/
+  /*vnoremap / /\v*/
+  /*nnoremap ? ?\v*/
+  /*vnoremap ? ?\v*/
+  /*nnoremap s/ s/\v*/
+  /*cnoremap s/ s/\v*/
+  /*vnoremap s/ s/\v*/
+  /*cnoremap %s/ %s/\v*/
+  /*vnoremap %s/ %s/\v*/
+
+  /*" delete the current line w/ '-'*/
+  /*nnoremap - dd*/
+
+  /*" make Y behave like other capitals*/
+  /*nnoremap Y y$*/
+
+
+
+  /*" edit and source vimrc easier*/
+  /*nnoremap <Leader>ev :tabnew $MYVIMRC<CR>*/
+  /*nnoremap <Leader>sv :so $MYVIMRC<CR>*/
+}
