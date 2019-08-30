@@ -1,5 +1,5 @@
 " (魔境 makyō) - a Zen term meaning "ghost cave" or "devil's cave", a
-" perfect description for Vim configuration
+" perfect description of Vim configuration
 "
 " ----------------------------------------------------------------------
 
@@ -7,9 +7,7 @@ if &compatible
   set nocompatible
 endif
 
-augroup Reset
-  autocmd!
-augroup END
+let g:node_host_prog = '/$HOME/.volta/tools/image/packages/neovim/4.5.0/bin/cli.js'
 
 call makyo#plugins#config#init()      " Plugin configuration via autogroups
 call makyo#ux#init()                  " Usability options

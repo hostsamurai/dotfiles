@@ -72,20 +72,9 @@ function! makyo#plugins#denite#config#init()
     call denite#custom#var('grep', 'final_opts', [])
 
     " Open file commands
-    call denite#custom#map('insert,normal', "<C-t>", '<denite:do_action:tabopen>')
-    call denite#custom#map('insert,normal', "<C-v>", '<denite:do_action:vsplit>')
-    call denite#custom#map('insert,normal', "<C-s>", '<denite:do_action:split>')
-
-    " TODO: put these mappings in their own file or along with other mappings
-    " Browse currently opened buffers
-    noremap <C-space>b :Denite buffer<CR>
-    " Browse list of files in the current working directory
-    noremap <C-space>p :DeniteProjectDir file/rec<CR>
-    " Search current directory for occurences of given term; close window if no
-    " matches found.
-    nnoremap <C-space>g :<C-u>Denite grep:. -no-empty<CR>
-    " Search current directory for occurences of given word under cursor
-    nnoremap <C-space>j :<C-u>DeniteCursorWord grep:.<CR>
+    call denite#custom#map('normal', "tt", '<denite:do_action:tabopen>', 'noremap')
+    call denite#custom#map('normal', "tv", '<denite:do_action:vsplit>', 'noremap')
+    call denite#custom#map('normal', "ts", '<denite:do_action:split>', 'noremap')
 
     " Define mappings
     autocmd FileType denite call s:denite_ft_mappings()

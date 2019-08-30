@@ -3,11 +3,12 @@
     // -- Applications ------------------------
     // Space + a + c --> Opens calculator
     // Space + a + u --> Opens undo tree visualizer
+    // Space + a + l + u --> Updates coc.nvim and its extensions
     // TODO: open a terminal
-    // TODO: add "<CR>" to the end of these in the JS handler
     // ----------------------------------------
-    "<Space>ac": ":Calc",
-    "<Space>au": ":GundoToggle",
+    "<Space>ac":  ":Calc<CR>",
+    "<Space>au":  ":GundoToggle<CR>",
+    "<Space>alu": ":CocUpdate<CR>",
 
 
     // -- Buffers -----------------------------
@@ -15,24 +16,43 @@
     // Space + b + d --> Deletes the current active buffer
     // Space + b + h --> Opens the startup page
     // Space + b + s --> Switch to scratch buffer
-    // TODO: put denite-specific mappings here, under
-    // 'ftplugin' or something similar
     // ----------------------------------------
-    "<Space>bb": ":Denite buffer",
+    "<Space>bb": ":Denite buffer<CR>",
+    "<Space>bd": ":bd<CR>",
+    "<Space>bh": ":tabnew | Startify<CR>",
+    "<Space>bs": ":Scratch<CR>",
 
 
     // -- Files -------------------------------
     // Space + f + f --> Opens a list of project files via denite
     // Space + f + r --> Opens a MRU via denite
+    // Space + f + v + s --> Source vimrc
+    // Space + f + v + t --> Opens vimrc in a new tab
     // Space + f + t --> Opens a NERDTree
     // ----------------------------------------
-    "<Space>ff": ":DeniteProjectDir file/rec",
+    "<Space>ff":  ":DeniteProjectDir file/rec<CR>",
+    "<Space>fr":  ":Denite file_mru<CR>",
+    "<Space>ft":  ":NERDTreeToggle<CR>",
+    "<Space>fvs": ":so $MYVIMRC<CR>",
+    "<Space>fvt": ":tabnew $MYVIMRC<CR>",
+
+
+    // -- Project -----------------------------
+    // Space + p + b --> Opens project browser via denite
+    // Space + p + t + c --> Generate tags
+    // Space + p + t + g --> Generate GTAGS
+    // ----------------------------------------
+    "<Space>pb": ":DeniteProjectDir file/rec<CR>",
+    "<Space>ptc": ":GenCtags<CR>",
+    "<Space>ptg": ":GenGTAGS<CR>",
 
 
     // -- Insertion ---------------------------
     // Space + i + S + c --> Create a new snippet
     // Space + i + S + e --> See all snippets for filetype
     // ----------------------------------------
+    "<Space>ise": ":CocCommand snippets.editSnippets<CR>",
+    "<Space>isc": ":CocCommand snippets.openSnippetFiles<CR>",
 
 
     // -- Version Control ---------------------
@@ -47,36 +67,153 @@
 
 
     // -- Search ------------------------------
-    // Space + s + c --> Clear search highlight
+    // Space + s + c --> Clear search highlights
+    // Space + s + g --> Search current directory for occurences of given term; close window if no
+    //                   matches found.
+    // Space + s + u --> Search current directory for occurences of given word under cursor.
+    // Space + s + r + g --> Run a ripgrep query in a new tab
     // ----------------------------------------
+    "<silent> <space>sc": ":nohls<CR>",
+    "<space>sg": ":<C-u>Denite grep:. -no-empty<CR>",
+    "<space>su": ":<C-u>DeniteCursorWord grep:.<CR>",
+    "<space>srg": ":tabnew<CR>:Rg -i<Space>",
+
+    // More sane regexes
+    "/":  "/\v",
+    "?":  "?\v",
+    "s/": "s/\v",
 
 
     // -- Text --------------------------------
+    // - --> Delete the current line
+    // Q --> Don't use Ex mode, use Q for formatting
+    // Y --> Make Y behave like other capital letters
     // Space + t + a --> Align text
     // ----------------------------------------
+    "-": "dd",
+    "Q": "gq",
+    "Y": "y$",
+    "<Space>ta": ":EasyAlign<CR>",
 
 
     // -- Toggles -----------------------------
     // Space + t + c --> Cycle through color schemes via denite
     // ----------------------------------------
+    "<Space>tc": ":Denite colorscheme<CR>",
 
 
     // -- Windows -----------------------------
+    // Easier window navigation
+    // Ctrl + h --> Go to window left of current
+    // Ctrl + j --> Go to window below current
+    // Ctrl + k --> Go to window above current
+    // Ctrl + l --> Go to window right of current
+    //
+    // tc --> Open a new tab
+    //
     // Space + w + - --> Split window below
     // Space + w + | --> Split window right
     // Space + w + d --> Kill current window
     // Space + w + q --> Open quickfix window
     // Space + w + W --> Choose window
     // ----------------------------------------
+    "<C-h>": "<C-w>h",
+    "<C-j>": "<C-w>j",
+    "<C-k>": "<C-w>k",
+    "<C-l>": "<C-w>l",
+
+    "tc": ":tabnew<CR>",
+
+    "<Space>w-": "",
+    "<Space>w|": "",
+    "<Space>wW": "<Plug>(choosewin)",
 
 
     // -- Modes -------------------------------
     // ----------------------------------------
   },
 
-  "noremap": {},
+  "noremap": {
+    // Easier navigation on line-wrapped text
+    "j":  "gj",
+    "k":  "gk",
+    "gj": "j",
+    "gk": "k"
+  },
 
-  "cnoremap": {},
+  "cnoremap": {
+    // Heretical mappings
+    // Ctrl + a --> Jump to beginning of line
+    // Ctrl + b --> Back one character
+    // Ctrl + d --> Delete one character
+    // Ctrl + e --> Jump to end of line
+    // Ctrl + f --> Forward one character
+    // Ctrl + n --> Go forwards in history to the a newer entry
+    // Ctrl + p --> Go backwards in history to an older entry
+    // ----------------------------------------
+    "<C-A>": "<Home>",
+    "<C-B>": "<Left>",
+    "<C-D>": "<Del>",
+    "<C-E>": "<End>",
+    "<C-F>": "<Right>",
+    "<C-N>": "<Down>",
+    "<C-P>": "<Up>",
 
-  "inoremap": {},
+    // More sane regexes
+    "s/":  "s/\v",
+    "%s/": "%s/\v",
+
+    // Using sudo to write to a file
+    "w!!": "w !sudo tee % >/dev/null"
+  },
+
+  "inoremap": {
+    // jk --> Escape from insert mode without stretching your fingers
+    // Ctrl + U --> CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
+    //              so that you can undo CTRL-U after inserting a line break.
+    // Ctrl + d --> Delete text after the cusor position in insert mode.
+    // ----------------------------------------
+    "jk":    "<ESC>",
+    "<C-U>": "<C-G>u<C-U>",
+    "<C-d>": "<C-[>ld$A",
+
+    // coc.nvim snippets - see https://github.com/neoclide/coc.nvim/wiki/Using-snippets
+    "<silent><expr> <CR>": 'pumvisible() ? coc#_select_confirm() : "<C-g>u<CR><c-r>=coc#on_enter()\<CR>"'
+  },
+
+
+  "snoremap": {},
+
+
+  "vnoremap": {
+    // More sane regexes
+    "/":   "/\v",
+    "?":   "?\v",
+    "s/":  "s/\v",
+    "%s/": "%s/\v"
+  },
+
+
+  "nmap": {
+    // Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    "ga": "<Plug>(EasyAlign)"
+  },
+
+
+  "imap": {
+    // neosnippet completion - currently not fully working
+	  "<expr><TAB>": "pumvisible() ? '<C-n>' : neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'",
+    "<expr><CR>": '(pumvisible() && neosnippet#expandable()) ?  "<Plug>(neosnippet_expand)" : "<CR>"'
+  },
+
+
+  "smap": {
+    "<expr><TAB>": "neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'"
+  },
+
+
+  "vmap": {
+    // Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+    "<Enter>": "<Plug>(EasyAlign)"
+  }
 }

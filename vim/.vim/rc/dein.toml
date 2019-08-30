@@ -6,6 +6,7 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
+depends = ['vim-snippets']
 rev = 'release'
 merge = 0
 build = 'yarn install --frozen-lockfile'
@@ -15,13 +16,15 @@ repo = 'liuchengxu/vista.vim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
-hook_add = '''
-  let g:neosnippet#disable_runtime_snippets = {'_': 1}
-  let g:neosnippet#snippets_directory = ['~/.vim/plugged/vim-snippets/snippets', '~/.vim/custom_snippets']
-'''
-on_event = 'InsertEnter'
-on_ft = 'snippet'
 depends = ['vim-snippets', 'context_filetype.vim']
+hook_source = '''
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  let g:neosnippet#enable_completed_snippet = 1
+  let g:neosnippet#expand_word_boundary = 1
+  let g:neosnippet#snippets_directory = '~/.vim/snippets'
+'''
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
 
 [[plugins]]
 repo = 'honza/vim-snippets'
@@ -34,9 +37,6 @@ repo = 'jsfaint/gen_tags.vim'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-hook_add = '''
-  nnoremap <Leader>t :NERDTreeToggle<CR>
-'''
 
 [[plugins]]
 repo = 'scrooloose/nerdcommenter'
@@ -104,12 +104,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
-add_hook = '''
-  " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-  vmap <Enter> <Plug>(EasyAlign)
-  " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-  nmap ga <Plug>(EasyAlign)
-'''
 
 
 # - Language -------------------------------------
@@ -193,10 +187,6 @@ repo = 'jreybert/vimagit'
 repo = 'mhinz/vim-signify'
 add_hook = '''
   let g:signify_vcs_list = ['git', 'hg']
-
-  " hunk jumping
-  nmap <leader>gj <plug>(signify-next-hunk)
-  nmap <leader>gk <plug>(signify-prev-hunk)
 '''
 
 [[plugins]]
@@ -208,12 +198,6 @@ on_cmd = 'Gina'
 
 [[plugins]]
 repo = 'jremmen/vim-ripgrep'
-hook_add = '''
-  " run a ripgrep query in a new tab
-  nnoremap <Leader>rg :tabnew<CR>:Rg -i<Space>'
-  " run a ripgrep query in a new tab using the word under the cursor
-  nnoremap <Leader>Rg yaw:tabnew<CR>:Rg -i '<C-R>"'<Space>
-'''
 
 [[plugins]]
 repo = 'bronson/vim-visual-star-search'
@@ -262,17 +246,14 @@ hook_add = '''
 
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'
-on_func = 'comfortable_motion#flick'
 hook_add = '''
   let g:comfortable_motion_impulse_multiplier = 1
 '''
 
 [[plugins]]
 repo = 't9md/vim-choosewin'
-on_map = '<Plug>'
 hook_add = '''
   let g:choosewin_overlay_enable = 1
-  nnoremap <Space>wc <Plug>(choosewin)
 '''
 
 
