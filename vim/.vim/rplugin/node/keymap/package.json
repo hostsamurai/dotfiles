@@ -1,0 +1,14 @@
+{
+  "name": "keymap.vim",
+  "version": "1.0.0",
+  "description": "Remote plugin that maps keys to plugin functions via JSON5 ",
+  "main": "keymap.js",
+  "devDependencies": {
+    "neovim": "^4.5.0"
+  },
+  "dependencies": {
+    "json5": "^2.1.0"
+  },
+  "author": "Lou Gonzalez <lou.gonzalez@protonmail.com>",
+  "license": "ISC"
+}

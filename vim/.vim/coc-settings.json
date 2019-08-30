@@ -1,0 +1,5 @@
+{
+  "suggest.noselect": false,
+
+  "snippets.ultisnips.directories": ["~/.vim/snippets"]
+}
