@@ -29,6 +29,7 @@ function s:basic_options()
   set laststatus=2               " always show a statusline
   set cmdheight=2                " command line height
   set relativenumber             " show line numbers relative to the current lien
+  set inccommand="nosplit"       " show effects of a command as you type
   set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,localoptions,help
 
   " Hide the tabline - rely on CtrlSpace for navigation instead.

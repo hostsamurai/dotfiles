@@ -37,6 +37,11 @@ repo = 'jsfaint/gen_tags.vim'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
+hook_add = '''
+  let g:NERDTreeShowHidden = 1
+  let g:NERDTreeMinimalUI = 1
+  let g:NERDTreeStatusLine = ''
+'''
 
 [[plugins]]
 repo = 'scrooloose/nerdcommenter'
@@ -74,6 +79,23 @@ repo = 'amix/open_file_under_cursor.vim'
 repo = 'tpope/vim-dispatch'
 
 
+[[plugins]]
+repo = 'RRethy/vim-hexokinase.git'
+build = 'make hexokinase'
+hook_add = '''
+  let g:all_hexokinase_patterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla', 'colour_names']
+  let g:Hexokinase_ftOptInPatterns = {
+  \ 'css': g:all_hexokinase_patterns,
+  \ 'less': g:all_hexokinase_patterns,
+  \ 'scss': g:all_hexokinase_patterns,
+  \ 'sass': g:all_hexokinase_patterns,
+  \ 'clojure': 'hsl,hsla,colour_names'
+  \ }
+  let g:Hexokinase_ftEnabled  = ['css', 'less', 'sass', 'scss', 'clojure']
+  let g:Hexokinase_ftDisabled = ['help']
+'''
+
+
 # - Text Manipulation ----------------------------
 
 [[plugins]]
@@ -90,7 +112,10 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'Townk/vim-autoclose'
-on_event = "InsertEnter"
+on_event = "InsertCharPre"
+hook_add = '''
+let g:AutoClosePairs = "() {} [] \" '"
+'''
 
 [[plugins]]
 repo = 'vim-scripts/visincr'
@@ -150,6 +175,11 @@ on_ft = 'ruby'
 repo = 'tpope/vim-rails'
 on_ft = 'ruby'
 
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'cd app && yarn install'
+
 
 # - Applications ---------------------------------
 
@@ -192,6 +222,12 @@ add_hook = '''
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
 on_cmd = 'Gina'
+
+[[plugins]]
+repo = 'rhysd/git-messenger.vim'
+on_cmd = 'GitMessenger',
+on_map = '<Plug>(git-messenger'
+lazy = 1
 
 
 # - Search ---------------------------------------
@@ -254,6 +290,45 @@ hook_add = '''
 repo = 't9md/vim-choosewin'
 hook_add = '''
   let g:choosewin_overlay_enable = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+  let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+  "let g:airline_powerline_fonts = 1
+  "let g:airline_highlighting_cache = 1
+  let g:airline_exclude_preview = 1
+  let g:airline_skip_empty_sections = 1
+
+  let g:airline_mode_map = {
+  \ '__'     : '-',
+  \ 'c'      : 'C',
+  \ 'i'      : 'I',
+  \ 'ic'     : 'I',
+  \ 'ix'     : 'I',
+  \ 'n'      : 'N',
+  \ 'multi'  : 'M',
+  \ 'ni'     : 'N',
+  \ 'no'     : 'N',
+  \ 'R'      : 'R',
+  \ 'Rv'     : 'R',
+  \ 's'      : 'S',
+  \ 'S'      : 'S',
+  \ ''     : 'S',
+  \ 't'      : 'T',
+  \ 'v'      : 'V',
+  \ 'V'      : 'V',
+  \ ''     : 'V',
+  \ }
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+depends = 'vim-airline'
+hook_add = '''
+  let g:airline_theme = 'minimalist'
 '''
 
 

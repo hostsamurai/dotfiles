@@ -23,6 +23,14 @@
     "<Space>bs": ":Scratch<CR>",
 
 
+    // -- Comment/Compile ---------------------
+    // Space + c + c --> Comment out line
+    // Space + c + u --> Uncomment line
+    // ----------------------------------------
+    "<Space>cc": ":NERDCommenterSexy<CR>",
+    "<Space>cu": ":NERDCommenterUncomment<CR>",
+
+
     // -- Files -------------------------------
     // Space + f + f --> Opens a list of project files via denite
     // Space + f + r --> Opens a MRU via denite
@@ -35,6 +43,12 @@
     "<Space>ft":  ":NERDTreeToggle<CR>",
     "<Space>fvs": ":so $MYVIMRC<CR>",
     "<Space>fvt": ":tabnew $MYVIMRC<CR>",
+
+
+    // -- Jumps/Folds -------------------------
+    // Space + j + j --> EasyMotion jump to character
+    // ----------------------------------------
+    "<Space>jj": "<Plug>(easymotion-s)",
 
 
     // -- Project -----------------------------
@@ -79,9 +93,9 @@
     "<space>srg": ":tabnew<CR>:Rg -i<Space>",
 
     // More sane regexes
-    "/":  "/\v",
-    "?":  "?\v",
-    "s/": "s/\v",
+    "/":  "/\\v",
+    "?":  "?\\v",
+    "s/": "s/\\v",
 
 
     // -- Text --------------------------------
@@ -160,8 +174,8 @@
     "<C-P>": "<Up>",
 
     // More sane regexes
-    "s/":  "s/\v",
-    "%s/": "%s/\v",
+    "s/":  "s/\\v",
+    "%s/": "%s/\\v",
 
     // Using sudo to write to a file
     "w!!": "w !sudo tee % >/dev/null"
@@ -185,12 +199,27 @@
   "snoremap": {},
 
 
+  "tnoremap": {
+    // Navigate windows from the terminal using Alt + h/j/k/l
+    "<A-h>": "<C-\><C-N><C-w>h",
+    "<A-j>": "<C-\><C-N><C-w>j",
+    "<A-k>": "<C-\><C-N><C-w>k",
+    "<A-l>": "<C-\><C-N><C-w>l",
+
+    // Simulate i_CTRL-R
+    "<expr> <C-R>": "'<C-\><C-N>\"' . nr2char(getchar()) . 'pi'",
+
+    // Exit terminal mode easily
+    "<Esc>": "<C-\><C-n>"
+  },
+
+
   "vnoremap": {
     // More sane regexes
-    "/":   "/\v",
-    "?":   "?\v",
-    "s/":  "s/\v",
-    "%s/": "%s/\v"
+    "/":   "/\\v",
+    "?":   "?\\v",
+    "s/":  "s/\\v",
+    "%s/": "%s/\\v"
   },
 
 
