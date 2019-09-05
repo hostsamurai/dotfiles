@@ -6,7 +6,6 @@
 function s:terminal_settings()
   set t_Co=256
   let g:solarized_termcolors=256
-  set background=dark
 endfunction
 
 function s:gui_settings()
@@ -27,6 +26,8 @@ endfunction
 
 function! makyo#ui#init()
   echomsg "[makyo] 📺📺📺 Applying UI settings..."
+
+  set background=dark
   call s:terminal_settings()
   call s:gui_settings()
 
