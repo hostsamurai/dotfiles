@@ -4,11 +4,15 @@
     // Space + a + c --> Opens calculator
     // Space + a + u --> Opens undo tree visualizer
     // Space + a + l + u --> Updates coc.nvim and its extensions
+    // Space + a + s + o --> Open session
+    // Space + a + s + s --> Save session
     // TODO: open a terminal
     // ----------------------------------------
     "<Space>ac":  ":Calc<CR>",
     "<Space>au":  ":GundoToggle<CR>",
     "<Space>alu": ":CocUpdate<CR>",
+    "<Space>aso": ":OpenSession ",
+    "<Space>ass": ":SaveSession ",
 
 
     // -- Buffers -----------------------------
@@ -27,8 +31,8 @@
     // Space + c + c --> Comment out line
     // Space + c + u --> Uncomment line
     // ----------------------------------------
-    "<Space>cc": ":NERDCommenterSexy<CR>",
-    "<Space>cu": ":NERDCommenterUncomment<CR>",
+    "<Space>cc": "<plug>NERDCommenterSexy",
+    "<Space>cu": "<plug>NERDCommenterUncomment",
 
 
     // -- Files -------------------------------
@@ -138,8 +142,9 @@
 
     "tc": ":tabnew<CR>",
 
-    "<Space>w-": "",
-    "<Space>w|": "",
+    "<Space>w-": ":split<CR>",
+    "<Space>w|": ":vsplit<CR>",
+    // FIXME: This isn't working
     "<Space>wW": "<Plug>(choosewin)",
 
 
@@ -223,9 +228,15 @@
   },
 
 
+  "map": {
+    "<Space>jj": "<Plug>(easymotion-s)"
+  },
+
+
   "nmap": {
     // Start interactive EasyAlign for a motion/text object (e.g. gaip)
-    "ga": "<Plug>(EasyAlign)"
+    "ga": "<Plug>(EasyAlign)",
+    "<Space>wW": "<Plug>(choosewin)"
   },
 
 

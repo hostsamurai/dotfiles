@@ -3,6 +3,9 @@ function s:denite_ft_mappings() abort
   nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
   nnoremap <silent><buffer><expr> r       denite#do_map('do_action', 'quickfix')
   nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> s       denite#do_map('do_action', 'split')
+  nnoremap <silent><buffer><expr> v       denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> t       denite#do_map('do_action', 'tabopen')
   nnoremap <silent><buffer><expr> q       denite#do_map('quit')
   nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
   nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select') .'j'
@@ -70,11 +73,6 @@ function! makyo#plugins#denite#config#init()
     call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
-
-    " Open file commands
-    call denite#custom#map('normal', "tt", '<denite:do_action:tabopen>', 'noremap')
-    call denite#custom#map('normal', "tv", '<denite:do_action:vsplit>', 'noremap')
-    call denite#custom#map('normal', "ts", '<denite:do_action:split>', 'noremap')
 
     " Define mappings
     autocmd FileType denite call s:denite_ft_mappings()
