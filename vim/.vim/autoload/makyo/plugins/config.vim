@@ -34,11 +34,20 @@ function s:dein_setup()
   if dein#check_install()
     call dein#install()
   endif
+
+  " Call the post_source hook manually
+  augroup makyo
+    autocmd VimEnter * call dein#call_hook('post_source')
+  augroup END
 endfunction
 
 
 function! makyo#plugins#config#init()
   echomsg "[makyo] 🔌🔌🔌 Initializing plugins..."
+
+  if &compatible
+    set nocompatible
+  endif
 
   call s:dein_setup()
   call makyo#plugins#denite#config#init()

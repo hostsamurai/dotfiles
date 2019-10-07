@@ -3,10 +3,6 @@
 "
 " ----------------------------------------------------------------------
 
-if &compatible
-  set nocompatible
-endif
-
 let g:node_host_prog = '/$HOME/.volta/tools/image/packages/neovim/4.5.0/bin/cli.js'
 
 call makyo#plugins#config#init()      " Plugin configuration via autogroups
