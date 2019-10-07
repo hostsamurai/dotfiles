@@ -83,13 +83,13 @@ repo = 'tpope/vim-dispatch'
 repo = 'RRethy/vim-hexokinase.git'
 build = 'make hexokinase'
 hook_add = '''
-  let g:all_hexokinase_patterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla', 'colour_names']
+  let g:all_hexokinase_patterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla']
   let g:Hexokinase_ftOptInPatterns = {
   \ 'css': g:all_hexokinase_patterns,
   \ 'less': g:all_hexokinase_patterns,
   \ 'scss': g:all_hexokinase_patterns,
   \ 'sass': g:all_hexokinase_patterns,
-  \ 'clojure': 'hsl,hsla,colour_names'
+  \ 'clojure': 'full_hex,triple_hex,hsl,hsla'
   \ }
   let g:Hexokinase_ftEnabled  = ['css', 'less', 'sass', 'scss', 'clojure']
   let g:Hexokinase_ftDisabled = ['help']
@@ -112,9 +112,8 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'Townk/vim-autoclose'
-on_event = "InsertCharPre"
 hook_add = '''
-let g:AutoClosePairs = "() {} [] \" '"
+  let g:AutoClosePairs = "() {} [] \" '"
 '''
 
 [[plugins]]
@@ -154,6 +153,12 @@ on_ft = 'clojure'
 [[plugins]]
 repo = 'kovisoft/paredit'
 on_ft = ['clojure', 'scheme', 'racket']
+hook_add = '''
+  let g:paredit_mode = 1
+  let g:paredit_shortmaps = 1
+  let g:paredit_smartjump = 1
+  let g:paredit_leader = ','
+'''
 
 [[plugins]]
 repo = 'guileen/vim-node'
@@ -166,10 +171,6 @@ on_ft = 'javascript'
 [[plugins]]
 repo = 'prettier/vim-prettier'
 on_ft = ['javascript', 'typescript', 'less', 'css', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html']
-
-[[plugins]]
-repo = 'hallison/vim-ruby-sinatra'
-on_ft = 'ruby'
 
 [[plugins]]
 repo = 'tpope/vim-rails'
@@ -225,7 +226,7 @@ on_cmd = 'Gina'
 
 [[plugins]]
 repo = 'rhysd/git-messenger.vim'
-on_cmd = 'GitMessenger',
+on_cmd = 'GitMessenger'
 on_map = '<Plug>(git-messenger'
 lazy = 1
 
@@ -277,7 +278,7 @@ hook_add = '''
 [[plugins]]
 repo = 'tomtom/quickfixsigns_vim'
 hook_add = '''
-  let g:quickfixsigns_classes = ['qfl', 'marks', 'breakpoints']
+  let g:quickfixsigns_classes = ['marks']
 '''
 
 [[plugins]]
@@ -328,7 +329,11 @@ hook_add = '''
 repo = 'vim-airline/vim-airline-themes'
 depends = 'vim-airline'
 hook_add = '''
+  set background=dark
   let g:airline_theme = 'minimalist'
+'''
+hook_post_source = '''
+  set background=dark
 '''
 
 
@@ -391,6 +396,10 @@ markdown_mkd = '''
 
 vim = '''
   setlocal foldmethod=marker
+'''
+
+clojure = '''
+  let g:AutoClosePairs_del = "() [] {}"
 '''
 
 javascript_ruby_erb = '''
