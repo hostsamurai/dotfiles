@@ -217,6 +217,7 @@ repo = 'jreybert/vimagit'
 [[plugins]]
 repo = 'mhinz/vim-signify'
 add_hook = '''
+  let g:signify_realtime = 1
   let g:signify_vcs_list = ['git', 'hg']
 '''
 
