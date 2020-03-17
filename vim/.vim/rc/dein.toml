@@ -1,6 +1,14 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+if = "!has('nvim')"
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if = "!has('nvim')"
+
 
 # - Coding ---------------------------------------
 
@@ -80,7 +88,7 @@ repo = 'tpope/vim-dispatch'
 
 
 [[plugins]]
-repo = 'RRethy/vim-hexokinase.git'
+repo = 'rrethy/vim-hexokinase'
 build = 'make hexokinase'
 hook_add = '''
   let g:all_hexokinase_patterns = ['full_hex', 'triple_hex', 'rgb', 'rgba', 'hsl', 'hsla']
@@ -118,6 +126,12 @@ hook_add = '''
 
 [[plugins]]
 repo = 'vim-scripts/visincr'
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+hook_add = '''
+  let g:rainbow_activate = 0 " enabled via :RainbowToggle
+'''
 
 [[plugins]]
 repo = 'AndrewRadev/switch.vim'
@@ -399,7 +413,7 @@ vim = '''
   setlocal foldmethod=marker
 '''
 
-clojure = '''
+clojure_scheme_lisp = '''
   let g:AutoClosePairs_del = "() [] {}"
 '''
 
@@ -413,4 +427,8 @@ sass_scss_less_css = '''
 
 json_json5 = '''
   let g:AutoClosePairs_add = "\""
+'''
+
+toml = '''
+  let g:AutoClosePairs_add = "' []"
 '''

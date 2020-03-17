@@ -143,7 +143,7 @@
     "tc": ":tabnew<CR>",
 
     "<Space>w-": ":split<CR>",
-    "<Space>w|": ":vsplit<CR>",
+    "<Space>w\\\|": ":vsplit<CR>",
     // FIXME: This isn't working
     "<Space>wW": "<Plug>(choosewin)",
 
