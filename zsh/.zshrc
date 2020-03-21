@@ -147,6 +147,8 @@ alias grep='grep --color=auto'
 alias -g L='| less'
 alias -g M='| more'
 
+alias vim='nvim'
+
 # apply aliases when running commands with sudo
 alias sudo='sudo '
 
