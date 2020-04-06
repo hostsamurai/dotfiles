@@ -1,5 +1,16 @@
 {
   "suggest.noselect": false,
-
-  "snippets.ultisnips.directories": ["~/.vim/snippets"]
+  "suggest.snippetIndicator": "🍦",
+  "snippets.ultisnips.directories": ["~/.vim/snippets"],
+  "languageserver": {
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "cd /Users/case/dev/lsp/ && lein run"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["project.clj"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {}
+    }
+  }
 }

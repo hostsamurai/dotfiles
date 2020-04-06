@@ -82,6 +82,8 @@
     // Space + g + s --> git status
     // Space + g + m --> Invoke magit
     // ----------------------------------------
+    "<Space>gs": ":Gina status",
+    "<Space>gm": ":Magit",
 
 
     // -- Search ------------------------------
@@ -144,7 +146,6 @@
 
     "<Space>w-": ":split<CR>",
     "<Space>w\\\|": ":vsplit<CR>",
-    // FIXME: This isn't working
     "<Space>wW": "<Plug>(choosewin)",
 
 

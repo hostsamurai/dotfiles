@@ -165,6 +165,11 @@ repo = 'dgrnbrg/vim-redl'
 on_ft = 'clojure'
 
 [[plugins]]
+repo = 'clojure-vim/acid.nvim'
+on_ft = 'clojure'
+hook_post_update = ':UpdateRemotePlugins'
+
+[[plugins]]
 repo = 'kovisoft/paredit'
 on_ft = ['clojure', 'scheme', 'racket']
 hook_add = '''
@@ -414,7 +419,7 @@ vim = '''
 '''
 
 clojure_scheme_lisp = '''
-  let g:AutoClosePairs_del = "() [] {}"
+  let b:AutoClosePairs = AutoClose#DefaultPairsModified("", "() [] {}")
 '''
 
 javascript_ruby_erb = '''
@@ -426,9 +431,9 @@ sass_scss_less_css = '''
 '''
 
 json_json5 = '''
-  let g:AutoClosePairs_add = "\""
+  let b:AutoClosePairs = AutoClose#DefaultPairsModified("\"", "")
 '''
 
 toml = '''
-  let g:AutoClosePairs_add = "' []"
+  let b:AutoClosePairs = AutoClose#DefaultPairsModified("' []", "")
 '''
