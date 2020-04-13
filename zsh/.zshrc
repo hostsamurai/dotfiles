@@ -19,6 +19,17 @@ export BAT_THEME='Monokai Extended Origin'
 autoload -z edit-command-line
 zle -N edit-command-line
 
+# bind P and N for Emacs mode
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+# Edit the current command line in $EDITOR
+bindkey '^X^E' edit-command-line
+
+bindkey '^U' backward-kill-line
+
+# Use vim key bindings
+bindkey -v
 
 # ------------------------------------------------
 # Plugins
@@ -51,6 +62,8 @@ zplug "lukechilds/zsh-better-npm-completion"
 zplug "arzzen/calc.plugin.zsh"
 zplug "joepvd/zsh-hints"
 
+export SPACESHIP_TIME_SHOW=true
+export SPACESHIP_TIME_FORMAT=%D{'%H:%M'}
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
@@ -71,7 +84,6 @@ if zplug check jamesob/desk; then
   [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
 fi
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if type "fasd" > /dev/null; then
@@ -79,15 +91,6 @@ if type "fasd" > /dev/null; then
 fi
 
 zplug load
-
-# bind P and N for Emacs mode
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-
-# Edit the current command line in $EDITOR
-bindkey '^X^E' edit-command-line
-
-bindkey '^U' backward-kill-line
 
 # ------------------------------------------------
 # Options
@@ -117,9 +120,7 @@ unsetopt BG_NICE      # Don't run all background jobs at a lower priority.
 unsetopt HUP          # Don't kill jobs on shell exit.
 unsetopt CHECK_JOBS   # Don't report on jobs when shell exit.
 
-
 setopt clobber
-
 
 # ------------------------------------------------
 # Aliases
@@ -163,7 +164,6 @@ if [[ `uname` == 'Linux' ]]; then
 fi
 
 alias cljs='clj -Sdeps "{:deps {org.clojure/clojurescript {:mvn/version \"1.9.946\"}}}" -m cljs.repl.node'
-
 
 # ------------------------------------------------
 # Autoloaded Functions
