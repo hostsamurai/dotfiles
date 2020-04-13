@@ -1,3 +1,4 @@
+vim/.vim/autoload/plug.vim
 vim/.vim/backups
 vim/.vim/sessions
 vim/.vim/tmp
