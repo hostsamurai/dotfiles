@@ -22,6 +22,8 @@ zle -N edit-command-line
 # bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
+bindkey -M viins '^P' history-substring-search-up
+bindkey -M viins '^N' history-substring-search-down
 
 # Edit the current command line in $EDITOR
 bindkey '^X^E' edit-command-line
