@@ -65,6 +65,15 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'dense-analysis/ale'
+add_hook = '''
+  let g:ale_set_balloons = 1
+  let g:ale_fixers = {
+  \   '*': ['remove_trailing_whitespace', 'trim_whitespace']
+  \}
+'''
+
+[[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 hook_add = '''
   let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -117,12 +126,6 @@ repo = 'tpope/vim-speeddating'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'Townk/vim-autoclose'
-hook_add = '''
-  let g:AutoClosePairs = "() {} [] \" '"
-'''
 
 [[plugins]]
 repo = 'vim-scripts/visincr'
@@ -429,22 +432,15 @@ vim = '''
   setlocal foldmethod=marker
 '''
 
-clojure_scheme_lisp = '''
-  let b:AutoClosePairs = AutoClose#DefaultPairsModified("", "() [] {}")
-'''
-
 javascript_ruby_erb = '''
   set foldmethod=syntax
 '''
 
+javascript_json_json5 = '''
+  let b:ale_fixers = ['prettier', 'eslint']
+  let b:ale_fix_on_save = 1
+'''
+
 sass_scss_less_css = '''
   set foldmethod=indent
-'''
-
-json_json5 = '''
-  let b:AutoClosePairs = AutoClose#DefaultPairsModified("\"", "")
-'''
-
-toml = '''
-  let b:AutoClosePairs = AutoClose#DefaultPairsModified("' []", "")
 '''
