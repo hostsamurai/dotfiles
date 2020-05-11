@@ -346,11 +346,14 @@ hook_add = '''
 repo = 'vim-airline/vim-airline-themes'
 depends = 'vim-airline'
 hook_add = '''
-  set background=dark
   let g:airline_theme = 'minimalist'
 '''
-hook_post_source = '''
-  set background=dark
+
+[[plugins]]
+repo = 'liuchengxu/vim-which-key'
+on_cmd = ['WhichKey', 'WhichKeyVisual']
+on_source = '''
+  let g:which_key_flatten = 0
 '''
 
 

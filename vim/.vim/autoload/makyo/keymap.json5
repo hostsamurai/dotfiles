@@ -1,126 +1,120 @@
 {
-  "nnoremap": {
+  nnoremap: {
     // -- Applications ------------------------
-    // Space + a + c --> Opens calculator
-    // Space + a + u --> Opens undo tree visualizer
-    // Space + a + l + u --> Updates coc.nvim and its extensions
-    // Space + a + s + o --> Open session
-    // Space + a + s + s --> Save session
-    // TODO: open a terminal
-    // ----------------------------------------
-    "<Space>ac":  ":Calc<CR>",
-    "<Space>au":  ":GundoToggle<CR>",
-    "<Space>alu": ":CocUpdate<CR>",
-    "<Space>aso": ":OpenSession ",
-    "<Space>ass": ":SaveSession ",
-
+    a: {
+      name: "+applications",
+      c: [":Calc<CR>",        "calculator"],
+      u: [":GundoToggle<CR>", "undo tree"],
+      l: {
+        name: "+coc",
+        u: [":CocUpdate<CR>", "update coc"]
+      },
+      s: {
+        name: "+session",
+        o: [":OpenSession ",    "open session"],
+        s: [":SaveSession ",    "save session"],
+        u: [":SaveSession<CR>", "save current session"]
+      },
+      t: [":terminal<CR>", "terminal"]
+    },
 
     // -- Buffers -----------------------------
-    // Space + b + b --> Opens the buffer list via denite
-    // Space + b + d --> Deletes the current active buffer
-    // Space + b + h --> Opens the startup page
-    // Space + b + s --> Switch to scratch buffer
-    // ----------------------------------------
-    "<Space>bb": ":Denite buffer<CR>",
-    "<Space>bd": ":bd<CR>",
-    "<Space>bh": ":tabnew | Startify<CR>",
-    "<Space>bs": ":Scratch<CR>",
-
-
-    // -- Comment/Compile ---------------------
-    // Space + c + c --> Comment out line
-    // Space + c + u --> Uncomment line
-    // ----------------------------------------
-    "<Space>cc": "<plug>NERDCommenterSexy",
-    "<Space>cu": "<plug>NERDCommenterUncomment",
+    b: {
+      name: "+buffer",
+      b: [":<C-u>Denite buffer<CR>",  "find buffer"],
+      d: [":bd<CR>",                  "delete buffer"],
+      h: [":tabnew \\| Startify<CR>", "home buffer"],
+      m: [":BufExplorer<CR>",         "manage buffers"],
+      s: [":Scratch<CR>",             "scratch buffer"]
+    },
 
 
     // -- Files -------------------------------
-    // Space + f + f --> Opens a list of project files via denite
-    // Space + f + r --> Opens a MRU via denite
-    // Space + f + v + s --> Source vimrc
-    // Space + f + v + t --> Opens vimrc in a new tab
-    // Space + f + t --> Opens a NERDTree
-    // ----------------------------------------
-    "<Space>ff":  ":DeniteProjectDir file/rec<CR>",
-    "<Space>fr":  ":Denite file_mru<CR>",
-    "<Space>ft":  ":NERDTreeToggle<CR>",
-    "<Space>fvs": ":so $MYVIMRC<CR>",
-    "<Space>fvt": ":tabnew $MYVIMRC<CR>",
-
-
-    // -- Jumps/Folds -------------------------
-    // Space + j + j --> EasyMotion jump to character
-    // ----------------------------------------
-    "<Space>jj": "<Plug>(easymotion-s)",
-
+    f: {
+      name: "+files",
+      f: [":DeniteProjectDir file/rec", "find file"],
+      r: [":Denite file_mru",           "recent files"],
+      t: [":NERDTreeToggle",            "NERDTree"],
+      v: {
+        name: "+vimrc",
+        s: [":so $MYVIMRC",     "source vimrc"],
+        t: [":tabnew $MYVIMRC", "edit vimrc"]
+      }
+    },
 
     // -- Project -----------------------------
-    // Space + p + b --> Opens project browser via denite
-    // Space + p + t + c --> Generate tags
-    // Space + p + t + g --> Generate GTAGS
-    // ----------------------------------------
-    "<Space>pb": ":DeniteProjectDir file/rec<CR>",
-    "<Space>ptc": ":GenCtags<CR>",
-    "<Space>ptg": ":GenGTAGS<CR>",
-
+    p: {
+      name: "+project",
+      b: [":DeniteProjectDir file/rec", "find project file"],
+      t: {
+        name: "+tags",
+        c: [":GenCtags", "generate ctags"],
+        g: [":GenGTAGS", "generate gtags"]
+      }
+    },
 
     // -- Insertion ---------------------------
-    // Space + i + S + c --> Create a new snippet
-    // Space + i + S + e --> See all snippets for filetype
-    // ----------------------------------------
-    "<Space>ise": ":CocCommand snippets.editSnippets<CR>",
-    "<Space>isc": ":CocCommand snippets.openSnippetFiles<CR>",
-
+    i: {
+      name: "+insertion",
+      s: {
+        name: "+snippets",
+        e: [":CocCommand snippets.editSnippets<CR>",     "edit snippets"],
+        c: [":CocCommand snippets.openSnippetFiles<CR>", "open snippets file"]
+      }
+    },
 
     // -- Version Control ---------------------
+    // TODO:
     // Space + g + b + # --> git blame
     // Space + g + b + c --> git checkout -b
     // Space + g + c + - --> git checkout --
     // Space + g + p + p --> git push
     // Space + g + p + f --> git push --force
-    // Space + g + s --> git status
-    // Space + g + m --> Invoke magit
     // ----------------------------------------
-    "<Space>gs": ":Gina status",
-    "<Space>gm": ":Magit",
-
+    g: {
+      name: "+version control",
+      s: [":Gina status<CR>", "status"],
+      m: [":Magit<CR>",       "magit"]
+    },
 
     // -- Search ------------------------------
-    // Space + s + c --> Clear search highlights
-    // Space + s + g --> Search current directory for occurences of given term; close window if no
-    //                   matches found.
-    // Space + s + u --> Search current directory for occurences of given word under cursor.
-    // Space + s + r + g --> Run a ripgrep query in a new tab
-    // ----------------------------------------
-    "<silent> <space>sc": ":nohls<CR>",
-    "<space>sg": ":<C-u>Denite grep:. -no-empty<CR>",
-    "<space>su": ":<C-u>DeniteCursorWord grep:.<CR>",
-    "<space>srg": ":tabnew<CR>:Rg -i<Space>",
+    s: {
+      name: "+search",
+      c: [":nohlsearch<CR>",               "clear highlights"],
+      g: [":<C-u>Denite grep:. -no-empty", "search cwd"],
+      u: [":<C-u>DeniteCursorWord grep:.", "word under cursor"],
+      r: {
+        name: "+ripgrep",
+        g: [":tabnew:Rg -i", "rg"]
+      }
+    },
 
     // More sane regexes
-    "/":  "/\\v",
-    "?":  "?\\v",
+    "/": "/\\v",
+    "?": "?\\v",
     "s/": "s/\\v",
-
 
     // -- Text --------------------------------
     // - --> Delete the current line
     // Q --> Don't use Ex mode, use Q for formatting
     // Y --> Make Y behave like other capital letters
-    // Space + t + a --> Align text
     // ----------------------------------------
     "-": "dd",
-    "Q": "gq",
-    "Y": "y$",
-    "<Space>ta": ":EasyAlign<CR>",
+    Q: "gq",
+    Y: "y$",
 
+    x: {
+      name: "+text",
+      a: [":EasyAlign", "align text"]
+    },
 
     // -- Toggles -----------------------------
     // Space + t + c --> Cycle through color schemes via denite
     // ----------------------------------------
-    "<Space>tc": ":Denite colorscheme<CR>",
-
+    t: {
+      name: "+toogles",
+      c: [":Denite colorscheme", "cycle color schemes"]
+    },
 
     // -- Windows -----------------------------
     // Easier window navigation
@@ -128,40 +122,34 @@
     // Ctrl + j --> Go to window below current
     // Ctrl + k --> Go to window above current
     // Ctrl + l --> Go to window right of current
-    //
-    // tc --> Open a new tab
-    //
-    // Space + w + - --> Split window below
-    // Space + w + | --> Split window right
-    // Space + w + d --> Kill current window
-    // Space + w + q --> Open quickfix window
-    // Space + w + W --> Choose window
     // ----------------------------------------
     "<C-h>": "<C-w>h",
     "<C-j>": "<C-w>j",
     "<C-k>": "<C-w>k",
     "<C-l>": "<C-w>l",
 
-    "tc": ":tabnew<CR>",
-
-    "<Space>w-": ":split<CR>",
-    "<Space>w\\\|": ":vsplit<CR>",
-    "<Space>wW": "<Plug>(choosewin)",
-
-
-    // -- Modes -------------------------------
-    // ----------------------------------------
+    w: {
+      name: "+windows",
+      "-": [":exe 'split'<CR>",    "horizontal split"],
+      "\\|": [":exe 'vsplit'<CR>", "vertical split"],
+      c: [":close<CR>",            "close current window"],
+      l: [":lopen<CR>",            "open location list"],
+      q: [":copen<CR>",            "open quickfix"],
+      W: ["<Plug>(choosewin)",     "jump to window"]
+    }
   },
 
-  "noremap": {
+  noremap: {
     // Easier navigation on line-wrapped text
-    "j":  "gj",
-    "k":  "gk",
-    "gj": "j",
-    "gk": "k"
+    j: "gj",
+    k: "gk",
+    gj: "j",
+    gk: "k",
+
+    tc: ":tabnew<CR>"
   },
 
-  "cnoremap": {
+  cnoremap: {
     // Heretical mappings
     // Ctrl + a --> Jump to beginning of line
     // Ctrl + b --> Back one character
@@ -180,47 +168,44 @@
     "<C-P>": "<Up>",
 
     // More sane regexes
-    "s/":  "s/\\v",
+    "s/": "s/\\v",
     "%s/": "%s/\\v",
 
     // Using sudo to write to a file
     "w!!": "w !sudo tee % >/dev/null"
   },
 
-  "inoremap": {
+  inoremap: {
     // jk --> Escape from insert mode without stretching your fingers
     // Ctrl + U --> CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
     //              so that you can undo CTRL-U after inserting a line break.
     // Ctrl + d --> Delete text after the cusor position in insert mode.
     // ----------------------------------------
-    "jk":    "<ESC>",
+    jk:      "<ESC>",
     "<C-U>": "<C-G>u<C-U>",
     "<C-d>": "<C-[>ld$A",
 
     // coc.nvim snippets - see https://github.com/neoclide/coc.nvim/wiki/Using-snippets
-    "<silent><expr> <CR>": 'pumvisible() ? coc#_select_confirm() : "<C-g>u<CR><c-r>=coc#on_enter()\<CR>"'
+    "<silent><expr> <CR>": 'pumvisible() ? coc#_select_confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"'
   },
 
+  snoremap: {},
 
-  "snoremap": {},
-
-
-  "tnoremap": {
+  tnoremap: {
     // Navigate windows from the terminal using Alt + h/j/k/l
-    "<A-h>": "<C-\><C-N><C-w>h",
-    "<A-j>": "<C-\><C-N><C-w>j",
-    "<A-k>": "<C-\><C-N><C-w>k",
-    "<A-l>": "<C-\><C-N><C-w>l",
+    "<A-h>": "<C-><C-N><C-w>h",
+    "<A-j>": "<C-><C-N><C-w>j",
+    "<A-k>": "<C-><C-N><C-w>k",
+    "<A-l>": "<C-><C-N><C-w>l",
 
     // Simulate i_CTRL-R
-    "<expr> <C-R>": "'<C-\><C-N>\"' . nr2char(getchar()) . 'pi'",
+    "<expr> <C-R>": "'<C-><C-N>\"' . nr2char(getchar()) . 'pi'",
 
     // Exit terminal mode easily
-    "<Esc>": "<C-\><C-n>"
+    "<Esc>": "<C-><C-N>"
   },
 
-
-  "vnoremap": {
+  vnoremap: {
     // More sane regexes
     "/":   "/\\v",
     "?":   "?\\v",
@@ -228,32 +213,44 @@
     "%s/": "%s/\\v"
   },
 
+  map: {
+    // -- Comment/Compile ---------------------
+    c: {
+      name: "+comments/compile",
+      c: ["<plug>NERDCommenterSexy",      "comment"],
+      u: ["<plug>NERDCommenterUncomment", "uncomment"]
+    },
 
-  "map": {
-    "<Space>jj": "<Plug>(easymotion-s)"
+
+    // -- Jumps/Folds -------------------------
+    j: {
+      name: "+jumps/folds",
+      j: ["<Plug>(easymotion-s)", "easymotion"]
+    }
+
+    // -- Windows -----------------------------
+    w: {
+      name: "+windows",
+      W: ["<Plug>(choosewin)", "jump to window"]
+    }
   },
 
-
-  "nmap": {
+  nmap: {
     // Start interactive EasyAlign for a motion/text object (e.g. gaip)
-    "ga": "<Plug>(EasyAlign)",
-    "<Space>wW": "<Plug>(choosewin)"
+    //"ga": "<Plug>(EasyAlign)",
   },
 
-
-  "imap": {
-    // neosnippet completion - currently not fully working
-	  "<expr><TAB>": "pumvisible() ? '<C-n>' : neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'",
+  imap: {
+    // FIXME: neosnippet tab completion - currently not fully working
+    "<expr><TAB>": "pumvisible() ? '<C-n>' : neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'",
     "<expr><CR>": '(pumvisible() && neosnippet#expandable()) ?  "<Plug>(neosnippet_expand)" : "<CR>"'
   },
 
-
-  "smap": {
+  smap: {
     "<expr><TAB>": "neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'"
   },
 
-
-  "vmap": {
+  vmap: {
     // Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
     "<Enter>": "<Plug>(EasyAlign)"
   }

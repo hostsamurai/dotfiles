@@ -1,44 +1,22 @@
-const path = require('path');
-const fs = require('fs').promises;
-const JSON5 = require('json5');
+// Read JSON5 files through require()
+require('json5/lib/register')
 
-const getKeymapByMode = async () => {
-  const filePath = path.resolve(
-    __dirname,
-    '../../../autoload/makyo/keymap.json5',
-  );
-  const keymap = await fs.readFile(filePath, 'utf8');
-  const maps = JSON5.parse(keymap);
+const keymapByMode = require('../../../autoload/makyo/keymap.json5')
+const mapSimpleKeymappings = require('./keymaps/simple')
+const mapWhichKeyCommands = require('./keymaps/which_key')
 
-  return maps;
-};
-
-const getModeKeymapTuple = ([mode, keymap]) => {
-  return Object.entries(keymap).map(([lhs, rhs]) => [mode, lhs, rhs]);
-};
-
-const createModeMaps = ([mode, lhs, rhs]) => `${mode} ${lhs} ${rhs}`;
 
 const registerUserKeymap = plugin => {
-  plugin.setOptions({dev: true, alwaysInit: true});
+  plugin.setOptions({dev: true, alwaysInit: true})
 
   plugin.registerFunction(
     'RegisterKeymap',
-    async () => {
-      try {
-        const keymapByMode = await getKeymapByMode();
-
-        Object.entries(keymapByMode)
-          .filter(([, map]) => Object.keys(map).length)
-          .flatMap(getModeKeymapTuple)
-          .map(createModeMaps)
-          .forEach(c => plugin.nvim.command(c));
-      } catch (err) {
-        console.error(err);
-      }
+    () => {
+      mapSimpleKeymappings(plugin, keymapByMode)
+      mapWhichKeyCommands(plugin, keymapByMode)
     },
-    {sync: false},
-  );
-};
+    {sync: false}
+  )
+}
 
-module.exports = registerUserKeymap;
+module.exports = registerUserKeymap

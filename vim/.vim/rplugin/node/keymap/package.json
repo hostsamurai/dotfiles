@@ -4,10 +4,11 @@
   "description": "Remote plugin that maps keys to plugin functions via JSON5 ",
   "main": "keymap.js",
   "devDependencies": {
-    "neovim": "^4.5.0"
+    "neovim": "^4.8.0"
   },
   "dependencies": {
-    "json5": "^2.1.0"
+    "json5": "^2.1.3",
+    "lodash.isobject": "^3.0.2"
   },
   "author": "Lou Gonzalez <lou.gonzalez@protonmail.com>",
   "license": "ISC"
