@@ -79,12 +79,13 @@ const mapWhichKeyCommands = (plugin, keymapByMode) => {
         const scopedCommands = assignMap(m, key, keymap)
         return scopedCommands.length ? commands.concat(scopedCommands) : commands
       }, [])
-      .map(c =>
+      .map(c => {
+        console.log(c)
         plugin
           .nvim
           .command(c)
           .catch(e => console.error({error: e, vimCmd: c}))
-      )
+      })
   })
 }
 

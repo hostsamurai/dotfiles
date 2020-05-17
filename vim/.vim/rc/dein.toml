@@ -193,6 +193,9 @@ on_ft = 'javascript'
 [[plugins]]
 repo = 'prettier/vim-prettier'
 on_ft = ['javascript', 'typescript', 'less', 'css', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html']
+hook_source = '''
+  unmap <leader>p
+'''
 
 [[plugins]]
 repo = 'tpope/vim-rails'
@@ -235,6 +238,9 @@ repo = 'acustodioo/vim-tmux'
 
 [[plugins]]
 repo = 'jreybert/vimagit'
+on_source = '''
+  unmap <leader>M
+'''
 
 [[plugins]]
 repo = 'mhinz/vim-signify'
@@ -261,6 +267,9 @@ repo = 'jremmen/vim-ripgrep'
 
 [[plugins]]
 repo = 'bronson/vim-visual-star-search'
+hook_post_source = '''
+  unmap <leader>*
+'''
 
 [[plugins]]
 repo = 'Lokaltog/vim-easymotion'
@@ -315,6 +324,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
+depends = ['vim-airline/vim-airline-themes']
 hook_add = '''
   let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
@@ -344,19 +354,27 @@ hook_add = '''
   \ ''     : 'V',
   \ }
 '''
+hook_post_source = '''
+  set background=dark
+'''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 depends = 'vim-airline'
 hook_add = '''
   let g:airline_theme = 'minimalist'
+  let g:airline_minimalist_showmod = 1
 '''
 
 [[plugins]]
 repo = 'liuchengxu/vim-which-key'
-on_cmd = ['WhichKey', 'WhichKeyVisual']
-on_source = '''
-  let g:which_key_flatten = 0
+on_cmd = ['WhichKey', 'WhichKey!', 'WhichKeyVisual', 'WhichKeyVisual!']
+hook_source = '''
+  let g:which_key_align_by_separator = 1
+  let g:which_key_use_floating_win = 1
+'''
+hook_post_source = '''
+  doautocmd User vim-which-key
 '''
 
 
@@ -403,13 +421,9 @@ repo = 'bruth/vim-newsprint-theme'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
-hook_add = '''
-  let g:webdevicons_enable_startify=1
-  let g:webdevicons_enable_airline_tabline=1
-  let g:webdevicons_enable_airline_statusline=1
-  let g:webdevicons_enable_nerdtree=1
-  let g:webdevicons_enable_denite=1
-  let g:webdevicons_enable_unite=1
+hook_source = '''
+  let g:airline_powerline_fonts=1
+  let g:WebDevIconsUnicodeGlyphDoubleWidth=1
 '''
 
 

@@ -15,7 +15,7 @@ const registerUserKeymap = plugin => {
       mapSimpleKeymappings(plugin, keymapByMode)
       mapWhichKeyCommands(plugin, keymapByMode)
     },
-    {sync: false}
+    {sync: true}
   )
 }
 
