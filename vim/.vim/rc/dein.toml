@@ -193,7 +193,7 @@ on_ft = 'javascript'
 [[plugins]]
 repo = 'prettier/vim-prettier'
 on_ft = ['javascript', 'typescript', 'less', 'css', 'scss', 'json', 'graphql', 'markdown', 'yaml', 'html']
-hook_source = '''
+hook_post_source = '''
   unmap <leader>p
 '''
 
