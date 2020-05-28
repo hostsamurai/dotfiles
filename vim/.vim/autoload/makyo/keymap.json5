@@ -32,11 +32,12 @@
     // -- Files -------------------------------
     f: {
       name: "+files",
-      f: [":DeniteProjectDir file/rec", "find file"],
-      r: [":Denite file_mru",           "recent files"],
-      t: [":NERDTreeToggle",            "NERDTree"],
+      f: [":DeniteProjectDir file/rec<CR>", "find file"],
+      r: [":Denite file_mru<CR>",           "recent files"],
+      t: [":NERDTreeToggle<CR>",            "NERDTree"],
       v: {
-        name: "+vimrc",
+        name: "+vim",
+        k: [":tabnew ~/.vim/autoload/makyo/keymap.json5", "open keymap config"],
         s: [":so $MYVIMRC",     "source vimrc"],
         t: [":tabnew $MYVIMRC", "edit vimrc"]
       }
@@ -45,11 +46,11 @@
     // -- Project -----------------------------
     p: {
       name: "+project",
-      b: [":DeniteProjectDir file/rec", "find project file"],
+      b: [":DeniteProjectDir file/rec<CR>", "find project file"],
       t: {
         name: "+tags",
-        c: [":GenCtags", "generate ctags"],
-        g: [":GenGTAGS", "generate gtags"]
+        c: [":GenCtags<CR>", "generate ctags"],
+        g: [":GenGTAGS<CR>", "generate gtags"]
       }
     },
 
@@ -73,8 +74,30 @@
     // ----------------------------------------
     g: {
       name: "+version control",
+      b: {
+        name: "+branch",
+        m: [":Gina blame<CR>", "blame"]
+      },
+      c: {
+        name: "+commit",
+        a: [":Gina commit --amend<CR>",           "amend"],
+        c: [":Gina commit<CR>",                   "commit"],
+        m: [":Gina commit -m ",                   "simple commit"],
+        n: [":Gina commit --amend --no-edit<CR>", "amend no-edit"]
+      },
+      d: {
+        name: "+diff",
+        d: [":Gina compare<CR>", "2-buffer compare"],
+        s: [":Gina diff<CR>",    "unified diff"]
+      },
+      l: [":Gina log<CR>", "log"],
       s: [":Gina status<CR>", "status"],
-      m: [":Magit<CR>",       "magit"]
+      m: [":Magit<CR>",       "magit"],
+      z: {
+        name: "+stash",
+        b: [":Gina stash<CR>",   "stash buffer"],
+        s: [":Gina stash show ", "show"]
+      }
     },
 
     // -- Search ------------------------------
@@ -85,7 +108,7 @@
       u: [":<C-u>DeniteCursorWord grep:.", "word under cursor"],
       r: {
         name: "+ripgrep",
-        g: [":tabnew:Rg -i", "rg"]
+        g: [":tabnew \\| :Rg -i", "rg"]
       }
     },
 
@@ -109,8 +132,6 @@
     },
 
     // -- Toggles -----------------------------
-    // Space + t + c --> Cycle through color schemes via denite
-    // ----------------------------------------
     t: {
       name: "+toogles",
       c: [":Denite colorscheme", "cycle color schemes"]
@@ -130,12 +151,14 @@
 
     w: {
       name: "+windows",
-      "-": [":exe 'split'<CR>",    "horizontal split"],
-      "\\|": [":exe 'vsplit'<CR>", "vertical split"],
-      c: [":close<CR>",            "close current window"],
-      l: [":lopen<CR>",            "open location list"],
-      q: [":copen<CR>",            "open quickfix"],
-      W: ["<Plug>(choosewin)",     "jump to window"]
+      s:   [ ":exe 'split'<CR>",  "horizontal split"],
+      v:   [ ":exe 'vsplit'<CR>", "vertical split"],
+      c:   [ ":close<CR>",        "close current window"],
+      l:   [ ":lopen<CR>",        "open location list"],
+      q:   [ ":copen<CR>",        "open quickfix"],
+      W:   [ "<Plug>(choosewin)", "jump to window"],
+      "+": [ ":resize +5<CR>",    "increase height"],
+      "-": [ ":resize -5<CR>",    "decrease height"]
     }
   },
 
@@ -186,7 +209,7 @@
     "<C-d>": "<C-[>ld$A",
 
     // coc.nvim snippets - see https://github.com/neoclide/coc.nvim/wiki/Using-snippets
-    "<silent><expr> <CR>": 'pumvisible() ? coc#_select_confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"'
+    "<silent><expr> <CR>": 'pumvisible() ? coc#_select_confirm() : \"\<C-g>u\<CR><c-r>=coc#on_enter()\<CR>"'
   },
 
   snoremap: {},
@@ -210,7 +233,9 @@
     "/":   "/\\v",
     "?":   "?\\v",
     "s/":  "s/\\v",
-    "%s/": "%s/\\v"
+    "%s/": "%s/\\v",
+
+    "<leader>*": ":<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>"
   },
 
   map: {
@@ -226,7 +251,7 @@
     j: {
       name: "+jumps/folds",
       j: ["<Plug>(easymotion-s)", "easymotion"]
-    }
+    },
 
     // -- Windows -----------------------------
     w: {
