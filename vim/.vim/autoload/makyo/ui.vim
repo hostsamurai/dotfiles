@@ -16,14 +16,18 @@ function s:gui_settings()
   set guioptions-=l " same as above - never present
   set guioptions-=R " no right scrollbar
   set guioptions-=r " same as above - never present
-
-  set guifont=FuraCode\ Nerd\ Font\ 13
 endfunction
 
 function s:adjust_colorscheme(name)
   if a:name == 'horizon'
     hi! link PMenu SneakScope
     hi! link NormalFloat SneakScope
+
+    syntax clear StatusLineNC
+    hi! link StatusLineNC airline_a_to_airline_b_inactive
+
+    syntax clear VertSplit
+    hi! VertSplit ctermfg=233 ctermbg=233 guifg=#191B23 guibg=#191B23
   endif
 endfunction
 
