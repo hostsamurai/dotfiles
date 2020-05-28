@@ -4,6 +4,9 @@ vim/.vim/sessions
 vim/.vim/tmp
 vim/.vim/plugged
 vim/.vim/.netrwhist
+configs/.boot/cache
+configs/.lein/indices
+configs/.lein/repl-history
 configs/.config/gtk-3.0/bookmarks
 configs/.config/pulse/cookie
 **/node_modules
