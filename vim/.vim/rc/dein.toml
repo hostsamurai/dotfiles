@@ -228,6 +228,13 @@ on_cmd = ['SaveSesion', 'OpenSession', 'RestartVim']
 depends = 'vim-misc'
 
 [[plugins]]
+repo = 'LucHermitte/lh-vim-lib'
+
+[[plugins]]
+repo = 'LucHermitte/local_vimrc'
+depends = 'lh-vim-lib'
+
+[[plugins]]
 repo = 'xolox/vim-misc'
 
 [[plugins]]
@@ -423,7 +430,6 @@ repo = 'bruth/vim-newsprint-theme'
 repo = 'ryanoasis/vim-devicons'
 hook_source = '''
   let g:airline_powerline_fonts=1
-  let g:WebDevIconsUnicodeGlyphDoubleWidth=1
 '''
 
 
