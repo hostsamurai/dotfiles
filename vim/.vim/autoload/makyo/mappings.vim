@@ -26,7 +26,7 @@ function! makyo#mappings#init()
   augroup makyo_mappings
     au!
     au VimEnter * call RegisterKeymap()
-    au FileWritePost */makyo/keymap.json5 call RegisterKeymap()
+    au BufWritePost */makyo/keymap.json5 call RegisterKeymap() | call which_key#parse_mappings()
 
     call s:setup_mappings()
   augroup END
