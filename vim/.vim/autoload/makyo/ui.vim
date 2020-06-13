@@ -40,11 +40,8 @@ function! makyo#ui#init()
 
   augroup makyo_ui
     au!
-    au VimEnter * call s:adjust_colorscheme(g:colors_name)
+    au User vim-which-key call s:adjust_colorscheme(g:colors_name)
   augroup end
-
-  let g:airline_powerline_fonts=1
-  let g:WebDevIconsUnicodeGlyphDoubleWidth=1
 
   echomsg "[makyo] 📺📺📺 Done."
 endfunction

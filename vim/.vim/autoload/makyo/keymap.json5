@@ -172,7 +172,7 @@
     tc: ":tabnew<CR>"
   },
 
-  cnoremap: {
+ cnoremap: {
     // Heretical mappings
     // Ctrl + a --> Jump to beginning of line
     // Ctrl + b --> Back one character
@@ -242,7 +242,8 @@
     // -- Comment/Compile ---------------------
     c: {
       name: "+comments/compile",
-      c: ["<plug>NERDCommenterSexy",      "comment"],
+      c: ["<plug>NERDCommenterToggle",    "comment one line"],
+      s: ["<plug>NERDCommenterSexy",      "comment"],
       u: ["<plug>NERDCommenterUncomment", "uncomment"]
     },
 
