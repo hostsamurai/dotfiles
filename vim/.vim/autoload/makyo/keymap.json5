@@ -247,6 +247,15 @@
       u: ["<plug>NERDCommenterUncomment", "uncomment"]
     },
 
+    // -- Version Control ---------------------
+    g: {
+      name: "+version control",
+      h: {
+        name: "+history",
+        c: ["<Plug>(git-messenger)",            "last commit message"],
+        C: ["<Plug>(git-messenger-into-popup)", "open popup"]
+      },
+    },
 
     // -- Jumps/Folds -------------------------
     j: {

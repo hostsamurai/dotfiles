@@ -233,6 +233,10 @@ repo = 'LucHermitte/lh-vim-lib'
 [[plugins]]
 repo = 'LucHermitte/local_vimrc'
 depends = 'lh-vim-lib'
+hook_add = '''
+  call lh#local_vimrc#filter_list('asklist', 'v:val != $HOME')
+  call lh#local_vimrc#munge('sandboxlist', $HOME)
+'''
 
 [[plugins]]
 repo = 'xolox/vim-misc'
@@ -265,6 +269,16 @@ repo = 'rhysd/git-messenger.vim'
 on_cmd = 'GitMessenger'
 on_map = '<Plug>(git-messenger'
 lazy = 1
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'tyru/open-browser-github.vim'
+depends = 'open-browser.vim'
+add_hook = '''
+  let g:openbrowser_github_always_used_branch=1
+'''
 
 
 # - Search ---------------------------------------
@@ -379,9 +393,7 @@ on_cmd = ['WhichKey', 'WhichKey!', 'WhichKeyVisual', 'WhichKeyVisual!']
 hook_source = '''
   let g:which_key_align_by_separator = 1
   let g:which_key_use_floating_win = 1
-'''
-hook_post_source = '''
-  doautocmd User vim-which-key
+  doautocmd User makyo_ui_fix
 '''
 
 
@@ -425,6 +437,9 @@ repo = 'cideM/yui'
 
 [[plugins]]
 repo = 'bruth/vim-newsprint-theme'
+
+[[plugins]]
+repo = 'vim-scripts/AfterColors.vim'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'

@@ -1,7 +1,9 @@
 {
   "suggest.noselect": false,
   "suggest.snippetIndicator": "🍦",
+
   "snippets.ultisnips.directories": ["~/.vim/snippets"],
+
   "languageserver": {
     "clojure-lsp": {
       "command": "bash",

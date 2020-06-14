@@ -18,30 +18,12 @@ function s:gui_settings()
   set guioptions-=r " same as above - never present
 endfunction
 
-function s:adjust_colorscheme(name)
-  if a:name == 'horizon'
-    hi! link PMenu SneakScope
-    hi! link NormalFloat SneakScope
-
-    syntax clear StatusLineNC
-    hi! link StatusLineNC airline_a_to_airline_b_inactive
-
-    syntax clear VertSplit
-    hi! VertSplit ctermfg=233 ctermbg=233 guifg=#191B23 guibg=#191B23
-  endif
-endfunction
-
 function! makyo#ui#init()
   echomsg "[makyo] 📺📺📺 Applying UI settings..."
 
   call s:gui_settings()
 
   colorscheme horizon
-
-  augroup makyo_ui
-    au!
-    au User vim-which-key call s:adjust_colorscheme(g:colors_name)
-  augroup end
 
   echomsg "[makyo] 📺📺📺 Done."
 endfunction
