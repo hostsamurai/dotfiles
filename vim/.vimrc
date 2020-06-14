@@ -5,7 +5,7 @@
 "
 " ----------------------------------------------------------------------
 
-let g:node_host_prog = '/$HOME/.volta/tools/image/packages/neovim/4.8.0/bin/cli.js'
+let g:node_host_prog = '/$HOME/.volta/tools/image/packages/neovim/4.9.0/bin/cli.js'
 echo g:node_host_prog
 call makyo#plugins#config#init()      " Plugin configuration via autogroups
 call makyo#ux#init()                  " Usability options

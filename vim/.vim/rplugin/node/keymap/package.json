@@ -11,5 +11,8 @@
     "lodash.isobject": "^3.0.2"
   },
   "author": "Lou Gonzalez <lou.gonzalez@protonmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "volta": {
+    "node": "14.4.0"
+  }
 }
