@@ -22,6 +22,7 @@ function! makyo#mappings#init()
 
   let g:mapleader = "\<Space>"
   let g:maplocalleader = ','
+  let g:which_key_map = {}
 
   augroup makyo_mappings
     au!

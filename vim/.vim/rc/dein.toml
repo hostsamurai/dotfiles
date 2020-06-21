@@ -393,6 +393,7 @@ on_cmd = ['WhichKey', 'WhichKey!', 'WhichKeyVisual', 'WhichKeyVisual!']
 hook_source = '''
   let g:which_key_align_by_separator = 1
   let g:which_key_use_floating_win = 1
+  doautocmd User vim-which-key
   doautocmd User makyo_ui_fix
 '''
 

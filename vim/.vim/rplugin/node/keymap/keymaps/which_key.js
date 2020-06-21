@@ -42,7 +42,7 @@ const assignMap = (mode, key, map, keyPrefix = '') => {
           const [rhs, desc] = cmdInfoOrNestedMap
           cmds = [
             `${mode} <silent> <leader>${keys.replace('.', '')}${k} ${rhs}`,
-            `let g:which_key_map.${keys}["${k}"] = '${desc}'`
+            `let g:which_key_map.${keys}['${k}'] = '${desc}'`
           ]
         } else {
           cmds = assignMap(mode, k, cmdInfoOrNestedMap, keys)
@@ -67,9 +67,6 @@ const mapWhichKeyCommands = (plugin, keymapByMode) => {
     Object
       .keys(keymapByMode)
       .filter(m => m === 'nnoremap' || m === 'noremap' || m === 'map')
-
-  // Initialize which_key_map
-  plugin.nvim.command("let g:which_key_map = {}")
 
   modes.forEach(m => {
     Object

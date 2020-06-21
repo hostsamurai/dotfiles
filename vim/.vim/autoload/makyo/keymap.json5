@@ -25,13 +25,14 @@
       d: [":bd<CR>",                  "delete buffer"],
       h: [":tabnew \\| Startify<CR>", "home buffer"],
       m: [":BufExplorer<CR>",         "manage buffers"],
+      p: [":bprevious<CR>",           "previous buffer"],
       s: [":Scratch<CR>",             "scratch buffer"]
     },
-
 
     // -- Files -------------------------------
     f: {
       name: "+files",
+      c: [':let @+ = expand("%")<CR>',      "copy file path"],
       f: [":DeniteProjectDir file/rec<CR>", "find file"],
       r: [":Denite file_mru<CR>",           "recent files"],
       t: [":NERDTreeToggle<CR>",            "NERDTree"],
@@ -66,14 +67,11 @@
 
     // -- Version Control ---------------------
     // TODO:
-    // Space + g + b + # --> git blame
     // Space + g + b + c --> git checkout -b
     // Space + g + c + - --> git checkout --
-    // Space + g + p + p --> git push
-    // Space + g + p + f --> git push --force
     // ----------------------------------------
     g: {
-      name: "+version control",
+      name: "+version-control",
       b: {
         name: "+branch",
         m: [":Gina blame<CR>", "blame"]
@@ -88,11 +86,16 @@
       d: {
         name: "+diff",
         d: [":Gina compare<CR>", "2-buffer compare"],
-        s: [":Gina diff<CR>",    "unified diff"]
+        s: [":Gina diff<CR>", "unified diff"]
       },
       l: [":Gina log<CR>", "log"],
+      p: {
+        name: "+push",
+        p: [":Gina push<CR>", "push"],
+        f: [":Gina push --force<CR>", "force push"]
+      },
       s: [":Gina status<CR>", "status"],
-      m: [":Magit<CR>",       "magit"],
+      m: [":Magit<CR>", "magit"],
       z: {
         name: "+stash",
         b: [":Gina stash<CR>",   "stash buffer"],
@@ -151,14 +154,14 @@
 
     w: {
       name: "+windows",
-      s:   [ ":exe 'split'<CR>",  "horizontal split"],
-      v:   [ ":exe 'vsplit'<CR>", "vertical split"],
-      c:   [ ":close<CR>",        "close current window"],
-      l:   [ ":lopen<CR>",        "open location list"],
-      q:   [ ":copen<CR>",        "open quickfix"],
-      W:   [ "<Plug>(choosewin)", "jump to window"],
-      "+": [ ":resize +5<CR>",    "increase height"],
-      "-": [ ":resize -5<CR>",    "decrease height"]
+      s:   [":exe 'split'<CR>",  "horizontal split"],
+      v:   [":exe 'vsplit'<CR>", "vertical split"],
+      c:   [":close<CR>",        "close current window"],
+      l:   [":lopen<CR>",        "open location list"],
+      q:   [":copen<CR>",        "open quickfix"],
+      W:   ["<Plug>(choosewin)", "jump to window"],
+      "+": [":resize +5<CR>",    "increase height"],
+      "-": [":resize -5<CR>",    "decrease height"]
     }
   },
 
@@ -172,7 +175,7 @@
     tc: ":tabnew<CR>"
   },
 
- cnoremap: {
+  cnoremap: {
     // Heretical mappings
     // Ctrl + a --> Jump to beginning of line
     // Ctrl + b --> Back one character
@@ -204,12 +207,12 @@
     //              so that you can undo CTRL-U after inserting a line break.
     // Ctrl + d --> Delete text after the cusor position in insert mode.
     // ----------------------------------------
-    jk:      "<ESC>",
+    jk: "<ESC>",
     "<C-U>": "<C-G>u<C-U>",
     "<C-d>": "<C-[>ld$A",
 
     // coc.nvim snippets - see https://github.com/neoclide/coc.nvim/wiki/Using-snippets
-    "<silent><expr> <CR>": 'pumvisible() ? coc#_select_confirm() : \"\<C-g>u\<CR><c-r>=coc#on_enter()\<CR>"'
+    "<silent><expr> <CR>": 'pumvisible() ? coc#_select_confirm() : "<C-g>u<CR><c-r>=coc#on_enter()<CR>"'
   },
 
   snoremap: {},
@@ -249,12 +252,12 @@
 
     // -- Version Control ---------------------
     g: {
-      name: "+version control",
+      name: "+version-control",
       h: {
         name: "+history",
         c: ["<Plug>(git-messenger)",            "last commit message"],
         C: ["<Plug>(git-messenger-into-popup)", "open popup"]
-      },
+      }
     },
 
     // -- Jumps/Folds -------------------------
