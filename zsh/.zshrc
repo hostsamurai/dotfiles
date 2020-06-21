@@ -144,6 +144,14 @@ alias xs='xl -s=size'      # sort by modified time
 alias xt='xl -s=modified'  # sort by modified time
 alias xx='xl -s=extension' # sort by extension
 
+alias a='fasd -a'     # any
+alias s='fasd -si'    # show / search / select
+alias d='fasd -d'     # directory
+alias f='fasd -f'     # file
+alias sd='fasd -sid'  # interactive directory selection
+alias sf='fasd -sif'  # interactive file selection
+alias zz='fasd -d -i' # cd with interactive selection
+
 alias diff='colordiff'
 alias grep='grep --color=auto'
 
