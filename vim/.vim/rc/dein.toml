@@ -18,6 +18,10 @@ depends = ['vim-snippets']
 rev = 'release'
 merge = 0
 build = 'yarn install --frozen-lockfile'
+hook_add = '''
+  let g:coc_snippet_next = '<c-j>'
+  let g:coc_snippet_prev = '<c-k>'
+'''
 
 [[plugins]]
 repo = 'liuchengxu/vista.vim'
@@ -145,6 +149,12 @@ hook_add = '''
 
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
+
+[[plugins]]
+repo = 'wellle/targets.vim'
+
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
 
 
 # - Language -------------------------------------
