@@ -1,19 +1,5 @@
 const isObject = require("lodash.isobject")
-const { objectToDict } = require("../util/transformer")
-
-
-/**
- * Turns an object representing a Vim mapping into a Dictionary.
- *
- * @param {Object} map - A two-element array.
- * @return {string}    - A string denoting a VimL dictionary.
- */
-const getGroupName = map =>  {
-  const descEntry = Object.entries(map)[0]
-  const descObj = Object.fromEntries([descEntry])
-
-  return objectToDict(descObj)
-}
+const { objectToDict, getMapParent } = require("../util/transformer")
 
 
 /**
@@ -29,7 +15,7 @@ const getGroupName = map =>  {
  */
 const assignMap = (mode, key, map, keyPrefix = '') => {
   const keys = keyPrefix ? `${keyPrefix}.${key}` : key
-  const mapParent = `let g:which_key_map.${keys} = ${getGroupName(map)}`
+  const mapParent = getMapParent(keyPrefix, key, map)
   const entries = isObject(map) ? Object.entries(map) : map
 
   const commands =

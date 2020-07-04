@@ -8,7 +8,7 @@ function s:denite_ft_mappings() abort
   nnoremap <silent><buffer><expr> t       denite#do_map('do_action', 'tabopen')
   nnoremap <silent><buffer><expr> q       denite#do_map('quit')
   nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select') .'j'
+  nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
   nnoremap <silent><buffer><expr> <C-a>   denite#do_map('toggle_select_all')
 endfunction
 
@@ -47,6 +47,7 @@ function! makyo#plugins#denite#config#init()
 
     " Custom options
     " TODO: Can we configure this a better way? TOML? Lua?
+    " TODO: Apply more hightlights for a consistent buffer coloring scheme
     let s:denite_options = {
     \ 'split': 'floating',
     \ 'start_filter': 1,
