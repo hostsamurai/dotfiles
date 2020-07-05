@@ -60,8 +60,9 @@
       name: "+insertion",
       s: {
         name: "+snippets",
+        c: [":CocCommand snippets.openSnippetFiles<CR>", "open snippets file"],
         e: [":CocCommand snippets.editSnippets<CR>",     "edit snippets"],
-        c: [":CocCommand snippets.openSnippetFiles<CR>", "open snippets file"]
+        l: [":CocList snippets<CR>",                     "list snippets"]
       }
     },
 
@@ -85,10 +86,19 @@
       },
       d: {
         name: "+diff",
-        d: [":Gina compare<CR>", "2-buffer compare"],
-        s: [":Gina diff<CR>", "unified diff"]
+        d: [":Gina compare<CR>",           "2-buffer compare"],
+        h: [":SignifyToggleHighlight<CR>", "toggle hightlight"],
+        i: [":SignifyHunkDiff<CR>",        "inline diff"],
+        s: [":Gina diff<CR>",              "unified diff"]
       },
-      l: [":Gina log<CR>", "log"],
+      h: {
+        name: "+hunks",
+        u: [":SignifyHunkUndo<CR>", "undo changes"]
+      },
+      l: {
+        name: "+logs",
+        l: [":Gina log<CR>", "log"]
+      },
       p: {
         name: "+push",
         p: [":Gina push<CR>", "push"],
@@ -253,10 +263,15 @@
     // -- Version Control ---------------------
     g: {
       name: "+version-control",
-      h: {
-        name: "+history",
+      l: {
+        name: "+logs",
         c: ["<Plug>(git-messenger)",            "last commit message"],
         C: ["<Plug>(git-messenger-into-popup)", "open popup"]
+      },
+      h: {
+        name: "+hunks",
+          n: ["<Plug>(signify-next-hunk)", "next"],
+          p: ["<Plug>(signify-prev-hunk)", "prev"]
       }
     },
 
@@ -270,7 +285,11 @@
     w: {
       name: "+windows",
       W: ["<Plug>(choosewin)", "jump to window"]
-    }
+    },
+
+    // Maintain ; and , functionality with clever-f plugin
+    ";": "<Plug>(clever-f-repeat-forward)",
+    ",": "<Plug>(clever-f-repeat-back)"
   },
 
   nmap: {
@@ -279,6 +298,7 @@
   },
 
   imap: {
+    "<C-l>": "<Plug>(coc-snippets-expand)",
     // FIXME: neosnippet tab completion - currently not fully working
     "<expr><TAB>": "pumvisible() ? '<C-n>' : neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'",
     "<expr><CR>": '(pumvisible() && neosnippet#expandable()) ?  "<Plug>(neosnippet_expand)" : "<CR>"'
