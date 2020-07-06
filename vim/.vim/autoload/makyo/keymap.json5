@@ -48,6 +48,16 @@
     p: {
       name: "+project",
       b: [":DeniteProjectDir file/rec<CR>", "find project file"],
+      c: {
+        name: "+checks",
+        t: {
+          name: "+tests",
+          n: [":TestNearest<CR>", "nearest"],
+          f: [":TestFile<CR>",    "file"],
+          s: [":TestSuite<CR>",   "suite"],
+          v: [":TestVisit<CR>",   "jump to test file"]
+        }
+      },
       t: {
         name: "+tags",
         c: [":GenCtags<CR>", "generate ctags"],
@@ -67,15 +77,13 @@
     },
 
     // -- Version Control ---------------------
-    // TODO:
-    // Space + g + b + c --> git checkout -b
-    // Space + g + c + - --> git checkout --
-    // ----------------------------------------
     g: {
       name: "+version-control",
       b: {
         name: "+branch",
-        m: [":Gina blame<CR>", "blame"]
+        l: [":Gina branch<CR>",                "list branches"],
+        m: [":Gina blame<CR>",                 "blame inline"],
+        r: [":Gina browse --scheme=blame<CR>", "blame in browser"]
       },
       c: {
         name: "+commit",

@@ -99,6 +99,11 @@ repo = 'amix/open_file_under_cursor.vim'
 [[plugins]]
 repo = 'tpope/vim-dispatch'
 
+[[plugins]]
+repo = 'vim-test/vim-test'
+
+[[plugins]]
+repo = 'tpope/vim-projectionist'
 
 [[plugins]]
 repo = 'rrethy/vim-hexokinase'
