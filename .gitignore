@@ -11,3 +11,6 @@ configs/.config/gtk-3.0/bookmarks
 configs/.config/pulse/cookie
 **/node_modules
 pnpm-debug.log
+GPATH
+GRTAGS
+GTAGS

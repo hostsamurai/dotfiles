@@ -61,7 +61,8 @@
       t: {
         name: "+tags",
         c: [":GenCtags<CR>", "generate ctags"],
-        g: [":GenGTAGS<CR>", "generate gtags"]
+        g: [":GenGTAGS<CR>", "generate gtags"],
+        t: [":Vista!!<CR>",  "tags view"]
       }
     },
 
@@ -264,7 +265,7 @@
     c: {
       name: "+comments/compile",
       c: ["<plug>NERDCommenterToggle",    "comment one line"],
-      s: ["<plug>NERDCommenterSexy",      "comment"],
+      s: ["<plug>NERDCommenterSexy",      "comment sexily"],
       u: ["<plug>NERDCommenterUncomment", "uncomment"]
     },
 

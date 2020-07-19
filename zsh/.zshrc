@@ -94,6 +94,10 @@ fi
 
 zplug load
 
+export GTAGSCONF=/usr/share/gtags/gtags.conf
+export GTAGSLABEL=pygments
+
+
 # ------------------------------------------------
 # Options
 # ------------------------------------------------
