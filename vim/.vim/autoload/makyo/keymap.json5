@@ -274,7 +274,7 @@
       l: {
         name: "+logs",
         c: ["<Plug>(git-messenger)",            "last commit message"],
-        C: ["<Plug>(git-messenger-into-popup)", "open popup"]
+        p: ["<Plug>(git-messenger-into-popup)", "open popup"]
       },
       h: {
         name: "+hunks",
@@ -307,17 +307,15 @@
 
   imap: {
     "<C-l>": "<Plug>(coc-snippets-expand)",
-    // FIXME: neosnippet tab completion - currently not fully working
-    "<expr><TAB>": "pumvisible() ? '<C-n>' : neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'",
-    "<expr><CR>": '(pumvisible() && neosnippet#expandable()) ?  "<Plug>(neosnippet_expand)" : "<CR>"'
+    "<C-j>": "<Plug>(coc-snippets-expand-jump)"
   },
 
   smap: {
-    "<expr><TAB>": "neosnippet#expandable_or_jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'"
   },
 
   vmap: {
     // Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-    "<Enter>": "<Plug>(EasyAlign)"
+    "<Enter>": "<Plug>(EasyAlign)",
+    "<C-j>": "<Plug>(coc-snippets-select)"
   }
 }

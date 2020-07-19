@@ -27,18 +27,6 @@ hook_add = '''
 repo = 'liuchengxu/vista.vim'
 
 [[plugins]]
-repo = 'Shougo/neosnippet'
-depends = ['vim-snippets', 'context_filetype.vim']
-hook_source = '''
-  let g:neosnippet#enable_snipmate_compatibility = 1
-  let g:neosnippet#enable_completed_snippet = 1
-  let g:neosnippet#expand_word_boundary = 1
-  let g:neosnippet#snippets_directory = '~/.vim/snippets'
-'''
-on_event = 'InsertCharPre'
-on_ft = 'snippet'
-
-[[plugins]]
 repo = 'honza/vim-snippets'
 
 [[plugins]]
@@ -263,12 +251,14 @@ repo = 'acustodioo/vim-tmux'
 # - Version Control ------------------------------
 
 [[plugins]]
+# Port of magit
 repo = 'jreybert/vimagit'
 on_source = '''
   unmap <leader>M
 '''
 
 [[plugins]]
+# Show a sign in the gutter to signify changes
 repo = 'mhinz/vim-signify'
 add_hook = '''
   let g:signify_realtime = 1
@@ -276,13 +266,15 @@ add_hook = '''
 '''
 
 [[plugins]]
+# Perform various git commands
 repo = 'lambdalisue/gina.vim'
 on_cmd = 'Gina'
 
 [[plugins]]
+# Open commit messages in a popup window
 repo = 'rhysd/git-messenger.vim'
 on_cmd = 'GitMessenger'
-on_map = '<Plug>(git-messenger'
+on_map = '<Plug>(git-messenger-'
 lazy = 1
 
 [[plugins]]
