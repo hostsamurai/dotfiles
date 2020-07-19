@@ -47,9 +47,10 @@ const getMapParent = (parentKeys, currentKey, map) => {
   const keys = parentKeys ? `${parentKeys}.${currentKey}` : currentKey
   const cmd = `
     let parentKeys = '${parentKeys}'
+
     if strlen(parentKeys) && !has_key(g:which_key_map[parentKeys], '${currentKey}')
       let g:which_key_map.${keys} = ${getGroupName(map)}
-    elseif !has_key(g:which_key_map, '${currentKey}')
+    elseif !strlen(parentKeys) && !has_key(g:which_key_map, '${currentKey}')
       let g:which_key_map['${currentKey}'] = ${getGroupName(map)}
     endif
   `
