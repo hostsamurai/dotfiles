@@ -38,9 +38,9 @@
       t: [":NERDTreeToggle<CR>",            "NERDTree"],
       v: {
         name: "+vim",
-        k: [":tabnew ~/.vim/autoload/makyo/keymap.json5", "open keymap config"],
-        s: [":so $MYVIMRC",     "source vimrc"],
-        t: [":tabnew $MYVIMRC", "edit vimrc"]
+        k: [":tabnew ~/.vim/autoload/makyo/keymap.json5<CR>", "open keymap config"],
+        s: [":so $MYVIMRC<CR>",     "source vimrc"],
+        t: [":tabnew $MYVIMRC<CR>", "edit vimrc"]
       }
     },
 

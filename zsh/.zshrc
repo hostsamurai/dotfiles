@@ -24,6 +24,7 @@ bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 bindkey -M viins '^P' history-substring-search-up
 bindkey -M viins '^N' history-substring-search-down
+bindkey -M viins '^X^E' edit-command-line
 
 # Edit the current command line in $EDITOR
 bindkey '^X^E' edit-command-line

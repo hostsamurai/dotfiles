@@ -109,6 +109,12 @@ hook_add = '''
   let g:Hexokinase_ftDisabled = ['help']
 '''
 
+[[plugins]]
+repo = 'dense-analysis/ale'
+hook_add = '''
+  let g:airline#extensions#ale#enabled = 1
+'''
+
 
 # - Text Manipulation ----------------------------
 
@@ -339,10 +345,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'yuttie/comfortable-motion.vim'
-hook_add = '''
-  let g:comfortable_motion_impulse_multiplier = 1
-'''
+repo = 'psliwka/vim-smoothie'
 
 [[plugins]]
 repo = 't9md/vim-choosewin'
@@ -482,6 +485,10 @@ javascript_ruby_erb = '''
 javascript_json_json5 = '''
   let b:ale_fixers = ['prettier', 'eslint']
   let b:ale_fix_on_save = 1
+'''
+
+sass_scss_less_css = '''
+  set foldmethod=indent
 '''
 
 sass_scss_less_css = '''
