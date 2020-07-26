@@ -125,11 +125,16 @@
     s: {
       name: "+search",
       c: [":nohlsearch<CR>",               "clear highlights"],
+      f: [":Farf<CR>",                     "search with Far"],
       g: [":<C-u>Denite grep:. -no-empty", "search cwd"],
       u: [":<C-u>DeniteCursorWord grep:.", "word under cursor"],
       r: {
         name: "+ripgrep",
         g: [":tabnew \\| :Rg -i", "rg"]
+      },
+      s: {
+        name: "+replace",
+        s: [":Farr<CR>", "replace"]
       }
     },
 
@@ -256,7 +261,16 @@
     "s/":  "s/\\v",
     "%s/": "%s/\\v",
 
-    "<leader>*": ":<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>"
+    "<leader>*": ":<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>",
+
+    "s": {
+      "name": "+search",
+      f: [":Farf<CR>", "search with Far"],
+      s: {
+        name: "+replace",
+        s: [":Farr<CR>", "replace"]
+      }
+    }
   },
 
   map: {

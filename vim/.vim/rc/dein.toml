@@ -305,7 +305,7 @@ hook_post_source = '''
 repo = 'Lokaltog/vim-easymotion'
 
 [[plugins]]
-repo = 'thinca/vim-qfreplace'
+repo = 'brooth/far.vim'
 
 
 # - UI -------------------------------------------

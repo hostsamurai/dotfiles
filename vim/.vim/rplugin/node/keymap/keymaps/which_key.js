@@ -52,7 +52,7 @@ const mapWhichKeyCommands = (plugin, keymapByMode) => {
   const modes =
     Object
       .keys(keymapByMode)
-      .filter(m => m === 'nnoremap' || m === 'noremap' || m === 'map')
+      .filter(m => m === 'nnoremap' || m === 'vnoremap' || m === 'noremap' || m === 'map')
 
   modes.forEach(m => {
     Object

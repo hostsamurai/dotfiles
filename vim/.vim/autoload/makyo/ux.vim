@@ -18,7 +18,7 @@ function s:basic_options()
   set fileencoding=UTF-8         " file content encoding
   set ruler                      " show cursor position
   set showcmd                    " show partial commands
-  set lazyredraw
+  set lazyredraw                 " improve scrolling performance when navigating through large results
   set matchtime=3                " time (ms) duration spent showing matching paren
   set autowrite                  " write file contents when moving away from buffer
   set autoread                   " read file when changes detected outside of Vim
