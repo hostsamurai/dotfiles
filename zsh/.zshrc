@@ -141,6 +141,8 @@ alias lx='ll -BX'  # sort by extension
 alias lz='ll -rS'  # sort by size
 alias lt='ll -rt'  # sort by date
 
+alias du='du -h --max-depth=1' # print directories by size
+
 alias less='less -R'
 
 alias xl='exa -la'
