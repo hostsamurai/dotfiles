@@ -114,7 +114,6 @@
         f: [":Gina push --force<CR>", "force push"]
       },
       s: [":Gina status<CR>", "status"],
-      m: [":Magit<CR>", "magit"],
       z: {
         name: "+stash",
         b: [":Gina stash<CR>",   "stash buffer"],

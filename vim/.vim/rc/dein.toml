@@ -115,6 +115,9 @@ hook_add = '''
   let g:airline#extensions#ale#enabled = 1
 '''
 
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
 
 # - Text Manipulation ----------------------------
 
@@ -255,13 +258,6 @@ repo = 'acustodioo/vim-tmux'
 
 
 # - Version Control ------------------------------
-
-[[plugins]]
-# Port of magit
-repo = 'jreybert/vimagit'
-on_source = '''
-  unmap <leader>M
-'''
 
 [[plugins]]
 # Show a sign in the gutter to signify changes
