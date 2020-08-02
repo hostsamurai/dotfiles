@@ -39,6 +39,7 @@
       v: {
         name: "+vim",
         k: [":tabnew ~/.vim/autoload/makyo/keymap.json5<CR>", "open keymap config"],
+        p: [":tabnew ~/.vim/rc/dein.toml<CR>", "open plugin config"],
         s: [":so $MYVIMRC<CR>",     "source vimrc"],
         t: [":tabnew $MYVIMRC<CR>", "edit vimrc"]
       }
@@ -82,9 +83,10 @@
       name: "+version-control",
       b: {
         name: "+branch",
-        l: [":Gina branch<CR>",                "list branches"],
-        m: [":Gina blame<CR>",                 "blame inline"],
-        r: [":Gina browse --scheme=blame<CR>", "blame in browser"]
+        l: [":Gina branch<CR>",                  "list branches"],
+        i: [":Gina blame<CR>",                   "blame inline"],
+        m: [":Gina browse --exact :<CR>",        "open from master"],
+        r: [":Gina browse --scheme=blame :<CR>", "blame in browser"]
       },
       c: {
         name: "+commit",
