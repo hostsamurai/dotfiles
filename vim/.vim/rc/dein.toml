@@ -452,6 +452,12 @@ repo = 'cideM/yui'
 repo = 'bruth/vim-newsprint-theme'
 
 [[plugins]]
+repo = 'rakr/vim-two-firewatch'
+hook_source = '''
+  let g:two-firewatch-italics=1
+'''
+
+[[plugins]]
 repo = 'vim-scripts/AfterColors.vim'
 
 [[plugins]]
