@@ -158,6 +158,12 @@ repo = 'wellle/targets.vim'
 [[plugins]]
 repo = 'rhysd/clever-f.vim'
 
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
+
+[[plugins]]
+repo = 'dkarter/bullets.vim'
+
 
 # - Language -------------------------------------
 

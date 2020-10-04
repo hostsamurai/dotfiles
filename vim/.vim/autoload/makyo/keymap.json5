@@ -156,7 +156,17 @@
 
     x: {
       name: "+text",
-      a: [":EasyAlign", "align text"]
+      a: [":EasyAlign", "align text"],
+      t: {
+        name: "+table-mode",
+        f: {
+          name: "+formulas",
+          e: [":TableEvalFormulaLine", "eval formula"],
+          f: [":TableAddFormula", "add cell formula"]
+        },
+        r: [":TableModeRealign", "realign"],
+        t: [":TableModeToggle<CR>", "toggle"]
+      }
     },
 
     // -- Toggles -----------------------------
@@ -302,7 +312,13 @@
     // -- Jumps/Folds -------------------------
     j: {
       name: "+jumps/folds",
-      j: ["<Plug>(easymotion-s)", "easymotion"]
+      j: ["<Plug>(easymotion-s)", "easymotion"],
+      e: {
+        name: "+errors",
+        f: ["<Plug>(ale_fix)",  "fix"],
+        n: ["<Plug>(ale_next_wrap)", "next"],
+        p: ["<Plug>(ale_prev_wrap)", "previous"]
+      }
     },
 
     // -- Windows -----------------------------
