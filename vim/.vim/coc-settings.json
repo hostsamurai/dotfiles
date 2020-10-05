@@ -2,7 +2,10 @@
   "suggest.noselect": false,
   "suggest.snippetIndicator": "🍦",
 
-  "snippets.ultisnips.directories": ["~/.vim/snippets"],
+  "snippets.ultisnips.directories": [
+    "~/.vim/snippets",
+    "~/.config/coc/ultisnips"
+  ],
 
   "languageserver": {
     "clojure-lsp": {
