@@ -286,6 +286,13 @@ on_map = '<Plug>(git-messenger-'
 lazy = 1
 
 [[plugins]]
+repo = 'samoshkin/vim-mergetool'
+add_hook = '''
+  let g:mergetool_layout = 'LmR'
+  let g:mergetool_prefer_revision = 'local'
+'''
+
+[[plugins]]
 repo = 'tyru/open-browser.vim'
 
 [[plugins]]
