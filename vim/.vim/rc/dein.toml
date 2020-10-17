@@ -187,6 +187,11 @@ on_ft = 'clojure'
 hook_post_update = ':UpdateRemotePlugins'
 
 [[plugins]]
+repo = 'Olical/conjure'
+rev = 'v4.7.0'
+on_ft = ['clojure', 'scheme', 'racket']
+
+[[plugins]]
 repo = 'kovisoft/paredit'
 on_ft = ['clojure', 'scheme', 'racket']
 hook_add = '''
@@ -474,7 +479,7 @@ hook_source = '''
 
 [ftplugin]
 _ = '''
-  set sw=2 sts=2 ts=2 et smarttab smartindent
+ set sw=2 sts=2 ts=2 et smarttab smartindent
 '''
 
 text = '''
