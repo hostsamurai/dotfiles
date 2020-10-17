@@ -16,14 +16,25 @@ function s:gui_settings()
   set guioptions-=l " same as above - never present
   set guioptions-=R " no right scrollbar
   set guioptions-=r " same as above - never present
+
+  if has('gui_running')
+    " Make shift-insert work like in Xterm
+    map <S-Insert> <MiddleMouse>
+    map! <S-Insert> <MiddleMouse>
+
+    set guifont=FiraCode\ Nerd\ Font:h13
+
+    " Neovide settings
+    let g:neovide_cursor_animation_length=0.13
+  endif
 endfunction
 
 function! makyo#ui#init()
-  echomsg "[makyo] 📺📺📺 Applying UI settings..."
+  echomsg "[makyo] 📺 Applying UI settings..."
 
   call s:gui_settings()
 
   colorscheme horizon
 
-  echomsg "[makyo] 📺📺📺 Done."
+  echomsg "[makyo] 📺 Done."
 endfunction
