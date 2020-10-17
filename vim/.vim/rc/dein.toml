@@ -59,10 +59,12 @@ hook_add = '''
 [[plugins]]
 repo = 'dense-analysis/ale'
 add_hook = '''
+  let g:airline#extensions#ale#enabled = 1
   let g:ale_set_balloons = 1
   let g:ale_fixers = {
   \   '*': ['remove_trailing_whitespace', 'trim_whitespace']
   \}
+
 '''
 
 [[plugins]]
@@ -107,12 +109,6 @@ hook_add = '''
   \ }
   let g:Hexokinase_ftEnabled  = ['css', 'less', 'sass', 'scss', 'clojure']
   let g:Hexokinase_ftDisabled = ['help']
-'''
-
-[[plugins]]
-repo = 'dense-analysis/ale'
-hook_add = '''
-  let g:airline#extensions#ale#enabled = 1
 '''
 
 [[plugins]]
