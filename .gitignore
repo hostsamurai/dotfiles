@@ -2,6 +2,7 @@ vim/.vim/autoload/plug.vim
 vim/.vim/backups
 vim/.vim/sessions
 vim/.vim/tmp
+vim/.vim/undo
 vim/.vim/plugged
 vim/.vim/.netrwhist
 configs/.boot/cache

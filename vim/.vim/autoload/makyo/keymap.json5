@@ -4,7 +4,7 @@
     a: {
       name: "+applications",
       c: [":Calc<CR>",        "calculator"],
-      u: [":GundoToggle<CR>", "undo tree"],
+      u: [":MundoToggle<CR>", "undo tree"],
       l: {
         name: "+coc",
         u: [":CocUpdate<CR>", "update coc"]
@@ -16,7 +16,29 @@
         s: [":SaveSession ",    "save new"],
         u: [":SaveSession<CR>", "save current"]
       },
-      t: [":terminal<CR>", "terminal"]
+      S: {
+        name: "+scratchpad",
+        c: [":Codi!<CR>",      "close"],
+        o: [":Codi ",          "open (filetype)"],
+        t: [":Codi<CR>",       "toggle"],
+        u: [":CodiUpdate<CR>", "update"],
+      },
+      t: {
+        name: "+terminal",
+        c: [":FloatermNew ", "run command"],
+        h: [":FloatermHide<CR>", "hide current"],
+        k: [":FloatermKill<CR>", "kill"],
+        K: [":FloatermKill ", "kill named"],
+        n: [":FloatermNext<CR>", "next instance"],
+        N: [":FloatermNew --name=", "new named terminal"],
+        p: [":FloatermPrev<CR>", "previous instance"],
+        t: [":FloatermNew<CR>", "new terminal"],
+        T: {
+          name: "+toggles",
+          n: [":FloatermToggle ", "toggle named"],
+          t: [":FloatermToggle<CR>", "toggle last"],
+        }
+      }
     },
 
     // -- Buffers -----------------------------
@@ -27,7 +49,8 @@
       h: [":tabnew \\| Startify<CR>", "home buffer"],
       m: [":BufExplorer<CR>",         "manage buffers"],
       p: [":bprevious<CR>",           "previous buffer"],
-      s: [":Scratch<CR>",             "scratch buffer"]
+      s: [":Scratch<CR>",             "scratch buffer"],
+      "<Tab>": [":b#<CR>", "previous buffer"],
     },
 
     // -- Files -------------------------------
@@ -44,6 +67,30 @@
         s: [":so $MYVIMRC<CR>",     "source vimrc"],
         t: [":tabnew $MYVIMRC<CR>", "edit vimrc"]
       }
+    },
+
+    // -- FZF ---------------------------------
+    F: {
+      name: "+FZF",
+      b: [":FzfBuffers<CR>", "buffers"],
+      B: [":FzfBCommits<CR>", "git buffer commits"],
+      c: [":FzfColors<CR>", "color schemes"],
+      f: [":FzfFiles<CR>", "files"],
+      g: [":FzfGFiles<CR>", "files in vcs"],
+      G: [":FzfGFiles?<CR>", "git status files"],
+      h: {
+        name: "+history",
+        C: [":FzfHistory:<CR>", "command history"],
+        h: [":FzfHistory<CR>", "mru"],
+        s: [":FzfHistory/<CR>", "search history"],
+      },
+      l: [":FzfLines<space>", "search lines"],
+      L: [":FzfBLines<space>", "search lines in buffers"],
+      m: [":FzfMarks<CR>", "marks"],
+      r: [":FzfRg<space>", "rg search"],
+      t: [":FzfTags<space>", "tags"],
+      T: [":FzfBTags<space>", "buffer tags"],
+      w: [":FzfWindows<CR>", "windows"],
     },
 
     // -- Project -----------------------------
@@ -75,6 +122,14 @@
       }
     },
 
+    // -- Plugins -----------------------------
+    P: {
+      name: "+plugins",
+      c: [":tabnew ~/.vim/rc/dein.toml<CR>", "open config"],
+      r: [":call dein#remote_plugins()<CR>", "update remote plugins"],
+      u: [":DeinUpdate<CR>", "update"]
+    },
+
     // -- Insertion ---------------------------
     i: {
       name: "+insertion",
@@ -93,6 +148,7 @@
         name: "+branch",
         l: [":Gina branch<CR>",                  "list branches"],
         i: [":Gina blame<CR>",                   "blame inline"],
+        I: [":BlameToggle<CR>",                  "blame inline (blamer.nvim)"],
         m: [":Gina browse --exact :<CR>",        "open from master"],
         r: [":Gina browse --scheme=blame :<CR>", "blame in browser"]
       },
@@ -118,6 +174,7 @@
         name: "+logs",
         l: [":Gina log<CR>", "log"]
       },
+      m: [":MergetoolToggle<CR>", "mergetool"],
       p: {
         name: "+push",
         p: [":Gina push<CR>", "push"],
@@ -368,6 +425,7 @@
   nmap: {
     // Start interactive EasyAlign for a motion/text object (e.g. gaip)
     //"ga": "<Plug>(EasyAlign)",
+    "<Tab>": [":b#<CR>", "previous buffer"],
   },
 
   imap: {

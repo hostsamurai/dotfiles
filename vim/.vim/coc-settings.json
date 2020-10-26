@@ -1,12 +1,28 @@
 {
+  // COC Preferences
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "graphql",
+    "html"
+  ],
+
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+
+  // Suggestions
   "suggest.noselect": false,
   "suggest.snippetIndicator": "🍦",
 
+  // Snippets
   "snippets.ultisnips.directories": [
     "~/.vim/snippets",
     "~/.config/coc/ultisnips"
   ],
 
+  // LSP
   "languageserver": {
     "clojure-lsp": {
       "command": "bash",

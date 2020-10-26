@@ -32,6 +32,10 @@ function s:basic_options()
   set inccommand="nosplit"       " show effects of a command as you type
   set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,localoptions,help
 
+  " Enable persistent undo so that undo history persists across sessions
+  set undofile
+  set undodir=~/.vim/undo
+
   " Hide the tabline - rely on CtrlSpace for navigation instead.
   set showtabline=0
 

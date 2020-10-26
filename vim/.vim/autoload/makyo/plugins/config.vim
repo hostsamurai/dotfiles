@@ -51,6 +51,7 @@ function! makyo#plugins#config#init()
 
   call s:dein_setup()
   call makyo#plugins#denite#config#init()
+  call makyo#plugins#fzf#config#init()
 
   echomsg "[makyo] 🔌🔌🔌 Done."
 endfunction

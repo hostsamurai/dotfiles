@@ -8,7 +8,7 @@ function s:setup_gui()
   map <S-Insert> <MiddleMouse>
   map! <S-Insert> <MiddleMouse>
 
-  set guifont=FiraCode\ Nerd\ Font:h13
+  set guifont=FiraCode\ Nerd\ Font\ Mono,Noto\ Color\ Emoji:h13
 
   " Neovide settings
   let g:neovide_cursor_animation_length=0.13
@@ -32,7 +32,7 @@ endfunction
 function! makyo#ui#init()
   echomsg "[makyo] 📺 Applying UI settings..."
 
-  call s:gui_settings()
+ call s:gui_settings()
   au UIEnter * call s:setup_gui()
 
   colorscheme horizon

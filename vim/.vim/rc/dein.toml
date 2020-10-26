@@ -9,6 +9,9 @@ if = "!has('nvim')"
 repo = 'roxma/vim-hug-neovim-rpc'
 if = "!has('nvim')"
 
+[[plugins]]
+repo = 'skywind3000/asynctasks.vim'
+
 
 # - Coding ---------------------------------------
 
@@ -58,7 +61,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'dense-analysis/ale'
-add_hook = '''
+hook_add = '''
   let g:airline#extensions#ale#enabled = 1
   let g:ale_set_balloons = 1
   let g:ale_fixers = {
@@ -166,7 +169,7 @@ repo = 'dkarter/bullets.vim'
 [[plugins]]
 ## Ultimate syntax collection
 repo = 'sheerun/vim-polyglot'
-add_hook = '''
+hook_add = '''
   let g:javascript_plugin_jsdoc = 1
   let g:jscomplete_use = ['dom', 'moz', 'es6th']
 
@@ -225,6 +228,10 @@ repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 build = 'cd app && yarn install'
 
+[[plugins]]
+# An interactive scratchpad
+repo = 'metakirby5/codi.vim'
+
 
 # - Applications ---------------------------------
 
@@ -232,10 +239,7 @@ build = 'cd app && yarn install'
 repo = 'gregsexton/VimCalc'
 
 [[plugins]]
-repo = 'sjl/gundo.vim'
-hook_add = '''
-  let g:gundo_prefer_python3 = 1
-'''
+repo = 'simnalamburt/vim-mundo'
 
 [[plugins]]
 repo = 'xolox/vim-session'
@@ -263,13 +267,19 @@ repo = 'xolox/vim-misc'
 [[plugins]]
 repo = 'acustodioo/vim-tmux'
 
+[[plugins]]
+repo = 'voldikss/vim-floaterm'
+hook_add = '''
+  let g:floaterm_rootmarkers = ['.git', '.gitignore']
+'''
+
 
 # - Version Control ------------------------------
 
 [[plugins]]
 # Show a sign in the gutter to signify changes
 repo = 'mhinz/vim-signify'
-add_hook = '''
+hook_add = '''
   let g:signify_realtime = 1
   let g:signify_vcs_list = ['git', 'hg']
 '''
@@ -288,9 +298,17 @@ lazy = 1
 
 [[plugins]]
 repo = 'samoshkin/vim-mergetool'
-add_hook = '''
+hook_add = '''
   let g:mergetool_layout = 'LmR'
   let g:mergetool_prefer_revision = 'local'
+'''
+
+[[plugins]]
+repo = 'APZelos/blamer.nvim'
+hook_add = '''
+  let g:blamer_show_in_insert_modes = 0
+  let g:blamer_show_in_visual_modes = 0
+  let g:blamer_relative_time = 1
 '''
 
 [[plugins]]
@@ -299,7 +317,7 @@ repo = 'tyru/open-browser.vim'
 [[plugins]]
 repo = 'tyru/open-browser-github.vim'
 depends = 'open-browser.vim'
-add_hook = '''
+hook_add = '''
   let g:openbrowser_github_always_used_branch=1
 '''
 
@@ -326,6 +344,25 @@ repo = 'brooth/far.vim'
 
 [[plugins]]
 repo = 'mhinz/vim-startify'
+hook_add = '''
+  let g:startify_session_dir = '~/.config/nvim/sessions'
+  let g:startify_lists = [
+    \ { 'type': 'files',     'header': ['   Files']                         },
+    \ { 'type': 'dir',       'header': ['   Current Directory ' . getcwd()] },
+    \ { 'type': 'sessions',  'header': ['   Sessions']                      },
+    \ { 'type': 'bookmarks', 'header': ['   Bookmarks']                     },
+    \ ]
+  let g:startify_bookmarks = [
+    \ { 'I': '~/dotfiles/vim/.vim/init.vim' },
+    \ { 'K': '~/dotfiles/vim/.vim/autoload/makyo/keymap.json5' },
+    \ { 'P': '~/dotfiles/vim/.vim/rc/dein.toml' },
+    \ '~/Code',
+    \ ]
+  let g:startify_session_persistence = 1
+  let g:startify_change_to_vcs_root = 0
+  let g:startify_session_sort = 1
+  let g:startify_enable_special = 0
+'''
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
@@ -333,6 +370,14 @@ repo = 'Shougo/neomru.vim'
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 augroup = 'makyoConfig#Plugin#denite'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+hook_post_update = 'call fzf#install()'
+augroup = 'makyoConfig#Plugin#fzf'
 
 [[plugins]]
 repo = 'jlanzarotta/bufexplorer'
@@ -462,8 +507,11 @@ repo = 'bruth/vim-newsprint-theme'
 [[plugins]]
 repo = 'rakr/vim-two-firewatch'
 hook_source = '''
-  let g:two-firewatch-italics=1
+  let g:two_firewatch_italics=1
 '''
+
+[[plugins]]
+repo = 'arzg/vim-colors-xcode'
 
 [[plugins]]
 repo = 'vim-scripts/AfterColors.vim'
@@ -473,6 +521,10 @@ repo = 'ryanoasis/vim-devicons'
 hook_source = '''
   let g:airline_powerline_fonts=1
 '''
+
+[[plugins]]
+# Toolkit for developing new color schemes
+repo = 'lifepillar/vim-colortemplate'
 
 
 # - Filetype Settings ----------------------------
