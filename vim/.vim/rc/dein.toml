@@ -242,15 +242,6 @@ repo = 'gregsexton/VimCalc'
 repo = 'simnalamburt/vim-mundo'
 
 [[plugins]]
-repo = 'xolox/vim-session'
-hook_add = '''
-  let g:session_autosave = 'yes'
-  let g:session_autoload = 'no'
-'''
-on_cmd = ['SaveSesion', 'OpenSession', 'RestartVim']
-depends = 'vim-misc'
-
-[[plugins]]
 repo = 'LucHermitte/lh-vim-lib'
 
 [[plugins]]

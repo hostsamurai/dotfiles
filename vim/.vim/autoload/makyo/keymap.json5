@@ -11,10 +11,10 @@
       },
       s: {
         name: "+session",
-        o: [":OpenSession ",    "open"],
-        O: [":OpenSession! ",   "open (no warning)"],
-        s: [":SaveSession ",    "save new"],
-        u: [":SaveSession<CR>", "save current"]
+        o: [":SLoad<CR>",      "open"],
+        O: [":SLoad!<CR>",     "open last session"],
+        s: [":SSave<space>",   "save new"],
+        u: [":SSave!<CR><CR>", "save current"]
       },
       S: {
         name: "+scratchpad",
