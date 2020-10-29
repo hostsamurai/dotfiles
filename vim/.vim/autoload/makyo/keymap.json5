@@ -66,6 +66,10 @@
         p: [":tabnew ~/.vim/rc/dein.toml<CR>", "open plugin config"],
         s: [":so $MYVIMRC<CR>",     "source vimrc"],
         t: [":tabnew $MYVIMRC<CR>", "edit vimrc"]
+      },
+      z: {
+        name: "+zsh",
+        c: [":tabnew ~/.zshrc<CR>", "open .zshrc"]
       }
     },
 
@@ -91,6 +95,15 @@
       t: [":FzfTags<space>", "tags"],
       T: [":FzfBTags<space>", "buffer tags"],
       w: [":FzfWindows<CR>", "windows"],
+    },
+
+    // -- Mode --------------------------------
+    m: {
+      name: "+modes",
+      n: {
+        name: "+nodejs",
+        r: [":FloatermNew node", "repl"]
+      }
     },
 
     // -- Project -----------------------------

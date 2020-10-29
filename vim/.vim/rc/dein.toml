@@ -345,6 +345,7 @@ hook_add = '''
     \ { 'I': '~/dotfiles/vim/.vim/init.vim' },
     \ { 'K': '~/dotfiles/vim/.vim/autoload/makyo/keymap.json5' },
     \ { 'P': '~/dotfiles/vim/.vim/rc/dein.toml' },
+    \ { 'Z': '~/dotfiles/zsh/.zshrc' },
     \ '~/Code',
     \ ]
   let g:startify_session_persistence = 1
