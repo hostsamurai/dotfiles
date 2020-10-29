@@ -181,6 +181,7 @@
         f: [":Gina push --force<CR>", "force push"]
       },
       s: [":Gina status<CR>", "status"],
+      S: [":tabnew<CR>:Gina status<CR>", "status in new tab"],
       z: {
         name: "+stash",
         b: [":Gina stash<CR>",   "stash buffer"],
