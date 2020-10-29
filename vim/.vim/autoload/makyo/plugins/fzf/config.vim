@@ -1,5 +1,5 @@
 let $FZF_DEFAULT_OPTS = "--layout=reverse --info=inline"
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden"
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --iglob .git"
 
 " Make fzf delegate its search responsibility to ripgrep. This turns fzf
 " into a simple selector interface.
@@ -33,7 +33,6 @@ fun! s:customize_fzf_variables()
     \ 'ctrl-t': 'tab vsplit',
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit',
-    \ 'ctrl-\,g': 'quit'
     \ }
   let g:fzf_history_dir = '~/.local/share/fzf-history'
   " [Buffers] Jump to existing window if possible
