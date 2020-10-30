@@ -19,7 +19,6 @@ repo = 'skywind3000/asynctasks.vim'
 repo = 'neoclide/coc.nvim'
 depends = ['vim-snippets']
 rev = 'release'
-merge = 0
 build = 'yarn install --frozen-lockfile'
 hook_add = '''
   let g:coc_snippet_next = '<c-j>'
@@ -263,7 +262,6 @@ repo = 'voldikss/vim-floaterm'
 hook_add = '''
   let g:floaterm_rootmarkers = ['.git', '.gitignore']
 '''
-
 
 # - Version Control ------------------------------
 

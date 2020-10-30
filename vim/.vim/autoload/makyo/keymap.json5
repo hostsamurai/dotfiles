@@ -25,10 +25,10 @@
       },
       t: {
         name: "+terminal",
-        c: [":FloatermNew ", "run command"],
+        c: [":FloatermNew<space>", "run command"],
         h: [":FloatermHide<CR>", "hide current"],
         k: [":FloatermKill<CR>", "kill"],
-        K: [":FloatermKill ", "kill named"],
+        K: [":FloatermKill<space>", "kill named"],
         n: [":FloatermNext<CR>", "next instance"],
         N: [":FloatermNew --name=", "new named terminal"],
         p: [":FloatermPrev<CR>", "previous instance"],

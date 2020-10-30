@@ -8,7 +8,11 @@ function s:setup_gui()
   map <S-Insert> <MiddleMouse>
   map! <S-Insert> <MiddleMouse>
 
-  set guifont=FiraCode\ Nerd\ Font\ Mono,Noto\ Color\ Emoji:h13
+  if xolox#misc#os#is_mac()
+    set guifont=FiraCode\ Nerd\ Font:h13
+  else
+    set guifont=FiraCode\ Nerd\ Font,Noto\ Color\ Emoji:h13
+  endif
 
   " Neovide settings
   let g:neovide_cursor_animation_length=0.13
