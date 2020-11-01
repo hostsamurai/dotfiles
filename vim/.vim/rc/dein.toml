@@ -191,11 +191,25 @@ hook_post_update = ':UpdateRemotePlugins'
 [[plugins]]
 repo = 'Olical/conjure'
 rev = 'v4.7.0'
-on_ft = ['clojure', 'scheme', 'racket']
+on_ft = ['clojure', 'scheme', 'racket', 'chicken', 'fennel']
+hook_add = '''
+  let g:conjure#client#fennel#aniseed#aniseed_module_prefix = "aniseed."
+'''
+
+[[plugins]]
+repo = 'Olical/aniseed'
+rev = 'v3.9.0'
+
+[[plugins]]
+repo = 'Olical/nvim-local-fennel'
+rev = 'v2.3.0'
+
+[[plugins]]
+repo = 'bakpakin/fennel.vim'
 
 [[plugins]]
 repo = 'kovisoft/paredit'
-on_ft = ['clojure', 'scheme', 'racket']
+on_ft = ['clojure', 'scheme', 'racket', 'chicken', 'fennel']
 hook_add = '''
   let g:paredit_mode = 1
   let g:paredit_shortmaps = 1

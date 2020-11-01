@@ -11,10 +11,10 @@
       },
       s: {
         name: "+session",
-        o: [":SLoad<CR>",      "open"],
-        O: [":SLoad!<CR>",     "open last session"],
-        s: [":SSave<space>",   "save new"],
-        u: [":SSave!<CR><CR>", "save current"]
+        o: [":SLoad<CR>",          "open"],
+        O: [":SLoad!<CR>",         "open last session"],
+        s: [":SSave<space>",       "save new"],
+        u: [":SSave!<CR><CR><CR>", "save current"]
       },
       S: {
         name: "+scratchpad",
@@ -36,7 +36,7 @@
         T: {
           name: "+toggles",
           n: [":FloatermToggle ", "toggle named"],
-          t: [":FloatermToggle<CR>", "toggle last"],
+          t: [":FloatermToggle<CR>", "toggle last"]
         }
       }
     },
@@ -44,13 +44,13 @@
     // -- Buffers -----------------------------
     b: {
       name: "+buffer",
-      b: [":<C-u>Denite buffer<CR>",  "find buffer"],
-      d: [":bd<CR>",                  "delete buffer"],
-      h: [":tabnew \\| Startify<CR>", "home buffer"],
-      m: [":BufExplorer<CR>",         "manage buffers"],
-      p: [":bprevious<CR>",           "previous buffer"],
-      s: [":Scratch<CR>",             "scratch buffer"],
-      "<Tab>": [":b#<CR>", "previous buffer"],
+      b:       [":<C-u>Denite buffer<CR>",  "find buffer"],
+      d:       [":bd<CR>",                  "delete buffer"],
+      h:       [":tabnew \\| Startify<CR>", "home buffer"],
+      m:       [":BufExplorer<CR>",         "manage buffers"],
+      p:       [":bprevious<CR>",           "previous buffer"],
+      s:       [":Scratch<CR>",             "scratch buffer"],
+      "<TAB>": [":b#<CR>",                  "previous buffer"],
     },
 
     // -- Files -------------------------------
@@ -58,6 +58,7 @@
       name: "+files",
       c: [':let @+ = expand("%")<CR>',      "copy file path"],
       f: [":DeniteProjectDir file/rec<CR>", "find file"],
+      g: ['execute "normal \<C-g>"',        "display relative path"],
       r: [":Denite file_mru<CR>",           "recent files"],
       t: [":NERDTreeToggle<CR>",            "NERDTree"],
       v: {
@@ -100,9 +101,25 @@
     // -- Mode --------------------------------
     m: {
       name: "+modes",
+      l: {
+        name: "+lisp",
+        b: [':execute "normal " . maplocalleader . "eb"<CR>', "eval buffer"],
+        e: {
+          name: "+eval",
+          e:   [':execute "normal " . maplocalleader . "ee"<CR>', "inner form"],
+          r:   [':execute "normal " . maplocalleader . "er"<CR>', "outer form"],
+          "!": [':execute "normal " . maplocalleader . "e!"<CR>', "replace with result"]
+        },
+        l: {
+          name: "+log-buffer",
+          c: [':execute "normal " . maplocalleader . "lq"<CR>', "close"],
+          s: [':execute "normal " . maplocalleader . "ls"<CR>', "open horizontally"],
+          v: [':execute "normal " . maplocalleader . "lv"<CR>', "open vertically"]
+        }
+      },
       n: {
         name: "+nodejs",
-        r: [":FloatermNew node", "repl"]
+        r: [":FloatermNew node<CR>", "repl"]
       }
     },
 
@@ -354,6 +371,16 @@
     "%s/": "%s/\\v",
 
     "<leader>*": ":<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>",
+
+    "m": {
+      name: "+modes",
+      l: {
+        name: "+lisp",
+        c: [':execute "normal gv" . maplocalleader . "Ea("<CR>', "eval form"],
+        E: [':execute "normal gv" . maplocalleader . "E"<CR>',   "eval selection"],
+        w: [':execute "normal gv" . maplocalleader . "Eiw"<CR>', "eval word"]
+      },
+    },
 
     "s": {
       "name": "+search",
