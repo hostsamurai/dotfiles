@@ -1,5 +1,5 @@
 let $FZF_DEFAULT_OPTS = "--layout=reverse --info=inline"
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --iglob .git"
+let $FZF_DEFAULT_COMMAND = "rg --hidden --iglob '!.git' --files "
 
 " Make fzf delegate its search responsibility to ripgrep. This turns fzf
 " into a simple selector interface.
