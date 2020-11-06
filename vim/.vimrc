@@ -6,8 +6,11 @@
 " ----------------------------------------------------------------------
 
 let g:node_host_prog = '/$HOME/.volta/tools/image/packages/neovim/4.9.0/bin/cli.js'
-let g:loaded_python_provider = 0
-let g:python3_host_prog = '/usr/bin/python'
+
+if has('python3')
+  let g:loaded_python_provider = 0 " turn off python2
+  let g:python3_host_prog = system('which python3')
+endif
 
 call makyo#plugins#config#init()      " Plugin configuration via autogroups
 call makyo#ux#init()                  " Usability options
