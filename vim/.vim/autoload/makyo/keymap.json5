@@ -25,14 +25,14 @@
       },
       t: {
         name: "+terminal",
-        c: [":FloatermNew<space>", "run command"],
-        h: [":FloatermHide<CR>", "hide current"],
-        k: [":FloatermKill<CR>", "kill"],
+        c: [":FloatermNew<space>",  "run command"],
+        h: [":FloatermHide<CR>",    "hide current"],
+        k: [":FloatermKill<CR>",    "kill"],
         K: [":FloatermKill<space>", "kill named"],
-        n: [":FloatermNext<CR>", "next instance"],
+        n: [":FloatermNext<CR>",    "next instance"],
         N: [":FloatermNew --name=", "new named terminal"],
-        p: [":FloatermPrev<CR>", "previous instance"],
-        t: [":FloatermNew<CR>", "new terminal"],
+        p: [":FloatermPrev<CR>",    "previous instance"],
+        t: [":FloatermNew<CR>",     "new terminal"],
         T: {
           name: "+toggles",
           n: [":FloatermToggle ", "toggle named"],
@@ -51,6 +51,14 @@
       p:       [":bprevious<CR>",           "previous buffer"],
       s:       [":Scratch<CR>",             "scratch buffer"],
       "<TAB>": [":b#<CR>",                  "previous buffer"],
+    },
+
+    // -- Comment/Compile ---------------------
+    c: {
+      name: "+comments/compile",
+      c: ["<plug>NERDCommenterToggle",    "comment one line"],
+      s: ["<plug>NERDCommenterSexy",      "comment sexily"],
+      u: ["<plug>NERDCommenterUncomment", "uncomment"]
     },
 
     // -- Files -------------------------------
@@ -98,6 +106,42 @@
       w: [":FzfWindows<CR>", "windows"],
     },
 
+    // -- Jumps/Folds -------------------------
+    j: {
+      name: "+jumps/folds",
+      a: {
+        name: "+ale",
+        d: ["<Plug>(ale_go_to_definition)",      "definition"],
+        r: ["<Plug>(ale_find_references)",       "references"],
+        t: ["<Plug>(ale_go_to_type_definition)", "type definition"],
+        R: [":ALERename<CR>",                    "rename symbol"]
+      },
+      c: {
+        name: "+coc",
+        d: ["<Plug>(coc-definition)",      "definition"],
+        D: ["<Plug>(coc-declaration)",     "declaration"],
+        i: ["<Plug>(coc-implementation)",  "implementation"],
+        o: ["<Plug>(coc-openlink)",        "open link"],
+        r: ["<Plug>(coc-references)",      "references"],
+        R: ["<Plug>(coc-rename)",          "rename symbol"],
+        t: ["<Plug>(coc-type-definition)", "type definition"],
+        e: {
+          name: "+errors/diagnostics",
+          n: ["<Plug>(coc-diagnostic-next)",       "next diagnostic"],
+          N: ["<Plug>(coc-diagnostic-next-error)", "next error"],
+          p: ["<Plug>(coc-diagnostic-prev)",       "prev diagnostic"],
+          P: ["<Plug>(coc-diagnostic-prev-error)", "prev error"]
+        }
+      },
+      j: ["<Plug>(easymotion-s)", "easymotion"],
+      e: {
+        name: "+errors",
+        f: ["<Plug>(ale_fix)",       "fix"],
+        n: ["<Plug>(ale_next_wrap)", "next"],
+        p: ["<Plug>(ale_prev_wrap)", "previous"]
+      }
+    },
+
     // -- Mode --------------------------------
     m: {
       name: "+modes",
@@ -106,9 +150,12 @@
         b: [':execute "normal " . maplocalleader . "eb"<CR>', "eval buffer"],
         e: {
           name: "+eval",
-          e:   [':execute "normal " . maplocalleader . "ee"<CR>', "inner form"],
-          r:   [':execute "normal " . maplocalleader . "er"<CR>', "outer form"],
-          "!": [':execute "normal " . maplocalleader . "e!"<CR>', "replace with result"]
+          c:   [':execute "normal gv" . maplocalleader . "Ea("<CR>', "eval form"],
+          e:   [':execute "normal " . maplocalleader . "ee"<CR>',    "inner form"],
+          E:   [':execute "normal gv" . maplocalleader . "E"<CR>',   "eval selection"],
+          r:   [':execute "normal " . maplocalleader . "er"<CR>',    "outer form"],
+          w:   [':execute "normal gv" . maplocalleader . "Eiw"<CR>', "eval word"],
+          "!": [':execute "normal " . maplocalleader . "e!"<CR>',    "replace with result"],
         },
         l: {
           name: "+log-buffer",
@@ -198,11 +245,15 @@
       },
       h: {
         name: "+hunks",
-        u: [":SignifyHunkUndo<CR>", "undo changes"]
+        n: ["<Plug>(signify-next-hunk)", "next"],
+        p: ["<Plug>(signify-prev-hunk)", "prev"],
+        u: [":SignifyHunkUndo<CR>",        "undo changes"]
       },
       l: {
         name: "+logs",
-        l: [":Gina log<CR>", "log"]
+        l: [":Gina log<CR>",                    "log"],
+        c: ["<Plug>(git-messenger)",            "last commit message"],
+        p: ["<Plug>(git-messenger-into-popup)", "open popup"]
       },
       m: [":MergetoolToggle<CR>", "mergetool"],
       p: {
@@ -304,7 +355,7 @@
     gj: "j",
     gk: "k",
 
-    tc: ":tabnew<CR>"
+    "<TAB>": [":b#<CR>", "previous buffer"]
   },
 
   cnoremap: {
@@ -372,16 +423,6 @@
 
     "<leader>*": ":<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>",
 
-    "m": {
-      name: "+modes",
-      l: {
-        name: "+lisp",
-        c: [':execute "normal gv" . maplocalleader . "Ea("<CR>', "eval form"],
-        E: [':execute "normal gv" . maplocalleader . "E"<CR>',   "eval selection"],
-        w: [':execute "normal gv" . maplocalleader . "Eiw"<CR>', "eval word"]
-      },
-    },
-
     "s": {
       "name": "+search",
       f: [":Farf<CR>", "search with Far"],
@@ -392,14 +433,7 @@
     }
   },
 
-  map: {
-    // -- Comment/Compile ---------------------
-    c: {
-      name: "+comments/compile",
-      c: ["<plug>NERDCommenterToggle",    "comment one line"],
-      s: ["<plug>NERDCommenterSexy",      "comment sexily"],
-      u: ["<plug>NERDCommenterUncomment", "uncomment"]
-    },
+  map: {},
 
     // -- Version Control ---------------------
     g: {
@@ -474,8 +508,7 @@
     "<C-j>": "<Plug>(coc-snippets-expand-jump)"
   },
 
-  smap: {
-  },
+  smap: {},
 
   vmap: {
     // Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
