@@ -135,9 +135,9 @@ repo = 'tpope/vim-surround'
 repo = 'vim-scripts/visincr'
 
 [[plugins]]
-repo = 'luochen1990/rainbow'
+repo = 'losingkeys/vim-niji'
 hook_add = '''
-  let g:rainbow_activate = 0 " enabled via :RainbowToggle
+  let g:niji_matching_filetypes = ['lisp', 'scheme', 'clojure', 'fennel']
 '''
 
 [[plugins]]
