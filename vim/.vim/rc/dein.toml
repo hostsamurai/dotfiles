@@ -64,9 +64,13 @@ hook_add = '''
   let g:airline#extensions#ale#enabled = 1
   let g:ale_set_balloons = 1
   let g:ale_fixers = {
-  \   '*': ['remove_trailing_whitespace', 'trim_whitespace']
+  \   '*': ['remove_trailing_whitespace', 'trim_whitespace'],
+  \   'javascript': ['prettier', 'eslint'],
+  \   'less': ['stylelint'],
+  \   'scss': ['stylelint'],
+  \   'css': ['stylelint']
   \}
-
+  let g:ale_fix_on_save = 1
 '''
 
 [[plugins]]
@@ -341,7 +345,9 @@ repo = 'Lokaltog/vim-easymotion'
 
 [[plugins]]
 repo = 'brooth/far.vim'
-
+hook_add = '''
+  let g:far#source = 'rg'
+'''
 
 # - UI -------------------------------------------
 
