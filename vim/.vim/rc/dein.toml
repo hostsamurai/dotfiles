@@ -266,6 +266,10 @@ hook_add = '''
 '''
 
 [[plugins]]
+# A few functional programming utilities for VimL
+repo = 'dan-t/vim-fn'
+
+[[plugins]]
 repo = 'xolox/vim-misc'
 
 [[plugins]]
