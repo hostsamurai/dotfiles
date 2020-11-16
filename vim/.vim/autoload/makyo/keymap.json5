@@ -7,6 +7,7 @@
       u: [":MundoToggle<CR>", "undo tree"],
       l: {
         name: "+coc",
+        c: [":CocConfig<CR>", "open coc config"],
         u: [":CocUpdate<CR>", "update coc"]
       },
       s: {
@@ -25,14 +26,14 @@
       },
       t: {
         name: "+terminal",
-        c: [":FloatermNew<space>", "run command"],
-        h: [":FloatermHide<CR>", "hide current"],
-        k: [":FloatermKill<CR>", "kill"],
+        c: [":FloatermNew<space>",  "run command"],
+        h: [":FloatermHide<CR>",    "hide current"],
+        k: [":FloatermKill<CR>",    "kill"],
         K: [":FloatermKill<space>", "kill named"],
-        n: [":FloatermNext<CR>", "next instance"],
+        n: [":FloatermNext<CR>",    "next instance"],
         N: [":FloatermNew --name=", "new named terminal"],
-        p: [":FloatermPrev<CR>", "previous instance"],
-        t: [":FloatermNew<CR>", "new terminal"],
+        p: [":FloatermPrev<CR>",    "previous instance"],
+        t: [":FloatermNew<CR>",     "new terminal"],
         T: {
           name: "+toggles",
           n: [":FloatermToggle ", "toggle named"],
@@ -60,7 +61,12 @@
       f: [":DeniteProjectDir file/rec<CR>", "find file"],
       g: ['execute "normal \<C-g>"',        "display relative path"],
       r: [":Denite file_mru<CR>",           "recent files"],
-      t: [":NERDTreeToggle<CR>",            "NERDTree"],
+      n: {
+        name: "+navigate",
+        o: [":Dirvish<CR>",          "open cwd"],
+        O: [":Dirvish %<CR>",        "open dir of current file"],
+        v: [":vsplit \\| Dirvish<CR>", "open cwd in vertical split"],
+      },
       v: {
         name: "+vim",
         k: [":tabnew ~/.vim/autoload/makyo/keymap.json5<CR>", "open keymap config"],
@@ -77,25 +83,25 @@
     // -- FZF ---------------------------------
     F: {
       name: "+FZF",
-      b: [":FzfBuffers<CR>", "buffers"],
+      b: [":FzfBuffers<CR>",  "buffers"],
       B: [":FzfBCommits<CR>", "git buffer commits"],
-      c: [":FzfColors<CR>", "color schemes"],
-      f: [":FzfFiles<CR>", "files"],
-      g: [":FzfGFiles<CR>", "files in vcs"],
-      G: [":FzfGFiles?<CR>", "git status files"],
+      c: [":FzfColors<CR>",   "color schemes"],
+      f: [":FzfFiles<CR>",    "files"],
+      g: [":FzfGFiles<CR>",   "files in vcs"],
+      G: [":FzfGFiles?<CR>",  "git status files"],
       h: {
         name: "+history",
         C: [":FzfHistory:<CR>", "command history"],
-        h: [":FzfHistory<CR>", "mru"],
+        h: [":FzfHistory<CR>",  "mru"],
         s: [":FzfHistory/<CR>", "search history"],
       },
-      l: [":FzfLines<space>", "search lines"],
+      l: [":FzfLines<space>",  "search lines"],
       L: [":FzfBLines<space>", "search lines in buffers"],
-      m: [":FzfMarks<CR>", "marks"],
-      r: [":FzfRg<space>", "rg search"],
-      t: [":FzfTags<space>", "tags"],
-      T: [":FzfBTags<space>", "buffer tags"],
-      w: [":FzfWindows<CR>", "windows"],
+      m: [":FzfMarks<CR>",     "marks"],
+      r: [":FzfRg<space>",     "rg search"],
+      t: [":FzfTags<space>",   "tags"],
+      T: [":FzfBTags<space>",  "buffer tags"],
+      w: [":FzfWindows<CR>",   "windows"],
     },
 
     // -- Mode --------------------------------
@@ -143,11 +149,11 @@
         g: [":GenGTAGS<CR>", "generate gtags"],
         v: {
           name: "+view",
-          c: [":Vista coc<CR>", "coc"],
-          C: [":Vista ctags<CR>", "ctags"],
-          f: [":Vista focus<CR>", "focus"],
+          c: [":Vista coc<CR>",     "coc"],
+          C: [":Vista ctags<CR>",   "ctags"],
+          f: [":Vista focus<CR>",   "focus"],
           F: [":Vista vim_lsp<CR>", "lsp"],
-          t: [":Vista!!<CR>",  "toggle"]
+          t: [":Vista!!<CR>",       "toggle"]
         }
       }
     },
@@ -250,6 +256,7 @@
     Q: "gq",
     Y: "y$",
 
+    // -- Text --------------------------------
     x: {
       name: "+text",
       a: [":EasyAlign", "align text"],
@@ -258,9 +265,9 @@
         f: {
           name: "+formulas",
           e: [":TableEvalFormulaLine", "eval formula"],
-          f: [":TableAddFormula", "add cell formula"]
+          f: [":TableAddFormula",      "add cell formula"]
         },
-        r: [":TableModeRealign", "realign"],
+        r: [":TableModeRealign",    "realign"],
         t: [":TableModeToggle<CR>", "toggle"]
       }
     },
@@ -356,11 +363,13 @@
     "<A-k>": "<C-><C-N><C-w>k",
     "<A-l>": "<C-><C-N><C-w>l",
 
-    // Simulate i_CTRL-R
+    // Simulate i_CTRL-R for inserting the contents of a register
     "<expr> <C-R>": "'<C-><C-N>\"' . nr2char(getchar()) . 'pi'",
 
     // Exit terminal mode easily
-    "<Esc>": "<C-><C-N>"
+    "<Esc>": "<C-><C-N>",
+    "<M-[>": "<Esc>",
+    "<C-v><Esc>": "<Esc>"
   },
 
   vnoremap: {
@@ -449,6 +458,19 @@
         f: ["<Plug>(ale_fix)",  "fix"],
         n: ["<Plug>(ale_next_wrap)", "next"],
         p: ["<Plug>(ale_prev_wrap)", "previous"]
+      },
+      z: {
+        name: "+folds",
+        "0": [":set foldlevel=0", "level 0"],
+        "1": [":set foldlevel=1", "level 1"],
+        "2": [":set foldlevel=2", "level 2"],
+        "3": [":set foldlevel=3", "level 3"],
+        "4": [":set foldlevel=4", "level 4"],
+        "5": [":set foldlevel=5", "level 5"],
+        "6": [":set foldlevel=6", "level 6"],
+        "7": [":set foldlevel=7", "level 7"],
+        "8": [":set foldlevel=8", "level 8"],
+        "9": [":set foldlevel=9", "level 9"]
       }
     },
 
