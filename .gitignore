@@ -15,3 +15,7 @@ pnpm-debug.log
 GPATH
 GRTAGS
 GTAGS
+/luarocks
+/lua
+/lua_modules
+/.luarocks
