@@ -38,12 +38,18 @@ repo = 'Shougo/context_filetype.vim'
 repo = 'jsfaint/gen_tags.vim'
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
+repo = 'justinmk/vim-dirvish'
 hook_add = '''
-  let g:NERDTreeShowHidden = 1
-  let g:NERDTreeMinimalUI = 1
-  let g:NERDTreeStatusLine = ''
+  let g:dirvish_mode = ':sort ,^.*[\/],'
 '''
+
+[[plugins]]
+# Show git status flags along Dirvish
+repo = 'kristijanhusak/vim-dirvish-git'
+
+[[plugins]]
+# List all files defined by your projections with the Dirvish plugin
+repo = 'fsharpasharp/vim-dirvinist'
 
 [[plugins]]
 repo = 'scrooloose/nerdcommenter'
@@ -63,10 +69,10 @@ repo = 'dense-analysis/ale'
 hook_add = '''
   let g:airline#extensions#ale#enabled = 1
   let g:ale_set_balloons = 1
+  let g:ale_fix_on_save = 1
   let g:ale_fixers = {
-  \   '*': ['remove_trailing_whitespace', 'trim_whitespace']
+  \   '*': ['remove_trailing_lines', 'trim_whitespace']
   \}
-
 '''
 
 [[plugins]]
@@ -235,6 +241,26 @@ hook_post_source = '''
 [[plugins]]
 repo = 'tpope/vim-rails'
 on_ft = 'ruby'
+
+# Lua
+[[plugins]]
+repo = 'tjdevries/nlua.nvim'
+
+[[plugins]]
+repo = 'nvim-lua/completion-nvim'
+
+[[plugins]]
+# Path, context manager, unit testing and luarocks installation functions
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'euclidianAce/BetterLua.vim'
+
+[[plugins]]
+repo = 'tjdevries/manillua.nvim'
+
+[[plugins]]
+repo = 'svermeulen/vimpeccable'
 
 [[plugins]]
 repo = 'iamcco/markdown-preview.nvim'
@@ -540,33 +566,4 @@ repo = 'lifepillar/vim-colortemplate'
 [ftplugin]
 _ = '''
  set sw=2 sts=2 ts=2 et smarttab smartindent
-'''
-
-text = '''
-  setlocal textwidth=78
-'''
-
-markdown_mkd = '''
-  setlocal tw=80
-'''
-
-vim = '''
-  setlocal foldmethod=marker
-'''
-
-javascript_ruby_erb = '''
-  set foldmethod=syntax
-'''
-
-javascript_json_json5 = '''
-  let b:ale_fixers = ['prettier', 'eslint']
-  let b:ale_fix_on_save = 1
-'''
-
-sass_scss_less_css = '''
-  set foldmethod=indent
-'''
-
-sass_scss_less_css = '''
-  set foldmethod=indent
 '''
