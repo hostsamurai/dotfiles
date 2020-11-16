@@ -3,13 +3,17 @@
 # ------------------------------------------------
 function {
   if [[ -d "$HOME/.boot" ]]; then
-    path+=("$HOME/.boot/bin")
+    path+=("$HOME.boot/bin")
   fi
 
   if [[ -d "$HOME/.rbenv" ]]; then
-    path+=("$HOME/.rbenv/bin")
-    export PATH
+    path+=("$HOME.rbenv/bin")
     eval "$(rbenv init -)"
+  fi
+
+  if [[ -d "$HOME/.luarocks" ]]; then
+    path+="$HOME.luarocks/bin"
+    eval "$(luarocks path --lua-version 5.1 --no-bin)"
   fi
 
   local kernel=`uname`
@@ -22,7 +26,5 @@ function {
   elif [[ $kernel = "Linux" ]]; then
     # Reference the environment variable created by the systemd unit
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-    # Optimization for NVIDIA card
-    export __GL_THREADED_OPTIMISATIONS=1
   fi
 }
