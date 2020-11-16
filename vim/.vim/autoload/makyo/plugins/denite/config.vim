@@ -1,4 +1,4 @@
-function s:denite_ft_mappings() abort
+function makyo#plugins#denite#config#denite_ft_mappings() abort
   nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
   nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
   nnoremap <silent><buffer><expr> r       denite#do_map('do_action', 'quickfix')
@@ -13,7 +13,7 @@ function s:denite_ft_mappings() abort
 endfunction
 
 
-function s:denite_filter_mappings() abort
+function makyo#plugins#denite#config#denite_filter_mappings() abort
   imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
 endfunction
 
@@ -42,13 +42,9 @@ endfunction
 function! makyo#plugins#denite#config#init()
   echomsg "[makyo][plugins] Setting up denite augroup..."
 
-  augroup makyoConfig#Plugin#denite
-    au!
-
-    " Custom options
-    " TODO: Can we configure this a better way? TOML? Lua?
-    " TODO: Apply more hightlights for a consistent buffer coloring scheme
-    let s:denite_options = {
+  " Custom options
+  " TODO: Apply more hightlights for a consistent buffer coloring scheme
+  let s:denite_options = {
     \ 'split': 'floating',
     \ 'start_filter': 1,
     \ 'auto_resize': 1,
@@ -63,20 +59,15 @@ function! makyo#plugins#denite#config#init()
     \ 'winrow': 1,
     \ 'vertical_preview': 1
     \}
-    call denite#custom#option('_', s:denite_options)
+  call denite#custom#option('_', s:denite_options)
 
-    call denite#custom#var('file/rec', 'command', ['rg', '--files', '--hidden', '--glob', '!.git'])
+  call denite#custom#var('file/rec', 'command', ['rg', '--files', '--hidden', '--glob', '!.git'])
 
-    " Ripgrep command on grep source
-    call denite#custom#var('grep', 'command', ['rg'])
-    call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep', '--no-heading', '--hidden'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-
-    " Define mappings
-    autocmd FileType denite call s:denite_ft_mappings()
-    autocmd FileType denite-filter call s:denite_filter_mappings()
-  augroup END
+  " Ripgrep command on grep source
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep', '--no-heading', '--hidden'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
 endfunction
