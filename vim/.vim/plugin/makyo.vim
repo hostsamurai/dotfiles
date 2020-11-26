@@ -15,6 +15,8 @@ function s:run_post_init_hook(opts)
     if get(a:opts, 'colorscheme', '') != ''
       execute 'colorscheme ' . a:opts.colorscheme
     endif
+
+    set background=dark
   augroup END
 endfunction
 

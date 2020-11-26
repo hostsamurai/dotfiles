@@ -6,19 +6,12 @@
 function! s:setup_mappings()
   " Setup which_key here, as the leader keys are not set up yet when
   " dein sources the plugin.
-  try
-    au! User vim-which-key call which_key#register('<Space>', "g:which_key_map")
-    nnoremap <leader> :<c-u>WhichKey '<Space>'<CR>
-    vnoremap <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
-  catch
-    echoerr "[makyo] Registering mappings failed!"
-    echoerr "[makyo] Check for errors in keymap.json5."
-    echoerr "[makyo] Additionally, call RegisterKeymap and ensure it works."
-  endtry
+  nnoremap <leader> :<c-u>WhichKey '<Space>'<CR>
+  vnoremap <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 endfunction
 
 function! makyo#mappings#init()
-  echomsg "[makyo] 🗝🗝🗝 Applying custom mappings..."
+  echomsg "[makyo] 🗝 Applying custom mappings..."
 
   let g:mapleader = "\<Space>"
   let g:maplocalleader = ','
@@ -28,6 +21,7 @@ function! makyo#mappings#init()
     au!
     au VimEnter * call RegisterKeymap()
     au BufWritePost */makyo/keymap.json5 call RegisterKeymap() | call which_key#parse_mappings()
+    au User vim-which-key call which_key#register('<Space>', "g:which_key_map")
 
     call s:setup_mappings()
   augroup END

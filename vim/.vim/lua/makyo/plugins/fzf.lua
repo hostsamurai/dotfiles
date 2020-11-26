@@ -2,6 +2,7 @@
 -- Configures FZF
 -- @module fzf
 
+-- TODO: Ensure these are setup prior to running the script
 local M    = require 'moses'
 local vimp = require 'vimp'
 
@@ -20,9 +21,6 @@ local function create_dynamic_ripgrep(query, fullscreen)
   local spec = {
     options = {'--phony', '--multi', '--query', q, '--bind', 'change:reload:' .. reload_command}
   }
-  print(vim.inspect(spec))
-  print(initial_command)
-  print(fullscreen)
   vim.fn['fzf#vim#grep'](initial_command, 1, vim.fn['fzf#vim#with_preview'](spec), f)
 end
 

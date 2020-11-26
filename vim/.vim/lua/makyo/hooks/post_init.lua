@@ -11,6 +11,8 @@ local function run(opts)
   -- TODO: Set up autocmd's and color scheme here once there's
   -- support for it.
   vim.g.makyo_post_init_options = opts
+
+  vim.cmd([[echomsg "[makyo] Ran post init hooks"]])
 end
 
 return {

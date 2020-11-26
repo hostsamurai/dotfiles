@@ -2,6 +2,7 @@
 -- Configures denite
 -- @module denite
 
+-- TODO: Ensure this has been installed prior to running the script
 local vimp = require 'vimp'
 
 local nnoremap = vimp.nnoremap

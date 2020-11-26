@@ -6,4 +6,3 @@
 " ----------------------------------------------------------------------
 
 lua require('init')
-call makyo#mappings#init() " custom mappings

@@ -1,18 +1,44 @@
---- Main plugin configuration using  packer.nvim
--- @module packer
+--- Main plugin configuration using packer.nvim
+-- @module setup
 
 local general_purpose_plugins = {
   -- Let packer manage itself as an optional plugin
-  {'wbthomason/packer.nvim', opt = true},
+  'wbthomason/packer.nvim',
 
   {
     'liuchengxu/vim-better-default',
-    config = function ()
+    disable = true,
+    opt = false,
+    setup = function()
       vim.g.vim_better_default_key_mapping = 0
       vim.g.vim_better_default_persistent_undo = 1
     end
   },
-  {'skywind3000/asynctasks.vim'}
+
+  {
+    'liuchengxu/vim-which-key',
+    opt = false,
+    -- Before loading the plugin
+    setup = function()
+      vim.g.which_key_align_by_separator = 1
+      vim.g.which_key_use_floating_win = 1
+    end,
+    -- After the plugin loads
+    config = function()
+      local which_key_config = require 'makyo.plugins.which_key'
+
+      vim.api.nvim_set_var('mapleader', ' ')
+      vim.api.nvim_set_var('maplocalleader', ',')
+
+      vim.g.which_key_map = which_key_config.setup()
+
+      vim.fn['which_key#register']('<Space>', 'g:which_key_map')
+      vim.api.nvim_set_keymap('n', '<leader>', ":<c-u>WhichKey '<Space>'<cr>", {silent = true, noremap = true})
+      vim.api.nvim_set_keymap('n', '<localleader>', ":<c-u>WhichKey ','<cr>", {silent = true, noremap = true})
+    end
+  },
+
+  'skywind3000/asynctasks.vim'
 }
 
 local coding_plugins = {
@@ -199,10 +225,10 @@ local language_plugins = {
       'html'
     },
     --[[
-       [setup = function()
-       [  nvim_del_keymap('n', '<leader>p')
-       [end
-       ]]
+    [setup = function()
+      [  nvim_del_keymap('n', '<leader>p')
+    [end
+    ]]
   },
 
   {'tpope/vim-rails', ft = 'ruby'},
@@ -305,10 +331,10 @@ local search_plugins = {
   {
     'bronson/vim-visual-star-search',
     --[[
-       [config = function ()
-       [  vim.api.nvim_del_keymap('n', '<leader>*')
-       [end
-       ]]
+    [config = function ()
+      [  vim.api.nvim_del_keymap('n', '<leader>*')
+    [end
+    ]]
   },  
 
   'Lokaltog/vim-easymotion',
@@ -417,14 +443,6 @@ local ui_plugins = {
       vim.g.airline_theme = 'minimalist'
       vim.g.airline_minimalist_showmod = 1
     end
-  },
-
-  {
-    'liuchengxu/vim-which-key',
-    config = function ()
-      vim.g.which_key_align_by_separator = 1
-      vim.g.which_key_use_floating_win = 1
-    end
   }
 }
 
@@ -464,21 +482,17 @@ local themes = {
 }
 
 local function init()
-  vim.cmd [[packadd packer.nvim]]
-
-  local plugins = {
-    general_purpose_plugins, 
-    coding_plugins,
-    text_manipulation_plugins,
-    language_plugins,
-    application_plugins,
-    version_control_plugins,
-    search_plugins,
-    ui_plugins,
-    themes
-  }
-
-  return require('packer').startup({plugins})
+  return require('packer').startup(function() 
+    use(general_purpose_plugins)
+    use(coding_plugins)
+    use(text_manipulation_plugins)
+    use(language_plugins)
+    use(application_plugins)
+    use(version_control_plugins)
+    use(search_plugins)
+    use(ui_plugins)
+    use(themes)
+  end)
 end
 
 return { init = init }

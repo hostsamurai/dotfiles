@@ -1,7 +1,7 @@
 --- Install plugins with packer and configures plugins that require non-trivial setup.
 -- @module plugins
 
-local packer = require 'makyo.plugins.packer'
+local packer = require 'makyo.plugins.setup'
 local denite = require 'makyo.plugins.denite'
 local fzf    = require 'makyo.plugins.fzf'
 

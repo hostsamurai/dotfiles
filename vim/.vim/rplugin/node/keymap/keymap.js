@@ -6,17 +6,19 @@ const mapSimpleKeymappings = require('./keymaps/simple')
 const mapWhichKeyCommands = require('./keymaps/which_key')
 
 
-const registerUserKeymap = plugin => {
-  plugin.setOptions({dev: true, alwaysInit: true})
+const registerUserKeymap = async plugin => {
+  plugin.setOptions({dev: true, alwaysInit: false})
 
-  plugin.registerFunction(
+  await plugin.registerFunction(
     'RegisterKeymap',
     () => {
       mapSimpleKeymappings(plugin, keymapByMode)
       mapWhichKeyCommands(plugin, keymapByMode)
     },
-    {sync: true}
+    {sync: false}
   )
+
+  await plugin.nvim.echoMsg('Finished setting up RegisterKeymap')
 }
 
 module.exports = registerUserKeymap
