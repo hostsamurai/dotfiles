@@ -7,7 +7,7 @@ const mapWhichKeyCommands = require('./keymaps/which_key')
 
 
 const registerUserKeymap = async plugin => {
-  plugin.setOptions({dev: true, alwaysInit: false})
+  plugin.setOptions({dev: false, alwaysInit: false})
 
   await plugin.registerFunction(
     'RegisterKeymap',

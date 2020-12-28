@@ -4,6 +4,7 @@ vim/.vim/sessions
 vim/.vim/tmp
 vim/.vim/undo
 vim/.vim/plugged
+vim/.vim/plugin/packer_compiled.vim
 vim/.vim/.netrwhist
 configs/.boot/cache
 configs/.lein/indices

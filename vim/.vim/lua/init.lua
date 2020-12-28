@@ -4,7 +4,7 @@
 local pre_init_hooks  = require 'makyo.hooks.pre_init'
 local post_init_hooks = require 'makyo.hooks.post_init'
 
-pre_init_hooks.run({configure_path = vim.g.neovide})
+pre_init_hooks.run({ configure_path = vim.g.neovide })
 
 require 'luarocks.loader'
 
@@ -24,20 +24,13 @@ vim.g.vim_better_default_persistent_undo = 1
 vim.api.nvim_command([[packadd vim-better-default]])
 
 do
-  local co = coroutine.create(function()
-    providers.init()
-    plugins.init()
-    UX.init()
-    UI.init()
-    fns.init()
-    mappings.init()
-    coroutine.yield('finished')
-  end)
+  providers.init()
+  plugins.init()
+  UX.init()
+  UI.init()
+  fns.init()
+  mappings.init()
 
-  local has_finished = coroutine.resume(co)
-
-  if has_finished then
-    vim.cmd([[echomsg "[makyo] Finished loading."]])
-    post_init_hooks.run({colorscheme = 'horizon'})
-  end
+  vim.cmd([[echomsg "[makyo] Finished loading."]])
+  post_init_hooks.run({colorscheme = 'horizon'})
 end

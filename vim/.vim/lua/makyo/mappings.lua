@@ -1,20 +1,18 @@
 --- Keybindings configuration
 -- @module
 
+local which_key_config = require 'makyo.plugins.which_key'
 local keymap = vim.api.nvim_set_keymap
 
 local function setup_better_regexes()
     keymap('n', '/',  '/\\v',  {noremap = true})
     keymap('n', '?',  '?\\v',  {noremap = true})
-    keymap('n', 's/', 's/\\v', {noremap = true})
 
     keymap('c', 's/',  's/\\v',  {noremap = true})
     keymap('c', '%s/', '%s/\\v', {noremap = true})
 
     keymap('v', '/',   '/\\v',   {noremap = true})
     keymap('v', '?',   '?\\v',   {noremap = true})
-    keymap('v', 's/',  's/\\v',  {noremap = true})
-    keymap('v', '%s/', '%s/\\v', {noremap = true})
 end
 
 local function setup_normal_mode_mappings()
@@ -101,6 +99,15 @@ local function setup_mappings()
     keymap('', 'tc', ':tabnew<CR>', {noremap = true})
 end
 
+local function setup_which_key_mappings()
+  vim.api.nvim_set_var('mapleader', ' ')
+  vim.api.nvim_set_var('maplocalleader', ',')
+  vim.api.nvim_set_var('which_key_map', which_key_config.setup())
+
+  vim.api.nvim_set_keymap('n', '<leader>', ":<c-u>WhichKey '<Space>'<cr>", {noremap = true})
+  vim.api.nvim_set_keymap('v', '<leader>', ":<c-u>WhichKeyVisual '<Space>'<cr>", {noremap = true})
+end
+
 local function init()
   print('[makyo] 🗝 Applying custom mappings...')
 
@@ -111,6 +118,7 @@ local function init()
   setup_visual_mode_mappings()
   setup_terminal_mode_mappings()
   setup_mappings()
+  setup_which_key_mappings()
 
   print('[makyo] 🗝 Done.')
 end

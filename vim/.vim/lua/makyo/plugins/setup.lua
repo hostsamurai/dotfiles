@@ -23,18 +23,8 @@ local general_purpose_plugins = {
       vim.g.which_key_align_by_separator = 1
       vim.g.which_key_use_floating_win = 1
     end,
-    -- After the plugin loads
     config = function()
-      local which_key_config = require 'makyo.plugins.which_key'
-
-      vim.api.nvim_set_var('mapleader', ' ')
-      vim.api.nvim_set_var('maplocalleader', ',')
-
-      vim.g.which_key_map = which_key_config.setup()
-
       vim.fn['which_key#register']('<Space>', 'g:which_key_map')
-      vim.api.nvim_set_keymap('n', '<leader>', ":<c-u>WhichKey '<Space>'<cr>", {silent = true, noremap = true})
-      vim.api.nvim_set_keymap('n', '<localleader>', ":<c-u>WhichKey ','<cr>", {silent = true, noremap = true})
     end
   },
 
@@ -165,12 +155,22 @@ local text_manipulation_plugins = {
   'junegunn/vim-easy-align',
   'wellle/targets.vim',
   'rhysd/clever-f.vim',
-  'dhruvasagar/vim-table-mode',
-  'dkarter/bullets.vim',
+
+  { 
+    'dhruvasagar/vim-table-mode',
+    opt = true,
+    cmd = { 'TableModeToggle', 'TableModeEnable', 'Tableize' }
+  },
+
+  { 
+    'dkarter/bullets.vim', 
+    setup = function()
+      vim.g.bullets_set_mappings = 0
+    end
+  }
 }
 
 local language_plugins = {
-
   -- Ultimate syntax collection
   { 
     'sheerun/vim-polyglot',
@@ -235,12 +235,15 @@ local language_plugins = {
 
   -- Lua
   'tjdevries/nlua.nvim',
-  'nvim-lua/completion-nvim',
+  {'nvim-lua/completion-nvim', ft = 'lua'},
   -- Path, context manager, unit testing and luarocks installation functions
   'nvim-lua/plenary.nvim',
-  'euclidianAce/BetterLua.vim',
-  'tjdevries/manillua.nvim',
+  {'euclidianAce/BetterLua.vim', ft = 'lua'},
+  {'tjdevries/manillua.nvim', ft = 'lua'},
   'svermeulen/vimpeccable',
+  {'bfredl/nvim-luadev', ft = 'lua'},
+
+  'teal-language/vim-teal',
 
   {
     'iamcco/markdown-preview.nvim', 
@@ -375,7 +378,12 @@ local ui_plugins = {
     run = ':call fzf#install()'
   },
 
-  'jlanzarotta/bufexplorer',
+  {
+    'jlanzarotta/bufexplorer',
+    setup = function () 
+      vim.g.bufExplorerDisableDefaultKeyMapping = 1
+    end
+  },
 
   {'wsdjeg/dein-ui.vim', disable = true},
 
