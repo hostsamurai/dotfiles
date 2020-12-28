@@ -1,13 +1,12 @@
 #!/bin/sh
 
 if [ ! -e ./vim/.vim/autoload/plug.vim ]; then
-  echo 'Installing vim-plug...'
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  vim -X -n +PlugInstall +qall > /dev/null
+  echo 'Installing packer...'
+  git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/opt/packer.nvim
+  vim -X -n +PackerInstall +qall > /dev/null
   echo 'Done installing vim plugins.'
 else
-  echo 'Updating vim-plug and plugins...'
-  vim -X -n +PlugUpgrade +PlugUpdate +qall > /dev/null
+  echo 'Updating plugins...'
+  vim -X -n +PackerSync +PackerCompile +qall > /dev/null
   echo 'Done updating vim plugins.'
 fi

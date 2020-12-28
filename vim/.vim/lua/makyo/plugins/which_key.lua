@@ -103,10 +103,12 @@ local map_tree = {
     },
     v = {
       name = "+vim",
-      k = {nn(":tabnew ~/.vim/autoload/makyo/keymap.json5<CR>"), "open keymap config"},
+      i = {nn(":tabnew ~/.vim/lua/makyo/ui.lua<CR>"), "open UI config"},
+      k = {nn(":tabnew ~/.vim/lua/makyo/mappings.lua<CR>"), "open keymap config"},
       p = {nn(":tabnew ~/.vim/rc/dein.toml<CR>"), "open plugin config"},
-      s = {nn(":so $MYVIMRC<CR>"),     "source vimrc"},
-      t = {nn(":tabnew $MYVIMRC<CR>"), "edit vimrc"}
+      t = {nn(":tabnew $MYVIMRC<CR>"), "edit vimrc"},
+      u = {nn(":tabnew ~/.vim/lua/makyo/ux.lua<CR>"), "open UX config"},
+      w = {nn(":tabnew ~/.vim/lua/makyo/plugins/which_key.lua<CR>"), "open which_key config"}
     },
     z = {
       name = "+zsh",

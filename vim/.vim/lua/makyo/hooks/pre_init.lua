@@ -29,9 +29,7 @@ local function configure_luarocks_path()
 end
 
 --- Runs hook logic
--- FIXME: why is opts nil?
 local function run(opts)
-  print("opts is: " .. vim.inspect(opts))
   if opts.configure_path == true then
     configure_luarocks_path()
   end  
