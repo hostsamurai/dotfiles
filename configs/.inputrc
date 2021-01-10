@@ -1,0 +1,5 @@
+$if fennel
+  set enable-bracketed-paste on
+  set blink-matching-paren on
+  set show-all-if-ambiguous on
+$endif

@@ -102,7 +102,7 @@ function Mapping:map()
   local keys = self.accessor:to_str()
   local cmdfn = self.value[1]
 
-  if M(val):keys():contains('name') then
+  if keys == 'name' then
     error('"name" key is not allowed.')
   end
 
