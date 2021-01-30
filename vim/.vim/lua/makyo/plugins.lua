@@ -2,15 +2,11 @@
 -- @module plugins
 
 local packer = require 'makyo.plugins.setup'
-local denite = require 'makyo.plugins.denite'
-local fzf    = require 'makyo.plugins.fzf'
 
 local function init()
   print("[makyo] 🔌 Initializing plugins...") 
 
   packer.init()
-  denite.init()
-  fzf.init()
 
   print("[makyo] 🔌 Done.")
 end
