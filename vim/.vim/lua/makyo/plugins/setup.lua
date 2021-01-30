@@ -1,15 +1,16 @@
 --- Main plugin configuration using packer.nvim
 -- @module setup
 
+vim.g.loaded_aniseed = false
+
 local general_purpose_plugins = {
   -- Let packer manage itself as an optional plugin
   'wbthomason/packer.nvim',
 
   {
     'liuchengxu/vim-better-default',
-    disable = true,
     opt = false,
-    setup = function()
+    config = function()
       vim.g.vim_better_default_key_mapping = 0
       vim.g.vim_better_default_persistent_undo = 1
     end
@@ -25,7 +26,8 @@ local general_purpose_plugins = {
     end,
     config = function()
       vim.fn['which_key#register']('<Space>', 'g:which_key_map')
-    end
+    end,
+    rocks = 'tl'
   },
 
   'skywind3000/asynctasks.vim'
@@ -186,15 +188,19 @@ local language_plugins = {
   {'clojure-vim/acid.nvim', ft = 'clojure'},
 
   {
+    'Olical/aniseed', 
+    tag = 'v3.14.0', 
+    config = function() vim.g.loaded_aniseed = true end
+  },
+  {
     'Olical/conjure',
-    tag = 'v4.7.0',
+    tag = 'v4.10.0',
     ft = {'clojure', 'scheme', 'racket', 'chicken', 'fennel'},
     setup = function()
       vim.g['conjure#client#fennel#aniseed#aniseed_module_prefix'] = "aniseed."
     end
   },
-  {'Olical/aniseed', tag = 'v3.9.0'},
-  {'Olical/nvim-local-fennel', tag = 'v2.3.0'},
+  {'Olical/nvim-local-fennel', tag = 'v2.5.0'},
   'bakpakin/fennel.vim',
 
   {
@@ -374,8 +380,9 @@ local ui_plugins = {
 
   {
     'junegunn/fzf.vim',
-    requires = 'junegunn/fzf',
-    run = ':call fzf#install()'
+    setup = function()
+      vim.g.fzf_command_prefix = 'Fzf'
+    end
   },
 
   {
@@ -490,17 +497,24 @@ local themes = {
 }
 
 local function init()
-  return require('packer').startup(function() 
-    use(general_purpose_plugins)
-    use(coding_plugins)
-    use(text_manipulation_plugins)
-    use(language_plugins)
-    use(application_plugins)
-    use(version_control_plugins)
-    use(search_plugins)
-    use(ui_plugins)
-    use(themes)
-  end)
+  local packer = require 'packer'
+  local use = packer.use 
+  local use_rocks = packer.use_rocks
+
+  packer.init()
+  packer.reset()
+
+  use_rocks 'tl'
+
+  use(general_purpose_plugins)
+  use(language_plugins)
+  use(coding_plugins)
+  use(text_manipulation_plugins)
+  use(application_plugins)
+  use(version_control_plugins)
+  use(search_plugins)
+  use(ui_plugins)
+  use(themes)
 end
 
 return { init = init }
