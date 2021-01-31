@@ -1,7 +1,5 @@
-(module makyo-fnl.demo
-  {require {a aniseed.core
-            nvim aniseed.nvim
-            providers makyo-fnl.providers
+(module makyo-fnl.init
+  {require {providers makyo-fnl.providers
             plugins makyo-fnl.plugins
             ux makyo-fnl.ux
             ui makyo-fnl.ui

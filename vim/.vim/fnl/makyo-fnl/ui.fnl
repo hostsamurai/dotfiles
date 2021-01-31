@@ -1,3 +1,4 @@
+;;;; Configures the UI
 (module makyo-fnl.ui
   {require {a aniseed.core
             nvim aniseed.nvim}})

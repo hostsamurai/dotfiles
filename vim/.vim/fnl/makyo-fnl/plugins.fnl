@@ -4,6 +4,4 @@
 
 (defn init []
   (do 
-    (a.println "[makyo] 🔌 Initializing plugins...")
-    (fzf.init)
-    (a.println "[makyo] 🔌 Done.")))
+    (fzf.init)))

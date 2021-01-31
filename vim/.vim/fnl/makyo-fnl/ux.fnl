@@ -1,3 +1,4 @@
+;;;; Configures usability options
 (module makyo-fnl.ux
   {require {a aniseed.core
             nvim aniseed.nvim}})

@@ -1,3 +1,4 @@
+;;;; General functions used in user commands
 (module makyo-fnl.functions
   {require {a aniseed.core
             nvim aniseed.nvim}})

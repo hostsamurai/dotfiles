@@ -1,3 +1,4 @@
+;;;; General user mappings not necessarily tied to any layers
 (module makyo-fnl.mappings
   {require {a aniseed.core
             nvim aniseed.nvim
