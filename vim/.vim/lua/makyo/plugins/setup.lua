@@ -389,7 +389,7 @@ local ui_plugins = {
     'jlanzarotta/bufexplorer',
     setup = function () 
       vim.g.bufExplorerDisableDefaultKeyMapping = 1
-    end
+   end
   },
 
   {'wsdjeg/dein-ui.vim', disable = true},
@@ -496,7 +496,22 @@ local themes = {
   'lifepillar/vim-colortemplate'
 }
 
+-- See https://github.com/wbthomason/packer.nvim#bootstrapping
+local function bootstrap()
+  local execute = vim.api.nvim_command
+  local fn = vim.fn
+
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+  if fn.empty(fn.glob(install_path)) > 0 then
+    execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+    execute 'packadd packer.nvim'
+  end 
+end
+
 local function init()
+  bootstrap()
+
   local packer = require 'packer'
   local use = packer.use 
   local use_rocks = packer.use_rocks
