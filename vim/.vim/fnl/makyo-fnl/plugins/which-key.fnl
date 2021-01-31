@@ -1,8 +1,11 @@
+;;;; Layer configuration
+
 (module makyo-fnl.plugins.which-key
   {require {a aniseed.core
             nvim aniseed.nvim
             translator makyo.plugins.translator}})
 
+;; Convinience function for creating custom mappings
 (defn- modemap [mode noremap cmd]
   (let [m (if (= noremap true)
                "noremap"
@@ -19,7 +22,7 @@
 (def- nn (partial modemap "n" true))
 (def- vn (partial modemap "v" true))
 
-(def- map-tree {
+(def- layers {
   ;; Applications ------------------------
   :a {
     :name "+applications"
@@ -97,12 +100,12 @@
     }
     :v {
       :name "+vim"
-      :i [(nn ":tabnew ~/.vim/lua/makyo/ui.lua<CR>")                 "open UI config"]
-      :k [(nn ":tabnew ~/.vim/lua/makyo/mappings.lua<CR>")           "open keymap config"]
-      :p [(nn ":tabnew ~/.vim/rc/dein.toml<CR>")                     "open plugin config"]
-      :t [(nn ":tabnew $MYVIMRC<CR>")                                "edit vimrc"]
-      :u [(nn ":tabnew ~/.vim/lua/makyo/ux.lua<CR>")                 "open UX config"]
-      :w [(nn ":tabnew ~/.vim/lua/makyo/plugins/which_key.lua<CR>")  "open which_key config"]
+      :i [(nn ":tabnew ~/.vim/fnl/makyo-fnl/ui.fnl<CR>")                "open UI config"]
+      :k [(nn ":tabnew ~/.vim/fnl/makyo-fnl/mappings.fnl<CR>")          "open keymap config"]
+      :p [(nn ":tabnew ~/.vim/lua/makyo/plugins/setup.lua<CR>")         "open plugin config"]
+      :t [(nn ":tabnew $MYVIMRC<CR>")                                   "edit vimrc"]
+      :u [(nn ":tabnew ~/.vim/fnl/makyo-fnl/ux.fnl<CR>")                "open UX config"]
+      :w [(nn ":tabnew ~/.vim/fnl/makyo-fnl/plugins/which-key.fnl<CR>") "open which_key config"]
     }
     :z {
       :name "+zsh"
@@ -367,7 +370,7 @@
 
 (defn setup []
   (let [ignore-list ["*"]
-        mapped-cmds (translator.init map-tree)]
+        mapped-cmds (translator.init layers)]
     (a.assoc mapped-cmds "<TAB>" "previous buffer")
     (a.map (fn [k] (a.assoc mapped-cmds k "which_key_ignore")) ignore-list)
     mapped-cmds))
