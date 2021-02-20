@@ -78,6 +78,9 @@ if ! zplug check --verbose; then
   fi
 fi
 
+. /usr/share/fzf/key-bindings.zsh
+. /etc/profile.d/fzf-extras.zsh
+
 if zplug check b4b4r07/enhancd; then
   export ENHANCD_FILTER=fzf-tmux:fzf
 fi
@@ -86,8 +89,6 @@ if zplug check jamesob/desk; then
   # Hook for desk activation
   [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
 fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if type "fasd" > /dev/null; then
   eval "$(fasd --init auto)"
