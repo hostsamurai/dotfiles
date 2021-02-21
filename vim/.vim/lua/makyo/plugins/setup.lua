@@ -134,6 +134,13 @@ local text_manipulation_plugins = {
 
   { 
     'losingkeys/vim-niji',
+    ft = {
+      'lisp', 
+      'scheme', 
+      'clojure', 
+      'fennel', 
+      'janet'
+    },
     setup = function()
       vim.g.niji_matching_filetypes = {
         'lisp', 
@@ -375,8 +382,8 @@ local ui_plugins = {
     end
   },
 
-  'Shougo/neomru.vim',
-  'Shougo/denite.nvim',
+  {'Shougo/neomru.vim', disable = true},
+  {'Shougo/denite.nvim', disable = true},
 
   {
     'junegunn/fzf.vim',
@@ -411,6 +418,8 @@ local ui_plugins = {
   },
 
   'psliwka/vim-smoothie',
+
+  {'camspiers/lens.vim', requires = 'camspiers/animate.vim'},
 
   {
     't9md/vim-choosewin',
