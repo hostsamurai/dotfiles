@@ -309,9 +309,9 @@
   ;; Plugins -----------------------------
   :P {
     :name "+plugins"
-    :c [(nn ":tabnew ~/.vim/rc/dein.toml<CR>") "open config"]
-    :r [(nn ":call dein#remote_plugins()<CR>") "update remote plugins"]
-    :u [(nn ":DeinUpdate<CR>") "update"]
+    :c [(nn ":PackerCompile<CR>") "compile changes"]
+    :o [(nn ":tabnew ~/.vim/lua/makyo/plugins/setup.lua<CR>") "open config"]
+    :u [(nn ":PackerUpdate<CR>") "update"]
   }
 
   ;; Search ------------------------------
