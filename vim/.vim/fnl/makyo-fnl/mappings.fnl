@@ -86,7 +86,7 @@
     (keymap "" ";" "<Plug>(clever-f-repeat-forward)" {})
     (keymap "" "," "<Plug>(clever-f-repeat-back)" {})
 
-    (keymap "" "<Tab>" ":b#<cr>" {})
+    (keymap "" "<Leader><TAB>" ":b#<cr>" {})
 
     ;; Easier navigation on line-wrapped text
     (keymap "" "j" "gj" {:noremap true})
@@ -96,11 +96,15 @@
 
     (keymap "" "tc" ":tabnew<CR>" {:noremap true})))
 
+;; NOTE: Resetting these mappings currently does not work.
+;; Mappings need to be unbound before being able to set again.
+;; It would be ideal to have a diff of what changed, so as to 
+;; only reset the affected mappings.
 (defn- setup_which_key_mappings []
   (let [svar vim.api.nvim_set_var
         keymap vim.api.nvim_set_keymap]
     (svar "mapleader" " ")
-    (svar "maplocalleader" "")
+    (svar "maplocalleader" ",")
     (svar "which_key_map" (which_key_config.setup))
 
     (keymap "n" "<leader>" ":<c-u>WhichKey '<Space>'<cr>" {:noremap true})
