@@ -428,6 +428,8 @@ local ui_plugins = {
     end
   },
 
+  'TaDaa/vimade',
+
   {
     'vim-airline/vim-airline',
     config = function ()
