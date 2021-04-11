@@ -2,44 +2,36 @@
 
 ### Initialization
 
-The `.vimrc` is terse for a reason - Vim provides us a means of splitting things
-out through its `autoload` functionality. This makes it possible to split out
-any complex configuration into parts. All of my configuration lives in
-`autoload/makyo`. Everything is set up in the order that it appears in my
-`.vimrc`. Custom mappings are configured when the `VimEnter` event fires, in
-order to guarantee that nothing else overrides them.
+The sole purpose of the `.vimrc` is to import the `lua` initialization script.
+This script is responsible for initializing plugins and passing off the rest of
+the initialization to `makyo`, my Vim configuration framework. `makyo` is
+written in [Fennel][Fennel], a LISP dialect written in `lua`.
+Aside from improving Vim's user experience, `makyo` is in charge of setting up
+keymaps in a similar fashion to Spacemacs. For more information, consult its
+[README](./fnl/makyo-fnl/README.md).
 
 #### Plugins
 
-Plugins are managed via [dein](https://github.com/Shougo/dein.vim/) through a
-TOML [plugin configuration file](https://github.com/hostsamurai/dotfiles/blob/master/vim/.vim/rc/dein.toml).
-Because this setup uses [coc.nvim](https://github.com/neoclide/coc.nvim), its
-extensions are managed via `:CocUpdate`.
+This configuration makes use of two flavors of plugins: regular Vim/Neovim
+plugins and extensions for [CoC][CoC]. Regular plugins are handled through [Packer][Packer]. One
+important thing that happens during plugin configuration and initialization is
+that the required dependency for `makyo`'s [Fennel][Fennel] source, [aniseed][aniseed], is set up.
+This happens asynchronously. Packer is also asynchronous. Because of this, we
+have to poll to ensure that `aniseed` has been initialized. Run `:PackerUpdate`
+to update plugins. `:PackerCompile` is needed after making changes to the
+plugin configuration file.
 
-#### Remote plugin
-
-Custom mode key mappings are configured through a JSON5
-[file](https://github.com/hostsamurai/dotfiles/blob/new-vim/vim/.vim/autoload/makyo/keymap.json5).
-A node.js [remote plugin](https://github.com/hostsamurai/dotfiles/tree/new-vim/vim/.vim/rplugin/node/keymap)
-is in charge of reading that configuration and executing the appropriate Vim
-commands.
-
-For this to work, Neovim has to know of the existence of the
-remote plugin. This is possible via `:UpdateRemotePlugins`. The
-[node-client](https://github.com/neovim/node-client) has a mechanism through
-which debugging is possible. You want to specify the path to a log file where
-all of the output from the node.js plugin can be redirected to, along with
-address of the RPC server for the running Neovim instance:
-
-```sh
-mkfifo /tmp/nvim-pipe
-NVIM_NODE_LOG_FILE=./rplugin.log nyaovim --listen /tmp/nvim-pipe
-```
-
-In the plugin, setting `alwaysInit: true` will allow you to test your changes
-easily after executing `:UpdateRemotePlugins`.
+[CoC][CoC] extensions are handled through CoC itself. It takes care of setting up
+everything as soon as [Packer][Packer] initializes it. No fancy setup is needed here. To
+update extensions, run `:CocUpdate`.
 
 #### Custom mappings
 
 Most mappings are heavily inspired by [Spacemac's](http://spacemacs.org/)
-keybindings. A minority are also taken out of my Atom configuration.
+keybindings. 
+
+[Packer]: https://github.com/wbthomason/packer.nvim
+[Fennel]: https://fennel-lang.org
+[aniseed]: https://github.com/Olical/aniseed
+[CoC]: https://github.com/neoclide/coc.nvim
+[Spacemacs]: http://spacemacs.org/

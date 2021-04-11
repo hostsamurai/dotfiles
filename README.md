@@ -13,7 +13,7 @@ The `Makefile` expects GNU `sed` and `stow` to be installed. You probably want
 to install these dependencies with [Homebrew](http://brew.sh/) if you're on OS
 X. The following commands will install them:
 
-```shell
+```sh
 brew install stow
 brew install gnu-sed --with-default-names
 ```
