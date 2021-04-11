@@ -11,13 +11,7 @@ build = {
    type = "builtin",
    modules = {
       init = "init.lua",
-      ["makyo.mappings"] = "makyo/mappings.lua",
       ["makyo.plugins"] = "makyo/plugins.lua",
-      ["makyo.plugins.denite"] = "makyo/plugins/denite.lua",
-      ["makyo.plugins.fzf"] = "makyo/plugins/fzf.lua",
-      ["makyo.plugins.which_key"] = "makyo/plugins/which_key.lua",
-      ["makyo.plugins.transform"] = "makyo/plugins/transform.lua",
-      ["makyo.ui"] = "makyo/ui.lua",
-      ["makyo.ux"] = "makyo/ux.lua"
+      ["makyo.plugins.transform"] = "makyo/plugins/transform.lua"
    }
 }
