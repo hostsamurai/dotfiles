@@ -387,6 +387,13 @@ local ui_plugins = {
   {'Shougo/denite.nvim', disable = true},
 
   {
+    '/usr/local/opt/fzf',
+    cond = function()
+      local env = vim.fn.system('uname')
+      return env == 'Darwin'
+    end
+  }, 
+  {
     'junegunn/fzf.vim',
     setup = function()
       vim.g.fzf_command_prefix = 'Fzf'
@@ -532,6 +539,8 @@ local function init()
   packer.reset()
 
   use_rocks 'tl'
+  use_rocks 'compat53'
+  use_rocks 'moses'
 
   use(general_purpose_plugins)
   use(language_plugins)

@@ -78,9 +78,12 @@ if ! zplug check --verbose; then
   fi
 fi
 
-# TODO: Add bindings for OS X
-. /usr/share/fzf/key-bindings.zsh
-. /etc/profile.d/fzf-extras.zsh
+if [[ `uname` == 'Linux' ]]; then
+  . /usr/share/fzf/key-bindings.zsh
+  . /etc/profile.d/fzf-extras.zsh
+else
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
 
 if zplug check b4b4r07/enhancd; then
   export ENHANCD_FILTER=fzf-tmux:fzf
@@ -193,8 +196,6 @@ autoload -Uz faviconify
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export VOLTA_HOME="$HOME/.volta"
 [ -s "$VOLTA_HOME/load.sh" ] && . "$VOLTA_HOME/load.sh"
