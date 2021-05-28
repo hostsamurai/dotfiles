@@ -16,6 +16,6 @@ build = {
    modules = {
       init = "init.lua",
       ["makyo.plugins"] = "makyo/plugins.lua",
-      ["makyo.plugins.transform"] = "makyo/plugins/transform.lua"
+      ["makyo.plugins.translator"] = "makyo/plugins/translator.lua"
    }
 }
