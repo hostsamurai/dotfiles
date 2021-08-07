@@ -65,9 +65,9 @@ zplug "lukechilds/zsh-better-npm-completion"
 zplug "arzzen/calc.plugin.zsh"
 zplug "joepvd/zsh-hints"
 
-export SPACESHIP_TIME_SHOW=true
-export SPACESHIP_TIME_FORMAT=%D{'%H:%M'}
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+#export SPACESHIP_TIME_SHOW=true
+#export SPACESHIP_TIME_FORMAT=%D{'%H:%M'}
+#zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
@@ -78,6 +78,7 @@ if ! zplug check --verbose; then
   fi
 fi
 
+# TODO: Add bindings for OS X
 . /usr/share/fzf/key-bindings.zsh
 . /etc/profile.d/fzf-extras.zsh
 
@@ -199,3 +200,5 @@ export VOLTA_HOME="$HOME/.volta"
 [ -s "$VOLTA_HOME/load.sh" ] && . "$VOLTA_HOME/load.sh"
 
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+eval "$(starship init zsh)"
