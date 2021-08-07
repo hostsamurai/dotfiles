@@ -23,6 +23,7 @@ local general_purpose_plugins = {
     setup = function()
       vim.g.which_key_align_by_separator = 1
       vim.g.which_key_use_floating_win = 1
+      vim.g.which_key_timeout = 500
     end,
     config = function()
       vim.fn['which_key#register']('<Space>', 'g:which_key_map')

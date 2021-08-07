@@ -30,6 +30,7 @@
     :u [(nn ":MundoToggle<CR>") "undo tree"]
     :l {
       :name "+coc"
+      :a [(nn ":CocAction<CR>") "execute action"]
       :c [(nn ":CocConfig<CR>") "open coc config"]
       :u [(nn ":CocUpdate<CR>") "update coc"]
     }
