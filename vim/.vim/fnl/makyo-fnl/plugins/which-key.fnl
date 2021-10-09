@@ -81,9 +81,9 @@
   ;; Comment/Compile ---------------------
   :c {
     :name "+comments/compile"
-    :c [(n "<plug>NERDCommenterToggle")    "comment one line"]
-    :s [(n "<plug>NERDCommenterSexy")      "comment sexily"]
-    :u [(n "<plug>NERDCommenterUncomment") "uncomment"]
+    :c [(nn "<plug>NERDCommenterToggle")    "comment one line"]
+    :s [(nn "<plug>NERDCommenterSexy")      "comment sexily"]
+    :u [(nn "<plug>NERDCommenterUncomment") "uncomment"]
   }
 
   ;; Files -------------------------------
