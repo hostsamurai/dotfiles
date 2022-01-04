@@ -71,6 +71,7 @@
     :name "+buffer"
     :b          [(nn ":<C-u>Denite buffer<CR>")  "find buffer"]
     :d          [(nn ":bd<CR>")                  "delete buffer"]
+    :D          [(nn ":bd!<CR>")                 "force delete buffer"]
     :h          [(nn ":tabnew \\| Startify<CR>") "home buffer"]
     :m          [(nn ":BufExplorer<CR>")         "manage buffers"]
     :p          [(nn ":bprevious<CR>")           "previous buffer"]
@@ -81,9 +82,15 @@
   ;; Comment/Compile ---------------------
   :c {
     :name "+comments/compile"
-    :c [(nn "<plug>NERDCommenterToggle")    "comment one line"]
-    :s [(nn "<plug>NERDCommenterSexy")      "comment sexily"]
-    :u [(nn "<plug>NERDCommenterUncomment") "uncomment"]
+    :c [(n "<plug>NERDCommenterToggle")    "comment one line"]
+    :s [(n "<plug>NERDCommenterSexy")      "comment sexily"]
+    :u [(n "<plug>NERDCommenterUncomment") "uncomment"]
+    :v {
+      :name "+visual"
+      :c [(vn "<plug>NERDCommenterToggle")    "comment one line"]
+      :s [(vn "<plug>NERDCommenterSexy")      "comment sexily"]
+      :u [(vn "<plug>NERDCommenterUncomment") "uncomment"]
+    }
   }
 
   ;; Files -------------------------------
@@ -311,8 +318,13 @@
   :P {
     :name "+plugins"
     :c [(nn ":PackerCompile<CR>") "compile changes"]
+    :C [(nn ":PackerClean<CR>") "clean"]
     :o [(nn ":tabnew ~/.vim/lua/makyo/plugins/setup.lua<CR>") "open config"]
     :u [(nn ":PackerUpdate<CR>") "update"]
+    :w {
+      :name "+which-key"
+      :e [(nn ":tabnew ~/.vim/fnl/makyo-fnl/plugins/which-key.fnl<CR>") "edit mappings"]
+    }
   }
 
   ;; Search ------------------------------
