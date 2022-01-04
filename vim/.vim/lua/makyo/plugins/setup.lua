@@ -226,9 +226,11 @@ local language_plugins = {
   {'myhere/vim-nodejs-complete', ft = 'javascript'},
   {
     'prettier/vim-prettier',
+    run = 'npm install --frozen-lockfile --production',
     ft = {
       'javascript', 
       'typescript', 
+      'typescriptreact',
       'less', 
       'css', 
       'scss', 
@@ -237,12 +239,12 @@ local language_plugins = {
       'markdown', 
       'yaml', 
       'html'
-    },
+    }
     --[[
-    [setup = function()
-      [  nvim_del_keymap('n', '<leader>p')
-    [end
-    ]]
+       [setup = function()
+       [  vim.api.nvim_del_keymap('n', '<leader>p')
+       [end
+       ]]
   },
 
   {'tpope/vim-rails', ft = 'ruby'},
@@ -387,9 +389,9 @@ local ui_plugins = {
   {'Shougo/denite.nvim', disable = true},
 
   {
-    '/usr/local/opt/fzf',
+    'junegunn/fzf',
     cond = function()
-      local env = vim.fn.system('uname')
+      local env = string.gsub(vim.fn.system('uname'), '\n', '')
       return env == 'Darwin'
     end
   }, 
