@@ -1,4 +1,4 @@
-local _tl_compat53 = ((tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3) and require('compat53.module'); local string = _tl_compat53 and _tl_compat53.string or string; local M = require('moses')
+local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local string = _tl_compat and _tl_compat.string or string; local M = require('moses')
 
 
 
@@ -179,7 +179,7 @@ function init(map_tree)
       local descriptions = l:describe()
 
 
-      M.each(pairings, function(m)          m:map() end)
+      M.each(pairings, function(m) m:map() end)
 
       leader_map[key] = descriptions
    end)
