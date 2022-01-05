@@ -195,21 +195,19 @@ local language_plugins = {
   {'dgrnbrg/vim-redl', ft = 'clojure'},
   {'clojure-vim/acid.nvim', ft = 'clojure'},
 
+  'bakpakin/fennel.vim',
+  'Olical/nvim-local-fennel',
   {
     'Olical/aniseed', 
-    tag = 'v3.14.0', 
     config = function() vim.g.loaded_aniseed = true end
   },
   {
     'Olical/conjure',
-    tag = 'v4.10.0',
     ft = {'clojure', 'scheme', 'racket', 'chicken', 'fennel'},
     setup = function()
       vim.g['conjure#client#fennel#aniseed#aniseed_module_prefix'] = "aniseed."
     end
   },
-  {'Olical/nvim-local-fennel', tag = 'v2.5.0'},
-  'bakpakin/fennel.vim',
 
   {
     'kovisoft/paredit',
