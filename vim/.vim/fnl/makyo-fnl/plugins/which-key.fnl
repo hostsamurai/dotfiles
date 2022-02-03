@@ -279,6 +279,10 @@
         :v [(nn ":execute 'normal ' . maplocalleader . 'lv'<CR>") "open vertically"]
       }
     }
+    :m {
+      :name "+markdown"
+      :p [(nn ":MarkdownPreview<CR>") "preview"]    
+    }
     :n {
       :name "+nodejs"
       :r [(nn ":FloatermNew node<CR>") "repl"]
@@ -342,6 +346,13 @@
       :name "+replace"
       :s [(nn ":Farr<CR>") "replace"]
     }
+  }
+
+  ;; Spelling ----------------------------
+  :S {
+    :name "+spelling"
+    :n [(nn ":set spell<CR>")   "enable spell checker"]
+    :f [(nn ":set nospell<CR>") "disable spell checker"]
   }
 
   ;; Toggles -----------------------------
