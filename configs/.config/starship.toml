@@ -6,6 +6,7 @@ disabled = false
 time_format = "%R"
 
 [aws]
+disabled = false
 symbol = "  "
 
 [conda]
