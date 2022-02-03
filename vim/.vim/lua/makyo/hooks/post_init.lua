@@ -12,7 +12,6 @@ local function plugin_post_init_hook()
 
   timer:start(1000, 750, vim.schedule_wrap(function() 
     if vim.g.loaded_aniseed then
-      timer:close()
       require('aniseed.env').init({ module = 'makyo-fnl.init' })
     end
   end))
