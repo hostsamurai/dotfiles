@@ -37,8 +37,7 @@ local general_purpose_plugins = {
 local coding_plugins = {
   { 
     'neoclide/coc.nvim',  
-    run = 'yarn install --frozen-lockfile',
-    tag = 'release',
+    branch = 'release',
     setup = function()
       vim.g.coc_snippet_next = '<c-j>'
       vim.g.coc_snippet_prev = '<c-k>'
@@ -237,12 +236,10 @@ local language_plugins = {
       'markdown', 
       'yaml', 
       'html'
-    }
-    --[[
-       [setup = function()
-       [  vim.api.nvim_del_keymap('n', '<leader>p')
-       [end
-       ]]
+    },
+    config = function()
+      vim.api.nvim_del_keymap('n', '<leader>p')
+    end
   },
 
   {'tpope/vim-rails', ft = 'ruby'},
