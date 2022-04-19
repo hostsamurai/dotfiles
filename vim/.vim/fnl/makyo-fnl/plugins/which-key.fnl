@@ -32,6 +32,7 @@
       :name "+coc"
       :a [(nn ":CocAction<CR>") "execute action"]
       :c [(nn ":CocConfig<CR>") "open coc config"]
+      :r [(nn ":CocRestart<CR>") "restart language server"]
       :u [(nn ":CocUpdate<CR>") "update coc"]
     }
     :s {
