@@ -6,7 +6,7 @@ disabled = false
 time_format = "%R"
 
 [aws]
-disabled = false
+disabled = true
 symbol = "  "
 
 [conda]
@@ -52,7 +52,7 @@ symbol = " "
 symbol = " "
 
 [nodejs]
-symbol = " "
+symbol = " "
 
 [package]
 symbol = " "
