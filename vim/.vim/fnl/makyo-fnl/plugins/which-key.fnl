@@ -29,11 +29,19 @@
     :c [(nn ":Calc<CR>")        "calculator"]
     :u [(nn ":MundoToggle<CR>") "undo tree"]
     :l {
-      :name "+coc"
-      :a [(nn ":CocAction<CR>") "execute action"]
-      :c [(nn ":CocConfig<CR>") "open coc config"]
-      :r [(nn ":CocRestart<CR>") "restart language server"]
-      :u [(nn ":CocUpdate<CR>") "update coc"]
+      :name "+lang"
+      :a {
+        :name "+ale"
+        :n [(nn ":ALENextWrap<CR>") "next"]
+        :p [(nn ":ALEPreviousWrap<CR>") "previous"]
+      }
+      :c {
+        :name "+coc"
+        :a [(nn ":CocAction<CR>") "execute action"]
+        :c [(nn ":CocConfig<CR>") "open coc config"]
+        :r [(nn ":CocRestart<CR>") "restart language server"]
+        :u [(nn ":CocUpdate<CR>") "update coc"]
+      }
     }
     :s {
       :name "+session"
