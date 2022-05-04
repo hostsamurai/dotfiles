@@ -65,10 +65,6 @@ zplug "lukechilds/zsh-better-npm-completion"
 zplug "arzzen/calc.plugin.zsh"
 zplug "joepvd/zsh-hints"
 
-#export SPACESHIP_TIME_SHOW=true
-#export SPACESHIP_TIME_FORMAT=%D{'%H:%M'}
-#zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
 if ! zplug check --verbose; then
@@ -203,3 +199,5 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 eval "$(starship init zsh)"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
