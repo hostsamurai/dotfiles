@@ -25,6 +25,7 @@
       ;; wrap long lines  
       (set o.linebreak       true) 
       (set o.matchpairs      "(:),{:},[:],<:>")
+      (set o.wrap            true)
       ;; command line height  
       (set o.cmdheight       2) 
       ;; show line numbers relative to the current line  
