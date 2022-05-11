@@ -10,7 +10,7 @@
     #load-module module-alsa-source device=default tsched=1
 
     # OUTPUT/PLAYBACK
-    load-module module-alsa-sink device=default tsched=0
+    load-module module-alsa-sink device=default tsched=1
 
     # Accept clients -- very important
     load-module module-native-protocol-unix

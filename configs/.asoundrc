@@ -1,47 +1,53 @@
 defaults.pcm.rate_converter "speexrate_best"
 defaults.pcm.rate 192000
 
-pcm.device {
-  type hw
-  card 0
-  device 1
-  format S16_LE
-  rate 192000
-}
-
 pcm.!default {
   type plug
-  slave.pcm "device"
+  slave.pcm "dmixer"
+}
+
+pcm.dmixed {
+  type asym
+  playback.pcm "dmixer"
 }
 
 pcm.dmixer {
   type dmix
   ipc_key 1024
-  ipc_key_add_uid 1
+  ipc_key_add_uid 0
   ipc_perm 0660
   slave {
-    pcm "hw:0,1"
+    pcm "hw:0,0"
     period_size 9216
     buffer_size 262144
     rate 192000
+    format S32_LE
   }
 }
 
-pcm.nvidiahdmi {
+ctl.dmixer {
   type hw
-  card 2
-  device 3
+  card 0
+  device 0
 }
 
-ctl.nvidiahdmi {
+pcm.xonar {
+  type hw
+  card 0
+  device 0
+  format S32_LE
+  rate 192000
+}
+
+pcm.dsp {
   type plug
-  slave.pcm "nvidiahdmi"
+  slave.pcm "dmix"
 }
 
 pcm.dp {
   type hw
-  card 2
-  device 7
+  card 1
+  device 10
 }
 
 ctl.dp {
