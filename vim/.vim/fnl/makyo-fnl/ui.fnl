@@ -19,8 +19,8 @@
       (nvim.command "set guioptions-=R"));; no right scrollbar 
 
     (if (= (nvim.fn.system  "uname") "Linux")
-      (set o.guifont "FiraCode Nerd Font,Noto Color Emoji:h13")
-      (set o.guifont "FiraCode Nerd Font:h13")))) 
+      (set o.guifont "FiraCode Nerd Font,Noto Color Emoji:h11")
+      (set o.guifont "FiraCode Nerd Font:h11")))) 
 
 (defn init []
   "Initialize GUI settings"
