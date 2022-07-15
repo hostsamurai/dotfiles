@@ -3,6 +3,7 @@
 (module makyo-fnl.plugins.which-key
   {require {a aniseed.core
             nvim aniseed.nvim
+            : vimp
             translator makyo.plugins.translator}})
 
 ;; Convinience function for creating custom mappings
@@ -37,7 +38,8 @@
       }
       :c {
         :name "+coc"
-        :a [(nn ":CocAction<CR>") "execute action"]
+        :a [(n "<plug>(coc-codeaction)") "execute action"]
+        :f [(n "<plug>(coc-fix-current)") "auto fix"]
         :c [(nn ":CocConfig<CR>") "open coc config"]
         :r [(nn ":CocRestart<CR>") "restart language server"]
         :u [(nn ":CocUpdate<CR>") "update coc"]
