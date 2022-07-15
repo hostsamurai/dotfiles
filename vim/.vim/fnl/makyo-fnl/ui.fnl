@@ -20,7 +20,7 @@
 
     (if (= (nvim.fn.system  "uname") "Linux")
       (set o.guifont "FiraCode Nerd Font,Noto Color Emoji:h11")
-      (set o.guifont "FiraCode Nerd Font:h11")))) 
+      (set o.guifont "FiraCode Nerd Font:h13")))) 
 
 (defn init []
   "Initialize GUI settings"
