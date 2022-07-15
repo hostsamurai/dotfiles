@@ -6,10 +6,11 @@
             fns makyo-fnl.functions
             mappings makyo-fnl.mappings}})
 
-(do 
-  (providers.init)
-  (plugins.init)
-  (ux.init)
-  (ui.init)
-  (fns.init)
-  (mappings.init))
+(defn init [] 
+  (do 
+      (providers.init)
+      (plugins.init)
+      (ux.init)
+      (ui.init)
+      (fns.init)
+      (mappings.init)))

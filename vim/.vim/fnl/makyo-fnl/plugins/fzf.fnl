@@ -1,6 +1,7 @@
 (module makyo-fnl.plugins.fzf
   {require {a aniseed.core
-            nvim aniseed.nvim}})
+            nvim aniseed.nvim
+            : vimp}})
 
 (set nvim.env.FZF_DEFAULT_OPTS "--layout=reverse --info=inline")
 (set nvim.env.FZF_DEFAULT_COMMAND "rg --hidden --iglob '!.git' --files ")
