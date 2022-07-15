@@ -3,25 +3,21 @@
 ## Overview 
 
 Makyo is a Vim configuration and keymapping framework. The brunt of Makyo is
-written in [Fennel][Fennel] with a dash of Lua and [Teal][Teal]. Lua is used to
-initialize all plugins, especially [aniseed][aniseed], which is what makes it
-possible to run Fennel. Teal is used for registering the key maps.
+written in [Fennel][Fennel] with a dash of [Teal][Teal]. The Fennel piece is
+powered by [aniseed][aniseed], which is what makes it possible to have our
+configuration written entirely in a LISP. Teal is used for registering the key
+maps.
 
 ## Configuration
 
 The entire initialization process starts with the
-[`init.lua`](../../lua/init.lua) file, which is responsible for importing
-pre-init and post-init hooks. Most importantly, it kicks off [Packer][Packer]'s
-plugin initialization process. This process is asynchronous. When Packer notices
-the [aniseed][aniseed] dependency, it loads it and `aniseed` stars. We set a
-flag to denote that `aniseed` is ready before continuing with the Makyo
-[Fennel][Fennel] source.
-
-The Fennel source sets various user experience settings and configures the
-keymaps. The registration of the keymaps happens in the
-[translator](../../lua/makyo/plugins/translator.tl). The translator's job is to
-not only register them but also provide a description, if one is provided, for
-the [which_key][which_key] plugin that supplies visual menus based on them.
+[`init.fnl`](../../lua/init.lua) file. Most importantly, it kicks off
+[Packer][Packer]'s plugin initialization process. The Fennel source sets various
+user experience settings and configures the keymaps. The registration of the
+keymaps happens in the [translator](../../lua/makyo/plugins/translator.tl). The
+translator's job is to not only register them but also provide a description, if
+one is provided, for the [which_key][which_key] plugin that supplies visual
+menus based on them.
 
 ## Plugins
 
