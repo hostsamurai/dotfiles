@@ -1,7 +1,8 @@
 ;;;; Configures the UI
 (module makyo-fnl.ui
   {require {a aniseed.core
-            nvim aniseed.nvim}})
+            nvim aniseed.nvim
+            {: trimr} aniseed.string}})
 
 (defn- setup []
   "Assigns various GUI options"
@@ -18,7 +19,9 @@
       (nvim.command "set guioptions-=l") ;; same as above - never present
       (nvim.command "set guioptions-=R"));; no right scrollbar 
 
-    (if (= (nvim.fn.system  "uname") "Linux")
+    (if (->> (nvim.fn.system  "uname")
+             trimr 
+             (= "Linux"))
       (set o.guifont "FiraCode Nerd Font,Noto Color Emoji:h11")
       (set o.guifont "FiraCode Nerd Font:h13")))) 
 
