@@ -69,6 +69,6 @@
 
 (defn init []
   (do
-    (nvim.print "[makyo] 🔨 Applying UX settings...")
+    (a.println "[makyo] 🔨 Applying UX settings...")
     (setup_basic_options)
-    (nvim.print "[makyo] 🔨 Done.")))
+    (a.println "[makyo] 🔨 Done.")))
