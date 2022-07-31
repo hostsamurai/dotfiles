@@ -276,7 +276,6 @@
       :b [(nn ":execute 'normal ' . maplocalleader . 'eb'<CR>") "eval buffer"]
       :e {
         :name "+eval"
-        :c  [(vn ":execute 'normal gv' . maplocalleader . 'Ea('<CR>") "eval form"]
         :E  [(vn ":execute 'normal gv' . maplocalleader . 'E'<CR>")   "eval selection"]
         :w  [(vn ":execute 'normal gv' . maplocalleader . 'Eiw'<CR>") "eval word"]
         :e  [(nn ":execute 'normal ' . maplocalleader . 'ee'<CR>")    "inner form"]
@@ -292,7 +291,7 @@
     }
     :m {
       :name "+markdown"
-      :p [(nn ":MarkdownPreview<CR>") "preview"]    
+      :p [(nn ":MarkdownPreview<CR>") "preview"]
     }
     :n {
       :name "+nodejs"
