@@ -28,7 +28,7 @@
 (defn init []
   "Initialize GUI settings"
   (do 
-    (nvim.print "[makyo] 📺 Applying UI settings...")
+    (a.println "[makyo] 📺 Applying UI settings...")
     (setup)
-    (nvim.print "[makyo] 📺 Done.")))
+    (a.println "[makyo] 📺 Done.")))
 

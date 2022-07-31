@@ -6,7 +6,7 @@
 
 (defn- use [plugin opts]
   "Gets around Fennel's limitation of being unable to mix associative
-  and sequential tables by associating the first index of the table to 
+  and sequential tables by associating the first index of the table to
   the name of the plugin that we're trying to use."
   (a.assoc opts 1 plugin))
 
@@ -69,8 +69,8 @@
                     (set vim.g.ale_disable_lsp 1)
                     (set vim.g.ale_set_balloons 1)
                     (set vim.g.ale_fix_on_save 1)
-                    (set vim.g.ale_fixers {"*"  ["remove_trailing_lines" "trim_whitespace"]
-                                           :javascript ["prettier" "eslint"]})))})
+                    (set vim.g.ale_fixers {:javascript ["prettier" "eslint"]
+                                           :* ["remove_trailing_lines" "trim_whitespace"]})))})
 
    (use "editorconfig/editorconfig-vim"
         {:setup (fn []
@@ -117,7 +117,7 @@
    (use "losingkeys/vim-niji"
         {:ft  ["lisp" "scheme" "clojure" "fennel" "janet"]
          :setup (fn []
-                  (set vim.g.niji_matching_filetypes  ["lisp" "scheme" "clojure" "fennel" "janet"]))}) 
+                  (set vim.g.niji_matching_filetypes  ["lisp" "scheme" "clojure" "fennel" "janet"]))})
 
    (use "AndrewRadev/switch.vim"
         {:cmd "Switch"
