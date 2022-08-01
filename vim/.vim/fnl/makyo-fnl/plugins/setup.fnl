@@ -215,7 +215,9 @@
 
    (use "voldikss/vim-floaterm"
         {:setup (fn []
-                  (set vim.g.floaterm_rootmarkers [".git" ".gitignore"]))})])
+                  (set vim.g.floaterm_rootmarkers [".git" ".gitignore"]))})]
+
+  (use "lbrayner/vim-rzip" {:opt true}))
 
 (def- version-control-plugins
   [
