@@ -4,27 +4,36 @@
             nvim aniseed.nvim
             which_key_config makyo-fnl.plugins.which-key}})
 
+(local keymap nvim.set_keymap)
+(local svar nvim.set_var)
+
 (defn- setup_better_regexes []
-  (let [keymap vim.api.nvim_set_keymap]
+  (do
     (keymap "n" "/" "/\\v" {:noremap true})
     (keymap "n" "?" "?\\v" {:noremap true})
-    
+
     (keymap "c" "s/" "s/\\v" {:noremap true})
     (keymap "c" "%s/" "%s/\\v" {:noremap true})
-    
+
     (keymap "v" "/" "/\\v" {:noremap true})
     (keymap "v" "/" "/\\v" {:noremap true})))
 
 (defn- setup_normal_mode_mappings []
-  (let [keymap vim.api.nvim_set_keymap]
+  (do
     ;; Easier window navigation
     (keymap "n" "<C-h>" "<C-w>h" {:noremap true})
     (keymap "n" "<C-j>" "<C-w>j" {:noremap true})
     (keymap "n" "<C-k>" "<C-w>k" {:noremap true})
-    (keymap "n" "<C-l>" "<C-w>l" {:noremap true})))
+    (keymap "n" "<C-l>" "<C-w>l" {:noremap true})
+
+    ;; Easier navigation on line-wrapped text
+    (keymap "n" "j" "gj" {:noremap true})
+    (keymap "n" "k" "gk" {:noremap true})
+    (keymap "n" "gj" "j" {:noremap true})
+    (keymap "n" "gk" "k" {:noremap true})))
 
 (defn- setup_command_mode_mappings []
-  (let [keymap vim.api.nvim_set_keymap]
+  (do
     ;; Heretical mappings
     ;; Ctrl + a --> Jump to beginning of line
     ;; Ctrl + b --> Back one character
@@ -42,7 +51,7 @@
     (keymap "c" "<C-P>" "<Up>"    {:noremap true})))
 
 (defn- setup_insert_mode_mappings []
-  (let [keymap vim.api.nvim_set_keymap]
+  (do
     (keymap "i" "<C-l>" "<Plug>(coc-snippets-expand)" {})
     (keymap "i" "<C-j>" "<Plug>(coc-snippets-expand-jump)" {})
 
@@ -54,7 +63,7 @@
     (keymap "i" "<C-d>" "<C-[>ld$A" {:noremap true})))
 
 (defn- setup_visual_mode_mappings []
-  (let [keymap vim.api.nvim_set_keymap]
+  (do
     (keymap "v" "<enter>" "<Plug>(EasyAlign)" {})
     (keymap "v" "<C-j>" "<Plug>(coc-snippets-select)" {})
 
@@ -66,7 +75,7 @@
     (keymap "v" "<leader>mlw" ":execute 'normal gv' . maplocalleader . 'Eiw'<CR>" {:noremap true})))
 
 (defn- setup_terminal_mode_mappings []
-  (let [keymap vim.api.nvim_set_keymap]
+  (do
     ;; Navigate windows from the terminal using Alt + h/j/k/l
     (keymap "t" "<A-h>" "<C-><C-N><C-w>h" {:noremap true})
     (keymap "t" "<A-j>" "<C-><C-N><C-w>j" {:noremap true})
@@ -82,27 +91,20 @@
     (keymap "t" "<C-v><Esc>" "<Esc>"       {:noremap true})))
 
 (defn- setup_mappings []
-  (let [keymap vim.api.nvim_set_keymap]
+  (do
     (keymap "" ";" "<Plug>(clever-f-repeat-forward)" {})
     (keymap "" "," "<Plug>(clever-f-repeat-back)" {})
 
     (keymap "" "<Leader><TAB>" ":b#<cr>" {})
 
-    ;; Easier navigation on line-wrapped text
-    (keymap "" "j" "gj" {:noremap true})
-    (keymap "" "k" "gk" {:noremap true})
-    (keymap "" "gj" "j" {:noremap true})
-    (keymap "" "gk" "k" {:noremap true})
-
     (keymap "" "tc" ":tabnew<CR>" {:noremap true})))
 
 ;; NOTE: Resetting these mappings currently does not work.
 ;; Mappings need to be unbound before being able to set again.
-;; It would be ideal to have a diff of what changed, so as to 
+;; It would be ideal to have a diff of what changed, so as to
 ;; only reset the affected mappings.
 (defn- setup_which_key_mappings []
-  (let [svar vim.api.nvim_set_var
-        keymap vim.api.nvim_set_keymap]
+  (do
     (svar "mapleader" " ")
     (svar "maplocalleader" ",")
     (svar "which_key_map" (which_key_config.setup))
@@ -111,7 +113,7 @@
     (keymap "v" "<leader>" ":<c-u>WhichKeyVisual '<Space>'<cr>" {:noremap true})))
 
 (defn init []
-  (do 
+  (do
     (a.println "[makyo] 🗝 Applying custom mappings...")
 
     (setup_better_regexes)
