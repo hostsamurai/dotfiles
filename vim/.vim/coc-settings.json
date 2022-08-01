@@ -3,6 +3,8 @@
   "coc.preferences.hoverTarget": "float",
   "coc.preferences.extensionUpdateCheck": "weekly",
   "coc.preferences.formatOnSaveFiletypes": [
+    "typescript",
+    "typescriptreact",
     "css",
     "graphql",
     "html"
@@ -21,6 +23,9 @@
     "~/.vim/snippets",
     "~/.config/coc/ultisnips"
   ],
+
+  "javascript.suggest.includeCompletionsForImportStatements": true,
+  "typescript.suggest.includeCompletionsForImportStatements": true,
 
   // LSP
   "languageserver": {
