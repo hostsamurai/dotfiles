@@ -1,1 +1,1 @@
-/home/lou//.vimrc
+../.vimrc
