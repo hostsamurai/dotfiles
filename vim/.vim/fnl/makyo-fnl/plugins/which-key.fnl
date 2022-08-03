@@ -150,7 +150,7 @@
     :l [(nn ":FzfLines<space>")  "search lines"]
     :L [(nn ":FzfBLines<space>") "search lines in buffers"]
     :m [(nn ":FzfMarks<CR>")     "marks"]
-    :r [(nn ":FzfRg<space>")     "rg search"]
+    :r [(nn ":FzfRRG<space>")     "rg search"]
     :t [(nn ":FzfTags<space>")   "tags"]
     :T [(nn ":FzfBTags<space>")  "buffer tags"]
     :w [(nn ":FzfWindows<CR>")   "windows"]
@@ -163,7 +163,7 @@
       :name "+branch"
       :l [(nn ":Gina branch<CR>")                  "list branches"]
       :i [(nn ":Gina blame<CR>")                   "blame inline"]
-      :I [(nn ":BlameToggle<CR>")                  "blame inline (blamer.nvim)"]
+      :I [(nn ":BlamerToggle<CR>")                 "blame inline (blamer.nvim)"]
       :m [(nn ":Gina browse --exact :<CR>")        "open from master"]
       :r [(nn ":Gina browse --scheme=blame :<CR>") "blame in browser"]
     }
