@@ -2,409 +2,400 @@
 
 (module makyo-fnl.plugins.which-key
   {require {a aniseed.core
-            nvim aniseed.nvim
-            : vimp
-            translator makyo.plugins.translator}})
+            nvim aniseed.nvim}})
 
-;; Convinience function for creating custom mappings
-(defn- modemap [mode noremap cmd]
-  (let [m (if (= noremap true)
-               "noremap"
-               "map")
-        opts (if (= noremap true)
-               [:silent]
-               [])
-        fullmode (.. mode m)
-        modefn (a.get vimp fullmode)]
-    (fn [chord]
-      (modefn opts (.. "<leader>" chord) cmd))))
+(def normal-mode-layers
+  {
+   ;; Applications ------------------------
+   :a {
+       :name "+applications"
+       :c [":Calc"        "calculator"]
+       :u [":MundoToggle" "undo tree"]
+       :l {
+           :name "+lang"
+           :a {
+               :name "+ale"
+               :n [":ALENextWrap"     "next"]
+               :p [":ALEPreviousWrap" "previous"]
+               }
+           :c {
+               :name "+coc"
+               :a ["<plug>(coc-codeaction)"  "execute action"]
+               :f ["<plug>(coc-fix-current)" "auto fix"]
+               :c [":CocConfig"              "open coc config"]
+               :r [":CocRestart"             "restart language server"]
+               :u [":CocUpdate"              "update coc"]
+               }
+           }
+       :s {
+           :name "+session"
+           :o [":SLoad"        "open"]
+           :O [":SLoad!"       "open last session"]
+           :s [":SSave<space>" "save new"]
+           :u [":SSave!"       "save current"]
+           }
+       :S {
+           :name "+scratchpad"
+           :c [":Codi!"      "close"]
+           :o [":Codi "      "open (filetype)"]
+           :t [":Codi"       "toggle"]
+           :u [":CodiUpdate" "update"]
+           }
+       :t {
+           :name "+terminal"
+           :c [":FloatermNew<space>"  "run command"]
+           :h [":FloatermHide"        "hide current"]
+           :k [":FloatermKill"        "kill"]
+           :K [":FloatermKill<space>" "kill named"]
+           :n [":FloatermNext"        "next instance"]
+           :N [":FloatermNew --name=" "new named terminal"]
+           :p [":FloatermPrev"        "previous instance"]
+           :t [":FloatermNew"         "new terminal"]
+           :T {
+               :name "+toggles"
+               :n [":FloatermToggle "    "toggle named"]
+               :t [":FloatermToggle" "toggle last"]
+               }
+           }
+       }
 
-(def- n  (partial modemap "n" false))
-(def- nn (partial modemap "n" true))
-(def- vn (partial modemap "v" true))
+   ;; Buffers -----------------------------
+   :b {
+       :name "+buffer"
+       :b          [":<C-u>Denite buffer"  "find buffer"]
+       :d          [":bd"                  "delete buffer"]
+       :D          [":bd!"                 "force delete buffer"]
+       :h          [":tabnew \\| Startify" "home buffer"]
+       :m          [":BufExplorer"         "manage buffers"]
+       :p          [":bprevious"           "previous buffer"]
+       :s          [":Scratch"             "scratch buffer"]
+       ;; Maps to <TAB>. See :help keycodes
+       "<C-I>"     [":b#"                  "previous buffer"]
+       }
 
-(def- layers {
-  ;; Applications ------------------------
-  :a {
-    :name "+applications"
-    :c [(nn ":Calc<CR>")        "calculator"]
-    :u [(nn ":MundoToggle<CR>") "undo tree"]
-    :l {
-      :name "+lang"
-      :a {
-        :name "+ale"
-        :n [(nn ":ALENextWrap<CR>") "next"]
-        :p [(nn ":ALEPreviousWrap<CR>") "previous"]
-      }
-      :c {
-        :name "+coc"
-        :a [(n "<plug>(coc-codeaction)") "execute action"]
-        :f [(n "<plug>(coc-fix-current)") "auto fix"]
-        :c [(nn ":CocConfig<CR>") "open coc config"]
-        :r [(nn ":CocRestart<CR>") "restart language server"]
-        :u [(nn ":CocUpdate<CR>") "update coc"]
-      }
-    }
-    :s {
-      :name "+session"
-      :o [(nn ":SLoad<CR>")          "open"]
-      :O [(nn ":SLoad!<CR>")         "open last session"]
-      :s [(nn ":SSave<space>")       "save new"]
-      :u [(nn ":SSave!<CR><CR><CR>") "save current"]
-    }
-    :S {
-      :name "+scratchpad"
-      :c [(nn ":Codi!<CR>")      "close"]
-      :o [(nn ":Codi ")          "open (filetype)"]
-      :t [(nn ":Codi<CR>")       "toggle"]
-      :u [(nn ":CodiUpdate<CR>") "update"]
-    }
-    :t {
-      :name "+terminal"
-      :c [(nn ":FloatermNew<space>")  "run command"]
-      :h [(nn ":FloatermHide<CR>")    "hide current"]
-      :k [(nn ":FloatermKill<CR>")    "kill"]
-      :K [(nn ":FloatermKill<space>") "kill named"]
-      :n [(nn ":FloatermNext<CR>")    "next instance"]
-      :N [(nn ":FloatermNew --name=") "new named terminal"]
-      :p [(nn ":FloatermPrev<CR>")    "previous instance"]
-      :t [(nn ":FloatermNew<CR>")     "new terminal"]
-      :T {
-        :name "+toggles"
-        :n [(nn ":FloatermToggle ")    "toggle named"]
-        :t [(nn ":FloatermToggle<CR>") "toggle last"]
-      }
-    }
-  }
+   ;; Comment/Compile ---------------------
+   :c {
+       :name "+comments/compile"
+       :c ["<plug>NERDCommenterToggle"    "comment one line"]
+       :s ["<plug>NERDCommenterSexy"      "comment sexily"]
+       :u ["<plug>NERDCommenterUncomment" "uncomment"]
+       }
 
-  ;; Buffers -----------------------------
-  :b {
-    :name "+buffer"
-    :b          [(nn ":<C-u>Denite buffer<CR>")  "find buffer"]
-    :d          [(nn ":bd<CR>")                  "delete buffer"]
-    :D          [(nn ":bd!<CR>")                 "force delete buffer"]
-    :h          [(nn ":tabnew \\| Startify<CR>") "home buffer"]
-    :m          [(nn ":BufExplorer<CR>")         "manage buffers"]
-    :p          [(nn ":bprevious<CR>")           "previous buffer"]
-    :s          [(nn ":Scratch<CR>")             "scratch buffer"]
-    "<TAB>"     [(nn ":b#<CR>")                  "previous buffer"]
-  }
+   ;; Files -------------------------------
+   :f {
+       :name "+files"
+       :c [":let @+ = expand('%')"      "copy file path"]
+       :f [":DeniteProjectDir file/rec" "find file"]
+       :g ["execute 'normal <C-g>'"     "display relative path"]
+       :r [":Denite file_mru"           "recent files"]
+       :n {
+           :name "+navigate"
+           :o [":Dirvish"          "open cwd"]
+           :O [":Dirvish %"        "open dir of current file"]
+           :v [":vsplit | Dirvish" "open cwd in vertical split"]
+           }
+       :v {
+           :name "+vim"
+           :i [":tabnew ~/.vim/fnl/makyo-fnl/ui.fnl"                "open UI config"]
+           :k [":tabnew ~/.vim/fnl/makyo-fnl/mappings.fnl"          "open keymap config"]
+           :p [":tabnew ~/.vim/lua/makyo/plugins/setup.lua"         "open plugin config"]
+           :t [":tabnew $MYVIMRC"                                   "edit vimrc"]
+           :u [":tabnew ~/.vim/fnl/makyo-fnl/ux.fnl"                "open UX config"]
+           :w [":tabnew ~/.vim/fnl/makyo-fnl/plugins/which-key.fnl" "open which_key config"]
+           }
+       :z {
+           :name "+zsh"
+           :c [":tabnew ~/.zshrc" "open .zshrc"]
+           }
+       }
 
-  ;; Comment/Compile ---------------------
-  :c {
-    :name "+comments/compile"
-    :c [(n "<plug>NERDCommenterToggle")    "comment one line"]
-    :s [(n "<plug>NERDCommenterSexy")      "comment sexily"]
-    :u [(n "<plug>NERDCommenterUncomment") "uncomment"]
-    :v {
-      :name "+visual"
-      :c [(vn "<plug>NERDCommenterToggle")    "comment one line"]
-      :s [(vn "<plug>NERDCommenterSexy")      "comment sexily"]
-      :u [(vn "<plug>NERDCommenterUncomment") "uncomment"]
-    }
-  }
+   ;; FZF ---------------------------------
+   :F {
+       :name "+FZF"
+       :b [":FzfBuffers"  "buffers"]
+       :B [":FzfBCommits" "git buffer commits"]
+       :c [":FzfColors"   "color schemes"]
+       :f [":FzfFiles"    "files"]
+       :g [":FzfGFiles"   "files in vcs"]
+       :G [":FzfGFiles?"  "git status files"]
+       :h {
+           :name "+history"
+           :C [":FzfHistory:" "command history"]
+           :h [":FzfHistory"  "mru"]
+           :s [":FzfHistory/" "search history"]
+           }
+       :l [":FzfLines<space>"  "search lines"]
+       :L [":FzfBLines<space>" "search lines in buffers"]
+       :m [":FzfMarks"         "marks"]
+       :r [":FzfRg<space>"     "rg search"]
+       :t [":FzfTags<space>"   "tags"]
+       :T [":FzfBTags<space>"  "buffer tags"]
+       :w [":FzfWindows"       "windows"]
+       }
 
-  ;; Files -------------------------------
-  :f {
-    :name "+files"
-    :c [(nn ":let @+ = expand('%')<CR>")      "copy file path"]
-    :f [(nn ":DeniteProjectDir file/rec<CR>") "find file"]
-    :g [(nn "execute 'normal <C-g>'")         "display relative path"]
-    :r [(nn ":Denite file_mru<CR>")           "recent files"]
-    :n {
-      :name "+navigate"
-      :o [(nn ":Dirvish<CR>")          "open cwd"]
-      :O [(nn ":Dirvish %<CR>")        "open dir of current file"]
-      :v [(nn ":vsplit | Dirvish<CR>") "open cwd in vertical split"]
-    }
-    :v {
-      :name "+vim"
-      :i [(nn ":tabnew ~/.vim/fnl/makyo-fnl/ui.fnl<CR>")                "open UI config"]
-      :k [(nn ":tabnew ~/.vim/fnl/makyo-fnl/mappings.fnl<CR>")          "open keymap config"]
-      :p [(nn ":tabnew ~/.vim/lua/makyo/plugins/setup.lua<CR>")         "open plugin config"]
-      :t [(nn ":tabnew $MYVIMRC<CR>")                                   "edit vimrc"]
-      :u [(nn ":tabnew ~/.vim/fnl/makyo-fnl/ux.fnl<CR>")                "open UX config"]
-      :w [(nn ":tabnew ~/.vim/fnl/makyo-fnl/plugins/which-key.fnl<CR>") "open which_key config"]
-    }
-    :z {
-      :name "+zsh"
-      :c [(nn ":tabnew ~/.zshrc<CR>") "open .zshrc"]
-    }
-  }
+   ;; Version Control ---------------------
+   :g {
+       :name "+version-control"
+       :b {
+           :name "+branch"
+           :l [":Gina branch"                  "list branches"]
+           :i [":Gina blame"                   "blame inline"]
+           :I [":BlameToggle"                  "blame inline (blamer.nvim)"]
+           :m [":Gina browse --exact :"        "open from master"]
+           :r [":Gina browse --scheme=blame :" "blame in browser"]
+           }
+       :c {
+           :name "+commit"
+           :a [":Gina commit --amend"           "amend"]
+           :c [":Gina commit"                   "commit"]
+           :m [":Gina commit -m "               "simple commit"]
+           :n [":Gina commit --amend --no-edit" "amend no-edit"]
+           }
+       :d {
+           :name "+diff"
+           :d [":Gina compare"           "2-buffer compare"]
+           :h [":SignifyToggleHighlight" "toggle hightlight"]
+           :i [":SignifyHunkDiff"        "inline diff"]
+           :s [":Gina diff"              "unified diff"]
+           }
+       :h {
+           :name "+hunks"
+           :n ["<Plug>(signify-next-hunk)" "next"]
+           :p ["<Plug>(signify-prev-hunk)" "prev"]
+           :u [":SignifyHunkUndo"     "undo changes"]
+           }
+       :l {
+           :name "+logs"
+           :c ["<Plug>(git-messenger)"            "last commit message"]
+           :l [":Gina log"                        "log"]
+           :p ["<Plug>(git-messenger-into-popup)" "open popup"]
+           }
+       :m [":MergetoolToggle" "mergetool"]
+       :p {
+           :name "+push"
+           :p [":Gina push" "push"]
+           :f [":Gina push --force" "force push"]
+           }
+       :s [":Gina status"        "status"]
+       :S [":tabnew:Gina status" "status in new tab"]
+       :z {
+           :name "+stash"
+           :b [":Gina stash"       "stash buffer"]
+           :s [":Gina stash show " "show"]
+           }
+       }
 
-  ;; FZF ---------------------------------
-  :F {
-    :name "+FZF"
-    :b [(nn ":FzfBuffers<CR>")  "buffers"]
-    :B [(nn ":FzfBCommits<CR>") "git buffer commits"]
-    :c [(nn ":FzfColors<CR>")   "color schemes"]
-    :f [(nn ":FzfFiles<CR>")    "files"]
-    :g [(nn ":FzfGFiles<CR>")   "files in vcs"]
-    :G [(nn ":FzfGFiles?<CR>")  "git status files"]
-    :h {
-      :name "+history"
-      :C [(nn ":FzfHistory:<CR>") "command history"]
-      :h [(nn ":FzfHistory<CR>")  "mru"]
-      :s [(nn ":FzfHistory/<CR>") "search history"]
-    }
-    :l [(nn ":FzfLines<space>")  "search lines"]
-    :L [(nn ":FzfBLines<space>") "search lines in buffers"]
-    :m [(nn ":FzfMarks<CR>")     "marks"]
-    :r [(nn ":FzfRRG<space>")     "rg search"]
-    :t [(nn ":FzfTags<space>")   "tags"]
-    :T [(nn ":FzfBTags<space>")  "buffer tags"]
-    :w [(nn ":FzfWindows<CR>")   "windows"]
-  }
+   ;; Insertion ---------------------------
+   :i {
+       :name "+insertion"
+       :s {
+           :name "+snippets"
+           :c [":CocCommand snippets.openSnippetFiles" "open snippets file"]
+           :e [":CocCommand snippets.editSnippets"     "edit snippets"]
+           :l [":CocList snippets"                     "list snippets"]
+           }
+       }
 
-  ;; Version Control ---------------------
-  :g {
-    :name "+version-control"
-    :b {
-      :name "+branch"
-      :l [(nn ":Gina branch<CR>")                  "list branches"]
-      :i [(nn ":Gina blame<CR>")                   "blame inline"]
-      :I [(nn ":BlamerToggle<CR>")                 "blame inline (blamer.nvim)"]
-      :m [(nn ":Gina browse --exact :<CR>")        "open from master"]
-      :r [(nn ":Gina browse --scheme=blame :<CR>") "blame in browser"]
-    }
-    :c {
-      :name "+commit"
-      :a [(nn ":Gina commit --amend<CR>")           "amend"]
-      :c [(nn ":Gina commit<CR>")                   "commit"]
-      :m [(nn ":Gina commit -m ")                   "simple commit"]
-      :n [(nn ":Gina commit --amend --no-edit<CR>") "amend no-edit"]
-    }
-    :d {
-      :name "+diff"
-      :d [(nn ":Gina compare<CR>")           "2-buffer compare"]
-      :h [(nn ":SignifyToggleHighlight<CR>") "toggle hightlight"]
-      :i [(nn ":SignifyHunkDiff<CR>")        "inline diff"]
-      :s [(nn ":Gina diff<CR>")              "unified diff"]
-    }
-    :h {
-      :name "+hunks"
-      :n [(n "<Plug>(signify-next-hunk)") "next"]
-      :p [(n "<Plug>(signify-prev-hunk)") "prev"]
-      :u [(nn ":SignifyHunkUndo<CR>")     "undo changes"]
-    }
-    :l {
-      :name "+logs"
-      :c [(n  "<Plug>(git-messenger)")            "last commit message"]
-      :l [(nn ":Gina log<CR>")                    "log"]
-      :p [(n  "<Plug>(git-messenger-into-popup)") "open popup"]
-    }
-    :m [(nn ":MergetoolToggle<CR>") "mergetool"]
-    :p {
-      :name "+push"
-      :p [(nn ":Gina push<CR>") "push"]
-      :f [(nn ":Gina push --force<CR>") "force push"]
-    }
-    :s [(nn ":Gina status<CR>") "status"]
-    :S [(nn ":tabnew<CR>:Gina status<CR>") "status in new tab"]
-    :z {
-      :name "+stash"
-      :b [(nn ":Gina stash<CR>")   "stash buffer"]
-      :s [(nn ":Gina stash show ") "show"]
-    }
-  }
+     ;; Jumps/Folds -------------------------
+     :j {
+         :name "+jumps/folds"
+         :a {
+             :name "+ale"
+             :d ["<Plug>(ale_go_to_definition)"      "definition"]
+             :r ["<Plug>(ale_find_references)"       "references"]
+             :t ["<Plug>(ale_go_to_type_definition)" "type definition"]
+             :R [":ALERename"                        "rename symbol"]
+             }
+         :c {
+             :name "+coc"
+             :d ["<Plug>(coc-definition)"      "definition"]
+             :D ["<Plug>(coc-declaration)"     "declaration"]
+             :i ["<Plug>(coc-implementation)"  "implementation"]
+             :o ["<Plug>(coc-openlink)"        "open link"]
+             :r ["<Plug>(coc-references)"      "references"]
+             :R ["<Plug>(coc-rename)"          "rename symbol"]
+             :t ["<Plug>(coc-type-definition)" "type definition"]
+             :e {
+                 :name "+errors/diagnostics"
+                 :n ["<Plug>(coc-diagnostic-next)"       "next diagnostic"]
+                 :N ["<Plug>(coc-diagnostic-next-error)" "next error"]
+                 :p ["<Plug>(coc-diagnostic-prev)"       "prev diagnostic"]
+                 :P ["<Plug>(coc-diagnostic-prev-error)" "prev error"]
+                 }
+             }
+         :j ["<Plug>(easymotion-s)" "easymotion"]
+         :e {
+             :name "+errors"
+             :f ["<Plug>(ale_fix)"       "fix"]
+             :n ["<Plug>(ale_next_wrap)" "next"]
+             :p ["<Plug>(ale_prev_wrap)" "previous"]
+             }
+         :z {
+             :name "+folds"
+             "0" [":set foldlevel=0" "level 0"]
+             "1" [":set foldlevel=1" "level 1"]
+             "2" [":set foldlevel=2" "level 2"]
+             "3" [":set foldlevel=3" "level 3"]
+             "4" [":set foldlevel=4" "level 4"]
+             "5" [":set foldlevel=5" "level 5"]
+             "6" [":set foldlevel=6" "level 6"]
+             "7" [":set foldlevel=7" "level 7"]
+             "8" [":set foldlevel=8" "level 8"]
+             "9" [":set foldlevel=9" "level 9"]
+             }
+         }
 
-  ;; Insertion ---------------------------
-  :i {
-    :name "+insertion"
-    :s {
-      :name "+snippets"
-      :c [(nn ":CocCommand snippets.openSnippetFiles<CR>") "open snippets file"]
-      :e [(nn ":CocCommand snippets.editSnippets<CR>")     "edit snippets"]
-      :l [(nn ":CocList snippets<CR>")                     "list snippets"]
-    }
-  }
+   ;; Mode --------------------------------
+   :m {
+       :name "+modes"
+       :l {
+           :name "+lisp"
+           :b [":execute 'normal ' . maplocalleader . 'eb'" "eval buffer"]
+           :e {
+               :name "+eval"
+               :e  [":execute 'normal ' . maplocalleader . 'ee'"    "inner form"]
+               :r  [":execute 'normal ' . maplocalleader . 'er'"    "outer form"]
+               "!" [":execute 'normal ' . maplocalleader . 'e!'"    "replace with result"]
+               }
+           :l {
+               :name "+log-buffer"
+               :c [":execute 'normal ' . maplocalleader . 'lq'" "close"]
+               :s [":execute 'normal ' . maplocalleader . 'ls'" "open horizontally"]
+               :v [":execute 'normal ' . maplocalleader . 'lv'" "open vertically"]
+               }
+           }
+       :m {
+           :name "+markdown"
+           :p [":MarkdownPreview" "preview"]
+           }
+       :n {
+           :name "+nodejs"
+           :r [":FloatermNew node" "repl"]
+           }
+       }
 
-  ;; Jumps/Folds -------------------------
-  :j {
-    :name "+jumps/folds"
-    :a {
-      :name "+ale"
-      :d [(n "<Plug>(ale_go_to_definition)")      "definition"]
-      :r [(n "<Plug>(ale_find_references)")       "references"]
-      :t [(n "<Plug>(ale_go_to_type_definition)") "type definition"]
-      :R [(n ":ALERename<CR>")                    "rename symbol"]
-    }
-    :c {
-      :name "+coc"
-      :d [(n "<Plug>(coc-definition)")      "definition"]
-      :D [(n "<Plug>(coc-declaration)")     "declaration"]
-      :i [(n "<Plug>(coc-implementation)")  "implementation"]
-      :o [(n "<Plug>(coc-openlink)")        "open link"]
-      :r [(n "<Plug>(coc-references)")      "references"]
-      :R [(n "<Plug>(coc-rename)")          "rename symbol"]
-      :t [(n "<Plug>(coc-type-definition)") "type definition"]
-      :e {
-        :name "+errors/diagnostics"
-        :n [(n "<Plug>(coc-diagnostic-next)")       "next diagnostic"]
-        :N [(n "<Plug>(coc-diagnostic-next-error)") "next error"]
-        :p [(n "<Plug>(coc-diagnostic-prev)")       "prev diagnostic"]
-        :P [(n "<Plug>(coc-diagnostic-prev-error)") "prev error"]
-      }
-    }
-    :j [(n "<Plug>(easymotion-s)") "easymotion"]
-    :e {
-      :name "+errors"
-      :f [(n "<Plug>(ale_fix)")       "fix"]
-      :n [(n "<Plug>(ale_next_wrap)") "next"]
-      :p [(n "<Plug>(ale_prev_wrap)") "previous"]
-    }
-    :z {
-      :name "+folds"
-      "0" [(n ":set foldlevel=0") "level 0"]
-      "1" [(n ":set foldlevel=1") "level 1"]
-      "2" [(n ":set foldlevel=2") "level 2"]
-      "3" [(n ":set foldlevel=3") "level 3"]
-      "4" [(n ":set foldlevel=4") "level 4"]
-      "5" [(n ":set foldlevel=5") "level 5"]
-      "6" [(n ":set foldlevel=6") "level 6"]
-      "7" [(n ":set foldlevel=7") "level 7"]
-      "8" [(n ":set foldlevel=8") "level 8"]
-      "9" [(n ":set foldlevel=9") "level 9"]
-    }
-  }
+   ;; Project -----------------------------
+   :p {
+       :name "+project"
+       :b [":DeniteProjectDir file/rec" "find project file"]
+       :c {
+           :name "+checks"
+           :t {
+               :name "+tests"
+               :n [":TestNearest" "nearest"]
+               :f [":TestFile"    "file"]
+               :s [":TestSuite"   "suite"]
+               :v [":TestVisit"   "jump to test file"]
+               }
+           }
+       :t {
+           :name "+tags"
+           :c [":GenCtags" "generate ctags"]
+           :g [":GenGTAGS" "generate gtags"]
+           :v {
+               :name "+view"
+               :c [":Vista coc"     "coc"]
+               :C [":Vista ctags"   "ctags"]
+               :f [":Vista focus"   "focus"]
+               :F [":Vista vim_lsp" "lsp"]
+               :t [":Vista!!"       "toggle"]
+               }
+           }
+       }
 
-  ;; Mode --------------------------------
-  :m {
-    :name "+modes"
-    :l {
-      :name "+lisp"
-      :b [(nn ":execute 'normal ' . maplocalleader . 'eb'<CR>") "eval buffer"]
-      :e {
-        :name "+eval"
-        :E  [(vn ":execute 'normal gv' . maplocalleader . 'E'<CR>")   "eval selection"]
-        :w  [(vn ":execute 'normal gv' . maplocalleader . 'Eiw'<CR>") "eval word"]
-        :e  [(nn ":execute 'normal ' . maplocalleader . 'ee'<CR>")    "inner form"]
-        :r  [(nn ":execute 'normal ' . maplocalleader . 'er'<CR>")    "outer form"]
-        "!" [(nn ":execute 'normal ' . maplocalleader . 'e!'<CR>")    "replace with result"]
-      }
-      :l {
-        :name "+log-buffer"
-        :c [(nn ":execute 'normal ' . maplocalleader . 'lq'<CR>") "close"]
-        :s [(nn ":execute 'normal ' . maplocalleader . 'ls'<CR>") "open horizontally"]
-        :v [(nn ":execute 'normal ' . maplocalleader . 'lv'<CR>") "open vertically"]
-      }
-    }
-    :m {
-      :name "+markdown"
-      :p [(nn ":MarkdownPreview<CR>") "preview"]
-    }
-    :n {
-      :name "+nodejs"
-      :r [(nn ":FloatermNew node<CR>") "repl"]
-    }
-  }
+   ;; Plugins -----------------------------
+   :P {
+       :name "+plugins"
+       :c [":PackerCompile" "compile changes"]
+       :C [":PackerClean" "clean"]
+       :o [":tabnew ~/.vim/lua/makyo/plugins/setup.lua" "open config"]
+       :u [":PackerUpdate" "update"]
+       :w {
+           :name "+which-key"
+           :e [":tabnew ~/.vim/fnl/makyo-fnl/plugins/which-key.fnl" "edit mappings"]
+           }
+       }
 
-  ;; Project -----------------------------
-  :p {
-    :name "+project"
-    :b [(nn ":DeniteProjectDir file/rec<CR>") "find project file"]
-    :c {
-      :name "+checks"
-      :t {
-        :name "+tests"
-        :n [(nn ":TestNearest<CR>") "nearest"]
-        :f [(nn ":TestFile<CR>")    "file"]
-        :s [(nn ":TestSuite<CR>")   "suite"]
-        :v [(nn ":TestVisit<CR>")   "jump to test file"]
-      }
-    }
-    :t {
-      :name "+tags"
-      :c [(nn ":GenCtags<CR>") "generate ctags"]
-      :g [(nn ":GenGTAGS<CR>") "generate gtags"]
-      :v {
-        :name "+view"
-        :c [(nn ":Vista coc<CR>")     "coc"]
-        :C [(nn ":Vista ctags<CR>")   "ctags"]
-        :f [(nn ":Vista focus<CR>")   "focus"]
-        :F [(nn ":Vista vim_lsp<CR>") "lsp"]
-        :t [(nn ":Vista!!<CR>")       "toggle"]
-      }
-    }
-  }
+   ;; Search ------------------------------
+   :s {
+       :name "+search"
+       :c [":nohlsearch"                   "clear highlights"]
+       :f [":Farf"                         "search with Far"]
+       :g [":<C-u>Denite grep:. -no-empty" "search cwd"]
+       :u [":<C-u>DeniteCursorWord grep:." "word under cursor"]
+       :r {
+           :name "+ripgrep"
+           :g [":tabnew \\| :Rg -i" "rg"]
+           }
+       :s {
+           :name "+replace"
+           :s [":Farr" "replace"]
+           }
+       }
 
-  ;; Plugins -----------------------------
-  :P {
-    :name "+plugins"
-    :c [(nn ":PackerCompile<CR>") "compile changes"]
-    :C [(nn ":PackerClean<CR>") "clean"]
-    :o [(nn ":tabnew ~/.vim/lua/makyo/plugins/setup.lua<CR>") "open config"]
-    :u [(nn ":PackerUpdate<CR>") "update"]
-    :w {
-      :name "+which-key"
-      :e [(nn ":tabnew ~/.vim/fnl/makyo-fnl/plugins/which-key.fnl<CR>") "edit mappings"]
-    }
-  }
+   ;; Spelling ----------------------------
+   :S {
+       :name "+spelling"
+       :n [":set spell"   "enable spell checker"]
+       :f [":set nospell" "disable spell checker"]
+       }
 
-  ;; Search ------------------------------
-  :s {
-    :name "+search"
-    :c [(nn ":nohlsearch<CR>")               "clear highlights"]
-    :f [(nn ":Farf<CR>")                     "search with Far"]
-    :g [(nn ":<C-u>Denite grep:. -no-empty") "search cwd"]
-    :u [(nn ":<C-u>DeniteCursorWord grep:.") "word under cursor"]
-    :r {
-      :name "+ripgrep"
-      :g [(nn ":tabnew \\| :Rg -i") "rg"]
-    }
-    :s {
-      :name "+replace"
-      :s [(nn ":Farr<CR>") "replace"]
-    }
-  }
+   ;; Toggles -----------------------------
+   :t {
+       :name "+toogles"
+       :c [":Denite colorscheme" "cycle color schemes"]
+       }
 
-  ;; Spelling ----------------------------
-  :S {
-    :name "+spelling"
-    :n [(nn ":set spell<CR>")   "enable spell checker"]
-    :f [(nn ":set nospell<CR>") "disable spell checker"]
-  }
+   ;; Windows -----------------------------
+   :w {
+       :name "+windows"
+       :a    [":windo q"          "close all windows"]
+       :s    [":exe 'split'"      "horizontal split"]
+       :v    [":exe 'vsplit'"     "vertical split"]
+       :c    [":close"            "close current window"]
+       :l    [":lopen"            "open location list"]
+       :q    [":copen"            "open quickfix"]
+       :W    ["<Plug>(choosewin)" "jump to window"]
+       "+"   [":resize +5"        "increase height"]
+       "-"   [":resize -5"        "decrease height"]
+       }
 
-  ;; Toggles -----------------------------
-  :t {
-    :name "+toogles"
-    :c [(nn ":Denite colorscheme") "cycle color schemes"]
-  }
+   ;; Text --------------------------------
+   :x {
+       :name "+text"
+       :a [":EasyAlign" "align text"]
+       :t {
+           :name "+table-mode"
+           :f {
+               :name "+formulas"
+               :e [":TableEvalFormulaLine" "eval formula"]
+               :f [":TableAddFormula"      "add cell formula"]
+               }
+           :r [":TableModeRealign" "realign"]
+           :t [":TableModeToggle"  "toggle"]
+           }
+       }
+   "<C-I>" [":b#" "previous buffer"]
+   "*" "which_key_ignore"
+   })
 
-  ;; Windows -----------------------------
-  :w {
-    :name "+windows"
-    :a    [(nn ":windo q<CR>")      "close all windows"]
-    :s    [(nn ":exe 'split'<CR>")  "horizontal split"]
-    :v    [(nn ":exe 'vsplit'<CR>") "vertical split"]
-    :c    [(nn ":close<CR>")        "close current window"]
-    :l    [(nn ":lopen<CR>")        "open location list"]
-    :q    [(nn ":copen<CR>")        "open quickfix"]
-    :W    [(n  "<Plug>(choosewin)") "jump to window"]
-    "+"   [(nn ":resize +5<CR>")    "increase height"]
-    "-"   [(nn ":resize -5<CR>")    "decrease height"]
-  }
+(def visual-mode-layers
+    {
+     :c {
+         :name "+comments/compile"
+         :c ["<plug>NERDCommenterToggle"    "comment one line"]
+         :s ["<plug>NERDCommenterSexy"      "comment sexily"]
+         :u ["<plug>NERDCommenterUncomment" "uncomment"]
+         }
 
-  ;; Text --------------------------------
-  :x {
-    :name "+text"
-    :a [(nn ":EasyAlign") "align text"]
-    :t {
-      :name "+table-mode"
-      :f {
-        :name "+formulas"
-        :e [(nn ":TableEvalFormulaLine") "eval formula"]
-        :f [(nn ":TableAddFormula")      "add cell formula"]
-      }
-      :r [(nn ":TableModeRealign")    "realign"]
-      :t [(nn ":TableModeToggle<CR>") "toggle"]
-    }
-  }
-})
-
-(defn setup []
-  (let [ignore-list ["*"]
-        mapped-cmds (translator.init layers)]
-    (a.assoc mapped-cmds "<TAB>" "previous buffer")
-    (a.map (fn [k] (a.assoc mapped-cmds k "which_key_ignore")) ignore-list)
-    mapped-cmds))
+     :m {
+         :name "+modes"
+         :l {:name "+lisp"
+             :e {
+                 :name "+eval"
+                 :E  [":execute 'normal gv' . maplocalleader . 'E'"   "eval selection"]
+                 :w  [":execute 'normal gv' . maplocalleader . 'Eiw'" "eval word"]
+                 }
+             }
+         }
+     })

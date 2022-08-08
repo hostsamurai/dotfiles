@@ -2,12 +2,13 @@
 (module makyo-fnl.mappings
   {require {a aniseed.core
             nvim aniseed.nvim
-            which_key_config makyo-fnl.plugins.which-key}})
+            {: normal-mode-layers
+             : visual-mode-layers} makyo-fnl.plugins.which-key}})
 
 (local keymap nvim.set_keymap)
 (local svar nvim.set_var)
 
-(defn- setup_better_regexes []
+(defn- setup-better-regexes []
   (do
     (keymap "n" "/" "/\\v" {:noremap true})
     (keymap "n" "?" "?\\v" {:noremap true})
@@ -18,7 +19,7 @@
     (keymap "v" "/" "/\\v" {:noremap true})
     (keymap "v" "/" "/\\v" {:noremap true})))
 
-(defn- setup_normal_mode_mappings []
+(defn- setup-normal-mode-mappings []
   (do
     ;; Easier window navigation
     (keymap "n" "<C-h>" "<C-w>h" {:noremap true})
@@ -32,7 +33,7 @@
     (keymap "n" "gj" "j" {:noremap true})
     (keymap "n" "gk" "k" {:noremap true})))
 
-(defn- setup_command_mode_mappings []
+(defn- setup-command-mode-mappings []
   (do
     ;; Heretical mappings
     ;; Ctrl + a --> Jump to beginning of line
@@ -50,7 +51,7 @@
     (keymap "c" "<C-N>" "<Down>"  {:noremap true})
     (keymap "c" "<C-P>" "<Up>"    {:noremap true})))
 
-(defn- setup_insert_mode_mappings []
+(defn- setup-insert-mode-mappings []
   (do
     (keymap "i" "<C-l>" "<Plug>(coc-snippets-expand)" {})
     (keymap "i" "<C-j>" "<Plug>(coc-snippets-expand-jump)" {})
@@ -62,7 +63,7 @@
     ;; Ctrl + d --> Delete text after the cusor position in insert mode.
     (keymap "i" "<C-d>" "<C-[>ld$A" {:noremap true})))
 
-(defn- setup_visual_mode_mappings []
+(defn- setup-visual-mode-mappings []
   (do
     (keymap "v" "<enter>" "<Plug>(EasyAlign)" {})
     (keymap "v" "<C-j>" "<Plug>(coc-snippets-select)" {})
@@ -74,7 +75,7 @@
     (keymap "v" "<leader>mlE" ":execute 'normal gv' . maplocalleader . 'E'<CR>"   {:noremap true})
     (keymap "v" "<leader>mlw" ":execute 'normal gv' . maplocalleader . 'Eiw'<CR>" {:noremap true})))
 
-(defn- setup_terminal_mode_mappings []
+(defn- setup-terminal-mode-mappings []
   (do
     ;; Navigate windows from the terminal using Alt + h/j/k/l
     (keymap "t" "<A-h>" "<C-><C-N><C-w>h" {:noremap true})
@@ -90,7 +91,7 @@
     (keymap "t" "<M-[>"      "<Esc>"       {:noremap true})
     (keymap "t" "<C-v><Esc>" "<Esc>"       {:noremap true})))
 
-(defn- setup_mappings []
+(defn- setup-mappings []
   (do
     (keymap "" ";" "<Plug>(clever-f-repeat-forward)" {})
     (keymap "" "," "<Plug>(clever-f-repeat-back)" {})
@@ -99,30 +100,30 @@
 
     (keymap "" "tc" ":tabnew<CR>" {:noremap true})))
 
-;; NOTE: Resetting these mappings currently does not work.
-;; Mappings need to be unbound before being able to set again.
-;; It would be ideal to have a diff of what changed, so as to
-;; only reset the affected mappings.
-(defn- setup_which_key_mappings []
+(defn- setup-which-key-mappings []
   (do
     (svar "mapleader" " ")
     (svar "maplocalleader" ",")
-    (svar "which_key_map" (which_key_config.setup))
+    (svar "which_key_map" normal-mode-layers)
+    (svar "which_key_map_visual" visual-mode-layers)
 
-    (keymap "n" "<leader>" ":<c-u>WhichKey '<Space>'<cr>" {:noremap true})
-    (keymap "v" "<leader>" ":<c-u>WhichKeyVisual '<Space>'<cr>" {:noremap true})))
+    (keymap "n" "<leader>" ":<c-u>WhichKey '<Space>'<CR>" {:silent true :noremap true})
+    (keymap "v" "<leader>" ":<c-u>WhichKeyVisual '<Space>'<CR>" {:silent true :noremap true})
+
+    (nvim.call_function "which_key#register" ["<Space>" "g:which_key_map" "n"])
+    (nvim.call_function "which_key#register" ["<Space>" "g:which_key_map_visual" "v"])))
 
 (defn init []
   (do
     (a.println "[makyo] 🗝 Applying custom mappings...")
 
-    (setup_better_regexes)
-    (setup_normal_mode_mappings)
-    (setup_command_mode_mappings)
-    (setup_insert_mode_mappings)
-    (setup_visual_mode_mappings)
-    (setup_terminal_mode_mappings)
-    (setup_mappings)
-    (setup_which_key_mappings)
+    (setup-better-regexes)
+    (setup-normal-mode-mappings)
+    (setup-command-mode-mappings)
+    (setup-insert-mode-mappings)
+    (setup-visual-mode-mappings)
+    (setup-terminal-mode-mappings)
+    (setup-mappings)
+    (setup-which-key-mappings)
 
     (a.println "[makyo] 🗝 Done.")))
