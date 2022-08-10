@@ -36,11 +36,7 @@
 (def- coding-plugins
   [
    (use "neoclide/coc.nvim"
-     {:branch  "release"
-      :setup  (fn []
-                (do
-                  (set vim.g.coc_snippet_next "<c-j>")
-                  (set vim.g.coc_snippet_prev "<c-k>")))})
+     {:branch  "release"})
 
    "jsfaint/gen_tags.vim"
    "liuchengxu/vista.vim"

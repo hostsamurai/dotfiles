@@ -53,8 +53,8 @@
 
 (defn- setup-insert-mode-mappings []
   (do
-    (keymap "i" "<C-l>" "<Plug>(coc-snippets-expand)" {})
-    (keymap "i" "<C-j>" "<Plug>(coc-snippets-expand-jump)" {})
+    ;(keymap "i" "<CR>" "coc#pum#visible() ? coc#pum#confirm() : \"<CR>\"" {:expr true})
+    (keymap "i" "<CR>" "coc#pum#visible() ? coc#_select_confirm() : \"<C-g>u<CR><c-r>=coc#on_enter()<CR>\"" {:silent true :expr true})
 
     ;; jk --> Escape from insert mode without stretching your fingers
     (keymap "i" "jk" "<ESC>" {:noremap true})
