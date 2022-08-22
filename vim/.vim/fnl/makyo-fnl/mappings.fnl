@@ -100,7 +100,7 @@
 
     (keymap "" "tc" ":tabnew<CR>" {:noremap true})))
 
-(defn- setup-which-key-mappings []
+(defn setup-which-key-mappings []
   (do
     (svar "mapleader" " ")
     (svar "maplocalleader" ",")

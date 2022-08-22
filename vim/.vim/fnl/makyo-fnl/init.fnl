@@ -7,8 +7,8 @@
             autocmds makyo-fnl.autocmds
             mappings makyo-fnl.mappings}})
 
-(defn init [] 
-  (do 
+(defn init []
+  (do
       (providers.init)
       (plugins.init)
       (ux.init)
