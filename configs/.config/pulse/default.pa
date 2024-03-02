@@ -20,4 +20,6 @@
     # Publish to X11 so the clients know how to connect to Pulse. Will
     # clear itself on unload.
     load-module module-x11-publish
+    # Network access
+    load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
 .endif

@@ -25,7 +25,7 @@ module.exports = {
     lineHeight: 1.2,
 
     // letter spacing as a relative unit
-    letterSpacing: 0.666,
+    letterSpacing: 0.333,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: "rgba(248,28,229,0.8)",
@@ -143,7 +143,7 @@ module.exports = {
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
-  localPlugins: [],
+  localPlugins: ["universal_theme"],
 
   keymaps: {
     // Example
