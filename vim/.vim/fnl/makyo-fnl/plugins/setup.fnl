@@ -52,8 +52,11 @@
    ;; List all files defined by your projections with the Dirvish plugin
    "fsharpasharp/vim-dirvinist"
 
+   (use "numToStr/Comment.nvim" {:config #(let [c (require :Comment)]
+                                            (c.setup))})
    (use "scrooloose/nerdcommenter"
-        {:setup (fn []
+        {:disable true
+         :setup (fn []
                   (do
                     (set vim.g.NERDSpaceDelim 0)
                     (set vim.g.NERDTrimTrailingWhitespace 1)))})
@@ -102,7 +105,7 @@
 
    "mattn/emmet-vim"])
 
-(local text-manipulation-plugins
+(def- text-manipulation-plugins
   [
    "terryma/vim-multiple-cursors"
    "t9md/vim-textmanip"
@@ -135,6 +138,48 @@
 
 (def- language-plugins
   [
+   (use "nvim-treesitter/nvim-treesitter" {:run (fn []
+                                                  (if (nvim.fn.exists ":TSUpdate")
+                                                    (nvim.command "TSUpdate")
+                                                    (let [ts-install (require :nvim-treesitter.install)
+                                                          ts-update (ts-install.update {:with_sync true})]
+                                                      (ts-update))))})
+
+   ;; Treesitter support
+   (use "nvim-treesitter/nvim-treesitter-context")
+   (use "windwp/nvim-ts-autotag")
+
+   ;; LSP support
+   (use "neovim/nvim-lspconfig")
+   (use "williamboman/mason.nvim")
+   (use "williamboman/mason-lspconfig.nvim")
+   (use "nvimdev/lspsaga.nvim" {:after "nvim-lspconfig"
+                                :config #(do
+                                           (let [lspsaga (require :lspsaga)]
+                                             (lspsaga.setup {})))})
+
+  ;; DSP support
+  (use "mfussenegger/nvim-dap")
+  (use "rcarriga/nvim-dap-ui" {:requires "mfussenegger/nvim-dap"})
+
+  ;; Linter support
+  (use "mfussenegger/nvim-lint" {:config #(let [lint (require :lint)]
+                                            (set lint.linters_by_ft {:bash       ["shellcheck"]
+                                                                     :clojure    ["clj-kondo"]
+                                                                     :css        ["stylelint"]
+                                                                     :fennel     ["fennel"]
+                                                                     :html       ["tidy" "curly"]
+                                                                     :javascript ["eslint_d" "jshint"]
+                                                                     :json       ["jsonlint"]
+                                                                     :markdown   ["vale" "markdownlint"]
+                                                                     :ruby       ["rubocop"]
+                                                                     :sass       ["stylelint"]
+                                                                     :text       ["vale"]
+                                                                     :zsh        ["shellcheck"]}))})
+
+  ;; Formatting support
+  (use "mhartington/formatter.nvim")
+
    ;; Ultimate syntax collection
    (use "sheerun/vim-polyglot"
         {:config (fn []
@@ -196,6 +241,8 @@
 
    "teal-language/vim-teal"
 
+   "vim-pandoc/vim-pandoc"
+
    (use "iamcco/markdown-preview.nvim"
         {:ft  ["markdown" "pandoc.markdown" "rmd"]
          :run "cd app && yarn install"})
@@ -225,7 +272,14 @@
                     (set vim.g.signify_vcs_list ["git" "hg"])))})
 
    ;; Perform various git functions
-   (use "lambdalisue/gina.vim" {:cmd  "Gina"})
+   (use "lambdalisue/gina.vim" {:cmd  "Gina" :disable true})
+   (use "NeogitOrg/neogit"
+        {:disable true
+         :requires "nvim-lua/plenary.nvim"
+         :setup (fn []
+                  (do
+                    (let [neogit (require :neogit)]
+                      (neogit.setup {}))))})
 
    ;; Open commit messages in a popup window
    (use "rhysd/git-messenger.vim"
@@ -237,12 +291,20 @@
                     (set vim.g.mergetool_layout "LmR")
                     (set vim.g.mergetool_prefer_revision "local")))})
 
+   (use "f-person/git-blame.nvim")
    (use "APZelos/blamer.nvim"
         {:setup (fn []
                   (do
                     (set vim.g.blamer_show_in_insert_modes 0)
                     (set vim.g.blamer_show_in_visual_modes  0)
                     (set vim.g.blamer_relative_time  1)))})
+
+  (use "ruifm/gitlinker.nvim"
+       {:requires "nvim-lua/plenary.nvim"
+        :opt true
+        :config (fn []
+                  (autoload {{: setup} gitlinker}
+                            (setup {:mappings nil})))})
 
    "tyru/open-browser.vim"
 

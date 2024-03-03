@@ -1,9 +1,9 @@
 ;;;; Layer configuration
 
 (module makyo-fnl.plugins.which-key
-  {require {a aniseed.core
-            nvim aniseed.nvim
-            {: normal} aniseed.nvim.util}})
+        {autoload {a aniseed.core
+                   nvim aniseed.nvim
+                   {: normal} aniseed.nvim.util}})
 
 (defn prompt-and-run [prompt command]
     (let [user-input (nvim.fn.input prompt)]
@@ -11,6 +11,8 @@
         (a.println "Value from user: " user-input)
         (nvim.exec (.. command user-input) true)
         (nvim.fn.inputrestore)))
+
+(def- tab (nvim.replace_termcodes "<Tab>" true true true))
 
 (def normal-mode-layers
   {
@@ -36,6 +38,12 @@
                :r [":CocRestart"             "restart language server"]
                :u [":CocUpdate"              "update coc"]
                }
+           :t {
+               :name "+treesitter"
+               :i [#(prompt-and-run "Language to install: " ":TSInstall ") "install language"]
+               :u [#(prompt-and-run "Language to update: " ":TSUpdate ") "update language"]
+               :U [":TSUpdate all"  "update all parsers"]
+              }
            }
        :s {
            :name "+session"
@@ -84,7 +92,7 @@
        :p      [":bprevious"           "previous buffer"]
        :s      [":Scratch"             "scratch buffer"]
        ;; Maps to <TAB>. See :help keycodes
-       "<C-I>" [":b#"                  "previous buffer"]
+       tab [":b#"                  "previous buffer"]
        }
 
    ;; Comment/Compile ---------------------
@@ -150,54 +158,42 @@
 
    ;; Version Control ---------------------
    :g {
-       ;; TODO: Replace Gina
        :name "+version-control"
-       :b {
-           :name "+branch"
-           :l [":Gina branch"                  "list branches"]
-           :i [":Gina blame"                   "blame inline"]
-           :I [":BlameToggle"                  "blame inline (blamer.nvim)"]
-           :m [":Gina browse --exact :"        "open from master"]
-           :r [":Gina browse --scheme=blame :" "blame in browser"]
-           }
-       :c {
-           :name "+commit"
-           :a [":Gina commit --amend"           "amend"]
-           :c [":Gina commit"                   "commit"]
-           :m [":Gina commit -m "               "simple commit"]
-           :n [":Gina commit --amend --no-edit" "amend no-edit"]
+       :B {
+           :name "+blame"
+           :i [":BlamerToggle"        "blame inline (blame.nvim)"]
+           :f [":GitBlameOpenFileURL" "open file URL in browser"]
+           :t [":GitBlameToggle"      "blame inline"]
            }
        :d {
            :name "+diff"
-           :d [":Gina compare"           "2-buffer compare"]
            :h [":SignifyToggleHighlight" "toggle hightlight"]
            :i [":SignifyHunkDiff"        "inline diff"]
-           :s [":Gina diff"              "unified diff"]
            }
        :h {
            :name "+hunks"
            :n ["<Plug>(signify-next-hunk)" "next"]
            :p ["<Plug>(signify-prev-hunk)" "prev"]
-           :u [":SignifyHunkUndo"     "undo changes"]
+           :u [":SignifyHunkUndo"          "undo changes"]
            }
        :l {
            :name "+logs"
            :c ["<Plug>(git-messenger)"            "last commit message"]
-           :l [":Gina log"                        "log"]
            :p ["<Plug>(git-messenger-into-popup)" "open popup"]
            }
        :m [":MergetoolToggle" "mergetool"]
-       :p {
-           :name "+push"
-           :p [":Gina push" "push"]
-           :f [":Gina push --force" "force push"]
+       :n {
+           :name "+Neogit"
+           :c [":Neogit commit"      "open commit popup"]
+           :o [":Neogit"             "open in tab"]
+           :s [":Neogit kind=split"  "open in split"]
+           :v [":Neogit kind=vsplit" "open in vsplit"]
            }
-       :s [":Gina status"                              "status "]
-       :S [#(nvim.fn.execute ["tabnew" "Gina status"]) "status in new tab"]
-       :z {
-           :name "+stash"
-           :b [":Gina stash"       "stash buffer"]
-           :s [":Gina stash show " "show"]
+       :u {
+           :name "+url"
+           :b [#(nvim.cmd {:cmd "lua require\"gitlinker\".get_buf_range_url(\"n\", {action_callback = require\"gitlinker.actions\".open_in_browser})<CR>"} {:mods {:silent true}}) "buf range URL"]
+           :B [#(nvim.cmd {:cmd "lua require\"gitlinker\".get_repo_url({action_callback = require\"gitlinker.actions\".open_in_browser})<CR>"} {:output true} {:mods {:silent true}}) "open home page URL"]
+           :h [#(nvim.cmd {:cmd "lua require\"gitlinker\".get_repo_url()<CR>"} {:output true} {:mods {:silent true}}) "home page URL"]
            }
        }
 
@@ -403,7 +399,7 @@
            :t [":TableModeToggle"  "toggle"]
            }
        }
-   "<C-I>" [":b#" "previous buffer"]
+   tab [":b#" "previous buffer"]
    "*" "which_key_ignore"
    })
 
@@ -416,6 +412,13 @@
          :u ["<plug>NERDCommenterUncomment" "uncomment"]
          }
 
+     :g {
+         :name "+version-control"
+         :u {
+             :name "+url"
+             :b [#(nvim.cmd {:cmd "lua require\"gitlinker\".get_buf_range_url(\"v\", {action_callback = require\"gitlinker.actions\".open_in_browser})<cr>"}) "buf range URL"]
+             }
+         }
      :m {
          :name "+modes"
          :l {:name "+lisp"

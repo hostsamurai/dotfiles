@@ -1,9 +1,11 @@
 ;;;; Autocmd declarations
 
 (module makyo-fnl.autocmds
-  {require {a aniseed.core
-            compile aniseed.compile
-            nvim aniseed.nvim}})
+  {autoload {a aniseed.core
+             compile aniseed.compile
+             nvim aniseed.nvim
+             {: setup-which-key-mappings} makyo-fnl.mappings}
+   import-macros [[ac :aniseed.macros.autocmds]]})
 
 (defn- to-transpiled-filename [filename]
   "Takes a Fennel source filename and returns its Lua counterpart."
@@ -13,7 +15,7 @@
 
 (defn- create-plugin-config-refresh-autocmd []
   "Refresh plugin configuration after modifying it."
-  (let [setup-file "~/.vim/fnl/makyo-fnl/plugins/setup.fnl"
+  (let [setup-file "**/makyo-fnl/plugins/setup.fnl"
         transpiled-setup-file (to-transpiled-filename setup-file)]
     (nvim.create_autocmd ["BufWritePost"]
                         {:pattern setup-file
@@ -23,13 +25,24 @@
 
 (defn- create-shortcuts-refresh-autocmd []
   "Refresh which_key shortcuts."
-  (let [shortcuts-file "~/.vim/fnl/makyo-fnl/plugins/which-key.fnl"
+  (let [shortcuts-file "**/makyo-fnl/plugins/which-key.fnl"
         transpiled-shortcuts-file (to-transpiled-filename shortcuts-file)]
     (nvim.create_autocmd ["BufWritePost"]
                          {:pattern shortcuts-file
                           :callback #(do
-                                       (compile.file shortcuts-file transpiled-shortcuts-file)
-                                       (nvim.ex.source transpiled-shortcuts-file))})))
+                                       (nvim.echo "Refreshing shortcuts...")
+                                       (nvim.set_var "which_key_map" {})
+                                       (nvim.set_var "which_key_map_visual" {})
+                                       (setup-which-key-mappings))})))
+
+(defn- create-ts-fold-workaround-autocmd []
+  "Avoid the \"No folds found\" error when initializing treesitter
+  through packer.nvim"
+  (ac.augroup :TS_FOLD_WORKAROUND
+              [[:BufEnter :BufAdd :BufNew :BufNewFile :BufWinEnter]
+               {:callback #(do
+                             (nvim.o.foldmethod "expr")
+                             (nvim.o.foldexpr "nvim_treesitter#foldexpr()"))}]))
 
 (defn- create_general_autocmds []
   (do

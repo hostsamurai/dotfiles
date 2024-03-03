@@ -1,0 +1,56 @@
+{
+  "parser-directories": [
+    "/home/lou/github",
+    "/home/lou/src",
+    "/home/lou/source"
+  ],
+  "theme": {
+    "variable.parameter": {
+      "underline": true
+    },
+    "attribute": {
+      "italic": true,
+      "color": 124
+    },
+    "constant": 94,
+    "module": 136,
+    "function": 26,
+    "constant.builtin": {
+      "color": 94,
+      "bold": true
+    },
+    "keyword": 56,
+    "property": 124,
+    "punctuation.bracket": 239,
+    "type": 23,
+    "operator": {
+      "bold": true,
+      "color": 239
+    },
+    "number": {
+      "bold": true,
+      "color": 94
+    },
+    "function.builtin": {
+      "color": 26,
+      "bold": true
+    },
+    "punctuation.delimiter": 239,
+    "tag": 18,
+    "string": 28,
+    "type.builtin": {
+      "color": 23,
+      "bold": true
+    },
+    "variable.builtin": {
+      "bold": true
+    },
+    "comment": {
+      "italic": true,
+      "color": 245
+    },
+    "constructor": 136,
+    "embedded": null,
+    "string.special": 30
+  }
+}
