@@ -49,6 +49,7 @@ source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
+zplug "dim-an/cod", defer:2
 
 zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/lein",    from:oh-my-zsh
@@ -200,4 +201,4 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 eval "$(starship init zsh)"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$PATH"
