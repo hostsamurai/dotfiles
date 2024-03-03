@@ -87,7 +87,6 @@ vcs:
 vim:
 	@$(call print-bold-header, "Stowing vim...")
 	stow -R vim --ignore $(ignore)
-	@$(call run-post-hook,vim)
 
 spacemacs:
 	@$(call print-bold-header, "Stowing spacemacs...")

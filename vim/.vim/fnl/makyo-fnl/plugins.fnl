@@ -1,13 +1,17 @@
 (module makyo-fnl.plugins
   {require {a aniseed.core
-            plugins makyo-fnl.plugins.setup
-            fzf makyo-fnl.plugins.fzf}})
+            lb makyo-fnl.plugins.bootstrap
+            lazy makyo-fnl.plugins.lazy
+            fzf makyo-fnl.plugins.fzf
+            treesitter makyo-fnl.plugins.treesitter}})
 
 (defn init []
-  (do 
+  (do
     (a.println "[makyo] 🔌 Initializing plugins...")
 
-    (plugins.init)
+    (lb.bootstrap)
+    (lazy.init)
     (fzf.init)
+    (treesitter.init)
 
-    (a.println "[makyo] 🔌 Done.")))
+   (a.println "[makyo] 🔌 Done.")))

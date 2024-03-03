@@ -9,10 +9,12 @@
 
 (defn init []
   (do
-      (providers.init)
-      (plugins.init)
-      (ux.init)
-      (ui.init)
-      (fns.init)
-      (autocmds.init)
-      (mappings.init)))
+    (providers.init)
+    (plugins.init)
+    (ux.init)
+    (ui.init)
+    (fns.init)
+    (autocmds.init)
+    (mappings.init)))
+
+(init)
