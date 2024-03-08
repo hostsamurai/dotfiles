@@ -17,18 +17,18 @@
       (nvim.command "set guioptions-=t") ;; no tearoff menu items
       (nvim.command "set guioptions-=m") ;; no menubar
       (nvim.command "set guioptions-=l") ;; same as above - never present
-      (nvim.command "set guioptions-=R"));; no right scrollbar 
+      (nvim.command "set guioptions-=R") ;; no right scrollbar
+      (nvim.command "set guioptions+=d"));; dark mode
 
     (if (->> (nvim.fn.system  "uname")
-             trimr 
+             trimr
              (= "Linux"))
       (set o.guifont "FiraCode Nerd Font,Noto Color Emoji:h11")
-      (set o.guifont "FiraCode Nerd Font:h13")))) 
+      (set o.guifont "FiraCode Nerd Font:h13"))))
 
 (defn init []
   "Initialize GUI settings"
-  (do 
+  (do
     (a.println "[makyo] 📺 Applying UI settings...")
     (setup)
     (a.println "[makyo] 📺 Done.")))
-
