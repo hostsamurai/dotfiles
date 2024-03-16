@@ -2,7 +2,9 @@
   {require {a aniseed.core
             nvim aniseed.nvim
             {: trimr} aniseed.string}
-   autoload {: lazy}})
+   autoload {: lazy
+             {: normal-mode-layers
+             : visual-mode-layers} makyo-fnl.plugins.which-key}})
 
 (defn- spec [plugin-name spec-definitions]
   "Gets around Fennel's limitation of being unable to mix associative
@@ -14,21 +16,26 @@
 
 (def- general-purpose-plugins
   [
-   (spec "liuchengxu/vim-better-default" {:lazy  false
-                                          :disable true
-                                          :config (fn []
-                                                    (do
-                                                      (set vim.g.vim_better_default_key_mapping 0)
-                                                      (set vim.g.vim_better_default_persistent_undo 1)))})
-
-   (spec "liuchengxu/vim-which-key" {:lazy false
-                                     :init (fn []
-                                             (do
-                                               (set vim.g.which_key_align_by_separator 1)
-                                               (set vim.g.which_key_use_floating_win  1)
-                                               (set vim.g.which_key_timeout 500)))
-                                     :config (fn []
-                                               (vim.fn.which_key#register "<Space>" "g:which_key_map"))})
+   (spec "folke/which-key.nvim" {:event "VeryLazy"
+                                 :opts {
+                                        ;:triggers ["<leader>"]
+                                        ;:prefix "<leader>"
+                                        :plugins {:presets {
+                                                            :operators false
+                                                            :motions false
+                                                            :nav false
+                                                            :z false
+                                                            :g false
+                                                           }}
+                                       }
+                                 :init #(let [wk (require :which-key)
+                                              svar nvim.set_var]
+                                          (do
+                                            (set vim.o.timeout true)
+                                            (set vim.o.timeoutlen 300)
+                                            (svar "mapleader" " ")
+                                            (wk.register normal-mode-layers {:prefix "<leader>"})
+                                            (wk.register visual-mode-layers {:mode "v" :silent true :noremap true})))})
 
    "skywind3000/asynctasks.vim"
    ])

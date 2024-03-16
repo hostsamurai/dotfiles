@@ -1,12 +1,9 @@
 ;;;; General user mappings not necessarily tied to any layers
 (module makyo-fnl.mappings
   {require {a aniseed.core
-            nvim aniseed.nvim
-            {: normal-mode-layers
-             : visual-mode-layers} makyo-fnl.plugins.which-key}})
+            nvim aniseed.nvim}})
 
 (local keymap nvim.set_keymap)
-(local svar nvim.set_var)
 
 (defn- setup-better-regexes []
   (do
@@ -100,19 +97,6 @@
 
     (keymap "" "tc" ":tabnew<CR>" {:noremap true})))
 
-(defn setup-which-key-mappings []
-  (do
-    (svar "mapleader" " ")
-    (svar "maplocalleader" ",")
-    (svar "which_key_map" normal-mode-layers)
-    (svar "which_key_map_visual" visual-mode-layers)
-
-    (keymap "n" "<leader>" ":<c-u>WhichKey '<Space>'<CR>" {:silent true :noremap true})
-    (keymap "v" "<leader>" ":<c-u>WhichKeyVisual '<Space>'<CR>" {:silent true :noremap true})
-
-    (nvim.call_function "which_key#register" ["<Space>" "g:which_key_map" "n"])
-    (nvim.call_function "which_key#register" ["<Space>" "g:which_key_map_visual" "v"])))
-
 (defn init []
   (do
     (a.println "[makyo] 🗝 Applying custom mappings...")
@@ -124,6 +108,5 @@
     (setup-visual-mode-mappings)
     (setup-terminal-mode-mappings)
     (setup-mappings)
-    (setup-which-key-mappings)
 
     (a.println "[makyo] 🗝 Done.")))

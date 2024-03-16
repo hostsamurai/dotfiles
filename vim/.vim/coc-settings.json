@@ -2,13 +2,7 @@
   // COC Preferences
   "coc.preferences.hoverTarget": "float",
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "typescript",
-    "typescriptreact",
-    "css",
-    "graphql",
-    "html"
-  ],
+  "coc.preferences.formatOnSave": true,
 
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
