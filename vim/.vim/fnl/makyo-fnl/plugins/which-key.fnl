@@ -318,10 +318,11 @@
    ;; Plugins -----------------------------
    :P {
        :name "+plugins"
-       :c ["<cmd>PackerCompile<cr>" "compile changes"]
-       :C ["<cmd>PackerClean<cr>" "clean"]
-       :o ["<cmd>tabnew ~/.vim/lua/makyo/plugins/setup.lua<cr>" "open config"]
-       :u ["<cmd>PackerUpdate<cr>" "update"]
+       :C ["<cmd>Lazy clean<cr>" "clean"]
+       :h ["<cmd>Lazy home<cr>" "home"]
+       :i [#(prompt-and-run "Plugin to install: " ":Lazy install ") "install plugin"]
+       :l ["<cmd>Lazy log<cr>" "log"]
+       :u ["<cmd>Lazy update<cr>" "update"]
        :w {
            :name "+which-key"
            :e ["<cmd>tabnew ~/.vim/fnl/makyo-fnl/plugins/which-key.fnl<cr>" "edit mappings"]
