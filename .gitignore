@@ -12,6 +12,8 @@ configs/.lein/indices
 configs/.lein/repl-history
 configs/.config/gtk-3.0/bookmarks
 configs/.config/pulse/cookie
+configs/.config/gomp
+configs/.config/mpdscribble
 **/node_modules
 pnpm-debug.log
 GPATH
