@@ -6,8 +6,8 @@
 
 (defn- setup []
   "Configures treesitter"
-  (ts.setup {:ensure-installed ["lua"
-                                "lua patterns"
+  (ts.setup {:ensure_installed ["lua"
+                                "luap"
                                 "vim"
                                 "vimdoc"
                                 "clojure"
@@ -22,20 +22,20 @@
                                 "ruby"]
              :highlight {:enable true
                          :disable ["racket" "scheme"]
-                         :additional-vim-regex-highlighting false}
+                         :additional_vim_regex_highlighting false}
              :indent {:enable true}
-             :incremental-selection {:enable true
-                                     :init-selection "gnn"
-                                     :node-incremental "grn"
-                                     :scope-incremental "grc"
-                                     :node-decremental "grm"}
+             :incremental_selection {:enable true
+                                     :init_selection "gnn"
+                                     :node_incremental "grn"
+                                     :scope_incremental "grc"
+                                     :node_decremental "grm"}
              ;; Plugin support
              :autotag {:enable true}
              :textsubjects {:enable true
                             :prev_selection ","
-                            :keymaps {"." "textsubjects-smart"
-                                      ";" "textsubjects-container-outer"
-                                      "i;" "textsubjects-container-inner"}}}))
+                            :keymaps {"." "textsubjects_smart"
+                                      ";" "textsubjects_container_outer"
+                                      "i;" "textsubjects_container_inner"}}}))
 
 (defn- setup-parser-configs []
   (let [pc (tsp.get_parser_configs)]
