@@ -3,8 +3,7 @@ vim/.vim/backups
 vim/.vim/sessions
 vim/.vim/tmp
 vim/.vim/undo
-vim/.vim/plugged
-vim/.vim/plugin/packer_compiled.*
+vim/.vim/lazy-lock.json
 vim/.vim/.netrwhist
 vim/.vim/lua/makyo-fnl
 configs/.boot/cache
@@ -23,3 +22,4 @@ GTAGS
 /lua
 /lua_modules
 /.luarocks
+neovide_backtraces.log
