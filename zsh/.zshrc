@@ -147,7 +147,7 @@ alias du='du -h --max-depth=1' # print directories by size
 
 alias less='less -R'
 
-alias xl='exa -la'
+alias xl='eza -la'
 alias xr='xl -R'           # recursive exa
 alias xs='xl -s=size'      # sort by modified time
 alias xt='xl -s=modified'  # sort by modified time
