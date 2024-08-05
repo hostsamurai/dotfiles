@@ -4,7 +4,8 @@
             {: trimr} aniseed.string}
    autoload {: lazy
              {: normal-mode-layers
-             : visual-mode-layers} makyo-fnl.plugins.which-key}})
+             : visual-mode-layers} makyo-fnl.plugins.which-key
+             utils makyo-fnl.utils}})
 
 (defn- spec [plugin-name spec-definitions]
   "Gets around Fennel's limitation of being unable to mix associative
@@ -42,7 +43,9 @@
 
 (def- coding-plugins
   [
-   (spec "neoclide/coc.nvim" {:branch  "release"})
+   (spec "neoclide/coc.nvim" {:branch  "release"
+                              :init #(when (utils.is-darwin?)
+                                       (set nvim.g.coc_node_path "~/.proto/bin/node"))})
 
    "jsfaint/gen_tags.vim"
    "liuchengxu/vista.vim"
