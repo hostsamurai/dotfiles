@@ -164,9 +164,7 @@
    "williamboman/mason.nvim"
    "williamboman/mason-lspconfig.nvim"
    (spec "nvimdev/lspsaga.nvim" {:dependencies "nvim-lspconfig"
-                                 :config #(do
-                                            (let [lspsaga (require :lspsaga)]
-                                              (lspsaga.setup {})))})
+                                 :config true})
 
    ;; DSP support
    "mfussenegger/nvim-dap"
@@ -194,7 +192,7 @@
 
    ;; Ultimate syntax collection
    (spec "sheerun/vim-polyglot"
-         {:config (fn []
+         {:init (fn []
                     (do
                       (set vim.g.javascript_plugin_jsdoc 1)
                       (set vim.g.jscomplete_use ["dom" "moz" "es6th"])
@@ -219,7 +217,7 @@
                     (set vim.g.paredit_mode 1)
                     (set vim.g.paredit_shortmaps 1)
                     (set vim.g.paredit_smartjump 1)
-                    (set vim.g.paredit_leader "")))})
+                    (set vim.g.paredit_leader ",")))})
 
    (spec "guileen/vim-node" {:ft "javascript"})
    (spec "myhere/vim-nodejs-complete" {:ft "javascript"})
@@ -362,44 +360,43 @@
 
    "TaDaa/vimade"
 
-   (spec "vim-airline/vim-airline" {:config #(do
-                                               (set vim.g.airline#extensions#tabline#formatter "unique_tail_improved")
+   (spec "vim-airline/vim-airline" {:init #(do
+                                             (set vim.g.airline#extensions#tabline#formatter "unique_tail_improved")
 
-                                               (set vim.g.airline_powerline_fonts  1)
-                                               (set vim.g.airline_highlighting_cache  1)
-                                               (set vim.g.airline_exclude_preview  1)
-                                               (set vim.g.airline_skip_empty_sections  1)
+                                             (set vim.g.airline_powerline_fonts  1)
+                                             (set vim.g.airline_highlighting_cache  1)
+                                             (set vim.g.airline_exclude_preview  1)
+                                             (set vim.g.airline_skip_empty_sections  1)
 
-                                               (set vim.g.airline_mode_map {
-                                                                            "__"   "-"
-                                                                            :c     "C"
-                                                                            :i     "I"
-                                                                            :ic    "I"
-                                                                            :ix    "I"
-                                                                            :n     "N"
-                                                                            :multi "M"
-                                                                            :ni    "N"
-                                                                            :no    "N"
-                                                                            :R     "R"
-                                                                            :Rv    "R"
-                                                                            :s     "S"
-                                                                            :S     "S"
-                                                                            ""   "S"
-                                                                            :t     "T"
-                                                                            :v     "V"
-                                                                            :V     "V"
-                                                                            ""   "V"
-                                                                            }))})
+                                             (set vim.g.airline_mode_map {
+                                                                          "__"   "-"
+                                                                          :c     "C"
+                                                                          :i     "I"
+                                                                          :ic    "I"
+                                                                          :ix    "I"
+                                                                          :n     "N"
+                                                                          :multi "M"
+                                                                          :ni    "N"
+                                                                          :no    "N"
+                                                                          :R     "R"
+                                                                          :Rv    "R"
+                                                                          :s     "S"
+                                                                          :S     "S"
+                                                                          ""   "S"
+                                                                          :t     "T"
+                                                                          :v     "V"
+                                                                          :V     "V"
+                                                                          ""   "V"
+                                                                          }))})
 
-   (spec "vim-airline/vim-airline-themes" {:config #(do
-                                                      (set vim.g.airline_theme "minimalist")
-                                                      (set vim.g.airline_minimalist_showmod 1))})
+   (spec "vim-airline/vim-airline-themes" {:init #(do
+                                                    (set vim.g.airline_theme "minimalist")
+                                                    (set vim.g.airline_minimalist_showmod 1))})
   ])
 
 (def- themes
   [
-   ;; set the default colorscheme
-   (spec "ntk148v/vim-horizon" {:lazy false
+   (spec "ntk148v/vim-horizon" {:lazy true
                                 :config #(vim.cmd "colorscheme horizon")})
    (spec "tomasr/molokai" {:lazy true})
    (spec "vim-scripts/fruity.vim" {:lazy true})
