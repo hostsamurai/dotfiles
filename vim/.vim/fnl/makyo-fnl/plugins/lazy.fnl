@@ -412,6 +412,27 @@
    (spec "bruth/vim-newsprint-theme" {:lazy true})
    (spec "arzg/vim-colors-xcode" {:lazy true})
    (spec "vim-scripts/AfterColors.vim" {:lazy true})
+  ;; treesitter-compatible color schemes
+   (spec "nvimdev/zephyr-nvim" {:lazy true})
+   (spec "Iron-E/nvim-highlite" {:lazy true})
+   ;; TODO: set this as the default theme
+   (spec "rockerBOO/boo-colorscheme-nvim" {:lazy true
+                                           :priority 1000
+                                           :opts {:italic true :theme "crimson_moonlight"}
+                                           :main "boo-colorscheme"})
+   (spec "nvimdev/zephyr-nvim" {:lazy true})
+   (spec "savq/melange-nvim" {:lazy true})
+   (spec "matsuuu/pinkmare" {:lazy true})
+   (spec "Mofiqul/dracula.nvim" {:lazy true})
+   (spec "NTBBloodbath/doom-one.nvim" {:lazy true})
+   (spec "sainnhe/sonokai" {:lazy true})
+   (spec "comfysage/evergarden" {:lazy true
+                                 :priority 1000
+                                 :opts {:contrast_dark "medium"}})
+   (spec "ray-x/starry.nvim" {:lazy false
+                              :priority 1000
+                              :opts {:style {:name "dracula_blood"}
+                                     :italics {:comments true :keywords true}}})
 
    (spec "rakr/vim-two-firewatch" {:lazy true
                                    :init #(set vim.g.two_firewatch_italics true)})
