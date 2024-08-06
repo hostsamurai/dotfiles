@@ -3,7 +3,8 @@
             lb makyo-fnl.plugins.bootstrap
             lazy makyo-fnl.plugins.lazy
             fzf makyo-fnl.plugins.fzf
-            treesitter makyo-fnl.plugins.treesitter}})
+            treesitter makyo-fnl.plugins.treesitter
+            neorg makyo-fnl.plugins.neorg}})
 
 (defn init []
   (do
@@ -13,5 +14,6 @@
     (lazy.init)
     (fzf.init)
     (treesitter.init)
+    (neorg.init)
 
    (a.println "[makyo] 🔌 Done.")))

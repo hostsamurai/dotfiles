@@ -269,6 +269,14 @@
    (spec "voldikss/vim-floaterm" {:init #(set vim.g.floaterm_rootmarkers [".git" ".gitignore"])})
 
    (spec "lbrayner/vim-rzip" {:lazy true})
+
+   ;; Neorg support
+   (spec "nvim-neorg/neorg" {:lazy false
+                             :version "*"
+                             :config true})
+   (spec "lukas-reineke/headlines.nvim" {:dependencies "nvim-treesitter/nvim-treesitter"
+                                         :opts {:norg {:headline_highlights ["Headline1" "Headline2" "Headline3" "Headline4" "Headline5"]
+                                                       :codeblock_highlight ["NeorgCodeBlock"]}}})
    ])
 
 (def- version-control-plugins
