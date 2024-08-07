@@ -39,7 +39,7 @@ bindkey -v
 # ------------------------------------------------
 
 if [[ `uname` = "Darwin" ]]; then
-  export ZPLUG_HOME=/usr/local/opt/zplug
+  export ZPLUG_HOME=/opt/homebrew/opt/zplug
 else
   export ZPLUG_HOME=~/.zplug
 fi
