@@ -148,7 +148,7 @@ alias du='du -h --max-depth=1' # print directories by size
 alias less='less -R'
 
 alias xl='eza -la'
-alias xr='xl -R'           # recursive exa
+alias xr='xl -R'           # recursive eza
 alias xs='xl -s=size'      # sort by modified time
 alias xt='xl -s=modified'  # sort by modified time
 alias xx='xl -s=extension' # sort by extension
@@ -182,7 +182,7 @@ if [[ `uname` == 'Linux' ]]; then
   alias ppss='powerpill -Ss'
 fi
 
-alias cljs='clj -Sdeps "{:deps {org.clojure/clojurescript {:mvn/version \"1.9.946\"}}}" -m cljs.repl.node'
+alias cljs='clj -Sdeps "{:deps {org.clojure/clojurescript {:mvn/version \"1.11.132\"}}}" -m cljs.repl.node'
 
 # ------------------------------------------------
 # Autoloaded Functions
@@ -196,10 +196,3 @@ fi
 
 # starship prompt
 eval "$(starship init zsh)"
-
-# proto
-export PROTO_HOME="$HOME/.proto"
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
-
-# yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$PATH"
