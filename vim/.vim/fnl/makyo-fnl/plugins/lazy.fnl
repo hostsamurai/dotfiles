@@ -256,7 +256,7 @@
 
 (def- application-plugins
   [
-   "gregsexton/VimCalc"
+   "Apeiros-46B/qalc.nvim"
    "simnalamburt/vim-mundo"
    "acustodioo/vim-tmux"
 
