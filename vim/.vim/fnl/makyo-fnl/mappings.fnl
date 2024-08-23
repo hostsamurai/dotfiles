@@ -5,6 +5,11 @@
 
 (local keymap nvim.set_keymap)
 
+(defn- setup-leader-keys []
+  (do
+    (set nvim.g.mapleader " ")
+    (set nvim.g.maplocalleader ",")))
+
 (defn- setup-better-regexes []
   (do
     (keymap "n" "/" "/\\v" {:noremap true})
@@ -101,6 +106,7 @@
   (do
     (a.println "[makyo] 🗝 Applying custom mappings...")
 
+    (setup-leader-keys)
     (setup-better-regexes)
     (setup-normal-mode-mappings)
     (setup-command-mode-mappings)

@@ -4,7 +4,7 @@
   {autoload {a aniseed.core
              compile aniseed.compile
              nvim aniseed.nvim
-             {: setup-which-key-mappings} makyo-fnl.mappings}
+             {: setup-mappings} makyo-fnl.plugins.which-key}
    import-macros [[ac :aniseed.macros.autocmds]]})
 
 (defn- to-transpiled-filename [filename]
@@ -24,16 +24,14 @@
                                       (nvim.command "PackerCompile"))})))
 
 (defn- create-shortcuts-refresh-autocmd []
-  "Refresh which_key shortcuts."
-  (let [shortcuts-file "**/makyo-fnl/plugins/which-key.fnl"
+  "Refresh which-key shortcuts."
+  (let [shortcuts-file "**/makyo-fnl/plugins/which-key/layers.fnl"
         transpiled-shortcuts-file (to-transpiled-filename shortcuts-file)]
     (nvim.create_autocmd ["BufWritePost"]
                          {:pattern shortcuts-file
                           :callback #(do
                                        (nvim.echo "Refreshing shortcuts...")
-                                       (nvim.set_var "which_key_map" {})
-                                       (nvim.set_var "which_key_map_visual" {})
-                                       (setup-which-key-mappings))})))
+                                       (setup-mappings))})))
 
 (defn- create-ts-fold-workaround-autocmd []
   "Avoid the \"No folds found\" error when initializing treesitter

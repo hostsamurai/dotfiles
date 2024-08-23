@@ -4,7 +4,7 @@
             {: trimr} aniseed.string}
    autoload {: lazy
              {: normal-mode-layers
-             : visual-mode-layers} makyo-fnl.plugins.which-key
+              : visual-mode-layers} makyo-fnl.plugins.which-key
              utils makyo-fnl.utils}})
 
 (defn- spec [plugin-name spec-definitions]
@@ -17,26 +17,21 @@
 
 (def- general-purpose-plugins
   [
-   (spec "folke/which-key.nvim" {:event "VeryLazy"
-                                 :opts {
-                                        ;:triggers ["<leader>"]
-                                        ;:prefix "<leader>"
-                                        :plugins {:presets {
-                                                            :operators false
-                                                            :motions false
-                                                            :nav false
-                                                            :z false
-                                                            :g false
-                                                           }}
-                                       }
-                                 :init #(let [wk (require :which-key)
-                                              svar nvim.set_var]
-                                          (do
-                                            (set vim.o.timeout true)
-                                            (set vim.o.timeoutlen 300)
-                                            (svar "mapleader" " ")
-                                            (wk.register normal-mode-layers {:prefix "<leader>"})
-                                            (wk.register visual-mode-layers {:mode "v" :silent true :noremap true})))})
+   (spec "folke/which-key.nvim"
+         {:event "VeryLazy"
+          :opts {
+                 :spec (a.merge normal-mode-layers visual-mode-layers)
+                 ;:triggers {1 "<leader>" :mode ["n" "v"]}
+                 :plugins {:presets {
+                                     :operators false
+                                     :motions false
+                                     :nav false
+                                     :z false
+                                     :g false
+                                     }}
+                 }
+          :dependencies "nvim-tree/nvim-web-devicons"
+          })
 
    "skywind3000/asynctasks.vim"
    ])
@@ -212,12 +207,11 @@
 
    (spec "kovisoft/paredit"
          {:ft  ["clojure" "scheme" "racket" "chicken" "fennel"]
-          :init (fn []
-                  (do
-                    (set vim.g.paredit_mode 1)
-                    (set vim.g.paredit_shortmaps 1)
-                    (set vim.g.paredit_smartjump 1)
-                    (set vim.g.paredit_leader ",")))})
+          :init #(do
+                   (set vim.g.paredit_mode 1)
+                   (set vim.g.paredit_shortmaps 1)
+                   (set vim.g.paredit_smartjump 1)
+                   (set vim.g.paredit_leader "\\"))})
 
    (spec "guileen/vim-node" {:ft "javascript"})
    (spec "myhere/vim-nodejs-complete" {:ft "javascript"})
@@ -336,7 +330,7 @@
                                                                    {:type "sessions"  :header ["   Sessions"]}
                                                                    {:type "bookmarks" :header ["   Bookmarks"]}])
                                         (set vim.g.startify_bookmarks [{:I  "~/dotfiles/vim/.vim/init.vim"}
-                                                                       {:P  "~/dotfiles/vim/.vim/fnl/makyo-fnl/which-key.fnl"}
+                                                                       {:P  "~/dotfiles/vim/.vim/fnl/makyo-fnl/which-key/layers.fnl"}
                                                                        {:V  "~/dotfiles/vim/.vim/fnl/init.fnl"}
                                                                        {:Z  "~/dotfiles/zsh/.zshrc"}
                                                                        "~/Code"])
@@ -400,6 +394,8 @@
    (spec "vim-airline/vim-airline-themes" {:init #(do
                                                     (set vim.g.airline_theme "minimalist")
                                                     (set vim.g.airline_minimalist_showmod 1))})
+
+   (spec "nvim-tree/nvim-web-devicons")
   ])
 
 (def- themes
