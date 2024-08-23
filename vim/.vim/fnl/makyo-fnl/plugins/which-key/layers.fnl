@@ -85,7 +85,7 @@
        :p ["<cmd>bprevious<cr>"           "previous buffer"]
        :s ["<cmd>Scratch<cr>"             "scratch buffer"]
        ;; Maps to <TAB>. See :help keycodes
-       tab ["<cmd>b#<cr>"                 "previous buffer"]
+       "<Tab>" ["<cmd>b#<cr>"                 "previous buffer"]
        }
    })
 
@@ -360,8 +360,8 @@
        :name "+spelling"
        :e ["<cmd>set spell<cr>"   "enable spell checker"]
        :f ["<cmd>set nospell<cr>" "disable spell checker"]
-       :n [#(normal "]s") "next misspelled word"]
-       :p [#(normal "[s") "previous misspelled word"]
+       :n [#(nvim.ex.normal "]s") "next misspelled word"]
+       :p [#(nvim.ex.normal "[s") "previous misspelled word"]
        }
    })
 
