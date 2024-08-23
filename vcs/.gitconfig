@@ -8,7 +8,7 @@
   copr = "!f() { git fetch origin pull/$1/head:pr$1 && git co pr$1; }; f"
   com = "!f() { git co $(git br -rl '*/HEAD' | awk -F/ '{print $NF}'); }; f"
   comp = "!f() { git com && git pull; }; f"
-  compp = "!f() { git rh && git co master && git pull; }; f"
+  compp = "!f() { git rh && git com && git pull; }; f"
   ci = commit
   can = commit --amend --no-edit -a
   d = diff
