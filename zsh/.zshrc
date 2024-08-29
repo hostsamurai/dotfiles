@@ -182,7 +182,13 @@ if [[ `uname` == 'Linux' ]]; then
   alias ppss='powerpill -Ss'
 fi
 
-alias cljs='clj -Sdeps "{:deps {org.clojure/clojurescript {:mvn/version \"1.11.132\"}}}" -m cljs.repl.node'
+alias cljs='shadow-cljs'
+alias cljs-new='bunx creaate-cljs-project'
+alias cljs-build='cljs compile app'
+alias cljs-watch='cljs watch app'
+alias cljs-repl='cljs cljs-repl app'
+alias cljs-nrepl='cljs node-repl app'
+alias cljs-release='cljs release app'
 
 # ------------------------------------------------
 # Autoloaded Functions
