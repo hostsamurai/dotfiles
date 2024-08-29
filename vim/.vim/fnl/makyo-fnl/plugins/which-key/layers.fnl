@@ -190,6 +190,22 @@
            :s ["<cmd>Neogit kind=split<cr>"  "open in split"]
            :v ["<cmd>Neogit kind=vsplit<cr>" "open in vsplit"]
            }
+       :o {
+           :name "+octo"
+           ;; For mappings, see makyo-fnl.plugins.octo
+           :i {:name "+issues"}
+           :f {:name "+file panel"}
+           :p {
+               :name "+pull requests"
+               :a {:name "+assignees"}
+               :c {:name "+comments"}
+               :l {:name "+labels"}
+               :r {:name "+reactions"}
+               }
+           :r {:name "+reactions"}
+           :R {:name "+review diffs"}
+           :t {:name "+review threads"}
+           }
        :u {
            :name "+url"
            :b [#(nvim.cmd {:cmd "lua require\"gitlinker\".get_buf_range_url(\"n\", {action_callback = require\"gitlinker.actions\".open_in_browser})<CR>"} {:mods {:silent true}}) "buf range URL"]

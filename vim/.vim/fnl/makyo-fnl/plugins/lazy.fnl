@@ -5,6 +5,7 @@
    autoload {: lazy
              {: normal-mode-layers
               : visual-mode-layers} makyo-fnl.plugins.which-key
+             octo makyo-fnl.plugins.octo
              utils makyo-fnl.utils}})
 
 (defn- spec [plugin-name spec-definitions]
@@ -281,12 +282,24 @@
                                        (set vim.g.signify_vcs_list ["git" "hg"]))})
 
    ;; Perform various git functions
-   (spec "NeogitOrg/neogit" {:dependencies [
-                                            "nvim-lua/plenary.nvim"
+   (spec "NeogitOrg/neogit" {:dependencies ["nvim-lua/plenary.nvim"
                                             "sindrets/diffview.nvim"
                                             "ibhagwan/fzf-lua"
                                             ]
-                             :config true})
+                             :config {:integrations {"fzf_lua" true}}})
+
+   (spec "pwntester/octo.nvim" {:dependencies ["nvim-lua/plenary.nvim"
+                                               "ibhagwan/fzf-lua"
+                                               "nvim-tree/nvim-web-devicons"
+                                               ]
+                                :config {:ui {"use_signcolumn" true}
+                                         :picker "fzf-lua"
+                                         :mappings {:issue (a.merge octo.issue-mappings octo.reaction-mappings)
+                                                    :pull_request octo.pull-request-mappings
+                                                    :review_thread octo.review-thread-mappings
+                                                    :submit_win octo.submit-win-mappings
+                                                    :review_diff octo.review-diff-mappings
+                                                    :file_panel octo.file-panel-mappings}}})
 
    ;; Open commit messages in a popup window
    (spec "rhysd/git-messenger.vim" {:cmd  "GitMessenger"})
