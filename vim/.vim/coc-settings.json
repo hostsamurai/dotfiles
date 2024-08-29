@@ -13,10 +13,7 @@
   "suggest.snippetIndicator": "🍦",
 
   // Snippets
-  "snippets.ultisnips.directories": [
-    "~/.vim/snippets",
-    "~/.config/coc/ultisnips"
-  ],
+  "snippets.userSnippetsDirectory": "$HOME/.local/share/nvim/custom_snippets",
 
   "javascript.suggest.includeCompletionsForImportStatements": true,
   "typescript.suggest.includeCompletionsForImportStatements": true,
