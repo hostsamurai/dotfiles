@@ -34,6 +34,11 @@ bindkey '^U' backward-kill-line
 # Use vim key bindings
 bindkey -v
 
+# Set editor to Neovim if it is available
+if command -v nvim > /dev/null; then
+  export EDITOR=nvim
+fi
+
 # ------------------------------------------------
 # Plugins
 # ------------------------------------------------
