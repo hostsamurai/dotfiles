@@ -212,5 +212,8 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# bun
+export PATH="$HOME/.cache/.bun/bin:$PATH"
+
 # starship prompt
 eval "$(starship init zsh)"
