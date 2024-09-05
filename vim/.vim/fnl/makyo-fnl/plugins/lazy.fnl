@@ -197,6 +197,8 @@
    (spec "tpope/vim-fireplace" {:ft "clojure"})
    (spec "dgrnbrg/vim-redl" {:ft "clojure"})
    (spec "clojure-vim/acid.nvim" {:ft "clojure"})
+   (spec "venantius/vim-eastwood" {:ft "clojure"})
+   (spec "venantius/vim-cljfmt" {:ft "clojure"})
 
    "bakpakin/fennel.vim"
    (spec "Olical/nvim-local-fennel" {:enabled false})
@@ -270,7 +272,13 @@
                              :version "*"
                              :config true})
    (spec "lukas-reineke/headlines.nvim" {:dependencies "nvim-treesitter/nvim-treesitter"
-                                         :opts {:norg {:headline_highlights ["Headline1" "Headline2" "Headline3" "Headline4" "Headline5"]
+                                         :opts {:norg {:headline_highlights [
+                                                                             "Headline1"
+                                                                             "Headline2"
+                                                                             "Headline3"
+                                                                             "Headline4"
+                                                                             "Headline5"
+                                                                             ]
                                                        :codeblock_highlight ["NeorgCodeBlock"]}}})
    ])
 
@@ -279,7 +287,8 @@
    ;; Show a sign in the gutter to signify changes
    (spec "mhinz/vim-signify" {:init #(do
                                        (set vim.g.signify_realtime 1)
-                                       (set vim.g.signify_vcs_list ["git" "hg"]))})
+                                       (set vim.g.signify_vcs_list ["git" "hg"]))
+                              :disable true})
 
    ;; Perform various git functions
    (spec "NeogitOrg/neogit" {:dependencies ["nvim-lua/plenary.nvim"
