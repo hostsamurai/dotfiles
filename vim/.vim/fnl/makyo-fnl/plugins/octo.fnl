@@ -5,20 +5,20 @@
 
 (def issue-mappings
   {
-   "close_issue"       {:lhs "<leader>oiic" :desc "close issue"}
-   "reopen_issue"      {:lhs "<leader>oiio" :desc "reopen issue"}
-   "list_issues"       {:lhs "<leader>oiil" :desc "list open issues on same repo"}
+   "close_issue"       {:lhs "<leader>goic" :desc "close issue"}
+   "reopen_issue"      {:lhs "<leader>goio" :desc "reopen issue"}
+   "list_issues"       {:lhs "<leader>goil" :desc "list open issues on same repo"}
    "reload"            {:lhs "<C-r>"        :desc "reload issue"}
    "open_in_browser"   {:lhs "<C-b>"        :desc "open issue in browser"}
    "copy_url"          {:lhs "<C-y>"        :desc "copy url to system clipboard"}
-   "add_assignee"      {:lhs "<leader>oiaa" :desc "add assignee"}
-   "remove_assignee"   {:lhs "<leader>oiad" :desc "remove assignee"}
-   "create_label"      {:lhs "<leader>oilc" :desc "create label"}
-   "add_label"         {:lhs "<leader>oila" :desc "add label"}
-   "remove_label"      {:lhs "<leader>oild" :desc "remove label"}
-   "goto_issue"        {:lhs "<leader>oigi" :desc "navigate to a local repo issue"}
-   "add_comment"       {:lhs "<leader>oica" :desc "add comment"}
-   "delete_comment"    {:lhs "<leader>oicd" :desc "delete comment"}
+   "add_assignee"      {:lhs "<leader>goia" :desc "add assignee"}
+   "remove_assignee"   {:lhs "<leader>goid" :desc "remove assignee"}
+   "create_label"      {:lhs "<leader>goilc" :desc "create label"}
+   "add_label"         {:lhs "<leader>goila" :desc "add label"}
+   "remove_label"      {:lhs "<leader>goild" :desc "remove label"}
+   "goto_issue"        {:lhs "<leader>goigi" :desc "navigate to a local repo issue"}
+   "add_comment"       {:lhs "<leader>goica" :desc "add comment"}
+   "delete_comment"    {:lhs "<leader>goicd" :desc "delete comment"}
    })
 
 (def pull-request-mappings
