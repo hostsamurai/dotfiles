@@ -68,7 +68,7 @@
                :n [#(nvim.exec "FloatermToggle<space>" true) "toggle named"]
                :t ["<cmd>FloatermToggle<cr>" "toggle last"]
                }
-
+           :R ["<cmd>FloatermUpdate --height=0.8 --width=0.8" "resize to 80%"]
            }
        }
    })
