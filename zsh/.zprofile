@@ -19,6 +19,8 @@ function {
   local kernel=`uname`
 
   if [[ $kernel = "Darwin" ]]; then
+    # Make shell aware of homebrew
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     # Programs installed by homebrew should appear before the
     # system-provided equivalents.
     export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
