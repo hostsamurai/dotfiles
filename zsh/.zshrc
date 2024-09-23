@@ -185,6 +185,8 @@ if [[ `uname` == 'Linux' ]]; then
   alias pps='sudo powerpill -S '
   alias ppsyu='sudo powerpill -Syu'
   alias ppss='powerpill -Ss'
+
+  alias restart-network='sudo systemctl restart systemd-resolved systemd-networkd.service'
 fi
 
 alias cljs='shadow-cljs'
