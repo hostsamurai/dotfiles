@@ -56,7 +56,14 @@
 (def visual-mode-layers
   (a.merge! {:mode "v"} (to-new-spec layers.visual-mode-layers)))
 
+(def terminal-mode-layers
+  (a.merge! {:mode "t"} (to-new-spec layers.terminal-mode-layers)))
+
 (defn setup-mappings []
   (let [wk (utils.safe-require "which-key")
-        all-layers [normal-mode-layers visual-mode-layers]]
+        all-layers [
+                    normal-mode-layers
+                    visual-mode-layers
+                    terminal-mode-layers
+                    ]]
     (wk.add all-layers)))
