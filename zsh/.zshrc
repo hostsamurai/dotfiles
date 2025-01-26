@@ -183,10 +183,13 @@ if [[ `uname` == 'Linux' ]]; then
   alias pS='sudo pacman -S '
   alias psyu='sudo pacman -Syu'
   alias pps='sudo powerpill -S '
-  alias ppsyu='sudo powerpill -Syu'
-  alias ppss='powerpill -Ss'
+  alias ppsyu='sudo pacman -Syu'
+  alias ppss='pacman -Ss'
 
   alias restart-network='sudo systemctl restart systemd-resolved systemd-networkd.service'
+
+  alias vpn.up='sudo wg-quick up /etc/wireguard/wg0.conf'
+  alias vpn.down='sudo wg-quick down /etc/wireguard/wg0.conf'
 fi
 
 alias cljs='shadow-cljs'
