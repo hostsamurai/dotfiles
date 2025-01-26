@@ -251,6 +251,7 @@
    "Apeiros-46B/qalc.nvim"
    "simnalamburt/vim-mundo"
    "acustodioo/vim-tmux"
+   "DAmesberger/sc-im.nvim"
 
    (spec "voldikss/vim-floaterm" {:init #(set vim.g.floaterm_rootmarkers [".git" ".gitignore"])})
 
