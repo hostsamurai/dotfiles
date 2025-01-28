@@ -5,7 +5,8 @@
   "coc.preferences.formatOnSave": true,
 
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
   },
 
   // Suggestions
@@ -15,8 +16,18 @@
   // Snippets
   "snippets.userSnippetsDirectory": "$HOME/.local/share/nvim/custom_snippets",
 
+  "css.format.enable": true,
+
   "javascript.suggest.includeCompletionsForImportStatements": true,
+  "javascript.format.enable": true,
+
+  "json.format.enable": true,
+  "json.schemaDownload.enable": true,
+
   "typescript.suggest.includeCompletionsForImportStatements": true,
+  "typescript.format.enable": true,
+
+  "yaml.format.enable": false,
 
   // LSP
   "languageserver": {
@@ -29,5 +40,6 @@
       "trace.server": "verbose",
       "initializationOptions": {}
     }
-  }
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }
