@@ -25,6 +25,7 @@ function {
     # system-provided equivalents.
     export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
     export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
+    export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
   elif [[ $kernel = "Linux" ]]; then
     # Reference the environment variable created by the systemd unit
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
