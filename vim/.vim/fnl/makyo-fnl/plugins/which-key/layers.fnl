@@ -25,9 +25,9 @@
                :name "+coc"
                :a ["<plug>(coc-codeaction)"  "execute action"]
                :f ["<plug>(coc-fix-current)" "auto fix"]
-               :c ["<cmd>CocConfig<cr>"              "open coc config"]
-               :r ["<cmd>CocRestart<cr>"             "restart language server"]
-               :u ["<cmd>CocUpdate<cr>"              "update coc"]
+               :c ["<cmd>CocConfig<cr>"      "open coc config"]
+               :r ["<cmd>CocRestart<cr>"     "restart language server"]
+               :u ["<cmd>CocUpdate<cr>"      "update coc"]
                }
            :t {
                :name "+treesitter"

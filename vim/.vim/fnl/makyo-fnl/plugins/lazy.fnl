@@ -22,7 +22,7 @@
          {:event "VeryLazy"
           :opts {
                  :spec (a.merge normal-mode-layers visual-mode-layers)
-                 ;:triggers {1 "<leader>" :mode ["n" "v"]}
+                 :triggers {1 "<leader>" :mode ["n" "v"]}
                  :plugins {:presets {
                                      :operators false
                                      :motions false
@@ -41,7 +41,9 @@
   [
    (spec "neoclide/coc.nvim" {:branch  "release"
                               :init #(when (utils.is-darwin?)
-                                       (set nvim.g.coc_node_path "~/.proto/bin/node"))})
+                                       (set nvim.g.coc_node_path "~/.proto/bin/node")
+                                       (set nvim.g.coc_snippet_next "<C-j>")
+                                       (set nvim.g.coc_snippet_prev "<C-k>"))})
 
    "jsfaint/gen_tags.vim"
    "liuchengxu/vista.vim"
@@ -218,21 +220,6 @@
 
    (spec "guileen/vim-node" {:ft "javascript"})
    (spec "myhere/vim-nodejs-complete" {:ft "javascript"})
-   (spec "prettier/vim-prettier"
-         {:build "npm install --frozen-lockfile --production"
-          :ft [
-               "javascript"
-               "typescript"
-               "typescriptreact"
-               "less"
-               "css"
-               "scss"
-               "json"
-               "graphql"
-               "markdown"
-               "yaml"
-               "html"
-               ]})
 
    (spec "tpope/vim-rails" {:ft  "ruby"})
 
@@ -246,12 +233,14 @@
    (spec "bfredl/nvim-luadev" {:ft "lua"})
    "svermeulen/vimpeccable"
 
-   "teal-language/vim-teal"
+   (spec "teal-language/vim-teal" {:disable true})
 
    "vim-pandoc/vim-pandoc"
 
+   ;; Markdown
    (spec "iamcco/markdown-preview.nvim" {:ft ["markdown" "pandoc.markdown" "rmd"]
                                          :build "cd app && yarn install"})
+   (spec "davidmh/mdx.nvim" {:dependencies "nvim-treesitter/nvim-treesitter"})
 
    ;; An interactive scratchpad
    "metakirby5/codi.vim"
@@ -364,8 +353,7 @@
    "junegunn/fzf"
    (spec "junegunn/fzf.vim" {:init #(set vim.g.fzf_command_prefix "Fzf")})
 
-   (spec "jlanzarotta/bufexplorer" {:lazy true
-                                    :init #(set vim.g.bufExplorerDisableDefaultKeyMapping 1)})
+   (spec "jlanzarotta/bufexplorer" {:init #(set vim.g.bufExplorerDisableDefaultKeyMapping 1)})
 
    (spec "Yggdroot/indentLine" {:init #(do
                                          (set vim.g.indentLine_fileTypeExclude ["text" "help"])
