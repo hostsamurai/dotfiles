@@ -180,9 +180,11 @@ alias sudo='sudo '
 if [[ `uname` == 'Linux' ]]; then
   alias pls='pacman -Qen'
   alias plsaur='pacman -Qm'
+  alias pql='pacman -Ql'
+  alias prd='sudo pacman -Rd'
   alias pS='sudo pacman -S '
   alias psyu='sudo pacman -Syu'
-  alias pps='sudo powerpill -S '
+  alias pps='sudo pacman -S '
   alias ppsyu='sudo pacman -Syu'
   alias ppss='pacman -Ss'
 
