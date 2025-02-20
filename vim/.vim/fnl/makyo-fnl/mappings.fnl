@@ -62,7 +62,10 @@
     ;; Ctrl + U --> CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo
     (keymap "i" "<C-U>" "<C-G>u<C-U>" {:noremap true})
     ;; Ctrl + d --> Delete text after the cusor position in insert mode.
-    (keymap "i" "<C-d>" "<C-[>ld$A" {:noremap true})))
+    (keymap "i" "<C-d>" "<C-[>ld$A" {:noremap true})
+
+    ;; Shift + Enter --> Paste from global register
+    (keymap "i" "<S-Insert>" "<C-R>+<CR>" {:noremap true})))
 
 (defn- setup-visual-mode-mappings []
   (do
