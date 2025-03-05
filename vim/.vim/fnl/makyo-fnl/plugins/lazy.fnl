@@ -158,11 +158,54 @@
    "windwp/nvim-ts-autotag"
 
    ;; LSP support
-   "neovim/nvim-lspconfig"
-   "williamboman/mason.nvim"
-   "williamboman/mason-lspconfig.nvim"
-   (spec "nvimdev/lspsaga.nvim" {:dependencies "nvim-lspconfig"
-                                 :config true})
+   (spec "neovim/nvim-lspconfig" {:dependencies ["nvimdev/lspsaga.nvim"]})
+   (spec "williamboman/mason.nvim" {:config #(let [mason (require :mason)]
+                                               (mason.setup))})
+   (spec "williamboman/mason-lspconfig.nvim"
+         {:config #(let [mason-config (require :mason-lspconfig)]
+                     (mason-config.setup {
+                                          :automatic_installation true
+                                          :ensure_installed [
+                                                             "astro"
+                                                             "ast_grep"
+                                                             "bashls"
+                                                             "clojure_lsp"
+                                                             "cssls"
+                                                             "css_variables"
+                                                             "eslint"
+                                                             "fennel_ls"
+                                                             "harper_ls"
+                                                             "html"
+                                                             "htmx"
+                                                             "jsonls"
+                                                             "lua_ls"
+                                                             "ruby_lsp"
+                                                             "ts_ls"
+                                                             "vtsls"
+                                                             ]
+                                          }))})
+   (spec "WhoIsSethDaniel/mason-tool-installer.nvim"
+         {:config #(let [mason-tool-installer (require :mason-tool-installer)]
+                     (mason-tool-installer.setup {
+                                                  :auto_update true
+                                                  :ensure_installed [
+                                                                     "ts-standard"
+                                                                     "mdx-analyzer"
+                                                                     "htmlbeautifier"
+                                                                     "typescript-language-server"
+                                                                     "clojure-lsp"
+                                                                     "clj-kondo"
+                                                                     "cljfmt"
+                                                                     "html-lsp"
+                                                                     "css-lsp"
+                                                                     "css-variables-language-server"
+                                                                     "astro-language-server"
+                                                                     ]
+                                                  }))})
+   (spec "nvimdev/lspsaga.nvim"
+         {:dependencies ["nvim-treesitter/nvim-treesitter" "nvim-tree/nvim-web-devicons"]
+          :config #(let [lspsaga (require :lspsaga)]
+                     (lspsaga.setup {}))})
 
    ;; DSP support
    "mfussenegger/nvim-dap"
@@ -196,12 +239,16 @@
                       (set vim.g.jscomplete_use ["dom" "moz" "es6th"])
                       (set vim.g.clojure_align_multiline_strings 0)))})
 
+   "wuelnerdotexe/vim-astro"
+
+   ;; Clojure
    (spec "tpope/vim-fireplace" {:ft "clojure"})
    (spec "dgrnbrg/vim-redl" {:ft "clojure"})
    (spec "clojure-vim/acid.nvim" {:ft "clojure"})
    (spec "venantius/vim-eastwood" {:ft "clojure"})
    (spec "venantius/vim-cljfmt" {:ft "clojure"})
 
+   ;; Fennel
    "bakpakin/fennel.vim"
    (spec "Olical/nvim-local-fennel" {:enabled false})
    "Olical/aniseed"

@@ -29,6 +29,12 @@
                :r ["<cmd>CocRestart<cr>"     "restart language server"]
                :u ["<cmd>CocUpdate<cr>"      "update coc"]
                }
+           :m {
+               :name "+mason"
+               :i [#(utils.prompt-and-run "LS to install: " ":MasonInstall ") "install language server"]
+               :u ["<cmd>MasonUpdate<cr>" "update all LSPs"]
+               :t ["<cmd>MasonToolsUpdate<cr>" "update all tools"]
+               }
            :t {
                :name "+treesitter"
                :i [#(utils.prompt-and-run "Language to install: " ":TSInstall ") "install language"]
