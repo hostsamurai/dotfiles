@@ -55,7 +55,12 @@
 
 (defn- setup-insert-mode-mappings []
   (do
-    (vim.keymap.set :i "<CR>" "coc#pum#visible() ? coc#pum#confirm() : \"<C-g>u<CR><c-r>=coc#on_enter()<CR>\"" {:expr true :silent true :desc "Lets you use <CR> to confirm completion."})
+    (vim.keymap.set :i "<CR>" "coc#pum#visible() ? coc#pum#confirm() : \"<C-g>u<CR><c-r>=coc#on_enter()<CR>\""
+                    {
+                     :expr true
+                     :silent true
+                     :desc "Lets you use <CR> to confirm completion."
+                     })
 
     ;; jk --> Escape from insert mode without stretching your fingers
     (keymap "i" "jk" "<ESC>" {:noremap true})
