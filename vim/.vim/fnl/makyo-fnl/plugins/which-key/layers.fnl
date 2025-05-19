@@ -24,8 +24,10 @@
            :c {
                :name "+coc"
                :a ["<plug>(coc-codeaction)"  "execute action"]
-               :f ["<plug>(coc-fix-current)" "auto fix"]
                :c ["<cmd>CocConfig<cr>"      "open coc config"]
+               :d ["<cmd>CocDisable<cr>"     "toggle coc off"]
+               :e ["<cmd>CocEnable<cr>"      "toggle coc on"]
+               :f ["<plug>(coc-fix-current)" "auto fix"]
                :r ["<cmd>CocRestart<cr>"     "restart language server"]
                :u ["<cmd>CocUpdate<cr>"      "update coc"]
                }
@@ -483,10 +485,11 @@
        :s    ["<cmd>exe 'split'<cr>"            "horizontal split"]
        :v    ["<cmd>exe 'vsplit'<cr>"           "vertical split"]
        :c    ["<cmd>close<cr>"                  "close current window"]
+       :f    ["<cmd>wincmd w<cr>"               "focus current floating window"]
        :k    ["<cmd>KillAllFloatingWindows<cr>" "kill floating windows"]
        :l    ["<cmd>lopen<cr>"                  "open location list"]
        :q    ["<cmd>copen<cr>"                  "open quickfix"]
-       :W    ["<Plug>(choosewin)"       "jump to window"]
+       :W    ["<Plug>(choosewin)"               "jump to window"]
        "+"   ["<cmd>resize +5<cr>"              "increase height"]
        "-"   ["<cmd>resize -5<cr>"              "decrease height"]
        ;; Ignore the following
