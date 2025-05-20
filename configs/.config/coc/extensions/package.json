@@ -19,9 +19,10 @@
     "coc-tsserver": ">=2.2.0",
     "coc-vimlsp": ">=0.13.1",
     "coc-yaml": ">=1.9.0",
-    "coc-pairs": ">=1.4.2"
+    "coc-pairs": ">=1.4.2",
+    "coc-sh": ">=1.2.4"
   },
   "disabled": [],
   "locked": [],
-  "lastUpdate": 1739898243751
+  "lastUpdate": 1747236902476
 }
