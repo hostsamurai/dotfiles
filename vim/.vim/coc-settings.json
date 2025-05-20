@@ -1,8 +1,8 @@
 {
   // COC Preferences
-  "coc.preferences.hoverTarget": "float",
-  "coc.preferences.extensionUpdateCheck": "weekly",
+  "extensions.updateCheck": "weekly",
   "coc.preferences.formatOnSave": true,
+  "coc.preferences.enableMessageDialog": true,
 
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -27,7 +27,8 @@
   "typescript.suggest.includeCompletionsForImportStatements": true,
   "typescript.format.enable": true,
 
-  "yaml.format.enable": false,
+  "yaml.format.enable": true,
+  "yaml.format.bracketSpacing": false,
 
   // LSP
   "languageserver": {
@@ -41,5 +42,6 @@
       "initializationOptions": {}
     }
   },
+
   "snippets.ultisnips.pythonPrompt": false
 }
