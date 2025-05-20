@@ -24,6 +24,12 @@ function {
     # Programs installed by homebrew should appear before the
     # system-provided equivalents.
     export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
+    # Do the same for LibreSSL and cURL
+    export PATH="/opt/homebrew/opt/libressl/bin:/opt/homebrew/opt/curl/bin:$PATH"
+    # And the same for Ruby
+    export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+    # Set path for different Python versions
+    export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:$PATH"
     export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
     export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
   elif [[ $kernel = "Linux" ]]; then
