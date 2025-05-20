@@ -241,6 +241,9 @@
 
    "wuelnerdotexe/vim-astro"
 
+   ;; Templating
+   "tpope/vim-liquid"
+
    ;; Clojure
    (spec "tpope/vim-fireplace" {:ft "clojure"})
    (spec "dgrnbrg/vim-redl" {:ft "clojure"})
