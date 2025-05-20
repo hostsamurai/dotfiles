@@ -292,9 +292,16 @@
                                          :build "cd app && yarn install"})
    (spec "davidmh/mdx.nvim" {:dependencies "nvim-treesitter/nvim-treesitter"})
 
-   ;; An interactive scratchpad
-   "metakirby5/codi.vim"
-  ])
+   ;; Interactive REPL inside the editor
+   (spec "pappasam/nvim-repl"
+         {:keys [
+                 [ "<Leader>c" "<Plug>(ReplSendCell)"   {:mode "n" :desc "Send Repl Cell"} ]
+                 [ "<Leader>r" "<Plug>(ReplSendLine)"   {:mode "n" :desc "Send Repl Line"} ]
+                 [ "<Leader>r" "<Plug>(ReplSendVisual)" {:mode "x" :desc "Send Repl Visual Selection"} ]
+                 ]})
+
+   "yasuhiroki/github-actions-yaml.vim"
+   ])
 
 (def- application-plugins
   [
