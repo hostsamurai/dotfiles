@@ -23,9 +23,18 @@
 #		endsnippet
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet => "arrow function" wA
+(${1:param}${2::${3:type}}) => {
+	${4:// fn body}
+}$5
+endsnippet
 
-snippet story "user story template" b
-*AS A* $1
-*I WANT TO* $2
-*SO THAT* $3
+snippet a=> "arrow function" wA
+async (${1:param}${2::${3:type}}) => {
+	${4:// fn body}
+}$5
+endsnippet
+
+snippet i=> "inline arrow function" wA
+(${1:param}${2::${3:type}}) => ({ $4 })$5
 endsnippet
