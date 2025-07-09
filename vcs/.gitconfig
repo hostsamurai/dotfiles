@@ -30,7 +30,7 @@
   dump = cat-file -p
   rb = rebase
   rbc = rebase --continue
-  rbm = rebase master
+  rbm = "!f() { git rb $(git br -rl '*/HEAD' | awk -F/ '{print $NF}'); }; f"
   rh = reset --hard
   rml = remote prune origin
   rmld = remote prune origin --dry-run
