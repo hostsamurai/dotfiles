@@ -130,6 +130,11 @@ module.exports = {
     // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
+
+    // configure theme
+    hyperMonokaiPro: {
+      theme: !!process.env.IS_WORK_LAPTOP ? "ristretto" : "octagon",
+    },
   },
 
   // a list of plugins to fetch and install from npm
@@ -138,7 +143,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyperterm-monokai"],
+  plugins: ["hyper-monokai-pro"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
