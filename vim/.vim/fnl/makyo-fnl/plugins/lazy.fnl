@@ -285,7 +285,9 @@
    (spec "Olical/conjure"
          {:ft  ["clojure" "scheme" "racket" "chicken" "fennel"]
           :init (fn []
-                  (set vim.g.conjure#client#fennel#aniseed#aniseed_module_prefix "aniseed."))})
+                  (do
+                    (set vim.g.conjure#client#fennel#aniseed#aniseed_module_prefix "aniseed.")
+                    (set vim.g.conjure#filetype#fennel "conjure.client.fennel.aniseed")))})
 
    (spec "kovisoft/paredit"
          {:ft  ["clojure" "scheme" "racket" "chicken" "fennel"]
