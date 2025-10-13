@@ -487,6 +487,7 @@
        :s    ["<cmd>exe 'split'<cr>"            "horizontal split"]
        :v    ["<cmd>exe 'vsplit'<cr>"           "vertical split"]
        :c    ["<cmd>close<cr>"                  "close current window"]
+       :C    ["<cmd>set cmdheight=2<cr>"        "fix command line height"]
        :f    ["<cmd>wincmd w<cr>"               "focus current floating window"]
        :k    ["<cmd>KillAllFloatingWindows<cr>" "kill floating windows"]
        :l    ["<cmd>lopen<cr>"                  "open location list"]
@@ -494,19 +495,6 @@
        :W    ["<Plug>(choosewin)"               "jump to window"]
        "+"   ["<cmd>resize +5<cr>"              "increase height"]
        "-"   ["<cmd>resize -5<cr>"              "decrease height"]
-       ;; Ignore the following
-       "2" "which_key_ignore"
-       "=" "which_key_ignore"
-       "|" "which_key_ignore"
-       :d  "which_key_ignore"
-       :h  "which_key_ignore"
-       :H  "which_key_ignore"
-       :j  "which_key_ignore"
-       :J  "which_key_ignore"
-       :K  "which_key_ignore"
-       :L  "which_key_ignore"
-       :r  "which_key_ignore"
-       :w  "which_key_ignore"
        }
    })
 
