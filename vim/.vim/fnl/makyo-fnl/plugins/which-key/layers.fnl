@@ -28,13 +28,15 @@
                :d ["<cmd>CocDisable<cr>"     "toggle coc off"]
                :e ["<cmd>CocEnable<cr>"      "toggle coc on"]
                :f ["<plug>(coc-fix-current)" "auto fix"]
+               :u ["<cmd>CocCommand extensions.forceUpdateAll<cr>" "force update extensions"]
                :r ["<cmd>CocRestart<cr>"     "restart language server"]
                :u ["<cmd>CocUpdate<cr>"      "update coc"]
                }
            :m {
                :name "+mason"
                :i [#(utils.prompt-and-run "LS to install: " ":MasonInstall ") "install language server"]
-               :u ["<cmd>MasonUpdate<cr>" "update all LSPs"]
+               :m ["<cmd>Mason<cr>" "show manager window"]
+               :u ["<cmd>MasonUpdate<cr>" "update registries"]
                :t ["<cmd>MasonToolsUpdate<cr>" "update all tools"]
                }
            :t {
@@ -68,7 +70,7 @@
            :k ["<cmd>FloatermKill<cr>"        "kill"]
            :K [#(nvim.exec "FloatermKill " true) "kill named"]
            :n ["<cmd>FloatermNext<cr>"        "next instance"]
-           :N [#(nvim.cmd {:cmd "FloatermNew --name="} {:output true}) "new named terminal"]
+           :N [#(utils.prompt-and-run "Terminal name: " "FloatermNew --name=" ) "new named terminal"]
            :p ["<cmd>FloatermPrev<cr>"        "previous instance"]
            :t ["<cmd>FloatermNew<cr>"         "new terminal"]
            :T {
