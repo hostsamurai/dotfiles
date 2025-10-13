@@ -2,7 +2,7 @@
   // COC Preferences
   "extensions.updateCheck": "weekly",
   "coc.preferences.formatOnSave": true,
-  "coc.preferences.enableMessageDialog": true,
+  "coc.preferences.messageDialogKind": "notification",
 
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -15,7 +15,12 @@
 
   // Snippets
   "snippets.userSnippetsDirectory": "$HOME/.local/share/nvim/custom_snippets",
+  "snippets.ultisnips.pythonPrompt": false,
 
+  "coc.source.emoji.enable": true,
+  "coc.source.emoji.filetypes": null,
+
+  // Language-specific options
   "css.format.enable": true,
 
   "javascript.suggest.includeCompletionsForImportStatements": true,
@@ -41,7 +46,5 @@
       "trace.server": "verbose",
       "initializationOptions": {}
     }
-  },
-
-  "snippets.ultisnips.pythonPrompt": false
+  }
 }
