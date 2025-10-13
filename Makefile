@@ -7,7 +7,7 @@ command-width := 15
 
 ifeq ($(UNAME_S), Linux)
 	ignore = '.tmux-osx.conf'
-	defer = 'Library'
+	defer = '.hyper.js'
 else
 	ignore = '.gvimrc'
 endif
@@ -96,6 +96,7 @@ spacemacs:
 ifeq ($(UNAME_S), 'Linux')
 configs:
 	stow -R configs --defer $(defer)
+	# TODO: spawn a new shell, cd to ~/.hyper_plugins, and run `npm i`
 else
 configs:
 	stow -R configs
