@@ -133,7 +133,7 @@ module.exports = {
 
     // configure theme
     hyperMonokaiPro: {
-      theme: !!process.env.IS_WORK_LAPTOP ? "ristretto" : "octagon",
+      theme: "octagon",
     },
   },
 

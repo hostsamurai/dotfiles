@@ -7,6 +7,7 @@ command-width := 15
 
 ifeq ($(UNAME_S), Linux)
 	ignore = '.tmux-osx.conf'
+	defer = 'Library'
 else
 	ignore = '.gvimrc'
 endif
@@ -92,8 +93,13 @@ spacemacs:
 	@$(call print-bold-header, "Stowing spacemacs...")
 	stow -R spacemacs
 
+ifeq ($(UNAME_S), 'Linux')
+configs:
+	stow -R configs --defer $(defer)
+else
 configs:
 	stow -R configs
+endif
 
 clean:
 	stow -D zsh vcs tmux vim spacemacs configs
