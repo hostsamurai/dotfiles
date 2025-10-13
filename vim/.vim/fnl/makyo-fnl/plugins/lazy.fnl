@@ -105,6 +105,33 @@
                                            (set vim.g.Hexokinase_ftDisabled  ["help"]))})
 
    "mattn/emmet-vim"
+
+   ;; AI
+   (spec "ravitemer/mcphub.nvim" {:dependencies "nvim-lua/plenary.nvim"
+                                  :build "npm install -g mcp-hub@latest"
+                                  :config #(let [mcphub (require :mcphub)]
+                                             (mcphub.setup {}))})
+   (spec "github/copilot.vim" {:lazy false})
+   (spec "CopilotC-Nvim/CopilotChat.nvim" {:dependencies "nvim-lua/plenary.nvim"
+                                           :build "make tiktoken"})
+   (spec "yetone/avante.nvim" {:dependencies [
+                                              "nvim-lua/plenary.nvim"
+                                              "MunifTanjim/nui.nvim"
+                                              ;; The below dependencies are optional
+                                              "ibhagwan/fzf-lua" ;; for file_selector provider fzf
+                                              "stevearc/dressing.nvim" ;; for input provider dressing
+                                              "folke/snacks.nvim" ;; for input provider snacks
+                                              "nvim-tree/nvim-web-devicons"
+                                              "zbirenbaum/copilot.lua" ;; for providers='copilot'
+                                              ;; support for image pasting
+                                              (spec "HakonHarnes/img-clip.nvim" {:event "VeryLazy"
+                                                                                 :opts {:default {"embed_image_as_base64" false "prompt_for_file_name" false "drag_and_drop" {"insert_mode" true}}}})
+                                              (spec "MeanderingProgrammer/render-markdown.nvim" {:opts {:file_types ["markdown" "avante"]}
+                                                                                                 :ft ["markdown" "avante"]})
+                                              ]
+                               :build "make"
+                               :event "VeryLazy"})
+
    ])
 
 (def- text-manipulation-plugins
@@ -173,7 +200,7 @@
                                                              "cssls"
                                                              "css_variables"
                                                              "eslint"
-                                                             "fennel_ls"
+                                                             "fennel_language_server"
                                                              "harper_ls"
                                                              "html"
                                                              "htmx"
@@ -487,7 +514,6 @@
   ;; treesitter-compatible color schemes
    (spec "nvimdev/zephyr-nvim" {:lazy true})
    (spec "Iron-E/nvim-highlite" {:lazy true})
-   ;; TODO: set this as the default theme
    (spec "rockerBOO/boo-colorscheme-nvim" {:lazy true
                                            :priority 1000
                                            :opts {:italic true :theme "crimson_moonlight"}
