@@ -133,7 +133,7 @@ module.exports = {
 
     // configure theme
     hyperMonokaiPro: {
-      theme: "ristretto",
+      theme: "ristretto", // or 'octagon'
     },
   },
 
@@ -145,13 +145,9 @@ module.exports = {
   //   `project#1.0.1`
   plugins: ["hyper-monokai-pro"],
 
-  // in development, you can create a directory under
-  // `~/.hyper_plugins/local/` and include it here
-  // to load it and avoid it being `npm install`ed
-  localPlugins: ["universal_theme"],
-
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
   },
 };
+
