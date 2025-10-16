@@ -10,7 +10,7 @@
 (defn- create-dynamic-ripgrep [query fullscreen]
   (let [q (or query "")
         f (or fullscreen false)
-        command-fmt "rg --column --line-number --no-heading --color=always --smart-case --hidden --iglob '!.git' -- %s || true"
+        command-fmt "rg --column --line-number --no-heading --color=always --smart-case --hidden --iglob '!.git' -- '%s' || true"
         inital-cmd (nvim.fn.printf command-fmt (nvim.fn.shellescape q))
         reload-cmd (nvim.fn.printf command-fmt "{q}")
         spec {:options ["--phony" "--multi" "--query" q "--bind" (.. "change:reload:" reload-cmd)]}
@@ -30,9 +30,8 @@
     (set nvim.g.fzf_action {"ctrl-t" "tab vsplit" "ctrl-s" "split" "ctrl-v" "vsplit"})
     (set nvim.g.fzf_history_dir "~/.local/share/fzf-history")
     ;; [Buffers] Jump to existing window if possible
-    (set nvim.g.fzf_buffers_jump 1)
     ;; [Tags] Command to generate tags files
-    (set nvim.g.fzf_tags_command "ctags -R")))
+    (set nvim.g.fzf_vim {:buffers_jump 1 :tags_command "ctags -R"})))
 
 (defn- create-custom-fzf-commands []
   ;; Set up a command for using the advanced rg integration fn above.

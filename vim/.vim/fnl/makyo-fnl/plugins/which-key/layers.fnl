@@ -30,7 +30,7 @@
                :f ["<plug>(coc-fix-current)" "auto fix"]
                :u ["<cmd>CocCommand extensions.forceUpdateAll<cr>" "force update extensions"]
                :r ["<cmd>CocRestart<cr>"     "restart language server"]
-               :u ["<cmd>CocUpdate<cr>"      "update coc"]
+               :u ["<cmd>CocUpdate<cr>"      "update extensions"]
                }
            :m {
                :name "+mason"
