@@ -178,6 +178,7 @@ alias vim='nvim'
 alias sudo='sudo '
 
 if [[ `uname` == 'Linux' ]]; then
+  alias pqi='pacman -Qi'
   alias pls='pacman -Qen'
   alias plsaur='pacman -Qm'
   alias pql='pacman -Ql'
@@ -187,11 +188,15 @@ if [[ `uname` == 'Linux' ]]; then
   alias pps='sudo pacman -S '
   alias ppsyu='sudo pacman -Syu'
   alias ppss='pacman -Ss'
+  alias parus='paru -S --aur'
 
   alias restart-network='sudo systemctl restart systemd-resolved systemd-networkd.service'
 
   alias vpn.up='sudo wg-quick up /etc/wireguard/wg0.conf'
   alias vpn.down='sudo wg-quick down /etc/wireguard/wg0.conf'
+
+  # free swap
+  alias freeswap='sudo swapoff -a; sudo swapon -a'
 fi
 
 alias cljs='shadow-cljs'
