@@ -455,7 +455,7 @@
        :u [#(nvim.exec (a.str "FzfRRG " (nvim.fn.expand "<cword>")) true) "word under cursor"]
        :s {
            :name "+replace"
-           :s ["Farr" "replace"]
+           :s ["<cmd>Farr<cr>" "manual replace all"]
            }
        }
    })
