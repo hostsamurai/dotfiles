@@ -32,26 +32,7 @@
             (a.kv-pairs old-spec)))
 
 (def normal-mode-layers
-  (to-new-spec
-    (a.merge
-      layers.root-mappings
-      layers.application-layer
-      layers.buffer-layer
-      layers.comment-and-compile-layer
-      layers.file-layer
-      layers.fzf-layer
-      layers.version-control-layer
-      layers.insertion-layer
-      layers.jumps-and-folds-layer
-      layers.modes-layer
-      layers.project-layer
-      layers.plugins-layer
-      layers.search-layer
-      layers.spelling-layer
-      layers.toggles-layer
-      layers.windows-layer
-      layers.text-layer
-      )))
+  (to-new-spec layers.normal-mode-layers))
 
 (def visual-mode-layers
   (a.merge! {:mode "v"} (to-new-spec layers.visual-mode-layers)))
@@ -64,6 +45,5 @@
         all-layers [
                     normal-mode-layers
                     visual-mode-layers
-                    terminal-mode-layers
                     ]]
     (wk.add all-layers)))
