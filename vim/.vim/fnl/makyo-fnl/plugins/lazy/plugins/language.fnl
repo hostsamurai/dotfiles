@@ -124,10 +124,10 @@
    (spec "kovisoft/paredit"
          {:ft  ["clojure" "scheme" "racket" "chicken" "fennel"]
           :init #(do
-                   (set vim.g.paredit_mode 1)
-                   (set vim.g.paredit_shortmaps 1)
-                   (set vim.g.paredit_smartjump 1)
-                   (set vim.g.paredit_leader "\\"))})
+                   (set nvim.g.paredit_mode 1)
+                   (set nvim.g.paredit_shortmaps 1)
+                   (set nvim.g.paredit_smartjump 1)
+                   (set nvim.g.paredit_leader "\\"))})
 
    (spec "guileen/vim-node" {:ft "javascript"})
    (spec "myhere/vim-nodejs-complete" {:ft "javascript"})

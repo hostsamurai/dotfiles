@@ -20,6 +20,11 @@
                :s [#(nvim.ex.execute "':normal ' . g:maplocalleader . 'ls'") "open horizontally"]
                :v [#(nvim.ex.execute "':normal ' . g:maplocalleader . 'lv'") "open vertically"]
                }
+           :p {
+               :name "+paredit"
+               :e [(set nvim.g.paredit_mode 1) "enable paredit"]
+               :d [(set nvim.g.paredit_mode 0) "disable paredit"]
+               }
            }
        :m {
            :name "+markdown"
