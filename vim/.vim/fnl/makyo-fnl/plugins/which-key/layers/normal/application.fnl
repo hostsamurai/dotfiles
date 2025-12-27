@@ -74,5 +74,11 @@
                }
            :R ["<cmd>FloatermUpdate --height=0.8 --width=0.8" "resize to 80%"]
            }
+       :z {
+           :name "+sc-im"
+           :c ["<cmd>lua require('sc-im').close()<cr>" "close sc-im view"]
+           :o ["<cmd>lua require('sc-im').open_in_scim()<cr>" "open table in sc-im"]
+           :r ["<cmd>lua require('sc-im').update(true)<cr>" "recalculate table"]
+           }
        }
    })
