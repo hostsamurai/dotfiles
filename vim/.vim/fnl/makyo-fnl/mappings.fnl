@@ -104,6 +104,7 @@
   (do
     (keymap "" ";" "<Plug>(clever-f-repeat-forward)" {})
     (keymap "" "," "<Plug>(clever-f-repeat-back)" {})
+    (keymap "" "-" ":lua MiniFiles.open()<CR>" {})
 
     (keymap "" "<Leader><TAB>" ":b#<cr>" {})
 

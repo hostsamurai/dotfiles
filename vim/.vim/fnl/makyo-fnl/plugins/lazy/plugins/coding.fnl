@@ -17,11 +17,9 @@
    "honza/vim-snippets"
    "Shougo/context_filetype.vim"
 
-   (spec "justinmk/vim-dirvish" {:init #(set vim.g.dirvish_mode ":sort ,^.*[\\/],")})
-   ;; Show git status flags along Dirvish
-   "kristijanhusak/vim-dirvish-git"
-   ;; List all files defined by your projections with the Dirvish plugin
-   "fsharpasharp/vim-dirvinist"
+   (spec "nvim-mini/mini.nvim" {:version "*"
+                                :config #(let [minifiles (utils.safe-require "mini.files")]
+                                           (minifiles.setup))})
 
    (spec "numToStr/Comment.nvim" {:lazy false})
 
