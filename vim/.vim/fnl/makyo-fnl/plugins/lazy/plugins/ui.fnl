@@ -1,25 +1,18 @@
 (module makyo-fnl.plugins.lazy.plugins.ui
-  {require {{: trimr} aniseed.string
-            {: spec} makyo-fnl.plugins.lazy.spec}})
+  {require {nvim aniseed.nvim
+            a aniseed.core
+            {: trimr} aniseed.string
+            {: spec} makyo-fnl.plugins.lazy.spec
+            aleph makyo-fnl.plugins.alpha
+            utils makyo-fnl.utils}})
 
 (def ui-plugins
   [
-   (spec "mhinz/vim-startify" {:init #(do
-                                        (set vim.g.startify_session_dir "~/.config/nvim/sessions")
-                                        (set vim.g.startify_lists [{:type "files"     :header ["   Files"]}
-                                                                   {:type "dir"       :header [(let [cwd (vim.fn.getcwd)]
-                                                                                                 (.. "   Current Directory " cwd))]}
-                                                                   {:type "sessions"  :header ["   Sessions"]}
-                                                                   {:type "bookmarks" :header ["   Bookmarks"]}])
-                                        (set vim.g.startify_bookmarks [{:I  "~/dotfiles/vim/.vim/init.vim"}
-                                                                       {:P  "~/dotfiles/vim/.vim/fnl/makyo-fnl/which-key/layers.fnl"}
-                                                                       {:V  "~/dotfiles/vim/.vim/fnl/init.fnl"}
-                                                                       {:Z  "~/dotfiles/zsh/.zshrc"}
-                                                                       "~/Code"])
-                                        (set vim.g.startify_session_persistence 1)
-                                        (set vim.g.startify_change_to_vcs_root 0 )
-                                        (set vim.g.startify_session_sort 1)
-                                        (set vim.g.startify_enable_special 0))})
+   (spec "goolord/alpha-nvim" {:dependencies ["nvim-tree/nvim-web-devicons" "nvim-mini/mini.nvim"]
+                               :config #(let [alpha (utils.safe-require "alpha")
+                                              dashboard (utils.safe-require "alpha.themes.dashboard")
+                                              custom-layout (aleph.create-config dashboard)]
+                                          (alpha.setup custom-layout))})
 
    "junegunn/fzf"
    (spec "junegunn/fzf.vim" {:init #(set vim.g.fzf_command_prefix "Fzf")})

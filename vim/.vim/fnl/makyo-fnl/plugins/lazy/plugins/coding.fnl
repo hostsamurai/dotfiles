@@ -18,8 +18,14 @@
    "Shougo/context_filetype.vim"
 
    (spec "nvim-mini/mini.nvim" {:version "*"
-                                :config #(let [minifiles (utils.safe-require "mini.files")]
-                                           (minifiles.setup))})
+                                :priority 51
+                                :config #(let [minifiles (utils.safe-require "mini.files")
+                                               minisessions (utils.safe-require "mini.sessions")]
+                                           (do
+                                             (minifiles.setup)
+                                             (minisessions.setup {:directory (.. (nvim.fn.stdpath "data") "/sessions")})
+                                             ;; Expose `MiniSessions` outside of the `:lua` context.
+                                             (set nvim.g.makyo_sessions minisessions)))})
 
    (spec "numToStr/Comment.nvim" {:lazy false})
 

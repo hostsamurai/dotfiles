@@ -1,5 +1,6 @@
 (module makyo-fnl.plugins.which-key.layers.normal.application
-    {require {nvim aniseed.nvim}
+    {require {a aniseed.core
+              nvim aniseed.nvim}
      autoload {utils makyo-fnl.plugins.which-key.utils}})
 
 (def application-layer
@@ -42,11 +43,9 @@
            }
        :s {
            :name "+session"
-           :d [#(utils.prompt-and-run "Name of session to delete: " "SDelete ") "delete session"]
-           :o ["<cmd>SLoad<cr>"         "open"]
-           :O ["<cmd>SLoad!<cr>"        "open last session"]
-           :s [#(utils.prompt-and-run "Name of session to save: " "SSave ") "save new"]
-           :u ["<cmd>SSave!<cr>"        "save current"]
+           :d [#(utils.prompt-and-run "Name of session to delete: " nvim.g.makyo_sessions.delete) "delete session"]
+           :o [#(nvim.g.makyo_sessions.select) "open"]
+           :s [#(utils.prompt-and-run "Name of session to save: " (partial nvim.g.makyo_sessions.write)) "save new"]
            }
        :S {
            :name "+scratchpad"
