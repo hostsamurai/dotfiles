@@ -1,8 +1,11 @@
 {
   // COC Preferences
-  "extensions.updateCheck": "weekly",
+  "extensions.updateCheck": "daily",
   "coc.preferences.formatOnSave": true,
   "coc.preferences.messageDialogKind": "notification",
+
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
 
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
