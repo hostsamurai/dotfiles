@@ -17,10 +17,11 @@
 
    ;; LSP support
    (spec "neovim/nvim-lspconfig" {:dependencies ["nvimdev/lspsaga.nvim"]})
-   (spec "williamboman/mason.nvim" {:config #(let [mason (require :mason)]
+   (spec "mason-org/mason.nvim" {:config #(let [mason (require :mason)]
                                                (mason.setup))})
-   (spec "williamboman/mason-lspconfig.nvim"
-         {:config #(let [mason-config (require :mason-lspconfig)]
+   (spec "mason-org/mason-lspconfig.nvim"
+         {:dependencies ["mason-org/mason.nvim" "neovim/nvim-lspconfig"]
+          :config #(let [mason-config (require :mason-lspconfig)]
                      (mason-config.setup {
                                           :automatic_installation true
                                           :ensure_installed [
@@ -31,7 +32,7 @@
                                                              "cssls"
                                                              "css_variables"
                                                              "eslint"
-                                                             "fennel_language_server"
+                                                             "fennel_ls"
                                                              "harper_ls"
                                                              "html"
                                                              "htmx"
@@ -143,8 +144,6 @@
    (spec "tjdevries/manillua.nvim" {:ft "lua"})
    (spec "bfredl/nvim-luadev" {:ft "lua"})
    "svermeulen/vimpeccable"
-
-   (spec "teal-language/vim-teal" {:disable true})
 
    "vim-pandoc/vim-pandoc"
 
