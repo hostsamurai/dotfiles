@@ -56,6 +56,7 @@
            }
        :t {
            :name "+terminal"
+           :b [#(Snacks.terminal) "bottom-split terminal"]
            ;; FIXME: What we want to do here is the equivalent of
            ;; mapping the key to a command
            :c [#(utils.prompt-and-run "Command to run: " "FloatermNew ") "run command"]
@@ -71,7 +72,7 @@
                :n [#(nvim.exec "FloatermToggle<space>" true) "toggle named"]
                :t ["<cmd>FloatermToggle<cr>" "toggle last"]
                }
-           :R ["<cmd>FloatermUpdate --height=0.8 --width=0.8" "resize to 80%"]
+           :R ["<cmd>FloatermUpdate --height=0.8 --width=0.8<cr>" "resize to 80%"]
            }
        :z {
            :name "+sc-im"
