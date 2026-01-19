@@ -55,6 +55,7 @@
                 :e [#(utils.prompt-and-run "PR #: " ":Octo pr edit ") "edit PR <number> in current repo"]
                 :L [#(utils.prompt-and-run "Filters: " ":Octo pr list  ") "list all PRs satisfying given filter"]
                 :m [#(utils.prompt-and-run "Merge method [commit|rebase|squash|delete]: " ":Octo merge ") "merge current PR using the specified method"]
+                :o ["<cmd>Octo pr<cr>"	        "open PR for current branch"]
                 :l ["<cmd>Octo pr list<cr>"	    "list all PRs"]
                 :s ["<cmd>Octo pr search<cr>"   "live issue search"]
                 :r ["<cmd>Octo pr reopen<cr>"   "reopen the PR"]
