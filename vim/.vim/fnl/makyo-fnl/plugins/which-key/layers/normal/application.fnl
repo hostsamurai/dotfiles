@@ -46,6 +46,7 @@
            :d [#(utils.prompt-and-run "Name of session to delete: " nvim.g.makyo_sessions.delete) "delete session"]
            :o [#(nvim.g.makyo_sessions.select) "open"]
            :s [#(utils.prompt-and-run "Name of session to save: " (partial nvim.g.makyo_sessions.write)) "save new"]
+           :S [#(nvim.g.makyo_sessions.write) "save existing"]
            }
        :S {
            :name "+scratchpad"
