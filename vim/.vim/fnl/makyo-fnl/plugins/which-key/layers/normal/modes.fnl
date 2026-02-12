@@ -1,10 +1,21 @@
 (module makyo-fnl.plugins.which-key.layers.normal.modes
-    {require {nvim aniseed.nvim}})
+  {require {nvim aniseed.nvim}})
 
 (def modes-layer
   {
+   :name "+modes"
    :m {
-       :name "+modes"
+       :a {
+           :name "+ai"
+           :c {
+               :name "+claude"
+               :c ["<cmd>tabnew ~./claude/settings.json<cr>" "open settings"]
+               :p ["<cmd>ClaudeCodeResume<cr>" "conversation picker"]
+               :t ["<cmd>ClaudeCode<cr>" "toggle window"]
+               :r ["<cmd>ClaudeCodeResume<cr>" "resume most recent conversation"]
+               :v ["<cmd>ClaudeCodeVerbose<cr>" "verbose logging"]
+               }
+           }
        :l {
            :name "+lisp"
            :b [#(nvim.ex.execute "':normal ' . g:maplocalleader . 'eb'") "eval buffer"]

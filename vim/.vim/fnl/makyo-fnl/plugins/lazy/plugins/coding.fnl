@@ -77,6 +77,9 @@
    "mattn/emmet-vim"
 
    ;; AI
+   (spec "greggh/claude-code.nvim" {:dependencies "nvim-lua/plenary.nvim"
+                                    :config #(let [claude-code (require :claude-code)]
+                                               (claude-code.setup {}))})
    (spec "ravitemer/mcphub.nvim" {:dependencies "nvim-lua/plenary.nvim"
                                   :build "npm install -g mcp-hub@latest"
                                   :config #(let [mcphub (require :mcphub)]
