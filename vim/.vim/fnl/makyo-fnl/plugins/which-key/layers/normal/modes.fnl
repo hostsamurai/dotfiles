@@ -3,17 +3,24 @@
 
 (def modes-layer
   {
-   :name "+modes"
    :m {
+       :name "+modes"
        :a {
            :name "+ai"
            :c {
                :name "+claude"
                :c ["<cmd>tabnew ~./claude/settings.json<cr>" "open settings"]
-               :p ["<cmd>ClaudeCodeResume<cr>" "conversation picker"]
+               :p ["<cmd>ClaudeCodeResume<cr>"  "conversation picker"]
                :t ["<cmd>ClaudeCode<cr>" "toggle window"]
                :r ["<cmd>ClaudeCodeResume<cr>" "resume most recent conversation"]
                :v ["<cmd>ClaudeCodeVerbose<cr>" "verbose logging"]
+               :s {
+                   :name "+settings"
+                   :c ["<cmd>tabnew ~./claude/settings.json<cr>" "open settings in new tab"]
+                   :C ["<cmd>e ~./claude/settings.json<cr>" "open settings in current window"]
+                   :m ["<cmd>tabnew .mcp.json<cr>" "open project MCP config in new tab"]
+                   :M ["<cmd>e .mcp.json<cr>" "open project MCP settings in current window"]
+                   }
                }
            }
        :l {
