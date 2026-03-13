@@ -5,5 +5,5 @@
    "jremmen/vim-ripgrep"
    "bronson/vim-visual-star-search"
    "Lokaltog/vim-easymotion"
-   "brooth/far.vim"
+   "MagicDuck/grug-far.nvim"
   ])
