@@ -35,6 +35,10 @@
    (spec "comfysage/evergarden" {:lazy true
                                  :priority 1000
                                  :opts {:contrast_dark "medium"}})
+   (spec "sontungexpt/witch" {:lazy false
+                              :priority 1000
+                              :config #(let [witch (require "witch")]
+                                         (witch.setup $2))})
    (spec "ray-x/starry.nvim" {:lazy false
                               :priority 1000
                               :opts {:style {:name "dracula_blood"}
