@@ -12,6 +12,9 @@
 
    (spec "lbrayner/vim-rzip" {:lazy true})
 
+   ;; Paste images from system clipboard
+   (spec "HakonHarnes/img-clip.nvim" {:event "VeryLazy"})
+
    ;; Neorg support
    (spec "nvim-neorg/neorg" {:lazy false
                              :version "*"
