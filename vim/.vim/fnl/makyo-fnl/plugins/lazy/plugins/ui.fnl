@@ -19,10 +19,15 @@
 
    (spec "jlanzarotta/bufexplorer" {:init #(set vim.g.bufExplorerDisableDefaultKeyMapping 1)})
 
-   (spec "Yggdroot/indentLine" {:init #(do
-                                         (set vim.g.indentLine_fileTypeExclude ["text" "help"])
-                                         (set vim.g.indentLine_bufNameExclude ["_.*" "Startify*"])
-                                         (set vim.g.indentLine_char "┊"))})
+   (spec "nvimdev/indentmini.nvim" {:cmd ["IndentToggle" "IndentEnable" "IndentDisable"]
+                                    :lazy true
+                                    :config #(let [indentmini (utils.safe-require "indentmini")]
+                                               (indentmini.setup {:only_current false
+                                                                  :enabled true
+                                                                  :minlevel 4
+                                                                  :char "▏"
+                                                                  :exclude ["markdown" "help" "text" "terminal"]
+                                                                  :exclude_nodetype ["string" "comment"]}))})
 
    (spec "tomtom/quickfixsigns_vim" {:init #(set vim.g.quickfixsigns_classes ["marks"])})
 
