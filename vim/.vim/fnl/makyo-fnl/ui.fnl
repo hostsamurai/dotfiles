@@ -12,13 +12,6 @@
 
     (set nvim.g.neovide_cursor_animation_length 0.13)
 
-    (when (nvim.fn.has "gui_running")
-      (nvim.command "set guioptions-=t") ;; no tearoff menu items
-      (nvim.command "set guioptions-=m") ;; no menubar
-      (nvim.command "set guioptions-=l") ;; same as above - never present
-      (nvim.command "set guioptions-=R") ;; no right scrollbar
-    )
-
     (if (->> (nvim.fn.system  "uname")
              trimr
              (= "Linux"))
