@@ -76,6 +76,11 @@
 
    "mattn/emmet-vim"
 
+   ;; Devcontainer support
+   (spec "https://codeberg.org/esensar/nvim-dev-container" {:dependencies "nvim-treesitter/nvim-treesitter"
+                                                            :config #(let [devcontainer (utils.safe-require "devcontainer")]
+                                                                       (devcontainer.setup {:generate_commands true}))})
+
    ;; AI
    (spec "greggh/claude-code.nvim" {:dependencies "nvim-lua/plenary.nvim"
                                     :config #(let [claude-code (require :claude-code)]
@@ -87,22 +92,4 @@
    (spec "github/copilot.vim" {:lazy false})
    (spec "CopilotC-Nvim/CopilotChat.nvim" {:dependencies "nvim-lua/plenary.nvim"
                                            :build "make tiktoken"})
-   (spec "yetone/avante.nvim" {:dependencies [
-                                              "nvim-lua/plenary.nvim"
-                                              "MunifTanjim/nui.nvim"
-                                              ;; The below dependencies are optional
-                                              "ibhagwan/fzf-lua" ;; for file_selector provider fzf
-                                              "stevearc/dressing.nvim" ;; for input provider dressing
-                                              "folke/snacks.nvim" ;; for input provider snacks
-                                              "nvim-tree/nvim-web-devicons"
-                                              "zbirenbaum/copilot.lua" ;; for providers='copilot'
-                                              ;; support for image pasting
-                                              (spec "HakonHarnes/img-clip.nvim" {:event "VeryLazy"
-                                                                                 :opts {:default {"embed_image_as_base64" false "prompt_for_file_name" false "drag_and_drop" {"insert_mode" true}}}})
-                                              (spec "MeanderingProgrammer/render-markdown.nvim" {:opts {:file_types ["markdown" "avante"]}
-                                                                                                 :ft ["markdown" "avante"]})
-                                              ]
-                               :build "make"
-                               :event "VeryLazy"})
-
    ])

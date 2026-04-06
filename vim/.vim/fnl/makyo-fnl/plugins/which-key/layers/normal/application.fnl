@@ -27,6 +27,14 @@
                :u ["<cmd>CocUpdate<cr>"      "update extensions"]
                :U ["<cmd>CocCommand extensions.forceUpdateAll<cr>"      "update extensions"]
                }
+           :d {
+               :name "+devcontainer"
+               :a ["<cmd>DevcontainerAttach<cr>" "attach defined in devcontainer.json"]
+               :r [#(utils.prompt-and-run "Execute: " ":DevcontainerExec ") "execute command"]
+               :r ["<cmd>DevcontainerRemove<cr>" "remove"]
+               :s ["<cmd>DevcontainerStart<cr>" "start"]
+               :S ["<cmd>DevcontainerStopAll<cr>" "stop"]
+               }
            :m {
                :name "+mason"
                :i [#(utils.prompt-and-run "LS to install: " ":MasonInstall ") "install language server"]
