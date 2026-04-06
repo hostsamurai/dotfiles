@@ -151,6 +151,7 @@
    (spec "iamcco/markdown-preview.nvim" {:ft ["markdown" "pandoc.markdown" "rmd"]
                                          :build "cd app && yarn install"})
    (spec "davidmh/mdx.nvim" {:dependencies "nvim-treesitter/nvim-treesitter"})
+   (spec "MeanderingProgrammer/render-markdown.nvim" {:dependencies ["nvim-treesitter/nvim-treesitter" "nvim-mini/mini.icons"]})
 
    ;; Interactive REPL inside the editor
    (spec "pappasam/nvim-repl"

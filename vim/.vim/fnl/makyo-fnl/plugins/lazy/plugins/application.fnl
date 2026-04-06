@@ -19,13 +19,4 @@
    (spec "nvim-neorg/neorg" {:lazy false
                              :version "*"
                              :config true})
-   (spec "lukas-reineke/headlines.nvim" {:dependencies "nvim-treesitter/nvim-treesitter"
-                                         :opts {:norg {:headline_highlights [
-                                                                             "Headline1"
-                                                                             "Headline2"
-                                                                             "Headline3"
-                                                                             "Headline4"
-                                                                             "Headline5"
-                                                                             ]
-                                                       :codeblock_highlight ["NeorgCodeBlock"]}}})
    ])
