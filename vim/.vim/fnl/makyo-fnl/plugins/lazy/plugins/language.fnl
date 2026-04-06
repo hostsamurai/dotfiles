@@ -1,15 +1,14 @@
 (module makyo-fnl.plugins.lazy.plugins.language
   {require {nvim aniseed.nvim
+            ts makyo-fnl.plugins.treesitter
             {: spec} makyo-fnl.plugins.lazy.spec}})
 
 (def language-plugins
   [
-   (spec "nvim-treesitter/nvim-treesitter" {:build (fn []
-                                                     (if (nvim.fn.exists ":TSUpdate")
-                                                       (nvim.command "TSUpdate")
-                                                       (let [ts-install (require :nvim-treesitter.install)
-                                                             ts-update (ts-install.update {:with_sync true})]
-                                                         (ts-update))))})
+   (spec "nvim-treesitter/nvim-treesitter" {:branch "main"
+                                            :lazy false
+                                            :build ":TSUpdate"
+                                            :config #(ts.init)})
 
    ;; Treesitter support
    "nvim-treesitter/nvim-treesitter-context"
