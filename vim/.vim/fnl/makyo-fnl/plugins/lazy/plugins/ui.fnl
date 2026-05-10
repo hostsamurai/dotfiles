@@ -37,7 +37,14 @@
    ;; automatic window resizing
    (spec "camspiers/lens.vim" {:dependencies ["camspiers/animate.vim"]})
 
-   (spec "t9md/vim-choosewin" {:init #(set vim.g.choosewin_overlay_enable 1)})
+   (spec "s1n7ax/nvim-window-picker" {:name "window-picker"
+                                      :event "VeryLazy"
+                                      :version "2.*"
+                                      :config #(let [window-picker (utils.safe-require "window-picker")]
+                                                 (do
+                                                   ;; Expose widow-picker outside of the `:lua` context
+                                                   (set nvim.g.windowpicker window-picker)
+                                                   (window-picker.setup)))})
 
    "TaDaa/vimade"
 
