@@ -1,6 +1,7 @@
 (module makyo-fnl.plugins.lazy.plugins.language
   {require {nvim aniseed.nvim
             ts makyo-fnl.plugins.treesitter
+            utils makyo-fnl.utils
             {: spec} makyo-fnl.plugins.lazy.spec}})
 
 (def language-plugins
@@ -150,7 +151,9 @@
    (spec "iamcco/markdown-preview.nvim" {:ft ["markdown" "pandoc.markdown" "rmd"]
                                          :build "cd app && yarn install"})
    (spec "davidmh/mdx.nvim" {:dependencies "nvim-treesitter/nvim-treesitter"})
-   (spec "MeanderingProgrammer/render-markdown.nvim" {:dependencies ["nvim-treesitter/nvim-treesitter" "nvim-mini/mini.icons"]})
+   (spec "MeanderingProgrammer/render-markdown.nvim" {:dependencies ["nvim-treesitter/nvim-treesitter" "nvim-mini/mini.icons"]
+                                                      :config #(let [render-markdown (utils.safe-require "render-markdown")]
+                                                                 (render-markdown.setup {:heading {:border true :border_virtual true}}))})
 
    ;; Interactive REPL inside the editor
    (spec "pappasam/nvim-repl"
