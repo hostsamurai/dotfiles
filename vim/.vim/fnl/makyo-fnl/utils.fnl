@@ -1,6 +1,7 @@
 ;;; An assortment of helper functions
 (module makyo-fnl.utils
-  {autoload {nvim aniseed.nvim}})
+  {autoload {a aniseed.core
+             nvim aniseed.nvim}})
 
 (defn is-darwin? []
   (-> (nvim.fn.system "uname")
@@ -13,6 +14,13 @@
       (nvim.fn.trim)
       (string.lower)
       (= "linux")))
+
+(defn is-claude-installed? []
+  (-> (nvim.fn.system "which claude")
+      (nvim.fn.trim)
+      (string.match "/claude$")
+      (a.nil?)
+      (not)))
 
 (defn safe-require [mod]
   "Calls `require` within a protected call to prevent any failures

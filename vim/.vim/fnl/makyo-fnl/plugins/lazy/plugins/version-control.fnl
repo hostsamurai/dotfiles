@@ -1,6 +1,7 @@
 (module makyo-fnl.plugins.lazy.plugins.version-control
   {require {a aniseed.core
-            {: spec} makyo-fnl.plugins.lazy.spec}
+            {: spec} makyo-fnl.plugins.lazy.spec
+            utils makyo-fnl.utils}
    autoload {octo makyo-fnl.plugins.octo}})
 
 (def version-control-plugins
@@ -48,6 +49,11 @@
                                  :lazy true
                                  :config #(autoload {{: init} gitlinker}
                                                     (init {:mappings nil}))})
+   ;; Worktree support
+   (spec "afonsofrancof/worktrees.nvim" {:event "VeryLazy"
+                                         :opts {:base_path (if utils.is-claude-installed?
+                                                               "../claude"
+                                                               ".")}})
 
    "tyru/open-browser.vim"
 

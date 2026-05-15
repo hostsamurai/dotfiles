@@ -139,5 +139,11 @@
            :name "+url"
            :b [#(nvim.cmd {:cmd "lua require\"gitlinker\".get_buf_range_url(\"n\", {action_callback = require\"gitlinker.actions\".open_in_browser})<CR>"} {:mods {:silent true}}) "buf range URL"]
            }
+       :w {
+           :name "+worktrees"
+           :c ["<cmd>WorktreeCreate<cr>" "Create a worktree"]
+           :d ["<cmd>WorktreeDelete<cr>" "Delete a worktree"]
+           :s ["<cmd>WorktreeSwitch<cr>" "Switch to worktree"]
+           }
        }
    })
