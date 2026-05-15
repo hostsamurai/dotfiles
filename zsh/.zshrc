@@ -61,7 +61,6 @@ zplug "plugins/lein",    from:oh-my-zsh
 
 zplug "rupa/z", use:z.sh
 zplug "Tarrasch/zsh-bd", use:bd.zsh
-zplug "b4b4r07/enhancd", use:init.sh
 zplug "jamesob/desk", as:command, use:"desk.sh", hook-load:"shell_plugins/zsh/**" defer:2
 zplug "jocelynmallon/zshmarks"
 zplug "hlissner/zsh-autopair", defer:2
