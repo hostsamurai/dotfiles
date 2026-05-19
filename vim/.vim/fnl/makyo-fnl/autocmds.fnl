@@ -4,7 +4,8 @@
   {autoload {a aniseed.core
              compile aniseed.compile
              nvim aniseed.nvim
-             {: setup-mappings} makyo-fnl.plugins.which-key}
+             {: setup-mappings} makyo-fnl.plugins.which-key
+             colors makyo-fnl.colors}
    import-macros [[ac :aniseed.macros.autocmds]]})
 
 (defn- to-transpiled-filename [filename]
@@ -33,6 +34,12 @@
                                        (nvim.echo "Refreshing shortcuts...")
                                        (setup-mappings))})))
 
+(defn- create-autoupdate-airline-theme-autocmd []
+  "Updates the airline theme for certain color schemes"
+  (nvim.create_autocmd ["ColorScheme"]
+                       {:pattern "*"
+                        :callback #(colors.tweak-color-scheme)}))
+
 (defn- create-ts-fold-workaround-autocmd []
   "Avoid the \"No folds found\" error when initializing treesitter
   through packer.nvim"
@@ -45,7 +52,8 @@
 (defn- create_general_autocmds []
   (do
     (create-plugin-config-refresh-autocmd)
-    (create-shortcuts-refresh-autocmd)))
+    (create-shortcuts-refresh-autocmd))
+    (create-autoupdate-airline-theme-autocmd))
 
 (defn init []
   (do
