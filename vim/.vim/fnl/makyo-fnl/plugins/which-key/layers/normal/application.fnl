@@ -65,7 +65,7 @@
            }
        :t {
            :name "+terminal"
-           :b [#(Snacks.terminal) "bottom-split terminal"]
+           :b ["<cmd>FloatermNew --wintype=split<cr>" "bottom-split terminal"]
            ;; FIXME: What we want to do here is the equivalent of
            ;; mapping the key to a command
            :c [#(utils.prompt-and-run "Command to run: " "FloatermNew ") "run command"]
