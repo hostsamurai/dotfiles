@@ -1,7 +1,8 @@
 ;;;; General user mappings not necessarily tied to any layers
 (module makyo-fnl.mappings
   {require {a aniseed.core
-            nvim aniseed.nvim}})
+            nvim aniseed.nvim
+            utils makyo-fnl.utils}})
 
 (local keymap nvim.set_keymap)
 
@@ -69,8 +70,11 @@
     ;; Ctrl + d --> Delete text after the cusor position in insert mode.
     (keymap "i" "<C-d>" "<C-[>ld$A" {:noremap true})
 
-    ;; Shift + Enter --> Paste from global register
-    (keymap "i" "<S-Insert>" "<C-R>+<CR>" {:noremap true})))
+    (if-let [result (utils.is-linux?)]
+      ;; Shift + Enter --> Paste from global register
+      (keymap "i" "<S-Insert>" "<C-R>+" {:noremap true :silent true})
+      ;; Cmd + v --> do the same but for OS X
+      (keymap "i" "<D-v>" "<C-R>+" {:noremap true :silent true}))))
 
 (defn- setup-visual-mode-mappings []
   (do
