@@ -3,8 +3,7 @@
 
 (def themes
   [
-   (spec "ntk148v/vim-horizon" {:lazy true
-                                :config #(vim.cmd "colorscheme horizon")})
+   (spec "ntk148v/vim-horizon" {:lazy true})
    (spec "tomasr/molokai" {:lazy true})
    (spec "vim-scripts/fruity.vim" {:lazy true})
    (spec "altercation/vim-colors-solarized" {:lazy true})
@@ -28,18 +27,23 @@
                                            :main "boo-colorscheme"})
    (spec "nvimdev/zephyr-nvim" {:lazy true})
    (spec "savq/melange-nvim" {:lazy true})
-   (spec "matsuuu/pinkmare" {:lazy true})
+   ;; Set as the default
+   (spec "matsuuu/pinkmare" {
+                             :lazy false
+                             :priority 2000
+                             :init #(vim.cmd "colorscheme pinkmare")
+                             })
    (spec "Mofiqul/dracula.nvim" {:lazy true})
    (spec "NTBBloodbath/doom-one.nvim" {:lazy true})
    (spec "sainnhe/sonokai" {:lazy true})
    (spec "comfysage/evergarden" {:lazy true
                                  :priority 1000
                                  :opts {:contrast_dark "medium"}})
-   (spec "sontungexpt/witch" {:lazy false
+   (spec "sontungexpt/witch" {:lazy true
                               :priority 1000
                               :config #(let [witch (require "witch")]
                                          (witch.setup $2))})
-   (spec "ray-x/starry.nvim" {:lazy false
+   (spec "ray-x/starry.nvim" {:lazy true
                               :priority 1000
                               :opts {:style {:name "dracula_blood"}
                                      :italics {:comments true :keywords true}}})

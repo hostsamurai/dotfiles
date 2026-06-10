@@ -6,17 +6,19 @@
             colors makyo-fnl.colors
             fns makyo-fnl.functions
             autocmds makyo-fnl.autocmds
-            mappings makyo-fnl.mappings}})
+            mappings makyo-fnl.mappings
+            a aniseed.core}})
 
 (defn init []
   (do
     (providers.init)
     (plugins.init)
+    (autocmds.init)
     (ux.init)
     (ui.init)
     (colors.init)
     (fns.init)
-    (autocmds.init)
-    (mappings.init)))
+    (mappings.init)
+    (a.println "[makyo] Makyo startup complete")))
 
 (init)

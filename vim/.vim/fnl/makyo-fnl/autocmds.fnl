@@ -5,8 +5,46 @@
              compile aniseed.compile
              nvim aniseed.nvim
              {: setup-mappings} makyo-fnl.plugins.which-key
-             colors makyo-fnl.colors}
+             colors makyo-fnl.colors
+             {: config} makyo-fnl.config}
    import-macros [[ac :aniseed.macros.autocmds]]})
+
+;;; Makyo-specific functions
+
+(def makyo-augroup (nvim.create_augroup "makyo.events" {:clear true}))
+
+(defn apply-config []
+  (when-let [colorscheme (a.get-in config [:colorscheme])]
+    (nvim.exec_autocmds "User" {
+                                :group makyo-augroup
+                                :pattern "MakyoColorScheme"
+                                :modeline false
+                                :data {:colorscheme colorscheme}
+                                })))
+
+(defn- create-set-colorscheme-autocmd []
+  "Creates a custom `autocmd` for changing the color scheme."
+  (nvim.create_autocmd ["User"]
+                       {
+                        :group makyo-augroup
+                        :pattern "MakyoColorScheme"
+                        :callback (fn [event]
+                                    (let [colorscheme (a.get-in event [:data :colorscheme])]
+                                      (nvim.ex.colorscheme colorscheme)))
+                        }))
+
+(defn- create-makyo-initialization-done-autocmd []
+  "Sets up an `autocmd` that fires after all of the Makyo modules
+   have been loaded. It reads the config found in the `makyo-fnl.config`
+   module."
+  (nvim.create_autocmd ["UIEnter"] {:callback apply-config}))
+
+(defn- register-makyo-autocmds []
+  (do
+    (create-makyo-initialization-done-autocmd)
+    (create-set-colorscheme-autocmd)))
+
+;;; General purpose functions
 
 (defn- to-transpiled-filename [filename]
   "Takes a Fennel source filename and returns its Lua counterpart."
@@ -19,10 +57,10 @@
   (let [setup-file "**/makyo-fnl/plugins/setup.fnl"
         transpiled-setup-file (to-transpiled-filename setup-file)]
     (nvim.create_autocmd ["BufWritePost"]
-                        {:pattern setup-file
-                         :callback #(do
-                                      (compile.file setup-file transpiled-setup-file)
-                                      (nvim.command "PackerCompile"))})))
+                         {:pattern setup-file
+                          :callback #(do
+                                       (compile.file setup-file transpiled-setup-file)
+                                       (nvim.command "PackerCompile"))})))
 
 (defn- create-shortcuts-refresh-autocmd []
   "Refresh which-key shortcuts."
@@ -51,6 +89,7 @@
 
 (defn- create_general_autocmds []
   (do
+    (register-makyo-autocmds)
     (create-plugin-config-refresh-autocmd)
     (create-shortcuts-refresh-autocmd))
     (create-autoupdate-airline-theme-autocmd))
