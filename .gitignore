@@ -1,3 +1,6 @@
+.worktrees
+
+vim/.local/bin
 vim/.local/share
 vim/.local/state
 vim/.vim/autoload/plug.vim
