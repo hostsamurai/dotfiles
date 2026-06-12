@@ -1,0 +1,73 @@
+(import-macros {: module
+                : def
+                }
+                :nfnl.macros.aniseed)
+
+(module makyo-fnl.plugins.lazy.plugins.version-control)
+
+(local {: merge} (require :nfnl.core))
+(local {: spec} (require :makyo-fnl.plugins.lazy.spec))
+(local utils (require :makyo-fnl.utils))
+(local octo (require :makyo-fnl.plugins.octo))
+
+(def version-control-plugins
+  [
+   ;; Show a sign in the gutter to signify changes
+   (spec "mhinz/vim-signify" {:init #(do
+                                       (set vim.g.signify_realtime 1)
+                                       (set vim.g.signify_vcs_list ["git" "hg"]))
+                              :disable true})
+
+   ;; Perform various git functions
+   (spec "NeogitOrg/neogit" {:dependencies ["m00qek/baleia.nvim"
+                                            "sindrets/diffview.nvim"
+                                            "ibhagwan/fzf-lua"
+                                            ]
+                             :lazy true
+                             :cmd "Neogit"
+                             :config {:integrations {"fzf_lua" true}}})
+
+   (spec "pwntester/octo.nvim" {:dependencies ["nvim-lua/plenary.nvim"
+                                               "ibhagwan/fzf-lua"
+                                               "nvim-tree/nvim-web-devicons"
+                                               ]
+                                :config {:ui {"use_signcolumn" true}
+                                         :picker "fzf-lua"
+                                         :mappings {:issue (merge octo.issue-mappings octo.reaction-mappings)
+                                                    :pull_request octo.pull-request-mappings
+                                                    :review_thread octo.review-thread-mappings
+                                                    :submit_win octo.submit-win-mappings
+                                                    :review_diff octo.review-diff-mappings
+                                                    :file_panel octo.file-panel-mappings}}})
+
+   ;; Open commit messages in a popup window
+   (spec "rhysd/git-messenger.vim" {:lazy true :cmd  "GitMessenger"})
+
+   (spec "samoshkin/vim-mergetool" {:init #(do
+                                             (set vim.g.mergetool_layout "LmR")
+                                             (set vim.g.mergetool_prefer_revision "local"))})
+
+   "f-person/git-blame.nvim"
+   (spec "APZelos/blamer.nvim" {:init #(do
+                                         (set vim.g.blamer_show_in_insert_modes 0)
+                                         (set vim.g.blamer_show_in_visual_modes  0)
+                                         (set vim.g.blamer_relative_time  1))})
+
+   (spec "ruifm/gitlinker.nvim" {:dependencies ["nvim-lua/plenary.nvim"]
+                                 :lazy true
+                                 :config #(require {{: init} gitlinker}
+                                            (init {:mappings nil}))})
+   ;; Worktree support
+   (spec "afonsofrancof/worktrees.nvim" {:event "VeryLazy"
+                                         :opts {:base_path (if utils.is-claude-installed?
+                                                               "../claude"
+                                                               ".")}})
+
+   "tyru/open-browser.vim"
+
+   (spec "tyru/open-browser-github.vim" {:dependencies ["tyru/open-browser.vim"]
+                                         :init #(set vim.g.openbrowser_github_always_d_branch 1)})
+  ])
+
+;; Export them
+version-control-plugins
