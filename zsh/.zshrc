@@ -189,7 +189,7 @@ if [[ `uname` == 'Linux' ]]; then
   alias ppss='pacman -Ss'
   alias parus='paru -S --aur'
 
-  alias restart-network='sudo systemctl restart systemd-resolved systemd-networkd.service'
+  alias restart-network='sudo systemctl restart systemd-networkd.service systemd-resolved.service'
 
   alias vpn.up='sudo wg-quick up /etc/wireguard/wg0.conf'
   alias vpn.down='sudo wg-quick down /etc/wireguard/wg0.conf'
