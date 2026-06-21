@@ -1,0 +1,3 @@
+local wezterm = require("wezterm")
+local ui_config = {font = wezterm.font("FiraCode Nerd Font"), font_size = 11.0, underline_position = "200%", color_scheme = "Dracula (Official)", window_frame = {font = wezterm.font("SF Compact Text")}, hide_tab_bar_if_only_one_tab = true, window_close_confirmation = "NeverPrompt", window_decorations = "INTEGRATED_BUTTONS | RESIZE", keys = {{key = "v", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal({domain = "CurrentPaneDomain"})}, {key = "s", mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical({domain = "CurrentPaneDomain"})}}}
+return ui_config
