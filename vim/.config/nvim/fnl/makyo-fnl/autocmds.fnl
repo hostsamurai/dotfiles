@@ -86,6 +86,17 @@
                        {:pattern "*"
                         :callback #(colors.tweak-color-scheme)}))
 
+(defn- auto-apply-wezterm-config-changes []
+ "Transpiles weztern.fnl to wezterm.lua and places it in the
+  appropriate directory so wezterm can automatically pick up the
+  changes."
+ (let [config-path "configs/.config/wezterm/"
+       src-file (. config-path "wezterm.fnl")
+       dest-file (. config-path "wezterm.lua")]
+  (nvim.create_autocmd ["BufWritePost"]
+                       {:pattern src-file
+                        :callback #(compile.file src-file dest-file)})))
+
 (defn- create_general_autocmds []
   (do
     (register-makyo-autocmds)
