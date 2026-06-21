@@ -40,12 +40,14 @@
    (spec "nvimdev/indentmini.nvim" {:cmd ["IndentToggle" "IndentEnable" "IndentDisable"]
                                     :lazy true
                                     :config #(let [indentmini (utils.safe-require "indentmini")]
-                                               (indentmini.setup {:only_current false
-                                                                  :enabled true
-                                                                  :minlevel 4
-                                                                  :char "▏"
-                                                                  :exclude ["markdown" "help" "text" "terminal"]
-                                                                  :exclude_nodetype ["string" "comment"]}))})
+                                               (do
+                                                 (indentmini.setup {:only_current false
+                                                                    :enabled true
+                                                                    :minlevel 4
+                                                                    :char "▏"
+                                                                    :exclude ["markdown" "help" "text" "terminal"]
+                                                                    :exclude_nodetype ["string" "comment"]})
+                                                 (indentmini.enable)))})
 
    (spec "tomtom/quickfixsigns_vim" {:init #(set vim.g.quickfixsigns_classes ["marks"])})
 
