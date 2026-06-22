@@ -68,6 +68,7 @@
     ;; NOTE: "Olical/nfnl" and "norcalli/nvim.lua" are essential to
     ;; our configuration and must be installed first.
     (vim.opt.rtp:prepend nfnl-path)
+    ;; TODO: Remove nvim.lua entirely
     (vim.opt.rtp:prepend nvim-lua-path)
 
     (when (not (is-nfnl-installed?))
@@ -77,7 +78,7 @@
       (restart-neovim))
 
     ;; Required: setup Lazy.
-    (lazy.setup {:import "makyo-fnl.plugins.lazy.plugins"})
+    (lazy.setup "makyo-fnl.plugins.lazy.plugins")
 
     (when (not (plugins-already-installed?))
       ;; Restore our plugins from the lock file.
