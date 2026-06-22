@@ -25,7 +25,7 @@
                                             ]
                              :lazy true
                              :cmd "Neogit"
-                             :config {:integrations {"fzf_lua" true}}})
+                             })
 
    (spec "pwntester/octo.nvim" {:dependencies ["nvim-lua/plenary.nvim"
                                                "ibhagwan/fzf-lua"

@@ -17,23 +17,10 @@
                                               custom-layout (aleph.create-config dashboard)]
                                           (alpha.setup custom-layout))})
 
-   "junegunn/fzf"
-   (spec "junegunn/fzf.vim" {:init #(do
-                                      (set vim.g.fzf_command_prefix "Fzf")
-                                      (set vim.g.fzf_history_dir "~/.local/share/fzf-history")
-                                      (set vim.g.fzf_vim {
-                                                          :window {:height "50%"}
-                                                          :preview_window ["right,50%" "ctrl-/"]
-                                                          ;; [Buffers] Jump to existing window if possible
-                                                          :buffers_jump 1
-                                                          ;; [Tags] Command to generate tags files
-                                                          :tags_command "ctags -R"
-                                                          })
-                                      (set vim.g.fzf_action {
-                                                             :ctrl-t "tab vsplit"
-                                                             :ctrl-s "split"
-                                                             :ctrl-v "vsplit"
-                                                             }))})
+   (spec "ibhagwan/fzf-lua" {:dependencies ["nvim-tree/nvim-web-devicons"]
+                             :config #(let [fzf-lua (utils.safe-require "fzf-lua")]
+                                        (fzf-lua.setup {:ui_select true
+                                                        :defaults {:rg_opts "--color=never --files -g \"!.git\" -g \"!.jj\" --hidden"}}))})
 
    (spec "jlanzarotta/bufexplorer" {:init #(set vim.g.bufExplorerDisableDefaultKeyMapping 1)})
 

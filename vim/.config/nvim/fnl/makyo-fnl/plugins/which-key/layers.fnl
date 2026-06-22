@@ -26,7 +26,8 @@
 (local {: toggles-layer} (require :makyo-fnl.plugins.which-key.layers.normal.toggles))
 (local {: windows-layer} (require :makyo-fnl.plugins.which-key.layers.normal.windows))
 (local {: text-layer} (require :makyo-fnl.plugins.which-key.layers.normal.text))
-(local {: visual-modes-layers} (require :makyo-fnl.plugins.which-key.layers.visual.modes))
+(local {: visual-fzf-layer} (require :makyo-fnl.plugins.which-key.layers.visual.fzf))
+(local {: visual-modes-layer} (require :makyo-fnl.plugins.which-key.layers.visual.modes))
 (local {: visual-comment-and-compile-layer} (require :makyo-fnl.plugins.which-key.layers.visual.comment-and-compile))
 (local {: visual-version-control-layer} (require :makyo-fnl.plugins.which-key.layers.visual.version-control))
 
@@ -53,7 +54,8 @@
 
 (def visual-mode-layers
   (merge
-      visual-modes-layers
+      visual-fzf-layer
+      visual-modes-layer
       visual-comment-and-compile-layer
       visual-version-control-layer
       ))
