@@ -77,7 +77,7 @@
       (restart-neovim))
 
     ;; Required: setup Lazy.
-    (lazy.setup {:import "makyo-fnl.plugins.lazy.plugins"})
+    (lazy.setup "makyo-fnl.plugins.lazy.plugins")
 
     (when (not (plugins-already-installed?))
       ;; Restore our plugins from the lock file.

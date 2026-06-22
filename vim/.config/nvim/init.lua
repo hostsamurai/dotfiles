@@ -41,7 +41,7 @@ local function restore_plugins()
     restart_neovim()
   else
   end
-  lazy.setup({import = "makyo-fnl.plugins.lazy.plugins"})
+  lazy.setup("makyo-fnl.plugins.lazy.plugins")
   if not plugins_already_installed_3f() then
     lazy.restore()
   else
