@@ -1,0 +1,5 @@
+theme = "Rose Pine Moon"
+
+font-family = "FiraCode Nerd Font Mono"
+font-size = 13
+adjust-cell-height = 15%
