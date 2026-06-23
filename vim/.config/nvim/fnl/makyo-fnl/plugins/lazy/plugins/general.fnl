@@ -27,7 +27,15 @@
           :dependencies "nvim-tree/nvim-web-devicons"
           })
 
-   "skywind3000/asynctasks.vim"
+   (spec "folke/snacks.nvim"
+         {:priority 1000
+          :lazy false
+          :opts {
+                  :input {:enabled true}
+                  :notifier {:enabled true :timeout 3000}
+                  :image {:enabled true}
+                  :scratch {:enabled true :win {:width 200 :height 60}}
+                 }})
    ])
 
 ;; Export them
