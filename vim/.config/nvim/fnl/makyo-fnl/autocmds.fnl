@@ -45,7 +45,7 @@
   "Sets up an `autocmd` that fires after all of the Makyo modules
    have been loaded. It reads the config found in the `makyo-fnl.config`
    module."
-  (nvim.create_autocmd ["UIEnter"] {:callback apply-config}))
+  (nvim.create_autocmd ["VimEnter"] {:callback apply-config}))
 
 (defn- register-makyo-autocmds []
   (do
