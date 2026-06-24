@@ -14,7 +14,7 @@ local function running_headless_3f()
   return (#vim.api.nvim_list_uis() == 0)
 end
 local function restart_neovim()
-  return vim.api.nvim_cmd({cmd = "restart", args = "+qall!"})
+  return vim.api.nvim_cmd({cmd = "restart", args = "+qall!"}, {})
 end
 local function start_makyo()
   return require("makyo-fnl.init")

@@ -34,7 +34,7 @@
   (= (length (vim.api.nvim_list_uis)) 0))
 
 (fn restart-neovim []
-  (vim.api.nvim_cmd {:cmd "restart" :args "+qall!"}))
+  (vim.api.nvim_cmd {:cmd "restart" :args "+qall!"} {}))
 
 (fn start-makyo []
   (require :makyo-fnl.init))
