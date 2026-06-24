@@ -6,7 +6,7 @@
                 : defn}
                :nfnl.macros.aniseed)
 
-(module makyo-fnl.ux)
+(module :makyo-fnl.ux)
 
 (local {: println} (require :nfnl.core))
 

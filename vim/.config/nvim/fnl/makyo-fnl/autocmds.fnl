@@ -7,7 +7,7 @@
                :nfnl.macros.aniseed)
 (import-macros {: when-let} :nfnl.macros)
 
-(module makyo-fnl.autocmds)
+(module :makyo-fnl.autocmds)
 
 (local {: println : get-in} (require :nfnl.core))
 (local nvim (require :nvim))

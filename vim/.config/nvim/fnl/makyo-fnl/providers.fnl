@@ -3,7 +3,7 @@
                 : def}
                :nfnl.macros.aniseed)
 
-(module makyo-fnl.providers)
+(module :makyo-fnl.providers)
 
 (local {: get} (require :nfnl.core))
 (local {: trimr} (require :nfnl.string))

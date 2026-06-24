@@ -19,13 +19,13 @@
 (defn init []
   (do
     (providers.init)
-    (plugins.init)
     (autocmds.init)
+    (plugins.init)
     (ux.init)
     (ui.init)
-    (colors.init)
     (fns.init)
     (mappings.init)
+    (colors.init)
     (println "[makyo] Makyo startup complete")))
 
 (init)

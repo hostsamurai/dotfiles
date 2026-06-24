@@ -1,4 +1,4 @@
-(import-macros {: defn} :nfnl.macros.aniseed)
+(import-macros {: defn : def} :nfnl.macros.aniseed)
 
 (local {: println} (require :nfnl.core))
 (local config (require :nfnl.config))
