@@ -34,10 +34,10 @@
 (def- default-buttons-group-defaults
   [
    ["e" "  New file" "<cmd>ene <CR>"]
-   ["f" "󰈞  Find file" "<cmd>FzfFiles<cr>"]
-   ["r" "  MRU" "<cmd>FzfHistory<cr>"]
-   ["g" "󰈬  Find word" "<cmd>FzfRg<cr>"]
-   ["b" "  Jump to bookmarks" "<cmd>FzfMarks<cr>"]
+   ["f" "󰈞  Find file" "<cmd>FzfLua files<cr>"]
+   ["r" "  MRU" "<cmd>FzfLua history<cr>"]
+   ["g" "󰈬  Find word" "<cmd>FzfLua live_grep<cr>"]
+   ["b" "  Jump to bookmarks" "<cmd>FzfLua marks<cr>"]
    ["s" "  Load a session" #(vim.g.makyo_sessions.select)]
    ["u" "  Update plugins" "<cmd>Lazy sync<CR>"]
    ["q" "󰅚  Quit" "<cmd>qa<CR>"]

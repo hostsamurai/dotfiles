@@ -54,8 +54,7 @@
             :g ["<cmd>FzfLua live_grep_blob<cr>" "blob"]
             :l ["<cmd>FzfLua lines<cr>" "lines"]
             :L ["<cmd>FzfLua lines resume=true<cr>" "resume lines query"]
-            :r ["<cmd>FzfLua live_grep<cr>" "grep"]
-            :R ["<cmd>FzfLua live_grep_resume<cr>" "resume last grep"]
+            :r ["<cmd>FzfLua grep_project<cr>" "grep"]
             :t ["<cmd>FzfLua tags_grep<cr>" "tags"]
             :v ["<cmd>FzfLua lgrep_curbuf<cr>" "current buffer"]
             }
