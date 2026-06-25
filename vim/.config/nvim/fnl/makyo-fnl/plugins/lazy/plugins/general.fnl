@@ -32,7 +32,10 @@
           :lazy false
           :opts {
                   :input {:enabled true}
-                  :notifier {:enabled true :timeout 3000}
+                  :notifier {
+                             :enabled true
+                             :timeout 3000
+                             :win {:statusline "" :statuscolumn ""}}
                   :image {:enabled true}
                   :scratch {:enabled true :win {:width 200 :height 60}}
                  }})
