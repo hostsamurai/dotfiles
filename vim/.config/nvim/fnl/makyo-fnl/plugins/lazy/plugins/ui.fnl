@@ -61,7 +61,7 @@
                    (set vim.g.airline_highlighting_cache  1)
                    (set vim.g.airline_exclude_preview  1)
                    (set vim.g.airline_skip_empty_sections  1)
-                   (set vim.g.airline_exclude_filetypes ["scratch" "alpha" "floaterm"])
+                   (set vim.g.airline_exclude_filetypes ["scratch" "alpha" "floaterm" "snacks_notif"])
 
                    (set vim.g.airline_mode_map {
                                                 "__"   "-"
@@ -89,6 +89,17 @@
                                                     (set vim.g.airline_minimalist_showmod 1))})
 
    (spec "nvim-tree/nvim-web-devicons")
+
+   ;; Color Picker
+   (spec "eero-lehtinen/oklch-color-picker.nvim"
+         {
+          :event "VeryLazy"
+          :version "*"
+          ;; Expose the picker globally so we don't have to `require` it all
+          ;; of the time.
+          :init #(let [colorpicker (utils.safe-require "oklch-color-picker")]
+                   (set vim.g.colorpicker colorpicker))
+          })
   ])
 
 ;; Export them

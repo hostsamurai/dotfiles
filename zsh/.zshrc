@@ -199,7 +199,7 @@ if [[ `uname` == 'Linux' ]]; then
 fi
 
 alias cljs='shadow-cljs'
-alias cljs-new='bunx creaate-cljs-project'
+alias cljs-new='bunx create-cljs-project'
 alias cljs-build='cljs compile app'
 alias cljs-watch='cljs watch app'
 alias cljs-repl='cljs cljs-repl app'
