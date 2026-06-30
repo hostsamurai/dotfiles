@@ -1,0 +1,27 @@
+#!/usr/bin/zsh
+
+setup-headroom-and-claude-alias() {
+  # Prerequisites:
+  #
+  # - A Python virtual environment has already been set up.
+  # - The directory has `.claude` and `.headroom` directories already
+  #   set up.
+  # - Headroom can be called without issue.
+
+  echo "🤕 Initializing headroom... ⏳"
+
+  if [[ -d ".claude" && -d ".headroom" ]]; then
+    # Activate the Python virtual environment
+    if [[ -f .venv-py313/bin/activate ]]; then
+      source .venv-py313/bin/activate
+
+      # Set up necessary environment variables
+      export CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1
+
+      # Create alias which wraps claude by calling headroom
+      alias claude='headroom wrap claude --port 8899 --learn --memory --verbose -- '
+
+      echo "🤕 Headroom set up correctly 👍"
+    fi
+  fi
+}

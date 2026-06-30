@@ -1,7 +1,7 @@
 fpath=(
   $fpath
-  ~/.zsh/functions
   ~/.zsh/functions/**
+  ~/.zsh/hooks/**
 )
 
 if [[ `uname` = "Darwin" ]]; then

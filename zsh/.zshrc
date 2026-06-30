@@ -39,6 +39,11 @@ if command -v nvim > /dev/null; then
   export EDITOR=nvim
 fi
 
+# Hooks
+autoload -U add-zsh-hook
+source ~/.zsh/hooks/headroom-hook
+add-zsh-hook chpwd setup-headroom-and-claude-alias
+
 # ------------------------------------------------
 # Plugins
 # ------------------------------------------------
