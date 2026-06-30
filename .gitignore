@@ -20,6 +20,8 @@ configs/.config/pulse/cookie
 configs/.config/gomp
 configs/.config/mpdscribble
 
+zsh/.zshrc_work
+
 **/node_modules
 pnpm-debug.log
 
