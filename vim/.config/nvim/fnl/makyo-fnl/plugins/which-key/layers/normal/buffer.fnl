@@ -1,10 +1,14 @@
 (import-macros {: module
                 : def
+                : defn-
                 }
                 :nfnl.macros.aniseed)
 
 (module :makyo-fnl.plugins.which-key.layers.normal.buffer)
-(local {: Snacks} _G)
+
+(defn- get-snacks []
+  (let [Snacks (require :snacks)]
+    Snacks))
 
 (def buffer-layer
   {
@@ -18,9 +22,12 @@
        :p ["<cmd>bprevious<cr>"           "previous buffer"]
        :s {
            :name "+scratch"
-           :b [#(Snacks.scratch)                   "empty scratch buffer"]
-           :m [#(Snacks.scratch {:ft "markdown"})  "empty Markdown buffer"]
-           :s [#(Snacks.scratch.select)            "select scratch buffer"]
+           :b [#(let [Snacks (get-snacks)]
+                  (Snacks.scratch))                    "empty scratch buffer"]
+           :m [#(let [Snacks (get-snacks)]
+                  (Snacks.scratch {:ft "markdown"})) "empty Markdown buffer"]
+           :s [#(let [Snacks (get-snacks)]
+                  (Snacks.scratch.select))             "select scratch buffer"]
            }
        ;; Maps to <TAB>. See :help keycodes
        "<Tab>" ["<cmd>b#<cr>"             "previous buffer"]

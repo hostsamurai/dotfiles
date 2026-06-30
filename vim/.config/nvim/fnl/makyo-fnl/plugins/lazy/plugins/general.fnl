@@ -37,7 +37,7 @@
                              :timeout 3000
                              :win {:statusline "" :statuscolumn ""}}
                   :image {:enabled true}
-                  :scratch {:enabled true :win {:width 200 :height 60}}
+                  :scratch {:enabled true :win {:width 200 :height 50}}
                  }})
    ])
 
