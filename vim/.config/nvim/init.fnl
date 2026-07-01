@@ -34,7 +34,7 @@
   (= (length (vim.api.nvim_list_uis)) 0))
 
 (fn restart-neovim []
-  (vim.api.nvim_cmd {:cmd "restart" :args "+qall!"} {}))
+  (vim.api.nvim_cmd {:cmd "restart" :args ["+qall!"]} {}))
 
 (fn start-makyo []
   (require :makyo-fnl.init))
@@ -77,12 +77,17 @@
       (vim.print "[makyo] 🔌 Successfully installed core plugins. Restarting to restore the rest...")
       (restart-neovim))
 
-    ;; Required: setup Lazy.
-    (lazy.setup "makyo-fnl.plugins.lazy.plugins")
-
-    (when (not (plugins-already-installed?))
+    (if (not (plugins-already-installed?))
       ;; Restore our plugins from the lock file.
-      (lazy.restore))
+      (do
+        ;; Set up Lazy since lazy.restore complains about `headless`
+        ;; being referenced incorrectly.
+        (lazy.setup "makyo-fnl.plugins.lazy.plugins")
+        (compile-all-files)
+        (vim.print "[makyo] 🔌 Successfully installed all plugins.")
+        (restart-neovim))
+      ;; Required: set up Lazy.
+      (lazy.setup "makyo-fnl.plugins.lazy.plugins"))
 
     (when (and (plugins-already-installed?) (not (running-headless?)))
       ;; Fire the `LazyDone` event from Lazy to signal that we're
@@ -140,8 +145,7 @@
   (if (running-headless?)
     (do
       (bootstrap-lazy)
-      (restore-plugins)
-      (compile-all-files))
+      (restore-plugins))
     ;; Otherwise
     (do
       (bootstrap-lazy)

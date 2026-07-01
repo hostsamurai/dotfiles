@@ -14,7 +14,7 @@ local function running_headless_3f()
   return (#vim.api.nvim_list_uis() == 0)
 end
 local function restart_neovim()
-  return vim.api.nvim_cmd({cmd = "restart", args = "+qall!"}, {})
+  return vim.api.nvim_cmd({cmd = "restart", args = {"+qall!"}}, {})
 end
 local function start_makyo()
   return require("makyo-fnl.init")
@@ -41,10 +41,13 @@ local function restore_plugins()
     restart_neovim()
   else
   end
-  lazy.setup("makyo-fnl.plugins.lazy.plugins")
   if not plugins_already_installed_3f() then
-    lazy.restore()
+    lazy.setup("makyo-fnl.plugins.lazy.plugins")
+    __fnl_global__compile_2dall_2dfiles()
+    vim.print("[makyo] \240\159\148\140 Successfully installed all plugins.")
+    restart_neovim()
   else
+    lazy.setup("makyo-fnl.plugins.lazy.plugins")
   end
   if (plugins_already_installed_3f() and not running_headless_3f()) then
     vim.api.nvim_exec_autocmds({"User"}, {group = makyo_start_augroup, pattern = "LazyDone"})
@@ -73,8 +76,7 @@ end
 local function init()
   if running_headless_3f() then
     bootstrap_lazy()
-    restore_plugins()
-    return compile_all_files()
+    return restore_plugins()
   else
     bootstrap_lazy()
     prepare_lazy_done_hook()
