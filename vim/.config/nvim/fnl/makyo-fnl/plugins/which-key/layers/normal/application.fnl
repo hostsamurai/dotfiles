@@ -2,7 +2,7 @@
                 : def}
                :nfnl.macros.aniseed)
 
-(module makyo-fnl.plugins.which-key.layers.normal.application)
+(module :makyo-fnl.plugins.which-key.layers.normal.application)
 
 (local utils (require :makyo-fnl.plugins.which-key.utils))
 
@@ -11,6 +11,11 @@
    :a {
        :name "+applications"
        :c ["<cmd>Qalc<cr>"        "calculator"]
+       :C {
+           :name "+color picker"
+           :o [#(vim.g.colorpicker.open_picker) "open ignoring cword"]
+           :p [#(vim.g.colorpicker.pick_under_cursor) "launch picker for cword"]
+           }
        :u ["<cmd>MundoToggle<cr>" "undo tree"]
        :l {
            :name "+lang"
@@ -18,17 +23,6 @@
                :name "+ale"
                :n ["<cmd>ALENextWrap<cr>"     "next"]
                :p ["<cmd>ALEPreviousWrap<cr>" "previous"]
-               }
-           :c {
-               :name "+coc"
-               :a ["<plug>(coc-codeaction)"  "execute action"]
-               :c ["<cmd>CocConfig<cr>"      "open coc config"]
-               :d ["<cmd>CocDisable<cr>"     "toggle coc off"]
-               :e ["<cmd>CocEnable<cr>"      "toggle coc on"]
-               :f ["<plug>(coc-fix-current)" "auto fix"]
-               :r ["<cmd>CocRestart<cr>"     "restart language server"]
-               :u ["<cmd>CocUpdate<cr>"      "update extensions"]
-               :U ["<cmd>CocCommand extensions.forceUpdateAll<cr>"      "update extensions"]
                }
            :d {
                :name "+devcontainer"

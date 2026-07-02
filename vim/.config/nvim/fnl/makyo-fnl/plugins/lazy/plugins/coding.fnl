@@ -2,23 +2,68 @@
                 : def}
                :nfnl.macros.aniseed)
 
-(module makyo-fnl.plugins.lazy.plugins.coding)
+(module :makyo-fnl.plugins.lazy.plugins.coding)
 
 (local utils (require :makyo-fnl.utils))
 (local {: spec} (require :makyo-fnl.plugins.lazy.spec))
+(local ls-helper (require :makyo-fnl.plugins.luasnip))
 
 (def coding-plugins
   [
-   (spec "neoclide/coc.nvim" {:branch  "release"
-                              :init #(when (utils.is-darwin?)
-                                       (set vim.g.coc_node_path "~/.proto/bin/node")
-                                       (set vim.g.coc_snippet_next "<C-j>")
-                                       (set vim.g.coc_snippet_prev "<C-k>"))})
+   (spec "L3MON4D3/LuaSnip"
+         {
+          :version "v2.*"
+          :buld "make install_jsregexp"
+          :dependencies ["rafamadriz/friendly-snippets" "honza/vim-snippets"]
+          :config #(let [ls (utils.safe-require "luasnip")
+                         from_snipmate (utils.safe-require "luasnip.loaders.from_snipmate")]
+                     (ls-helper.setup ls {:snipmate from_snipmate}))
+          })
+
+   (spec "hrsh7th/nvim-cmp"
+         {:dependencies [
+                         "neovim/nvim-lspconfig"
+                         "hrsh7th/cmp-nvim-lsp"
+                         "hrsh7th/cmp-buffer"
+                         "hrsh7th/cmp-cmdline"
+                         "L3MON4D3/LuaSnip"
+                         "saadparwaiz1/cmp_luasnip"
+                         "SirVer/ultisnips"
+                         "quangnguyen30192/cmp-nvim-ultisnips"
+                         "davidsierradz/cmp-conventionalcommits"
+                         "chrisgrieser/cmp-nerdfont"
+                         "hrsh7th/cmp-emoji"
+                         "tamago324/cmp-zsh"
+                         "lukas-reineke/cmp-rg"
+                         "petertriho/cmp-git"
+                         "roginfarrer/cmp-css-variables"
+                         "epwalsh/obsidian.nvim"
+                         "SergioRibera/cmp-dotenv"
+                         "hrsh7th/cmp-nvim-lua"
+                         ]
+          :config #(let [cmp (utils.safe-require "cmp")]
+                     (cmp.setup {:snippet {:expand (fn [args]
+                                                     (let [ls (utils.safe-require "luasnip")]
+                                                       (ls.lsp_expand args.body)))}
+                                 :cmdline {:mapping (cmp.mapping.preset.cmdline) :sources [{:name ["buffer"]}]}
+                                 :sources [
+                                           {:name "nvim_lsp"}
+                                           {:name "buffer" :option {:get_bufnrs #(vim.api.nvim_list_bufs)}}
+                                           {:name "luasnip"}
+                                           {:name "conventionalcommits"}
+                                           {:name "nerdfont"}
+                                           {:name "emoji"}
+                                           {:name "zsh"}
+                                           {:name "rg"}
+                                           {:name "git"}
+                                           {:name "css-variables"}
+                                           {:name "dotenv"}
+                                           {:name "nvim_lua"}
+                                           ]}))})
 
    "jsfaint/gen_tags.vim"
    "liuchengxu/vista.vim"
 
-   "honza/vim-snippets"
    "Shougo/context_filetype.vim"
 
    (spec "nvim-mini/mini.nvim" {:version "*"
