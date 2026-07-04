@@ -8,7 +8,7 @@
   {
   :t {
       :name "+toogles"
-      :c ["<cmd>FzfColors<cr>" "cycle color schemes"]
+      :c ["<cmd>FzfLua colorschemes<cr>" "cycle color schemes"]
       :i {
           :name "+indent"
           :e ["<cmd>IndentEnable<cr>"  "enable indent lines"]

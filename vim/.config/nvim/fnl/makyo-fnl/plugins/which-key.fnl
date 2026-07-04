@@ -1,5 +1,6 @@
 ;;;; Which-key configuration
-(import-macros {: module
+(import-macros {
+                : module
                 : defn-
                 : defn
                 : def
