@@ -19,7 +19,8 @@
 
    (spec "ibhagwan/fzf-lua" {:dependencies ["nvim-tree/nvim-web-devicons"]
                              :config #(let [fzf-lua (utils.safe-require "fzf-lua")]
-                                        (fzf-lua.setup {:ui_select true
+                                        (fzf-lua.setup {:ui_select {}
+                                                        :winopts {:height 0.9 :width 0.9}
                                                         :defaults {:rg_opts "--color=never --files -g \"!.git\" -g \"!.jj\" --hidden"}}))})
 
    (spec "jlanzarotta/bufexplorer" {:init #(set vim.g.bufExplorerDisableDefaultKeyMapping 1)})
