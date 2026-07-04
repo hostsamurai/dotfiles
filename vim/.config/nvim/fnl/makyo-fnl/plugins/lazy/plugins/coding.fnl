@@ -6,7 +6,6 @@
 
 (local utils (require :makyo-fnl.utils))
 (local {: spec} (require :makyo-fnl.plugins.lazy.spec))
-(local ls-helper (require :makyo-fnl.plugins.luasnip))
 
 (def coding-plugins
   [
@@ -15,33 +14,33 @@
           :version "v2.*"
           :buld "make install_jsregexp"
           :dependencies ["rafamadriz/friendly-snippets" "honza/vim-snippets"]
-          :config #(let [ls (utils.safe-require "luasnip")
-                         from_snipmate (utils.safe-require "luasnip.loaders.from_snipmate")]
-                     (ls-helper.setup ls {:snipmate from_snipmate}))
           })
 
+   ;; All nvim-cmp sources must be referenced first
+   (spec "neovim/nvim-lspconfig" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-nvim-lsp" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-buffer" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-cmdline" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "L3MON4D3/LuaSnip" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "saadparwaiz1/cmp_luasnip" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "SirVer/ultisnips" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "quangnguyen30192/cmp-nvim-ultisnips" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "davidsierradz/cmp-conventionalcommits" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "chrisgrieser/cmp-nerdfont" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-emoji" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "tamago324/cmp-zsh" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "lukas-reineke/cmp-rg" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "petertriho/cmp-git" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "roginfarrer/cmp-css-variables" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "epwalsh/obsidian.nvim" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "SergioRibera/cmp-dotenv" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-nvim-lua" {:dependencies "hrsh7th/nvim-cmp"})
+
    (spec "hrsh7th/nvim-cmp"
-         {:dependencies [
-                         "neovim/nvim-lspconfig"
-                         "hrsh7th/cmp-nvim-lsp"
-                         "hrsh7th/cmp-buffer"
-                         "hrsh7th/cmp-cmdline"
-                         "L3MON4D3/LuaSnip"
-                         "saadparwaiz1/cmp_luasnip"
-                         "SirVer/ultisnips"
-                         "quangnguyen30192/cmp-nvim-ultisnips"
-                         "davidsierradz/cmp-conventionalcommits"
-                         "chrisgrieser/cmp-nerdfont"
-                         "hrsh7th/cmp-emoji"
-                         "tamago324/cmp-zsh"
-                         "lukas-reineke/cmp-rg"
-                         "petertriho/cmp-git"
-                         "roginfarrer/cmp-css-variables"
-                         "epwalsh/obsidian.nvim"
-                         "SergioRibera/cmp-dotenv"
-                         "hrsh7th/cmp-nvim-lua"
-                         ]
-          :config #(let [cmp (utils.safe-require "cmp")]
+         {:config #(let [cmp (utils.safe-require "cmp")
+                         ls (utils.safe-require "luasnip")
+                         from_snipmate (utils.safe-require "luasnip.loaders.from_snipmate")]
+                     (from_snipmate.lazy_load {:paths "~/.local/share/nvim/custom_snippets"})
                      (cmp.setup {:snippet {:expand (fn [args]
                                                      (let [ls (utils.safe-require "luasnip")]
                                                        (ls.lsp_expand args.body)))}
@@ -49,7 +48,7 @@
                                  :sources [
                                            {:name "nvim_lsp"}
                                            {:name "buffer" :option {:get_bufnrs #(vim.api.nvim_list_bufs)}}
-                                           {:name "luasnip"}
+                                           {:name "luasnip" :option {:show_autosnippets true}}
                                            {:name "conventionalcommits"}
                                            {:name "nerdfont"}
                                            {:name "emoji"}
@@ -59,7 +58,27 @@
                                            {:name "css-variables"}
                                            {:name "dotenv"}
                                            {:name "nvim_lua"}
-                                           ]}))})
+                                           ]
+                                 :mapping {
+                                           ;; Snippets
+                                           "<CR>" (cmp.mapping (fn [fallback]
+                                                                 (if (cmp.visible)
+                                                                   (if (ls.expandable)
+                                                                     (ls.expand)
+                                                                     (cmp.confirm {:select true}))
+                                                                   (fallback))))
+                                           "<Tab>" (cmp.mapping (fn [fallback]
+                                                                  (if (cmp.visible)
+                                                                    (cmp.select_next_item)
+                                                                    (ls.locally_jumpable 1)
+                                                                    (ls.jump 1)
+                                                                    (fallback)) ["i" "s"]))
+                                           "<S-Tab>" (cmp.mapping (fn [fallback]
+                                                                    (if (cmp.visible)
+                                                                      (cmp.select_prev_item)
+                                                                      (ls.locally_jumpable -1)
+                                                                      (ls.jump -1)
+                                                                      (fallback)) ["i" "s"]))}}))})
 
    "jsfaint/gen_tags.vim"
    "liuchengxu/vista.vim"
