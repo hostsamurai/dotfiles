@@ -19,6 +19,7 @@
 (local {: insertion-layer} (require :makyo-fnl.plugins.which-key.layers.normal.insertion))
 (local {: jumps-and-folds-layer} (require :makyo-fnl.plugins.which-key.layers.normal.jump-and-folds))
 (local {: modes-layer} (require :makyo-fnl.plugins.which-key.layers.normal.modes))
+(local {: notifications-layer} (require :makyo-fnl.plugins.which-key.layers.normal.notifications))
 (local {: project-layer} (require :makyo-fnl.plugins.which-key.layers.normal.project))
 (local {: plugins-layer} (require :makyo-fnl.plugins.which-key.layers.normal.plugins))
 (local {: search-layer} (require :makyo-fnl.plugins.which-key.layers.normal.search))
@@ -43,6 +44,7 @@
       insertion-layer
       jumps-and-folds-layer
       modes-layer
+      notifications-layer
       project-layer
       plugins-layer
       search-layer
