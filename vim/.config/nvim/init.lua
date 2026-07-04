@@ -3,6 +3,7 @@ local lazy_base_path = (vim.fn.stdpath("data") .. "/lazy")
 local lazy_path = (lazy_base_path .. "/lazy.nvim")
 local nfnl_path = (lazy_base_path .. "/nfnl")
 local nvim_lua_path = (lazy_base_path .. "/nvim.lua")
+local nvim_config_path = vim.fn.stdpath("config")
 local makyo_start_augroup = vim.api.nvim_create_augroup("makyo.startup", {clear = true})
 local function lazy_exists_3f()
   return pcall(require, "lazy")
@@ -10,11 +11,8 @@ end
 local function is_nfnl_installed_3f()
   return pcall(require, "nfnl.core")
 end
-local function running_headless_3f()
-  return (#vim.api.nvim_list_uis() == 0)
-end
-local function restart_neovim()
-  return vim.api.nvim_cmd({cmd = "restart", args = {"+qall!"}}, {})
+local function quit_neovim()
+  return vim.api.nvim_cmd({cmd = "quit!"}, {})
 end
 local function start_makyo()
   return require("makyo-fnl.init")
@@ -25,7 +23,7 @@ local function plugins_already_installed_3f()
 end
 local function bootstrap_lazy()
   local lazy_path0 = (vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
-  if not vim.loop.fs_stat(lazy_path0) then
+  if not vim.uv.fs_stat(lazy_path0) then
     vim.system({"git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazy_path0}):wait()
   else
   end
@@ -37,34 +35,23 @@ local function restore_plugins()
   vim.opt.rtp:prepend(nvim_lua_path)
   if not is_nfnl_installed_3f() then
     lazy.setup({spec = {"Olical/nfnl", "norcalli/nvim.lua"}})
-    vim.print("[makyo] \240\159\148\140 Successfully installed core plugins. Restarting to restore the rest...")
-    restart_neovim()
+    vim.print("[makyo] \240\159\148\140 Successfully installed core plugins. Restart to compile all files.")
+    quit_neovim()
   else
   end
   if not plugins_already_installed_3f() then
-    lazy.setup("makyo-fnl.plugins.lazy.plugins")
-    __fnl_global__compile_2dall_2dfiles()
-    vim.print("[makyo] \240\159\148\140 Successfully installed all plugins.")
-    restart_neovim()
+    vim.api.nvim_exec2(("NfnlCompileAllFiles " .. nvim_config_path), {output = true})
+    vim.print("[makyo] \240\159\148\140 Compilation completed successfully. Restoring all plugins...")
+    vim.system({"git", "restore", (nvim_config_path .. "lazy-lock.json")})
+    vim.system({"Lazy", "restore"})
+    vim.print("[makyo] \240\159\148\140 Restart to get the full Makyo experience...")
+    quit_neovim()
   else
-    lazy.setup("makyo-fnl.plugins.lazy.plugins")
   end
-  if (plugins_already_installed_3f() and not running_headless_3f()) then
+  if plugins_already_installed_3f() then
+    lazy.setup("makyo-fnl.plugins.lazy.plugins")
     vim.api.nvim_exec_autocmds({"User"}, {group = makyo_start_augroup, pattern = "LazyDone"})
-  else
-  end
-  return vim.print("[makyo] \240\159\148\140 Plugins have been restored.")
-end
-local function compile_all_files()
-  local _let_5_ = require("nfnl.api")
-  local compile_all_files0 = _let_5_["compile-all-files"]
-  local config_dir = vim.fn.stdpath("config")
-  local makyo_lua_dir = (config_dir .. "/lua/makyo-fnl")
-  if not vim.loop.fs_stat(makyo_lua_dir) then
-    vim.print("[makyo] Compiling config files")
-    compile_all_files0(config_dir)
-    vim.print("[makyo] Done. Restarting...")
-    return restart_neovim()
+    return vim.print("[makyo] \240\159\148\140 Plugins setup completed.")
   else
     return nil
   end
@@ -74,13 +61,8 @@ local function prepare_lazy_done_hook()
   return vim.api.nvim_create_autocmd({"User"}, {group = startup_augroup, pattern = "LazyDone", callback = start_makyo})
 end
 local function init()
-  if running_headless_3f() then
-    bootstrap_lazy()
-    return restore_plugins()
-  else
-    bootstrap_lazy()
-    prepare_lazy_done_hook()
-    return restore_plugins()
-  end
+  bootstrap_lazy()
+  prepare_lazy_done_hook()
+  return restore_plugins()
 end
 return init()
