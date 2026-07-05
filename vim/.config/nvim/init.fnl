@@ -67,20 +67,21 @@
                    (.. nfnl-path "/lua/nfnl")
                    nvim-config-lua-path
                    ])
-      (: :wait)
-      (vim.system [
+      (: :wait))
+  (-> (vim.system [
                    "mkdir"
                    "-p"
                    (.. nvim-fnl-path "/nfnl/macros")])
-      (: :wait)
-      (vim.system [
+      (: :wait))
+  (-> (vim.system [
                    "cp"
                    (.. nfnl-path "/fnl/macros/aniseed.fnlm")
                    (.. nvim-fnl-path "/nfnl/macros/")])
       (vim.system [
                    "cp"
                    (.. nfnl-path "/fnl/macros.fnlm")
-                   (.. nvim-fnl-path "/nfnl")])))
+                   (.. nvim-fnl-path "/nfnl")])
+      (: :wait)))
 
 
 ;;; ---------------------------------------------
@@ -132,7 +133,7 @@
   ;; which are not ready at the time that we try to configure them
   ;; separately.
   (vim.api.nvim_exec_autocmds [:User] {:group makyo-start-augroup :pattern "LazyDone"})
-  (vim.print "[makyo] 🔌 Plugins setup completed."))
+  (vim.print "[makyo] 👹 Plugins setup completed."))
 
 (fn restore-plugins []
   "This is a 3-step process that initializes Makyo by making sure that
@@ -144,7 +145,7 @@
     (when (not (files-already-compiled?))
       ;; Compile all of the Fennel source files
       (compile-all-files nvim-config-path)
-      (vim.print "[makyo] 🔌 Compilation completed successfully.")
+      (vim.print "[makyo] 👹 Compilation completed successfully.")
       (restart-neovim))
 
     ;; It is required to set up Lazy before being able to do anything

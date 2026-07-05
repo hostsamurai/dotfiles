@@ -33,7 +33,9 @@ local function clone_repo(repo_url, _3fbranch, dest)
   return vim.system({"git", "clone", "--filter=blob:none", repo_url, ("--branch=" .. (_3fbranch or "master")), dest}):wait()
 end
 local function embed_nfnl()
-  return vim.system(vim.system(vim.system(vim.system({"cp", "-r", (nfnl_path .. "/lua/nfnl"), nvim_config_lua_path}):wait(), {"mkdir", "-p", (nvim_fnl_path .. "/nfnl/macros")}):wait(), {"cp", (nfnl_path .. "/fnl/macros/aniseed.fnlm"), (nvim_fnl_path .. "/nfnl/macros/")}), {"cp", (nfnl_path .. "/fnl/macros.fnlm"), (nvim_fnl_path .. "/nfnl")})
+  vim.system({"cp", "-r", (nfnl_path .. "/lua/nfnl"), nvim_config_lua_path}):wait()
+  vim.system({"mkdir", "-p", (nvim_fnl_path .. "/nfnl/macros")}):wait()
+  return vim.system(vim.system({"cp", (nfnl_path .. "/fnl/macros/aniseed.fnlm"), (nvim_fnl_path .. "/nfnl/macros/")}), {"cp", (nfnl_path .. "/fnl/macros.fnlm"), (nvim_fnl_path .. "/nfnl")}):wait()
 end
 local function bootstrap_lazy()
   if not vim.uv.fs_stat(lazy_path) then
@@ -64,7 +66,7 @@ local function bootstrap()
 end
 local function start_app()
   vim.api.nvim_exec_autocmds({"User"}, {group = makyo_start_augroup, pattern = "LazyDone"})
-  return vim.print("[makyo] \240\159\148\140 Plugins setup completed.")
+  return vim.print("[makyo] \240\159\145\185 Plugins setup completed.")
 end
 local function restore_plugins()
   local lazy = require("lazy")
@@ -72,7 +74,7 @@ local function restore_plugins()
   local compile_all_files = _let_4_["compile-all-files"]
   if not files_already_compiled_3f() then
     compile_all_files(nvim_config_path)
-    vim.print("[makyo] \240\159\148\140 Compilation completed successfully.")
+    vim.print("[makyo] \240\159\145\185 Compilation completed successfully.")
     restart_neovim()
   else
   end
