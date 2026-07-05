@@ -3,23 +3,21 @@
                 }
                 :nfnl.macros.aniseed)
 
-(module makyo-fnl.plugins.which-key.layers.normal.file)
-
-(local nvim (require :nvim))
+(module :makyo-fnl.plugins.which-key.layers.normal.file)
 
 (def file-layer
   {
    :f {
        :name "+files"
-       :c [#(nvim.command "let @+=expand('%:p')") "copy file path"]
+       :c [#(vim.api.nvim_exec2 "let @+=expand('%:p')" {:output true}) "copy file path"]
        :f ["<cmd>FzfFiles<cr>" "files"]
-       :g [#(nvim.ex.normal "\\<C-g>") "display relative path"]
+       :g [#(vim.api.nvim_feedkeys "<C-g>" "n" false) "display relative path"]
        :r ["<cmd>FzfHistory<cr>" "mru"]
        :n {
            :name "+navigate"
            :o ["<cmd>Dirvish<cr>"                 "open cwd"]
            :O ["<cmd>Dirvish %<cr>"               "open dir of current file"]
-           :v [#(nvim.command "vsplit | Dirvish") "open cwd in vertical split"]
+           :v [#(vim.api.nvim_exec2 "vsplit | Dirvish" {:output true}) "open cwd in vertical split"]
            }
        :v {
            :name "+vim"

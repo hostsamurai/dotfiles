@@ -16,6 +16,8 @@
 (local nfnl-path (.. lazy-base-path "/nfnl"))
 (local nvim-lua-path (.. lazy-base-path "/nvim.lua"))
 (local nvim-config-path (.. (vim.fn.stdpath "config")))
+(local nvim-config-lua-path (.. nvim-config-path "/lua"))
+(local nvim-fnl-path (.. nvim-config-path "/fnl"))
 
 (local makyo-start-augroup (vim.api.nvim_create_augroup "makyo.startup" {:clear true}))
 
@@ -28,11 +30,14 @@
 (fn lazy-exists? []
   (pcall require "lazy"))
 
-(fn is-nfnl-installed? []
-  (pcall require "nfnl.core"))
+(fn is-installed? [module]
+  (pcall require module))
+
+(fn restart-neovim []
+  (vim.api.nvim_cmd {:cmd "restart" :args [":qall!"]} {}))
 
 (fn quit-neovim []
-  (vim.api.nvim_cmd {:cmd "quit!"} {}))
+  (vim.api.nvim_cmd {:cmd "q"} {}))
 
 (fn start-makyo []
   (require :makyo-fnl.init))
@@ -40,6 +45,42 @@
 (fn plugins-already-installed? []
   (let [dir-count (length (vim.fn.globpath lazy-base-path "*" 0 1))]
     (> dir-count 4)))
+
+(fn files-already-compiled? []
+  (vim.uv.fs_stat (.. nvim-config-lua-path "/makyo-fnl")))
+
+(fn clone-repo [repo-url ?branch dest]
+  (-> (vim.system [
+                   "git"
+                   "clone"
+                   "--filter=blob:none"
+                   repo-url
+                   (.. "--branch=" (or ?branch "master"))
+                   dest
+                   ])
+      (: :wait)))
+
+(fn embed-nfnl []
+  (-> (vim.system [
+                   "cp"
+                   "-r"
+                   (.. nfnl-path "/lua/nfnl")
+                   nvim-config-lua-path
+                   ])
+      (: :wait)
+      (vim.system [
+                   "mkdir"
+                   "-p"
+                   (.. nvim-fnl-path "/nfnl/macros")])
+      (: :wait)
+      (vim.system [
+                   "cp"
+                   (.. nfnl-path "/fnl/macros/aniseed.fnlm")
+                   (.. nvim-fnl-path "/nfnl/macros/")])
+      (vim.system [
+                   "cp"
+                   (.. nfnl-path "/fnl/macros.fnlm")
+                   (.. nvim-fnl-path "/nfnl")])))
 
 
 ;;; ---------------------------------------------
@@ -49,64 +90,72 @@
 
 (fn bootstrap-lazy []
   "Bootstraps the lazy package manager and adds it to the runtime path."
-  (let [lazy-path (.. (vim.fn.stdpath "data") "/lazy/lazy.nvim")]
-    (when (not (vim.uv.fs_stat lazy-path))
-      ;; Synchroneously clone the repo and place it in the right spot.
-      (-> (vim.system [
-                       "git"
-                       "clone"
-                       "--filter=blob:none"
-                       "https://github.com/folke/lazy.nvim.git"
-                       "--branch=stable"
-                       lazy-path
-                       ])
-          (: :wait)))
-    (vim.opt.rtp:prepend lazy-path)))
+  (when (not (vim.uv.fs_stat lazy-path))
+    ;; Synchroneously clone the repo and place it in the right spot.
+    (clone-repo "https://github.com/folke/lazy.nvim.git" "stable" lazy-path))
+  (vim.opt.rtp:prepend lazy-path))
+
+(fn bootstrap-nfnl []
+  "Ensures that Nfnl is installed and embeds the Lua source files in
+   the `/.lua` directory so that we don't depend on Lazy to make it
+   available for us, which can be problematic due to the async nature
+   of `lazy.setup`."
+  (when (not (is-installed? :nfnl.core))
+    (clone-repo "https://github.com/Olical/nfnl" "main" nfnl-path)
+    (embed-nfnl))
+  (vim.opt.rtp:prepend nfnl-path))
+
+(fn bootstrap-nvim-lua []
+  "Add nvim.lua to path as many of the modules in Makyo depend on
+   it. Without this, setting up Lazy doesn't work as Lazy hasn't
+   finished initializing this plugin."
+  (when (not (is-installed? :nvim))
+    (clone-repo "https://github.com/norcalli/nvim.lua" nvim-lua-path))
+  (vim.opt.rtp:prepend nvim-lua-path))
+
+(fn bootstrap []
+  (bootstrap-lazy)
+  (bootstrap-nfnl)
+  (bootstrap-nvim-lua))
+
+
+;;; ---------------------------------------------
+;;; APP INITIALIZATION FUNCTIONS
+;;; ---------------------------------------------
+
+
+(fn start-app []
+  "Fire the `LazyDone` event from Lazy to signal that we're
+  ready to start with the rest of the initialization process."
+  ;; NOTE: This has to be done here and not before we register all
+  ;; specs. Otherwise, we experience breakage for certain plugins
+  ;; which are not ready at the time that we try to configure them
+  ;; separately.
+  (vim.api.nvim_exec_autocmds [:User] {:group makyo-start-augroup :pattern "LazyDone"})
+  (vim.print "[makyo] 🔌 Plugins setup completed."))
 
 (fn restore-plugins []
   "This is a 3-step process that initializes Makyo by making sure that
   all of its source files are transpiled to Lua ones and by ensuring
   that Lazy is setup correctly. The first two steps are meant to be run
   in headless mode."
-  (let [lazy (require :lazy)]
-    ;; NOTE: "Olical/nfnl" and "norcalli/nvim.lua" are essential to
-    ;; our configuration and must be installed first.
-    (vim.opt.rtp:prepend nfnl-path)
-    ;; TODO: Remove nvim.lua entirely
-    (vim.opt.rtp:prepend nvim-lua-path)
+  (let [lazy (require :lazy)
+        {: compile-all-files} (require :nfnl.api)]
+    (when (not (files-already-compiled?))
+      ;; Compile all of the Fennel source files
+      (compile-all-files nvim-config-path)
+      (vim.print "[makyo] 🔌 Compilation completed successfully.")
+      (restart-neovim))
 
-    (when (not (is-nfnl-installed?))
-      ;; Install essential plugins
-      (lazy.setup {:spec ["Olical/nfnl" "norcalli/nvim.lua"]})
-      (vim.print "[makyo] 🔌 Successfully installed core plugins. Restart to compile all files.")
-      (quit-neovim))
-
-   (when (not (plugins-already-installed?))
-     ;; Compile all of the Fennel source files
-     (vim.api.nvim_exec2 (.. "NfnlCompileAllFiles " nvim-config-path) {:output true})
-     (vim.print "[makyo] 🔌 Compilation completed successfully. Restoring all plugins...")
-     ;; Restore the Lazy lockfile back to what it was.
-     (vim.system [
-                   "git"
-                   "restore"
-                   (.. nvim-config-path "lazy-lock.json")
-                   ])
-      ;; Restore all plugins
-      (vim.system ["Lazy" "restore"])
-      (vim.print "[makyo] 🔌 Restart to get the full Makyo experience...")
-      (quit-neovim))
-
+    ;; It is required to set up Lazy before being able to do anything
+    ;; with it.
     (when (plugins-already-installed?)
-      ;; Register all specs
-      (lazy.setup "makyo-fnl.plugins.lazy.plugins")
-      ;; Fire the `LazyDone` event from Lazy to signal that we're
-      ;; ready to start with the rest of the initialization.
-      ;; NOTE: This has to be done here and not before we register all
-      ;; specs. Otherwise, we experience breakage for certain plugins
-      ;; which are not ready at the time that we try to configure them
-      ;; separately.
-      (vim.api.nvim_exec_autocmds [:User] {:group makyo-start-augroup :pattern "LazyDone"})
-      (vim.print "[makyo] 🔌 Plugins setup completed."))))
+      (lazy.setup "makyo-fnl.plugins.lazy.plugins" {:wait true}))
+
+    ;; Restore all plugins from the lockfile
+    (when (not (plugins-already-installed?))
+      (lazy.setup "makyo-fnl.plugins.lazy.plugins" {:wait true})
+      (lazy.restore {:wait true :show true}))))
 
 (fn prepare-lazy-done-hook []
   "Creates the `autocmd` that will kick off Makyo's init process."
@@ -144,8 +193,9 @@
 
 (fn init []
   (do
-    (bootstrap-lazy)
+    (bootstrap)
     (prepare-lazy-done-hook)
-    (restore-plugins)))
+    (restore-plugins)
+    (start-app)))
 
 (init)

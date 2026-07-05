@@ -1,32 +1,30 @@
-(import-macros {: module
+(import-macros {
+                : module
                 : def
-                : defn}
+                : defn
+                }
                :nfnl.macros.aniseed)
 
-(module makyo-fnl.colors)
-
-(local nvim (require :nvim))
+(module :makyo-fnl.colors)
 
 (defn tweak-color-scheme []
-  (case nvim.g.colors_name
+  (case vim.g.colors_name
     "pinkmare" (do
-                (nvim.command "AirlineTheme atomic")
+                (vim.api.nvim_exec2 "AirlineTheme atomic" {:output true})
                 ;; Set the highlight groups for the indent lines
-                (nvim.command "hi! link IndentLine Conceal"))
+                (vim.api.nvim_exec2 "hi! link IndentLine Conceal" {:output true}))
     "horizon" (do
-                (nvim.command "syntax clear Pmenu")
-                (nvim.command "hi! link Pmenu SneakScope")
+                (vim.api.nvim_exec2 "syntax clear Pmenu" {:output true})
+                (vim.api.nvim_exec2 "hi! link Pmenu SneakScope" {:output true})
 
-                (nvim.command "hi! link NormalFloat SneakScope")
+                (vim.api.nvim_exec2 "hi! link NormalFloat SneakScope" {:output true})
 
-                (nvim.command "syntax clear StatusLineNC")
-                (nvim.command "hi! link StatusLineNC airline_a_to_airline_b_inactive")
+                (vim.api.nvim_exec2 "syntax clear StatusLineNC" {:output true})
+                (vim.api.nvim_exec2 "hi! link StatusLineNC airline_a_to_airline_b_inactive" {:output true})
 
-                (nvim.command "syntax clear VertSplit")
-                (nvim.command "hi! VertSplit ctermbg=233 ctermfg=233 guibg=#1c1e26 guifg=#1c1e26")
-                (nvim.command "hi! link WinSeparator Conceal"))))
-
-
+                (vim.api.nvim_exec2 "syntax clear VertSplit" {:output true})
+                (vim.api.nvim_exec2 "hi! VertSplit ctermbg=233 ctermfg=233 guibg=#1c1e26 guifg=#1c1e26" {:output true})
+                (vim.api.nvim_exec2 "hi! link WinSeparator Conceal" {:output true}))))
 
 (defn init []
   (tweak-color-scheme))
