@@ -6,6 +6,7 @@
 
 (local utils (require :makyo-fnl.utils))
 (local {: spec} (require :makyo-fnl.plugins.lazy.spec))
+(local {: setup-completion-sources} (require :makyo-fnl.lsp))
 
 (def coding-plugins
   [
@@ -13,11 +14,15 @@
          {
           :version "v2.*"
           :buld "make install_jsregexp"
-          :dependencies ["rafamadriz/friendly-snippets" "honza/vim-snippets"]
+          :dependencies ["rafamadriz/friendly-snippets" "honza/vim-snippets" "hrsh7th/nvim-cmp"]
           })
 
+   (spec "honza/vim-snippets" {:config (fn []
+                                         (let [loader (utils.safe-require "luasnip.loaders.from_snipmate")]
+                                           (loader.lazy_load)
+                                           (loader.lazy_load {:paths "./snippets"})))})
+
    ;; All nvim-cmp sources must be referenced first
-   (spec "neovim/nvim-lspconfig" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "hrsh7th/cmp-nvim-lsp" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "hrsh7th/cmp-buffer" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "hrsh7th/cmp-cmdline" {:dependencies "hrsh7th/nvim-cmp"})
@@ -39,17 +44,15 @@
    (spec "hrsh7th/nvim-cmp"
          {:config #(let [cmp (utils.safe-require "cmp")
                          ls (utils.safe-require "luasnip")
-                         from_snipmate (utils.safe-require "luasnip.loaders.from_snipmate")]
-                     (from_snipmate.lazy_load {:paths "~/.local/share/nvim/custom_snippets"})
+                         capabilities (utils.safe-require :cmp_nvim_lsp)]
                      (cmp.setup {:snippet {:expand (fn [args]
-                                                     (let [ls (utils.safe-require "luasnip")]
-                                                       (ls.lsp_expand args.body)))}
+                                                     (ls.lsp_expand args.body))}
+                                 :buffer {:sources (cmp.config.sources [{:name "conventionalcommits"}] [{:name "buffer"}])}
                                  :cmdline {:mapping (cmp.mapping.preset.cmdline) :sources [{:name ["buffer"]}]}
                                  :sources [
                                            {:name "nvim_lsp"}
                                            {:name "buffer" :option {:get_bufnrs #(vim.api.nvim_list_bufs)}}
                                            {:name "luasnip" :option {:show_autosnippets true}}
-                                           {:name "conventionalcommits"}
                                            {:name "nerdfont"}
                                            {:name "emoji"}
                                            {:name "zsh"}
@@ -78,7 +81,13 @@
                                                                       (cmp.select_prev_item)
                                                                       (ls.locally_jumpable -1)
                                                                       (ls.jump -1)
-                                                                      (fallback)) ["i" "s"]))}}))})
+                                                                      (fallback)) ["i" "s"]))}})
+                     (cmp.setup.filetype "gitcommit" {:sources (cmp.config.sources [
+                                                                                    {:name "git"}
+                                                                                    {:name "buffer"}
+                                                                                    {:name "conventionalcommits"}
+                                                                                    ])})
+                     (setup-completion-sources capabilities.default_capabilities))})
 
    "jsfaint/gen_tags.vim"
    "liuchengxu/vista.vim"

@@ -24,7 +24,8 @@
            :e [#(let [ls (get-luasnip-loaders)]
                   (ls.edit_snippet_files))       "edit snippets"]
            :l [#(let [ls (get-luasnip)]
-                  (ls.available))                "available snippets"]
-           }
+                  (ls.get_snippets))             "list snippets"]
+           :L [#(let [ls (get-luasnip)]
+                  (ls.log.open)) "open snippet log"]}
        }
    })
