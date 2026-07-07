@@ -1,6 +1,9 @@
-(import-macros {: module
-                : defn}
-               :nfnl.macros.aniseed)
+(import-macros {
+                : module
+                : defn
+                : def
+                }
+                :nfnl.macros.aniseed)
 
 (module makyo-fnl.plugins.lsp.fennel-language-server)
 

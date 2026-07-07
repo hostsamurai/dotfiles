@@ -1,13 +1,15 @@
 ;;;; General user mappings not necessarily tied to any layers
-(import-macros {: module
+(import-macros {
+                : module
                 : def
                 : def-
                 : defn-
-                : defn}
+                : defn
+                }
                :nfnl.macros.aniseed)
 (import-macros {: if-let} :nfnl.macros)
 
-(module makyo-fnl.mappings)
+(module :makyo-fnl.mappings)
 
 (local {: println} (require :nfnl.core))
 (local utils (require :makyo-fnl.utils))
