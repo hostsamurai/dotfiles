@@ -4,6 +4,7 @@
 
 (module :makyo-fnl.plugins.lazy.plugins.coding)
 
+(local {: update} (require :nfnl.core))
 (local utils (require :makyo-fnl.utils))
 (local {: spec} (require :makyo-fnl.plugins.lazy.spec))
 (local {: setup-completion-sources} (require :makyo-fnl.lsp))
@@ -24,13 +25,18 @@
 
    ;; All nvim-cmp sources must be referenced first
    (spec "hrsh7th/cmp-nvim-lsp" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-nvim-lsp-signature-help" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-nvim-lsp-document-symbol" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "onsails/lspkind.nvim" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "hrsh7th/cmp-buffer" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "hrsh7th/cmp-path" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "hrsh7th/cmp-cmdline" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "L3MON4D3/LuaSnip" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "saadparwaiz1/cmp_luasnip" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "SirVer/ultisnips" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "quangnguyen30192/cmp-nvim-ultisnips" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "davidsierradz/cmp-conventionalcommits" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "yus-works/csc.nvim" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "chrisgrieser/cmp-nerdfont" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "hrsh7th/cmp-emoji" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "tamago324/cmp-zsh" {:dependencies "hrsh7th/nvim-cmp"})
@@ -42,19 +48,29 @@
    (spec "hrsh7th/cmp-nvim-lua" {:dependencies "hrsh7th/nvim-cmp"})
 
    (spec "hrsh7th/nvim-cmp"
-         {:config #(let [cmp (utils.safe-require "cmp")
-                         ls (utils.safe-require "luasnip")
+         {:config #(let [cmp (utils.safe-require :cmp)
+                         lspkind (utils.safe-require :lspkind)
+                         ls (utils.safe-require :luasnip)
+                         git (utils.safe-require :cmp_git)
+                         csc (utils.safe-require :csc)
+                         ap (utils.safe-require :nvim-autopairs.completion.cmp)
                          capabilities (utils.safe-require :cmp_nvim_lsp)]
-                     (cmp.setup {:snippet {:expand (fn [args]
+                     (git.setup)
+                     (csc.setup)
+                     (cmp.setup {
+                                 :snippet {:expand (fn [args]
                                                      (ls.lsp_expand args.body))}
                                  :buffer {:sources (cmp.config.sources [{:name "conventionalcommits"}] [{:name "buffer"}])}
                                  :cmdline {:mapping (cmp.mapping.preset.cmdline) :sources [{:name ["buffer"]}]}
                                  :sources [
                                            {:name "nvim_lsp"}
+                                           {:name "nvim_lsp_signature_help"}
+                                           {:name "nvim_lsp_document_symbol"}
                                            {:name "buffer" :option {:get_bufnrs #(vim.api.nvim_list_bufs)}}
                                            {:name "luasnip" :option {:show_autosnippets true}}
                                            {:name "nerdfont"}
                                            {:name "emoji"}
+                                           {:name "path"}
                                            {:name "zsh"}
                                            {:name "rg"}
                                            {:name "git"}
@@ -81,13 +97,47 @@
                                                                       (cmp.select_prev_item)
                                                                       (ls.locally_jumpable -1)
                                                                       (ls.jump -1)
-                                                                      (fallback)) ["i" "s"]))}})
-                     (cmp.setup.filetype "gitcommit" {:sources (cmp.config.sources [
-                                                                                    {:name "git"}
-                                                                                    {:name "buffer"}
-                                                                                    {:name "conventionalcommits"}
-                                                                                    ])})
-                     (setup-completion-sources capabilities.default_capabilities))})
+                                                                      (fallback)) ["i" "s"]))}
+                                 :formatting {:format (fn [entry vim_item]
+                                                        (vim.print entry.source.name)
+                                                        (when (vim.tbl_contains ["path"] entry.source.name)
+                                                          (let [devicons (utils.safe-require :nvim-web-devicons)
+                                                                {: label} (devicons.get_icon (entry:get_completion_item))
+                                                                {: icon : hl_group} label]
+                                                            (update vim_item :kind icon)
+                                                            (update vim_item :kind_hl_group hl_group)
+                                                            (lua "return vim_item")))
+                                                        (let [fmt_fn (lspkind.cmp_format {:with_text false})] (fmt_fn entry vim_item)))}
+                                 })
+                     (cmp.setup.filetype "gitcommit" {:sources [
+                                                                {:name "csc"}
+                                                                {:name "luasnip"}
+                                                                {:name "conventionalcommits"}
+                                                                ]})
+                     (setup-completion-sources (capabilities.default_capabilities))
+                     (cmp.event:on "confirm_done" ap.on_confirm_done))})
+
+   (spec "windwp/nvim-autopairs"
+         {:event "InsertEnter"
+          :config #(let [ap (utils.safe-require :nvim-autopairs)]
+                     (ap.setup {:enable_check_bracket_line false :fast-wrap {
+                                                                             :map "<M-e>"
+                                                                             :chars: [
+                                                                                      "{"
+                                                                                      "["
+                                                                                      "("
+                                                                                      "\""
+                                                                                      "'"
+                                                                                      ]
+                                                                             :pattern "[=[[%'%\"%>%]%)%}%,]]=]"
+                                                                             :end_key "$"
+                                                                             :before_key "h"
+                                                                             :after_key "l"
+                                                                             :cursor_pos_before true
+                                                                             :keys "qwertyuiopzxcvbnmasdfghjkl"
+                                                                             :manual_position true
+                                                                             :highlight "Search"
+                                                                             :highlight_grey "Comment"}}))})
 
    "jsfaint/gen_tags.vim"
    "liuchengxu/vista.vim"
