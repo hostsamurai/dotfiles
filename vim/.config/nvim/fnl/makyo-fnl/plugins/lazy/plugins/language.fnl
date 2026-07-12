@@ -149,6 +149,7 @@
    (spec "landerson02/ghostty-theme-sync.nvim" {:opts {:config "~/.config/ghostty/ghostty.config"}})
    (spec "bezhermoso/tree-sitter-ghostty" {:install "make nvim_install"})
 
+   (spec "windwp/nvim-autopairs" {:event "InsertEnter" :config true})
    ;; Vim helpers
    (spec "norcalli/nvim.lua" {:priority 999999})
    ])
