@@ -10,6 +10,7 @@
 
 (local {: reduce : concat} (require :nfnl.core))
 (local fnl-ls (require :makyo-fnl.plugins.lsp.fennel-language-server))
+(local ghostty-ls (require :makyo-fnl.plugins.lsp.ghostty-ls))
 
 (defn- get-enabled-lsp-servers []
   (reduce (fn [acc server-info]
@@ -25,4 +26,5 @@
       (vim.lsp.enable server))))
 
 (defn init []
-  (fnl-ls.init))
+  (fnl-ls.init)
+  (ghostty-ls.init))

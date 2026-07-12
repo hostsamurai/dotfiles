@@ -37,7 +37,7 @@
    ;; LSP support
    (spec "neovim/nvim-lspconfig" {:dependencies ["nvimdev/lspsaga.nvim"]})
    (spec "mason-org/mason.nvim" {:config #(let [mason (require :mason)]
-                                               (mason.setup))})
+                                            (mason.setup {:registries ["github:mason-org/mason-registry" "github:mkindberg/ghostty-ls"]}))})
    (spec "mason-org/mason-lspconfig.nvim"
          {:dependencies ["mason-org/mason.nvim" "neovim/nvim-lspconfig"]
           :config #(let [mason-config (require :mason-lspconfig)]
@@ -144,6 +144,10 @@
                  ]})
 
    "yasuhiroki/github-actions-yaml.vim"
+
+   ;; ghostty
+   (spec "landerson02/ghostty-theme-sync.nvim" {:opts {:config "~/.config/ghostty/ghostty.config"}})
+   (spec "bezhermoso/tree-sitter-ghostty" {:install "make nvim_install"})
 
    ;; Vim helpers
    (spec "norcalli/nvim.lua" {:priority 999999})
