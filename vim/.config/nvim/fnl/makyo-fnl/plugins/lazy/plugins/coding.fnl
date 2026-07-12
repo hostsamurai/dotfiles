@@ -8,6 +8,7 @@
 (local utils (require :makyo-fnl.utils))
 (local {: spec} (require :makyo-fnl.plugins.lazy.spec))
 (local {: setup-completion-sources} (require :makyo-fnl.lsp))
+(local {: create-edit-snippets-command} (require :makyo-fnl.plugins.luasnip))
 
 (def coding-plugins
   [
@@ -16,6 +17,7 @@
           :version "v2.*"
           :buld "make install_jsregexp"
           :dependencies ["rafamadriz/friendly-snippets" "honza/vim-snippets" "hrsh7th/nvim-cmp"]
+          :config #(create-edit-snippets-command)
           })
 
    (spec "honza/vim-snippets" {:config (fn []
@@ -33,7 +35,7 @@
    (spec "hrsh7th/cmp-cmdline" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "L3MON4D3/LuaSnip" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "saadparwaiz1/cmp_luasnip" {:dependencies "hrsh7th/nvim-cmp"})
-   (spec "SirVer/ultisnips" {:dependencies "hrsh7th/nvim-cmp"})
+   (spec "SirVer/ultisnips" {:enabled false :dependencies "hrsh7th/nvim-cmp"})
    (spec "quangnguyen30192/cmp-nvim-ultisnips" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "davidsierradz/cmp-conventionalcommits" {:dependencies "hrsh7th/nvim-cmp"})
    (spec "yus-works/csc.nvim" {:dependencies "hrsh7th/nvim-cmp"})
@@ -55,6 +57,9 @@
                          csc (utils.safe-require :csc)
                          ap (utils.safe-require :nvim-autopairs.completion.cmp)
                          capabilities (utils.safe-require :cmp_nvim_lsp)]
+                     ;; honza/vim-snippets contains snippets for the "all" filetype
+                     ;; with the name _.snippets.
+                     (ls.filetype_extend "all" ["_"])
                      (git.setup)
                      (csc.setup)
                      (cmp.setup {

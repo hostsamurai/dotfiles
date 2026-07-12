@@ -5,15 +5,8 @@
                 }
                 :nfnl.macros.aniseed)
 
-(module makyo-fnl.plugins.which-key.layers.normal.insertion)
-
-(defn- get-luasnip-loaders []
-  (let [ls (require :luasnip.loaders)]
-    ls))
-
-(defn- get-luasnip []
-  (let [ls (require :luasnip)]
-    ls))
+(module :makyo-fnl.plugins.which-key.layers.normal.insertion)
+(local {: get-luasnip-loaders : get-luasnip} (require :makyo-fnl.plugins.luasnip))
 
 (def insertion-layer
   {
@@ -21,10 +14,13 @@
        :name "+insertion"
        :s {
            :name "+snippets"
-           :e [#(let [ls (get-luasnip-loaders)]
-                  (ls.edit_snippet_files))       "edit snippets"]
+           :e ["<cmd>LuaSnipEdit<cr>" "edit snippets"]
            :l [#(let [ls (get-luasnip)]
-                  (ls.get_snippets))             "list snippets"]
+                  ;; TODO: This returns a table containing all metadata related to
+                  ;; available snippets. We need to extract the trigger and the
+                  ;; description, then show it in some meaningful way. Perhaps using
+                  ;; FzfLua or Snacks notify?
+                  (ls.get_snippets)) "list snippets"]
            :L [#(let [ls (get-luasnip)]
                   (ls.log.open)) "open snippet log"]}
        }
