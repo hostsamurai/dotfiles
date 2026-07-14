@@ -244,3 +244,6 @@ export PATH="$HOME/.cache/.bun/bin:$PATH"
 
 # starship prompt
 eval "$(starship init zsh)"
+
+# Work-specific .zshrc
+[ -f ~/.zshrc_work ] && source ~/.zshrc_work
