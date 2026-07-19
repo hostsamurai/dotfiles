@@ -1,0 +1,16 @@
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+
+# Transpiled Lua files 
+lua/config 
+!lua/config/lazy.lua 
+lua/keymaps 
+lua/nfnl 
+lua/plugins
+lua/utils

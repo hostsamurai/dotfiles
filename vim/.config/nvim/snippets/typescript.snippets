@@ -1,0 +1,15 @@
+snippet => "arrow function"
+	(${1:param}${2::${3:type}}) => {
+		${4:// fn body}
+	}$5
+
+snippet a=> "arrow function"
+	async (${1:param}${2::${3:type}}) => {
+		${4:// fn body}
+	}$5
+
+snippet i=> "inline arrow function"
+	(${1:param}${2::${3:type}}) => ({ $4 })$5
+
+snippet is=> "inline simple arrow function"
+	${1:param} => $2
