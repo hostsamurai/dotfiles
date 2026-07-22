@@ -4,6 +4,7 @@
 
 (local {: spec} (require :utils.spec))
 (local {: wk-spec} (require :utils.wk-spec))
+(local {: is-markdown-buffer?} (require :utils.helpers))
 
 [
  ;; LazyVim overrides 
@@ -33,15 +34,21 @@
                "Tableize"
                ]
         :keys [
-               (wk-spec "<leader>mmta" "<cmd>TableAddFormula<cr>" {:desc "Add Formula"})
-               (wk-spec "<leader>mmte" "<cmd>TableEvalFormulaLine<cr>" {:desc "Eval Formula"})
-               (wk-spec "<leader>mmtr" "<cmd>TableModeToggle<cr>" {:desc "Realign Table"})
-               (wk-spec "<leader>mmtt" "<cmd>TableModeToggle<cr>" {:desc "Toggle Table Mode"})
+               (wk-spec "<leader>mmta" "<cmd>TableAddFormula<cr>" 
+                        {:desc "Add Formula" :cond #(is-markdown-buffer?)})
+               (wk-spec "<leader>mmte" "<cmd>TableEvalFormulaLine<cr>" 
+                        {:desc "Eval Formula" :cond #(is-markdown-buffer?)})
+               (wk-spec "<leader>mmtr" "<cmd>TableModeToggle<cr>" 
+                        {:desc "Realign Table" :cond #(is-markdown-buffer?)})
+               (wk-spec "<leader>mmtt" "<cmd>TableModeToggle<cr>" 
+                        {:desc "Toggle Table Mode" :cond #(is-markdown-buffer?)})
                ]
         })
 
- (spec "junegunn/vim-easy-align" {:keys [(wk-spec "<leader>FA" "<cmd>EasyAlign<cr>" {:desc "Align Text"})
-                                         (wk-spec "<leader>Fp" "<cmd>LiveEasyAlign<cr>" {:desc "Align with Preview"})]})
+ (spec "junegunn/vim-easy-align" {:keys [(wk-spec "<leader>FA" "<cmd>EasyAlign<cr>" 
+                                                  {:desc "Align Text"})
+                                         (wk-spec "<leader>Fp" "<cmd>LiveEasyAlign<cr>" 
+                                                  {:desc "Align with Preview"})]})
 
  ;; ghostty
  (spec "landerson02/ghostty-theme-sync.nvim" {:opts {:config "~/.config/ghostty/ghostty.config"}})

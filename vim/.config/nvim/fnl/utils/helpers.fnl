@@ -11,6 +11,7 @@
 
 (local {: nil?
         : empty?
+        : contains?
         : get
         } (require :nfnl.core))
 (local {: trim} (require :nfnl.string))
@@ -42,6 +43,23 @@
       (string.match "/claude$")
       (nil?)
       (not)))
+
+(defn is-markdown-buffer? []
+  (= "markdown" vim.bo.filetype))
+
+(defn is-lisp-buffer? []
+  (contains? [
+              "lisp"
+              "cl"
+              "clojure"
+              "clojurescript"
+              "fennel"
+              "chicken"
+              "racket"
+              "scheme"
+              "julia"
+              ] 
+             vim.bo.filetype))
 
 (defn safe-require [mod]
   "Calls `require` within a protected call to prevent any failures

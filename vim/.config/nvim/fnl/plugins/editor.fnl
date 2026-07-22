@@ -7,10 +7,15 @@
 
 (module :plugins.editor)
 
-(local {: merge} (require :nfnl.core))
+(local {: merge : contains?} (require :nfnl.core))
 (local {: spec} (require :utils.spec))
 (local {: wk-spec} (require :utils.wk-spec))
-(local {: safe-require} (require :utils.helpers))
+(local {
+        : safe-require
+        : is-lisp-buffer?
+        : is-markdown-buffer?
+        } (require :utils.helpers))
+
 
 [
  ;; LazyVim overrides 
@@ -28,19 +33,18 @@
                       (wk-spec "<leader>cD" {:group "Dev Container" :icon ""})
                       (wk-spec "<leader>F" {:group "Format" :icon "󰊄"})
                       (wk-spec "<leader>gw" {:group "Worktrees" :icon ""})
-                      (wk-spec "<leader>m" {:group "Modes"})
-                      (wk-spec "<leader>mm" {:group "Markdown" :icon "" :cond #(= vim.bo.filetype "markdown")})
+                      (wk-spec "<leader>m" 
+                               {
+                                :group "Mode" 
+                                :icon #(if (is-lisp-buffer?)
+                                           ""
+                                           (is-markdown-buffer?)
+                                           ""
+                                           nil)
+                                })
+                      (wk-spec "<leader>mm" {:group "Markdown" :icon ""})
                       (wk-spec "<leader>mmt" {:group "Tables" :icon ""})
-                      (wk-spec "<leader>ml" {:group "LISP" :icon "" :cond #(contains? [
-                                                                                        "lisp"
-                                                                                        "cl"
-                                                                                        "clojure"
-                                                                                        "clojurescript"
-                                                                                        "chicken"
-                                                                                        "racket"
-                                                                                        "scheme"
-                                                                                        "julia"
-                                                                                        ])})
+                      (wk-spec "<leader>ml" {:group "LISP" :icon ""})
                       (wk-spec "<leader>mle" {:group "Eval"})
                       (wk-spec "<leader>mll" {:group "Log"})
                       (wk-spec "<leader>T" {:group "Terminal" :icon ""})
@@ -57,4 +61,8 @@
  ;; Replace flash.nvim for 2-letter jumping around
  (spec "yuki-yano/hop.nvim" {:keys [(wk-spec "<leader>h" #(let [hop (require :hop)]
                                                             (hop.jump_words)) {:desc "Hop words"})]})
+
+ (spec "LZDQ/nvim-autocenter" {:event "InsertEnter"
+                               :keys [(wk-spec "<leader>Fc" #(let [autocenter (require :nvim-autocenter)]
+                                                               (autocenter.toggle)) {:desc "Toggle Autocenter"})]})
  ]
