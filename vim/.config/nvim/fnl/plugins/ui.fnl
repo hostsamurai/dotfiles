@@ -54,21 +54,19 @@
  "TaDaa/vimade"
 
  ;; window picker 
- (spec "s1n7ax/nvim-window-picker" {
-                                    :name "window-picker"
-                                    :event "VeryLazy"
-                                    :version "2.*"
-                                    :opts {:hint "floating-big-letter"}
-                                    :keys [["<leader>wW" #(let [window-picker (require :window-picker)]
-                                                            (window-picker.pick_window)) {:desc "Jump to Window"}]]
-                                    })
+ (spec "gbrlsnchs/winpick.nvim"
+       {:keys [(wk-spec "<leader>ww" 
+                        #(let [winpick (require :winpick)]
+                           (winpick.select {:prompt nil})) 
+                        {:desc "Jump to Window"})]})
+
  ;; color picker
  (spec "eero-lehtinen/oklch-color-picker.nvim"
        {
         :event "VeryLazy"
         :version "*"
         :opts {:highlight {:style "virtual_left"}}
-        ;; expose the picker globally so we don't have to `require` it all
+        ;; Expose the picker globally so we don't have to `require` it all
         ;; of the time.
         :init #(let [colorpicker (require :oklch-color-picker)]
                   (set vim.g.colorpicker colorpicker))
