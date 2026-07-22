@@ -7,7 +7,6 @@
 
 (module :plugins.editor)
 
-(local {: merge : contains?} (require :nfnl.core))
 (local {: spec} (require :utils.spec))
 (local {: wk-spec} (require :utils.wk-spec))
 (local {

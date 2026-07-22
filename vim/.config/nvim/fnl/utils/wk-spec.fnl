@@ -1,11 +1,13 @@
-(import-macros {: module
+(import-macros {
+                : module
                 : defn
-                : def}
-               :nfnl.macros.aniseed)
+                : def
+                }
+                :nfnl.macros.aniseed)
 
 (module :utils.wk-spec)
 
-(local {: println : merge : nil?} (require :nfnl.core))
+(local {: merge} (require :nfnl.core))
 
 (defn wk-spec [& args]
   "Gets around Fennel's limitation of being unable to mix associative
@@ -16,6 +18,3 @@
   (match args 
     [lhs rhs opts] (merge [lhs rhs] opts)
     [lhs rhs] (merge [lhs] rhs)))
-
-; (wk-spec "<leader>bs" {:group "Scratch" :icon "󱞁"})
-; (wk-spec "<leader>zc" #(println "sc-im.close") {:desc "Close"})

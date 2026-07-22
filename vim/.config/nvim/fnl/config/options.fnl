@@ -7,7 +7,6 @@
 
 (module :config.options)
 
-(local {: merge} (require :nfnl.core))
 (local {: trimr} (require :nfnl.string))
 (local {: run-command} (require :utils.helpers))
 
@@ -15,14 +14,12 @@
   (let [o vim.o 
         nvim-config-dir (vim.fn.stdpath "config")
         backup-dir (.. nvim-config-dir "/backups")]
-    (do 
-      ;; Keep backups of files when necessary
-      (set o.backup true)
-      (set o.backupdir backup-dir)
-      (set o.writebackup true)
-      (set o.matchpairs "(:),{:},[:],<:>")
-      (vim.print vim.opt.sessionoptions.defaults)
-      (vim.opt.sessionoptions:append ["localoptions" "winpos"]))))
+    ;; Keep backups of files when necessary
+    (set o.backup true)
+    (set o.backupdir backup-dir)
+    (set o.writebackup true)
+    (set o.matchpairs "(:),{:},[:],<:>")
+    (vim.opt.sessionoptions:append ["localoptions" "winpos"])))
 
 (defn- set-ui-options []
   (let [o vim.o]
