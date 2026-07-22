@@ -5,6 +5,13 @@
 (local {: spec} (require :utils.spec))
 
 [
+ ;; LazyVim overrides 
+ (spec "LazyVim/LazyVim" {:opts {:colorscheme "pinkmare"}})
+
+
+ ;;; Additional plugins
+ ;;; ----------------------------------------------
+ 
  (spec "matsuuu/pinkmare" {:lazy false :priority 2000})
  (spec "Mofiqul/dracula.nvim" {:lazy true})
  (spec "NTBBloodbath/doom-one.nvim" {:lazy true})
