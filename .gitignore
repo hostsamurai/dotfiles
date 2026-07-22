@@ -10,8 +10,8 @@ vim/.config/nvim/tmp
 vim/.config/nvim/undo
 vim/.config/nvim/.netrwhist
 vim/.config/nvim/lua/nfnl
-vim/.config/nvim/lua/makyo-fnl
 vim/.config/nvim/fnl/nfnl
+!vim/.config/nvim/lua/config/lazy.lua
 
 configs/.boot/cache
 configs/.lein/indices
