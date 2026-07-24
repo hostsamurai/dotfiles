@@ -13,6 +13,7 @@
  ;;; ----------------------------------------------
  
  (spec "matsuuu/pinkmare" {:lazy false :priority 2000})
+ (spec "rose-pine/neovim" {:lazy true :name "rose-pine"}) ;; 2nd favorite theme
  (spec "Mofiqul/dracula.nvim" {:lazy true})
  (spec "NTBBloodbath/doom-one.nvim" {:lazy true})
  (spec "ray-x/starry.nvim" {:lazy true
