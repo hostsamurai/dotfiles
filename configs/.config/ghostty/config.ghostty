@@ -22,6 +22,9 @@ adjust-cell-height = 15%
 #keybind = ctrl+tab=next_tab
 #keybind = ctrl+shift+tab=previous_tab
 keybind = super+ctrl+shift+a=toggle_window_decorations
+# needed by oh-my-pi
+keybind = alt+backspace=text:\x1b\x7f
+keybind = shift+enter=text:\n
 
 mouse-hide-while-typing = true
 scrollback-limit = 1000000
