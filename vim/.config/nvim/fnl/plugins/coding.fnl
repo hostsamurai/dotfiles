@@ -27,6 +27,11 @@
                        ]
         :opts {
                :snippets {:preset "vsnip"}
+               :keymap {
+                        :preset "enter" 
+                        "<Tab>" ["snippet_forward" "fallback"]
+                        "<S-Tab>" ["snippet_backward" "fallback"]
+                        }
                :sources {
                          :default [
                                    "buffer"
@@ -107,7 +112,12 @@
                                                 Rule (require :nvim-autopairs.rule)
                                                 cond (require :nvim-autopairs.conds)]
                                             (npairs.setup opts)
-                                            (-> (npairs.add_rule (Rule "<" ">"))
+                                            (-> (npairs.add_rule (Rule "<" ">") 
+                                                                 [
+                                                                  "-html" 
+                                                                  "-javascriptreact" 
+                                                                  "-typescriptreact"
+                                                                  ])
                                                 (: :with_pair (cond.before_regex "%a+:?:?$" 3))
                                                 (: :with_move (fn [opts]
                                                                 (= opts.char ">"))))))
