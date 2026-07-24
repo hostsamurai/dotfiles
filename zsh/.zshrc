@@ -225,25 +225,19 @@ fi
 # Toolchain
 # ------------------------------------------------
 
-# proto
-export PROTO_HOME="$HOME/.proto"
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+# mise 
+eval "$(~/.local/bin/mise activate zsh)"
 
-# yarn
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$PATH"
+# fnox 
+if [ -f ~/.config/fnox/age.txt ]; then 
+  export FNOX_AGE_KEY=$(cat ~/.config/fnox/age.txt | grep "AGE-SECRET-KEY")
+fi
 
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-# bun
-export PATH="$HOME/.cache/.bun/bin:$PATH"
-
-# starship prompt
-eval "$(starship init zsh)"
+# worktrunk
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
 
 # Work-specific .zshrc
 [ -f ~/.zshrc_work ] && source ~/.zshrc_work
+
+# starship prompt
+eval "$(starship init zsh)"

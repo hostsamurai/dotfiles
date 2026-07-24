@@ -1,0 +1,72 @@
+# How it works:
+#
+# ┌───────────────────────┬───────────────────────────────────────────────────────────────┐
+# │ Action                │ Command                                                       │
+# ├───────────────────────┼───────────────────────────────────────────────────────────────┤
+# │ Full install          │ mise run install (applies dotfiles + VCS prompt + zplug hook) │
+# ├───────────────────────┼───────────────────────────────────────────────────────────────┤
+# │ Apply/repair symlinks │ mise dotfiles apply                                           │
+# ├───────────────────────┼───────────────────────────────────────────────────────────────┤
+# │ Check status          │ mise run list or mise dotfiles status                         │
+# └───────────────────────┴───────────────────────────────────────────────────────────────┘
+#
+# The --force flag in the install task handles the 3 remaining conflicts (~/.spacemacs, ~/.config/ghostty, ~/.config/mpv) where existing real files/dirs get replaced
+# with symlinks — same behavior as the old stow -R.
+
+[settings]
+dotfiles.root = "."
+
+[tasks.install]
+description = "Install all dotfiles via mise dotfiles apply + run post-install hooks"
+run = [
+  "mise dotfiles apply --yes --force",
+  "./lib/vcs-setup.sh",
+  "./lib/hooks/post_zsh.sh",
+]
+
+[tasks.clean]
+description = "Remove all dotfile symlinks managed by mise"
+run = []
+
+[tasks.list]
+description = "Show dotfiles status via mise"
+run = "mise dotfiles status"
+
+[dotfiles]
+"~/dotfiles" = "."
+"~/.config/mise/config.toml" = "~/configs/.config/mise/config.toml"
+
+# --- ZSH ---
+"~/.zshrc" = "zsh/.zshrc"
+"~/.zshenv" = "zsh/.zshenv"
+"~/.zprofile" = "zsh/.zprofile"
+"~/.zsh" = "zsh/.zsh"
+
+# --- tmux ---
+"~/.tmux.conf" = "tmux/.tmux.conf"
+
+# --- VCS (Git / Mercurial) ---
+"~/.gitconfig" = "vcs/.gitconfig"
+"~/.gitignore_global" = "vcs/.gitignore_global"
+
+# --- Spacemacs ---
+"~/.spacemacs" = "spacemacs/.spacemacs"
+
+# --- Vim / Neovim ---
+"~/.config/nvim" = "vim/.config/nvim"
+
+# --- Configs: top-level dotfiles ---
+"~/.eslintrc.js" = "configs/.eslintrc.js"
+"~/.stylelintrc" = "configs/.stylelintrc"
+"~/.inputrc" = "configs/.inputrc"
+"~/.boot" = "configs/.boot"
+"~/.lein" = "configs/.lein"
+
+# --- Configs: under ~/.config ---
+# Individual entries so nvim and configs don't conflict on ~/.config
+"~/.config/ghostty" = { source = "configs/.config/ghostty", mode = "symlink" }
+"~/.config/gtk-3.0" = { source = "configs/.config/gtk-3.0", mode = "symlink" }
+"~/.config/skills" = { source = "configs/.config/skills", mode = "symlink" }
+"~/.config/starship.toml" = { source = "configs/.config/starship.toml", mode = "symlink" }
+"~/.config/tree-sitter" = { source = "configs/.config/tree-sitter", mode = "symlink" }
+

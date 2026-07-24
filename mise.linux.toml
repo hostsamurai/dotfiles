@@ -1,0 +1,19 @@
+[dotfiles]
+# On Linux, move old X server configs over
+# --- Configs: top-level dotfiles ---
+"~/.Xresources" = "configs/.Xresources"
+"~/.Xresources.d" = "configs/.Xresources.d"
+"~/.asoundrc" = "configs/.asoundrc"
+"~/.xinitrc" = "configs/.xinitrc"
+"~/.xserverrc" = "configs/.xserverrc"
+"~/.xsettingsd" = "configs/.xsettingsd"
+"~/.profile" = "configs/.profile"
+
+# --- Configs: under ~/.config ---
+# Individual entries so nvim and configs don't conflict on ~/.config
+"~/.config/mpdscribble" = { source = "configs/.config/mpdscribble", mode = "symlink" }
+"~/.config/mpv" = { source = "configs/.config/mpv", mode = "symlink" }
+"~/.config/pipewire" = { source = "configs/.config/pipewire", mode = "symlink" }
+"~/.config/pulse" = { source = "configs/.config/pulse", mode = "symlink" }
+"~/.config/wacom-config.sh" = { source = "configs/.config/wacom-config.sh", mode = "symlink" }
+"~/.config/wireplumber" = { source = "configs/.config/wireplumber", mode = "symlink" }

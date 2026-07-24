@@ -17,6 +17,7 @@ configs/.boot/cache
 configs/.lein/indices
 configs/.lein/repl-history
 configs/.config/coc/commands
+configs/.config/fnox/age.txt
 configs/.config/gtk-3.0/bookmarks
 configs/.config/pulse/cookie
 configs/.config/gomp
