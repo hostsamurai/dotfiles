@@ -27,7 +27,7 @@
              trimr
              (= "Linux"))
         (set o.guifont "FiraCode Nerd Font:h11")
-        (set o.guifont "FiraCode Nerd Font:12.5"))
+        (set o.guifont "FiraCode Nerd Font:h12.5"))
     (set o.linespace 4)))
 
 (do 
