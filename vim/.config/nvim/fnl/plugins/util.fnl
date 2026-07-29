@@ -41,8 +41,8 @@
                                ".")}
          :keys [
                 (wk-spec "<leader>gwc" "<cmd>WorktreeCreate<cr>" {:desc "Create a worktree"})
-                (wk-spec "<leader>gwd" "<cmd>WorktreeCreate<cr>" {:desc "Delete a worktree"})
-                (wk-spec "<leader>gws" "<cmd>WorktreeCreate<cr>" {:desc "Switch a worktree"})
+                (wk-spec "<leader>gwd" "<cmd>WorktreeDelete<cr>" {:desc "Delete a worktree"})
+                (wk-spec "<leader>gws" "<cmd>WorktreeSwitch<cr>" {:desc "Switch a worktree"})
                 ]
          })
 
