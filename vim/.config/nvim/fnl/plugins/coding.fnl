@@ -165,6 +165,14 @@
                                                           ]
                                               }))})
 
+ ;; Code outlines
+ (spec "hedyhli/outline.nvim" 
+       {
+        :lazy true 
+        :cmd ["Outline" "OutlineOpen"] 
+        :keys [(wk-spec "<leader>co" "<cmd>Outline<cr>" {:desc "Toggle Outline"})]
+        })
+
  ;; Terminal support
  (spec "akinsho/toggleterm.nvim" 
        {
