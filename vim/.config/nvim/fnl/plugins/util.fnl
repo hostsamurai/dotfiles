@@ -32,6 +32,13 @@
                                             (set vim.g.mergetool_prefer_revision "local"))
                                    :keys [(wk-spec "<leader>gm" "<cmd>MergetoolToggle<cr>" {:desc "Mergetool"})]})
 
+  ;; Jujutsu support
+  (spec "mistweaverco/jujutsu.nvim"
+        {:lazy true 
+         :opts {:kind "tab" :diff_viewer "diffview"}
+         :keys [(wk-spec "<leader>jj" #(let [jujutsu (require :jujutsu)]
+                                         (jujutsu.open)) {:desc "Jujutsu"})]})
+
   ;; Worktree support
   (spec "afonsofrancof/worktrees.nvim" 
         {
@@ -46,8 +53,10 @@
                 ]
          })
 
- (spec "Apeiros-46B/qalc.nvim" {:keys [["<leader>c" "<cmd>Qalc<cr>" {:desc "Calculator"}]]})
+  ;; Calculator
+ (spec "Apeiros-46B/qalc.nvim" {:keys [["<leader>*" "<cmd>Qalc<cr>" {:desc "Calculator"}]]})
 
+ ;; Spreadsheets support
  (spec "DAmesberger/sc-im.nvim" {:keys [
                                         (wk-spec "<leader>zc" #(sc-im.close) {:desc "Close"})
                                         (wk-spec "<leader>zo" #(sc-im.open_in_scim) {:desc "Open in sc-im"})
@@ -66,6 +75,10 @@
         :keys [(wk-spec "<leader>CP" #(img-clip.open_picker) {:desc "Open Ignoring cword"})
                (wk-spec "<leader>Cp" #(img-clip.open_picker) {:desc "Open Picker for cword"})]
         })
+
+ ;; Preview images in Markdown files
+ (spec "ACupofAir/markdown-image-preview.nvim" 
+       {:keys [(wk-spec "<leader>mmi" "<cmd>MarkdownImagePreview<cr>" {:desc "Preview Image"})]})
 
  ;; Replace session management with mini.sessions
  (spec "nvim-mini/mini.sessions" 
