@@ -30,7 +30,8 @@
                                                  :style_preset "default" 
                                                  :themable true 
                                                  :separator_style "thick" 
-                                                 }})))})
+                                                 }})))
+        :keys [(wk-spec "<leader><Tab>p" "<cmd>BufferLinePick<cr>" {:desc "Pick Tab"})]})
 
  (spec "nvim-lualine/lualine.nvim" 
        {:opts (fn [_ opts]
