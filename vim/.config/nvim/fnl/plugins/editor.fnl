@@ -64,4 +64,7 @@
  (spec "LZDQ/nvim-autocenter" {:event "InsertEnter"
                                :keys [(wk-spec "<leader>Fc" #(let [autocenter (require :nvim-autocenter)]
                                                                (autocenter.toggle)) {:desc "Toggle Autocenter"})]})
+
+ (spec "christoomey/vim-tmux-navigator"
+       {:lazy false :init #(set vim.g.tmux_navigator_no_mappings 1)})
  ]

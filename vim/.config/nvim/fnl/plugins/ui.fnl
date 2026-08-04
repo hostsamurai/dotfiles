@@ -54,6 +54,15 @@
  ;; Fade inactive buffers
  "TaDaa/vimade"
 
+ ;; Animations for yank and paste
+ (spec "rachartier/tiny-glimmer.nvim" 
+       {
+        :event "VeryLazy"
+        :priority 10 ;; low priority to catch other plugins' keybindings 
+        :config #(let [tiny-glimmer (require :tiny-glimmer)]
+                   (tiny-glimmer.setup))
+        })
+
  ;; window picker 
  (spec "gbrlsnchs/winpick.nvim"
        {:keys [(wk-spec "<leader>ww" 
