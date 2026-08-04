@@ -14,7 +14,7 @@
 # with symlinks — same behavior as the old stow -R.
 
 [settings]
-dotfiles.root = "."
+dotfiles.root = "~/dotfiles"
 
 [tasks.install]
 description = "Install all dotfiles via mise dotfiles apply + run post-install hooks"
@@ -33,8 +33,8 @@ description = "Show dotfiles status via mise"
 run = "mise dotfiles status"
 
 [dotfiles]
-"~/dotfiles" = "."
-"~/.config/mise/config.toml" = "~/configs/.config/mise/config.toml"
+#"~/dotfiles" = "."
+"~/.config/mise/config.toml" = "configs/.config/mise/config.toml"
 
 # --- ZSH ---
 "~/.zshrc" = "zsh/.zshrc"
@@ -64,9 +64,11 @@ run = "mise dotfiles status"
 "~/.hermes" = "configs/.hermes"
 "~/.omp" = "configs/.omp"
 
-# --- Configs: under ~/.config ---
+# --- Configs: under ~/.configs ---
 # Individual entries so nvim and configs don't conflict on ~/.config
+"~/.configs/opencode" = { source = "configs/.config/opencode", mode = "symlink" }
 "~/.config/ghostty" = { source = "configs/.config/ghostty", mode = "symlink" }
+"~/.configs/herdr" = { source = "configs/.config/herdr", mode = "symlink" }
 "~/.config/gtk-3.0" = { source = "configs/.config/gtk-3.0", mode = "symlink" }
 "~/.config/skills" = { source = "configs/.config/skills", mode = "symlink" }
 "~/.config/starship.toml" = { source = "configs/.config/starship.toml", mode = "symlink" }
