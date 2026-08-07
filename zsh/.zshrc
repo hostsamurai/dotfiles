@@ -61,7 +61,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search"
 zplug "dim-an/cod", defer:2
 
-zplug "plugins/extract", from:oh-my-zsh
+zplug "plugins/extract", from:oh-my-zsh, ignore:"_extract"
 zplug "plugins/lein",    from:oh-my-zsh
 
 zplug "rupa/z", use:z.sh
