@@ -8,43 +8,37 @@
 [
  ;; LazyVim overides 
  
- (spec "saghen/blink.compat" {:version "2.*" :lazy true})
+ ;; These two are necessary for blink to work correctly
+ (spec "saghen/blink.compat" {:optional false})
+ (spec "rafamadriz/friendly-snippets" {:optional false})
+
  (spec "saghen/blink.cmp" 
        {
         :dependencies [
-                       "hrsh7th/vim-vsnip"
-                       "https://codeberg.org/FelipeLema/bink-cmp-vsnip.git"
-                       "jdrupal-dev/css-vars.nvim"
+                       (spec "jdrupal-dev/css-vars.nvim" {:dependencies "saghen/blink.lib"})
                        (spec "mikavilpas/blink-ripgrep.nvim" {:version "*"})
                        "MahanRahmati/blink-nerdfont.nvim"
                        "moyiz/blink-emoji.nvim"
+                       "dmitmel/cmp-digraphs"
                        "archie-judd/blink-cmp-words"
                        "Kaiser-Yang/blink-cmp-git"
                        "barrettruth/blink-cmp-ghostty"
                        "bydlw98/blink-cmp-env"
                        "disrupted/blink-cmp-conventional-commits"
-                       "tamago324/cmp-zsh"
                        ]
         :opts {
-               :snippets {:preset "vsnip"}
-               :keymap {
-                        :preset "enter" 
-                        "<Tab>" ["snippet_forward" "fallback"]
-                        "<S-Tab>" ["snippet_backward" "fallback"]
-                        }
+               :snippets {:preset "mini_snippets"}
                :sources {
                          :default [
-                                   "buffer"
-                                   "ripgrep"
-                                   "nerdfont"
-                                   "emoji"
-                                   "lsp"
-                                   "path"
                                    "lazydev"
+                                   "emoji"
+                                   "nerdfont"
+                                   "digraphs"
                                    "git"
-                                   "ghostty"
-                                   "env"
                                    "conventional_commits"
+                                   "env"
+                                   "ripgrep"
+                                   "ghostty"
                                    ]
                          :compat ["zsh"]
                          :providers {
@@ -61,6 +55,11 @@
                                              :score_offset 15 
                                              :opts {:insert true :trigger ":"}
                                              }
+                                     :digraphs {
+                                                 :name "digraphs"
+                                                 :module "blink.compat.source"
+                                                 :opts {:keyword_length 2}
+                                                 }
                                      :dictionary {
                                                   :name "blink-cmp-words"
                                                   :module "blink-cmp-words.dictionary"
@@ -88,7 +87,6 @@
                                                             :module "blink-cmp-conventional-commits"
                                                             :enabled #(= vim.bo.filetype "gitcommit")
                                                             }
-                                     :zsh {:name "zsh" :module "blink.compat.source"}
                                      }
                          }
                }
