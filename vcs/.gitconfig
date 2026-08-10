@@ -44,20 +44,6 @@
 [color]
   ui = true
 
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-
 [core]
   autocrlf = input
   editor = nvim -u NONE
@@ -67,20 +53,11 @@
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
 
-[mergetool "mvimdiff"]
-  cmd = /usr/local/bin/mvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+[mergetool "codediff"]
+	cmd = nvim \"$MERGED\" -c \"CodeDiff --exit-on-close merge \\\"$MERGED\\\"\"
 
-[merge]
-  tool = mvimdiff
-  conflictstyle = diff3
-
-[diff]
-  tool = vimdiff
-  guitool = gvimdiff
-
-[difftool "sourcetree"]
-  cmd = opendiff "$LOCAL" "$REMOTE"
-  path =
+[difftool "codediff"]
+	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff --exit-on-close file $LOCAL $REMOTE\"
 
 [push]
 	default = simple
@@ -109,8 +86,10 @@
   hunk-header-file-style = red
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
+
 [init]
 	defaultBranch = master
+
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
