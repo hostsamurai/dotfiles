@@ -11,7 +11,6 @@
 
 [
  ;;; LazyVim overrides 
- 
 
  ;;; Additional plugins
  ;;; ----------------------------------------------
@@ -31,6 +30,30 @@
                                             (set vim.g.mergetool_layout "LmR")
                                             (set vim.g.mergetool_prefer_revision "local"))
                                    :keys [(wk-spec "<leader>gm" "<cmd>MergetoolToggle<cr>" {:desc "Mergetool"})]})
+
+  ;; Better git diffs
+  (spec "esmuellert/codediff.nvim" 
+        {
+         :cmd "CodeDiff"
+         :opts {:keymaps {:conflict {
+                                     :accept_incoming: "<localleader>ct"  ;; Accept incoming (theirs/left) change
+                                     :accept_current: "<localleader>co"   ;; Accept current (ours/right) change
+                                     :accept_both: "<localleader>cb"      ;; Accept both changes (incoming first)
+                                     :discard: "<localleader>cx"          ;; Discard both, keep base
+                                     ;; Accept all (whole file) - uppercase versions
+                                     :accept_all_incoming: "<localleader>cT"  ;; Accept ALL incoming changes
+                                     :accept_all_current: "<localleader>cO"   ;; Accept ALL current changes
+                                     :accept_all_both: "<localleader>cB"      ;; Accept ALL both changes
+                                     :discard_all: "<localleader>cX"          ;; Discard ALL, reset to base
+                                     }}}
+         :keys [
+                (wk-spec "<leader>g-c" "<cmd>CodeDiff file HEAD<cr>" {:desc "Diff Current File"})
+                (wk-spec "<leader>g-d" "<cmd>CodeDiff<cr>" {:desc "Show Git Diff"})
+                (wk-spec "<leader>g-h" "<cmd>CodeDiff history<cr>" {:desc "Show Git Log"})
+                (wk-spec "<leader>g-p" "<cmd>CodeDiff main...HEAD<cr>" {:desc "PR-like Diff"})
+                (wk-spec "<leader>g-s" "<cmd>CodeDiff --staged<cr>" {:desc "Diff Staged Changes"})
+                ]
+         })
 
   ;; Jujutsu support
   (spec "mistweaverco/jujutsu.nvim"
