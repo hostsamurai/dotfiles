@@ -1,14 +1,34 @@
+[deps.bun]
+auto = true
+[deps.pnpm]
+auto = true
+
+[tool_alias]
+gbrain = "github:garrytan/gbrain"
+
 [tools]
-fnox = "latest"
-"github:can1357/oh-my-pi" = "latest"
+# Core
+node = "latest"
+bun = "latest"
+"aqua:pnpm/pnpm" = "latest"
+worktrunk = "latest"
+uv = "latest"
+
+# AI-related
 herdr = "latest"
 hunk = "latest"
 "llama.cpp" = { version = "latest", version_prefix = "b" }
-markdownlint-cli2 = "latest"
-node = "latest"
+"github:can1357/oh-my-pi" = "latest"
 ollama = "latest"
 opencode = "latest"
 pi = "latest"
-pnpm = "latest"
-prettier = "latest"
-worktrunk = "latest"
+gbrain = "latest"
+
+# Secrets management
+fnox = "latest"
+
+# Deps
+"pnpm:prettier" = "latest"
+"pnpm:markdownlint-cli2" = "0.23.2"
+"pnpm:eslint" = "latest"
+"pnpm:pi-nvim-bridge" = "latest"
