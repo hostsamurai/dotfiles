@@ -233,8 +233,8 @@ if [ -f ~/.config/fnox/age.txt ]; then
   export FNOX_AGE_KEY=$(cat ~/.config/fnox/age.txt | grep "AGE-SECRET-KEY")
 fi
 
-# worktrunk
-if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+# jj-waltz 
+eval "$(jw shell init zsh)"
 
 # Work-specific .zshrc
 [ -f ~/.zshrc_work ] && source ~/.zshrc_work

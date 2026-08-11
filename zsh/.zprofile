@@ -16,6 +16,10 @@ function {
     eval "$(luarocks path --lua-version 5.1 --no-bin)"
   fi
 
+  if [[ -d "$HOME/.cargo/bin" ]]; then
+    path+="$HOME.cargo/bin"
+  fi
+
   local kernel=`uname`
 
   if [[ $kernel = "Darwin" ]]; then

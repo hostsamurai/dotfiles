@@ -32,6 +32,7 @@
                       (wk-spec "<leader>cD" {:group "Dev Container" :icon ""})
                       (wk-spec "<leader>F" {:group "Format" :icon "󰊄"})
                       (wk-spec "<leader>gw" {:group "Worktrees" :icon ""})
+                      (wk-spec "<leader>j" {:group "Jujutsu" :icon ""})
                       (wk-spec "<leader>m" 
                                {
                                 :group "Mode" 
