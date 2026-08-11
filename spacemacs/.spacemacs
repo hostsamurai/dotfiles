@@ -288,7 +288,7 @@ It should only modify the values of Spacemacs settings."
    ;; `fixed-pitch' faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("FiraCode Nerd Font"
+   dotspacemacs-default-font '("Maple Mono NF"
                                :size 11.0
                                :weight normal
                                :width normal)
@@ -486,7 +486,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers "relative"
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
