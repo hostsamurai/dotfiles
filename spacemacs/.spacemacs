@@ -286,9 +286,11 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. This setting has no effect when
    ;; running Emacs in terminal. The font set here will be used for `default' and
    ;; `fixed-pitch' faces. The `:size' can be specified as
-   ;; a non-negative integer (pixel size), or a floating-point (point size).
+   ;; a non-negative integer (pixel size), or a floating-point (point size.
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Maple Mono NF"
+   dotspacemacs-default-font '("IoskeleyMonoNL Nerd Font"
+                               ;; "Iosevka NFP"
+                               ;; "Maple Mono NF"
                                :size 11.0
                                :weight normal
                                :width normal)
@@ -426,7 +428,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default t) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
@@ -486,7 +488,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers "relative"
+   dotspacemacs-line-numbers '(:relative t)
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -636,8 +638,30 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  )
-
+  (setq-default evil-escape-key-sequence "jk")
+  (setq-default evil-escape-unordered-key-sequence "true") ;; Optional: allows "kj" as well
+  ;; NOTE: There's no way to provide the width value in
+  ;; `dotspacemacs-default-font' for Ioskeley Mono, so we must resort to
+  ;; setting it manually like this.
+  (set-face-attribute 'default nil
+                      :font (font-spec :family "Ioskeley Mono Nerd Font"
+                                       :size 11.5
+                                       :width 'semi-condensed
+                                       :weight 'semi-bold))
+  (set-face-attribute 'bold nil
+                      :font (font-spec :family "Ioskeley Mono Nerd Font"
+                                       :width 'semi-condensed
+                                       :weight 'ultra-bold))
+  (set-face-attribute 'italic nil
+                      :font (font-spec :family "Ioskeley Mono Nerd Font"
+                                       :width 'semi-condensed
+                                       :weight 'semi-bold
+                                       :slant 'italic))
+  (set-face-attribute 'bold-italic nil
+                      :font (font-spec :family "Ioskeley Mono Nerd Font"
+                                       :width 'semi-condensed
+                                       :weight 'ultra-bold
+                                       :slant 'italic)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -744,3 +768,5 @@ This function is called at the very end of Spacemacs initialization."
    ;; If there is more than one, they won't work right.
    '(default ((t (:background nil)))))
   )
+
+;; (dotspacemacs/init)

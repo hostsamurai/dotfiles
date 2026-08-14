@@ -22,6 +22,8 @@ configs/.config/gtk-3.0/bookmarks
 configs/.config/pulse/cookie
 configs/.config/gomp
 configs/.config/mpdscribble
+configs/.config/kitty/*.bak
+configs/.config/wezterm/*.lua
 
 zsh/.zshrc_work
 

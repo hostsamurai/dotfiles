@@ -1,0 +1,35 @@
+# NOTE: Other good combinations are the following: 
+# NOTE: 
+# NOTE: Maple Mono: 
+# NOTE: ------------ 
+# NOTE: normal = ["Maple Mono NF"]
+# NOTE: width = "Thin"
+# NOTE: 
+# NOTE: Iosevka NFM
+# NOTE: ------------ 
+# NOTE: normal = ["Iosevka NFM"]
+# NOTE: 
+# NOTE: The settings below serve to mimic the font rendering from 
+# NOTE: Kitty. It comes close, and Neovide is able to render ligatures 
+# NOTE: better.
+
+[font]
+hinting = "none"
+edging = "subpixelantialias"
+size = 11.0
+
+[[font.normal]]
+family = "IoskeleyMonoTerm Nerd Font"
+style = "SemiCondensed Medium"
+
+[[font.bold]]
+family = "IoskeleyMono Nerd Font"
+weight = "SemiCondensed Heavy"
+
+[[font.italic]]
+family = "IoskeleyMono Nerd Font"
+style = " SemiCondensed Medium Italic"
+
+[[font.bold_italic]]
+family = "IoskeleyMono Nerd Font"
+style = "SemiCondensed Heavy Italic"

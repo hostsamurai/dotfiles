@@ -2,9 +2,29 @@ shell-integration = zsh
 theme = "Rose Pine Moon"
 
 # Font Settings
-font-family = "FiraCode Nerd Font Mono"
+# NOTE: Other fonts that look good include the following 
+# configurations:
+#
+# IosevkaTerm Nerd Font Mono:
+#
+# font-family = "IosevkaTerm NFM Medium"
+# font-family-bold = "IosevkaTerm NFM Heavy"
+# font-family-italic = "IosevkaTerm NFM Medium Italic"
+# font-family-bold-italic = "IosevkaTerm NFM Heavy Italic"
+#
+# NOTE: We have to resort to this on Linux, otherwise none of 
+#       these variants render properly. DO NOT CHANGE THIS!
+font-family = "IoskeleyMonoTerm Nerd Font SemiCondensed"
+font-style = "Medium"
+font-family-bold = "IoskeleyMonoTerm Nerd Font SemiCondensed Heavy"
+font-style-bold = "Heavy"
+font-family-italic = "IoskeleyMonoTerm Nerd Font SemiCondensed Medium"
+font-style-italic = "Italic"
+font-family-bold-italic = "IoskeleyMonoTerm Nerd Font SemiCondensed Heavy"
+font-style-bold-italic = "Italic"
 font-size = 11
 adjust-cell-height = 15%
+font-thicken = true
 
 # Keybindings
 # TODO: uncomment these when ghostty becomes a real

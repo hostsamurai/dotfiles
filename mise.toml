@@ -64,12 +64,15 @@ run = "mise dotfiles status"
 "~/.hermes" = "configs/.hermes"
 "~/.omp" = "configs/.omp"
 
-# --- Configs: under ~/.configs ---
+# --- Configs: under ~/.config ---
 # Individual entries so nvim and configs don't conflict on ~/.config
 "~/.configs/opencode" = { source = "configs/.config/opencode", mode = "symlink" }
+"~/.config/kitty" = { source = "configs/.config/kitty", mode = "symlink" }
 "~/.config/ghostty" = { source = "configs/.config/ghostty", mode = "symlink" }
+"~/.config/wezterm" = { source = "configs/.config/wezterm", mode = "symlink" }
 "~/.configs/herdr" = { source = "configs/.config/herdr", mode = "symlink" }
 "~/.config/gtk-3.0" = { source = "configs/.config/gtk-3.0", mode = "symlink" }
 "~/.config/skills" = { source = "configs/.config/skills", mode = "symlink" }
 "~/.config/starship.toml" = { source = "configs/.config/starship.toml", mode = "symlink" }
 "~/.config/tree-sitter" = { source = "configs/.config/tree-sitter", mode = "symlink" }
+"~/.config/neovide" = { source = "configs/.config/neovide", mode = "symlink" }
