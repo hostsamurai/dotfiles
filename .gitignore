@@ -24,6 +24,14 @@ configs/.config/gomp
 configs/.config/mpdscribble
 configs/.config/kitty/*.bak
 configs/.config/wezterm/*.lua
+configs/.config/opencode
+configs/.config/hermes
+configs/.hermes
+configs/.hermes
+configs/.omp/*
+!configs/.omp/plugins/
+configs/.omp/plugins/*
+!configs/.omp/plugins/package.json
 
 zsh/.zshrc_work
 

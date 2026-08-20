@@ -1,0 +1,15 @@
+{
+  "name": "omp-plugins",
+  "private": true,
+  "dependencies": {
+    "@diegopetrucci/pi-quiet-tools": "^0.1.10",
+    "@dietrichgebert/ponytail": "github:DietrichGebert/ponytail",
+    "@juicesharp/rpiv-ask-user-question": "^2.4.0",
+    "context-mode": "^1.0.169",
+    "pi-execution-time": "^0.2.0",
+    "pi-interactive-shell": "^0.14.1",
+    "pi-mcp-adapter": "^2.21.2",
+    "pi-model-switch": "^0.1.4",
+    "pi-web-access": "^0.20.0"
+  }
+}

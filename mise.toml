@@ -61,7 +61,6 @@ run = "mise dotfiles status"
 "~/.inputrc" = "configs/.inputrc"
 "~/.boot" = "configs/.boot"
 "~/.lein" = "configs/.lein"
-"~/.hermes" = "configs/.hermes"
 "~/.omp" = "configs/.omp"
 
 # --- Configs: under ~/.config ---
