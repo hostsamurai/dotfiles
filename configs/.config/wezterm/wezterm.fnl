@@ -8,7 +8,7 @@
  ;;
  ;; https://wezterm.org/config/lua/wezterm/font.html 
  ;; https://wezterm.org/config/lua/config/font_rules.html?h=font_rules
- :font (wezterm.font "Ioskeley Mono Term")
+ :font (wezterm.font_with_fallback ["Ioskeley Mono Term" "Noto Color Emoji"])
  :font_rules [
               ;; Normal 
               {
@@ -80,7 +80,7 @@
                :italic true
                }
               ]
- :freetype_load_flags "NO_HINTING|MONOCHROME|NO_AUTOHINT|NO_BITMAP"
+ :freetype_load_flags "NO_HINTING|NO_AUTOHINT"
  :freetype_load_target nil
  :freetype_render_target nil
  :freetype_interpreter_version 40
