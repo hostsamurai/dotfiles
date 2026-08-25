@@ -4,9 +4,19 @@
 
 (local {: spec} (require :utils.spec))
 (local {: wk-spec} (require :utils.wk-spec))
+(local {: nil?} (require :nfnl.core))
 
 [
  ;; LazyVim overides 
+ (spec "nvim-treesitter/nvim-treesitter"
+       {:init (lambda [] 
+                (let [treesitter-query (require :vim.treesitter.query)]
+                  (treesitter-query.add_predicate "is_mise?" 
+                                                  (fn [_ _ bufnr]
+                                                    (let [filepath (vim.api.nvim_buf_get_name (tonumber bufnr))
+                                                          filename (vim.fn.fnamemodify filepath ":t")]
+                                                      (nil? (string.match filename ".*mise.*%.toml$")))) 
+                                                  {:force true :all false})))})
  
  ;; These two are necessary for blink to work correctly
  (spec "saghen/blink.compat" {:optional false})
