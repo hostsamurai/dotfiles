@@ -1,3 +1,20 @@
+[bootstrap.packages]
+"pacman:git"        = { os = "linux", version = "latest" }
+"pacman:base-devel" = { os = "linux", version = "latest" }
+# Various LISPs
+"pacman:roswell" = { os = "linux", version = "latest" }
+"pacman:racket"  = { os = "linux", version = "latest" }
+"pacman:chicken" = { os = "linux", version = "latest" }
+"pacman:guile"   = { os = "linux", version = "latest" }
+"pacman:sbcl"    = { os = "linux", version = "latest" }
+# Fonts 
+"pacman:ttf-iosevka-nerd"         = { os = "linux", version = "latest" }
+"pacman:ttf-iosevkaterm-nerd"     = { os = "linux", version = "latest" }
+"pacman:ttf-iosevkatermslab-nerd" = { os = "linux", version = "latest" }
+"pacman:ttf-fira-code"            = { os = "linux", version = "latest" }
+"pacman:ttf-hack-nerd"            = { os = "linux", version = "latest" }
+"pacman:ttf-lilex-nerd"           = { os = "linux", version = "latest" }
+
 [deps.bun]
 auto = true
 [deps.pnpm]
@@ -13,6 +30,9 @@ bun = "latest"
 "aqua:pnpm/pnpm" = "latest"
 worktrunk = "latest"
 uv = "latest"
+java = "latest"
+babashka = "latest"
+clojure = "latest"
 
 # AI-related
 herdr = "latest"

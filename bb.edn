@@ -1,0 +1,10 @@
+{:paths ["bootstrap"]
+ :tasks {bootstrap-paru paru/-main
+         lsp:setup-all lsp/-main
+         lsp:setup-racket lsp/install-racket-langserver
+         lsp:setup-chicken lsp/install-chicken-language-server
+         lsp:setup-guile lsp/install-guile-lsp-server
+         lsp:setup-cl lsp/install-cl-lsp
+         fonts:all fonts/install-all-custom-fonts
+         fonts:ioskeley (exec 'fonts/install-ioskeley-fonts)
+         fonts:aporetic fonts/install-aporetic-fonts}}

@@ -236,6 +236,15 @@ fi
 # jj-waltz 
 eval "$(jw shell init zsh)"
 
+# Helix and Steel
+export PATH="$PATH:$HOME.cargo/bin:$HOME.steel/bin"
+
+# Roswell (Common Lisp)
+[ -d "$HOME/.roswell" ] && PATH="$PATH:$HOME.roswell/bin"
+
+# bbin (babashka)
+[ -d "$HOME/.local/bin" ] && PATH="$PATH:$HOME.local/bin" 
+
 # Work-specific .zshrc
 [ -f ~/.zshrc_work ] && source ~/.zshrc_work
 

@@ -15,6 +15,7 @@
 
 [settings]
 dotfiles.root = "~/dotfiles"
+lockfile = true
 
 [tasks.install]
 description = "Install all dotfiles via mise dotfiles apply + run post-install hooks"
@@ -24,13 +25,42 @@ run = [
   "./lib/hooks/post_zsh.sh",
 ]
 
-[tasks.clean]
-description = "Remove all dotfile symlinks managed by mise"
-run = []
-
 [tasks.list]
 description = "Show dotfiles status via mise"
 run = "mise dotfiles status"
+
+[tasks."bootstrap-extra:paru"]
+description = "Install paru"
+run = "bb -m paru"
+
+[tasks."bootstrap-extra:fonts:ioskeley"]
+description = "Installs Ioskeley Mono and Aporetic fonts."
+usage = 'arg "[version]" default="v2.1.0" help="The version of Ioskeley to pull in."' 
+run = "bb fonts:ioskeley ${usage_version:-default}"
+
+[tasks."bootstrap-extra:fonts:aporetic"]
+description = "Installs Aporetic and its Nerd Font variant." 
+run = "bb fonts:aporetic"
+
+[tasks."bootstrap-extra:lsp:racket"]
+description = "Installs the language server for Racket"
+run = "bb lsp:setup-racket"
+
+[tasks."bootstrap-extra:lsp:chicken"]
+description = "Installs the language server for Chicken Scheme"
+run = "bb lsp:setup-chicken"
+
+[tasks."bootstrap-extra:lsp:guile"]
+description = "Installs the language server for Guile Scheme"
+run = "bb lsp:setup-guile"
+
+[tasks."bootstrap-extra:lsp:cl"]
+description = "Installs the language server for Common Lisp"
+run = "bb lsp:setup-cl"
+
+[tasks."bootstrap-extra:lsp:all"]
+description = "Installs the language server for all LISP variants."
+run = "bb lsp:setup-all"
 
 [dotfiles]
 #"~/dotfiles" = "."
@@ -58,20 +88,23 @@ run = "mise dotfiles status"
 # --- Configs: top-level dotfiles ---
 "~/.eslintrc.js" = "configs/.eslintrc.js"
 "~/.stylelintrc" = "configs/.stylelintrc"
-"~/.inputrc" = "configs/.inputrc"
-"~/.boot" = "configs/.boot"
-"~/.lein" = "configs/.lein"
-"~/.omp" = "configs/.omp"
+"~/.inputrc"     = "configs/.inputrc"
+"~/.boot"        = "configs/.boot"
+"~/.lein"        = "configs/.lein"
+"~/.omp"         = "configs/.omp"
 
 # --- Configs: under ~/.config ---
 # Individual entries so nvim and configs don't conflict on ~/.config
-"~/.configs/opencode" = { source = "configs/.config/opencode", mode = "symlink" }
-"~/.config/kitty" = { source = "configs/.config/kitty", mode = "symlink" }
-"~/.config/ghostty" = { source = "configs/.config/ghostty", mode = "symlink" }
-"~/.config/wezterm" = { source = "configs/.config/wezterm", mode = "symlink" }
-"~/.configs/herdr" = { source = "configs/.config/herdr", mode = "symlink" }
-"~/.config/gtk-3.0" = { source = "configs/.config/gtk-3.0", mode = "symlink" }
-"~/.config/skills" = { source = "configs/.config/skills", mode = "symlink" }
+"~/.configs/opencode"     = { source = "configs/.config/opencode",      mode = "symlink" }
+"~/.config/kitty"         = { source = "configs/.config/kitty",         mode = "symlink" }
+"~/.config/ghostty"       = { source = "configs/.config/ghostty",       mode = "symlink" }
+"~/.config/wezterm"       = { source = "configs/.config/wezterm",       mode = "symlink" }
+"~/.configs/herdr"        = { source = "configs/.config/herdr",         mode = "symlink" }
+"~/.config/gtk-3.0"       = { source = "configs/.config/gtk-3.0",       mode = "symlink" }
+"~/.config/skills"        = { source = "configs/.config/skills",        mode = "symlink" }
 "~/.config/starship.toml" = { source = "configs/.config/starship.toml", mode = "symlink" }
-"~/.config/tree-sitter" = { source = "configs/.config/tree-sitter", mode = "symlink" }
-"~/.config/neovide" = { source = "configs/.config/neovide", mode = "symlink" }
+"~/.config/tree-sitter"   = { source = "configs/.config/tree-sitter",   mode = "symlink" }
+"~/.config/neovide"       = { source = "configs/.config/neovide",       mode = "symlink" }
+"~/.config/emacs"         = { source = "configs/.config/emacs",         mode = "symlink" }
+"~/.config/hypr"          = { source = "configs/.config/hypr",          mode = "symlink" }
+"~/.config/helix"         = { source = "configs/.config/helix",         mode = "symlink" }
