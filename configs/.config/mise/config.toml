@@ -21,13 +21,16 @@ auto = true
 auto = true
 
 [tool_alias]
+oh-my-pi = "github:can1357/oh-my-pi"
 gbrain = "github:garrytan/gbrain"
+deja = "github:Giammarco-Ferranti/deja"
+zhist = "github:overflowy/zhist"
 
 [tools]
 # Core
 node = "latest"
 bun = "latest"
-"aqua:pnpm/pnpm" = "latest"
+pnpm = "latest"
 worktrunk = "latest"
 uv = "latest"
 java = "latest"
@@ -38,7 +41,7 @@ clojure = "latest"
 herdr = "latest"
 hunk = "latest"
 "llama.cpp" = { version = "latest", version_prefix = "b" }
-"github:can1357/oh-my-pi" = "latest"
+oh-my-pi = "latest"
 ollama = "latest"
 opencode = "latest"
 pi = "latest"
@@ -48,7 +51,15 @@ gbrain = "latest"
 fnox = "latest"
 
 # Deps
-"pnpm:prettier" = "latest"
-"pnpm:markdownlint-cli2" = "0.23.2"
-"pnpm:eslint" = "latest"
-"pnpm:pi-nvim-bridge" = "latest"
+"npm:prettier" = "latest"
+"npm:markdownlint-cli2" = "0.23.2"
+"npm:eslint" = "latest"
+"npm:pi-nvim-bridge" = "latest"
+
+[tools.deja]
+version = "latest"
+postinstall = "deja import"
+
+[tools.zhist]
+version = "latest"
+postinstall = "zhist import ~/.histfile"

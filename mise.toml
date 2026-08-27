@@ -16,6 +16,11 @@
 [settings]
 dotfiles.root = "~/dotfiles"
 lockfile = true
+npm.package_manager = "pnpm"
+
+# -----------------------
+# Tasks 
+# -----------------------
 
 [tasks.install]
 description = "Install all dotfiles via mise dotfiles apply + run post-install hooks"
@@ -62,6 +67,10 @@ run = "bb lsp:setup-cl"
 description = "Installs the language server for all LISP variants."
 run = "bb lsp:setup-all"
 
+# -----------------------
+# Dotfile management
+# -----------------------
+
 [dotfiles]
 #"~/dotfiles" = "."
 "~/.config/mise/config.toml" = "configs/.config/mise/config.toml"
@@ -91,7 +100,6 @@ run = "bb lsp:setup-all"
 "~/.inputrc"     = "configs/.inputrc"
 "~/.boot"        = "configs/.boot"
 "~/.lein"        = "configs/.lein"
-"~/.omp"         = "configs/.omp"
 
 # --- Configs: under ~/.config ---
 # Individual entries so nvim and configs don't conflict on ~/.config
