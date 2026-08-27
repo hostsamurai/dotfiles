@@ -77,7 +77,9 @@
          })
 
   ;; Calculator
- (spec "Apeiros-46B/qalc.nvim" {:keys [["<leader>*" "<cmd>Qalc<cr>" {:desc "Calculator"}]]})
+ (spec "Apeiros-46B/qalc.nvim" {:enabled false 
+                                :keys [["<leader>*" "<cmd>Qalc<cr>" {:desc "Calculator"}]]})
+ (spec "necrom4/calcium.nvim" {:keys [(wk-spec "<leader>*" "<cmd>Calcium<CR>" {:desc "Inline calculator"})]})
 
  ;; Spreadsheets support
  (spec "DAmesberger/sc-im.nvim" {:keys [
@@ -94,7 +96,12 @@
                          :embed_image_as_base64 false
                          :prompt_for_file_name false 
                          :drag_and_drop {:insert_mode true}
-                         }}
+                         }
+               :filetypes {:codecompanion {
+                                           :prompt_for_file_name false 
+                                           :template "[Image]($FILE_PATH)"
+                                           :use_absolute_path true
+                                           }}}
         :keys [(wk-spec "<leader>CP" #(img-clip.open_picker) {:desc "Open Ignoring cword"})
                (wk-spec "<leader>Cp" #(img-clip.open_picker) {:desc "Open Picker for cword"})]
         })
