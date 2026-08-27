@@ -11,9 +11,19 @@
        {:opts {
                :dim {:enabled true} 
                :input {:enabled true}
+               :picker {:sources {
+                                  :files {:hidden true}
+                                  :grep {:cmd "rg" :hidden true}
+                                  :grep_buffers {:cmd "rg" :hidden true}
+                                  }}
                }
+        :keys [(wk-spec "<leader>cR" #(let [snacks (require :snacks)]
+                                        (snacks.rename.rename_file)) {:desc "Rename File"})]
         :init (fn []
                 (let [snacks (require :snacks)] 
+                  (vim.api.nvim_create_autocmd "User" {:pattern "MiniFilesActionRename" 
+                                                       :callback (fn [event]
+                                                                   (_G.Snacks.rename.on_rename_file event.data.from event.data.to))})
                   (vim.api.nvim_create_autocmd "User" {:pattern "VeryLazy" 
                                                        ;; Turn on dimming without manually toggling it on
                                                        :callback #(snacks.dim.enable)})))})
