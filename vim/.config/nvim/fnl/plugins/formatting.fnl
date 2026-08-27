@@ -8,6 +8,10 @@
 
 [
  ;; LazyVim overrides 
+ 
+ (spec "stevearc/conform.nvim" 
+       {:opts {:formatters {:markdownlint-cli2 {:append_args ["--fix" "$filename"]}}}})
+
  (spec "MeanderingProgrammer/render-markdown.nvim" 
        {:config #(let [render-markdown (require :render-markdown)]
                    (render-markdown.setup {
@@ -45,10 +49,15 @@
                ]
         })
 
- (spec "junegunn/vim-easy-align" {:keys [(wk-spec "<leader>FA" "<cmd>EasyAlign<cr>" 
+ (spec "junegunn/vim-easy-align" {:enabled false 
+                                  :keys [(wk-spec "<leader>FA" "<cmd>EasyAlign<cr>" 
                                                   {:desc "Align Text"})
                                          (wk-spec "<leader>Fp" "<cmd>LiveEasyAlign<cr>" 
                                                   {:desc "Align with Preview"})]})
+
+ ;; Align text like EasyAlign 
+ (spec "nvim-mini/mini.align" 
+       {:opts {:mappings {:start "<leader>FA" :start_with_preview "<leader>Fp"}}})
 
  ;; ghostty
  (spec "landerson02/ghostty-theme-sync.nvim" {:opts {:config "~/.config/ghostty/ghostty.config"}})
