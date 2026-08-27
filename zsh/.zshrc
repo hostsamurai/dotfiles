@@ -2,6 +2,8 @@ HISTFILE=$HOME/.histfile
 HISTSIZE=51000
 SAVEHIST=21000
 
+autoload -Uz compinit && compinit -u
+
 setopt extendedglob
 
 # Source completions first to keep any plugins that depend
@@ -35,9 +37,7 @@ bindkey '^U' backward-kill-line
 bindkey -v
 
 # Set editor to Neovim if it is available
-if command -v nvim > /dev/null; then
-  export EDITOR=nvim
-fi
+export EDITOR=nvim
 
 # Hooks
 autoload -U add-zsh-hook
@@ -49,40 +49,48 @@ add-zsh-hook chpwd setup-headroom-and-claude-alias
 # ------------------------------------------------
 
 if [[ `uname` = "Darwin" ]]; then
-  export ZPLUG_HOME=/opt/homebrew/opt/zplug
+  export ZINIT_HOME=/opt/homebrew/opt/zinit.zsh
 else
-  export ZPLUG_HOME=~/.zplug
+  export ZINIT_HOME=/usr/share/zinit/zinit.zsh
 fi
 
-source $ZPLUG_HOME/init.zsh
+source $ZINIT_HOME
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search"
-zplug "dim-an/cod", defer:2
+zi snippet OMZP::extract
+zi snippet OMZP::lein/_lein
 
-zplug "plugins/extract", from:oh-my-zsh, ignore:"_extract"
-zplug "plugins/lein",    from:oh-my-zsh
+# better shell history; depends on zhist binary  
+zi ice from"gh-r" as"program"
+zi light overflowy/zhist
 
-zplug "rupa/z", use:z.sh
-zplug "Tarrasch/zsh-bd", use:bd.zsh
-zplug "jamesob/desk", as:command, use:"desk.sh", hook-load:"shell_plugins/zsh/**" defer:2
-zplug "jocelynmallon/zshmarks"
-zplug "hlissner/zsh-autopair", defer:2
-zplug "paulirish/git-open", as:command
-zplug "alexdavid/git-branch-status", as:command
-zplug "lukechilds/zsh-better-npm-completion"
-zplug "arzzen/calc.plugin.zsh"
-zplug "joepvd/zsh-hints"
+# predictive autosuggestions; depends on deja binary 
+zi ice wait lucid depth=1 
+zi light Giammarco-Ferranti/deja 
 
-zplug "zplug/zplug", hook-build:'zplug --self-manage'
+zi as"null" wait"2" lucid for \
+  zsh-users/zsh-syntax-highlighting  \
+  dim-an/cod \
+  zsh-users/zsh-history-substring-search \
+  lukechilds/zsh-better-npm-completion \
+  arzzen/calc.plugin.zsh \
+  joepvd/zsh-hints \
+  jocelynmallon/zshmarks \
+  hlissner/zsh-autopair  \
+  zsh-users/zsh-completions
 
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
+zi ice src"z.sh"
+zi light rupa/z
+
+zi ice src"bd.zsh"
+zi light Tarrasch/zsh-bd
+
+zi ice as"command"
+zi light paulirish/git-open
+
+zi ice as"command"
+zi light alexdavid/git-branch-status
 
 if [[ `uname` == 'Linux' ]]; then
   . /usr/share/fzf/key-bindings.zsh
@@ -91,20 +99,11 @@ else
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
 
-if zplug check b4b4r07/enhancd; then
-  export ENHANCD_FILTER=fzf-tmux:fzf
-fi
-
-if zplug check jamesob/desk; then
-  # Hook for desk activation
-  [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
-fi
+export ENHANCD_FILTER=fzf-tmux:fzf
 
 if type "fasd" > /dev/null; then
   eval "$(fasd --init auto)"
 fi
-
-zplug load
 
 export GTAGSCONF=/usr/share/gtags/gtags.conf
 export GTAGSLABEL=pygments
@@ -244,6 +243,9 @@ export PATH="$PATH:$HOME.cargo/bin:$HOME.steel/bin"
 
 # bbin (babashka)
 [ -d "$HOME/.local/bin" ] && PATH="$PATH:$HOME.local/bin" 
+
+eval "$(zhist init)"
+eval "$(deja init zsh)"
 
 # Work-specific .zshrc
 [ -f ~/.zshrc_work ] && source ~/.zshrc_work
