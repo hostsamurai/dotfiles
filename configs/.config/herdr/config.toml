@@ -1,3 +1,4 @@
+# Sane navigation keybindings
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
@@ -22,12 +23,14 @@ type = "plugin_action"
 command = "vim-herdr-navigation.right"
 description = "navigate right (vim/herdr)"
 
+
 # Navigator
 [[keys.command]]
 key = "prefix+t"
 type = "plugin_action"
 command = "herdr-navigator.open"
 description = "jump to anything"
+
 
 # Resurrect 
 [[keys.command]]
@@ -42,12 +45,28 @@ type = "plugin_action"
 command = "ntindle.herdr-resurrect.restore"
 description = "resurrect: restore"
 
+
+# File Viewer
+[[keys.command]]
+key = "prefix+f"
+type = "plugin_action"
+command = "herdr-file-viewer.open-file-viewer"
+description = "open file viewer in split"
+
+[[keys.command]]
+key = "prefix+shift+f"
+type = "plugin_action"
+command = "herdr-file-viewer.open-file-viewer-tab"
+description = "open file viewer in tab"
+
+
 # Plugin Manager 
 [[keys.command]]
-key = "prefix+ctrl+p"
+key = "prefix+ctrl+l"
 type = "plugin_action"
-command = "ray.plugin-manager.open"
+command = "herdr.lazy.manage"
 description = "Open plugin manager"
+
 
 # Jump between panes 
 [[keys.command]]
@@ -56,12 +75,35 @@ type = "plugin_action"
 command = "com.elliotekj.herdr-easymotion.pane"
 description = "Select pane"
 
+
 # Jump to words
 [[keys.command]]
 key = "prefix+j"
 type = "plugin_action"
 command = "RooseveltAdvisors.herdr-leap.open"
 description = "tmux-jump-style copy-mode cursor"
+
+
+# Diff files
+[[keys.command]]
+key = "cmd+r"
+type = "plugin_action"
+command = "persiyanov.reviewr.toggle"
+
+
+# Herdr Plus 
+[[keys.command]]
+key = "prefix+up"
+type = "plugin_action"
+command = "cloudmanic.herdr-plus.projects"
+description = "herdr-plus: projects"
+
+[[keys.command]]
+key = "prefix+down"
+type = "plugin_action"
+command = "cloudmanic.herdr-plus.quick-actions"
+description = "herdr-plus: quick actions"
+
 
 [experimental]
 kitty_graphics = true
