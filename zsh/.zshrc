@@ -166,6 +166,10 @@ alias zz='fasd -d -i' # cd with interactive selection
 
 alias diff='colordiff'
 alias grep='grep --color=auto'
+alias rg='rg --hyperlink-format=kitty'
+
+# tmux-spotlight standalone launch
+alias tsp='/home/lou/.tmux/plugins/tmux-spotlight-ddf5f56a664d/scripts/switcher.sh'
 
 alias -g L='| less'
 alias -g M='| more'
@@ -210,6 +214,7 @@ alias cljs-release='cljs release app'
 # ------------------------------------------------
 
 autoload -Uz faviconify
+autoload -Uz herdr-lazy
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
