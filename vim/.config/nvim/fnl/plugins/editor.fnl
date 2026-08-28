@@ -27,6 +27,7 @@
         :event "VeryLazy"
         :opts {:spec [
                       (wk-spec "<leader>bs" {:group "Scratch" :icon "󱞁"})
+                      (wk-spec "<leader>cY" {:group "Snippets" :icon ""})
                       (wk-spec "<leader>C" {:group "Color" :icon ""})
                       (wk-spec "<leader>M" {:group "Motion" :icon "󱖒"})
                       (wk-spec "<leader>cD" {:group "Dev Container" :icon ""})

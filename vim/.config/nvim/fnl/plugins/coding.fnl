@@ -21,10 +21,13 @@
  ;; These two are necessary for blink to work correctly
  (spec "saghen/blink.compat" {:optional false})
  (spec "rafamadriz/friendly-snippets" {:optional false})
+ (spec "nvim-mini/mini.snippets" 
+       {:keys [(wk-spec "<leader>cYt" #(_G.MiniSnippets.setup _G.MiniSnippets.config) {:desc "Refresh snippets"})]})
 
  (spec "saghen/blink.cmp" 
        {
         :dependencies [
+                       "liquidz/elin-cmp-source"
                        (spec "jdrupal-dev/css-vars.nvim" {:dependencies "saghen/blink.lib"})
                        (spec "mikavilpas/blink-ripgrep.nvim" {:version "*"})
                        "MahanRahmati/blink-nerdfont.nvim"
@@ -40,6 +43,7 @@
                :snippets {:preset "mini_snippets"}
                :sources {
                          :default [
+                                   "elin"
                                    "lazydev"
                                    "emoji"
                                    "nerdfont"
@@ -52,23 +56,27 @@
                                    ]
                          :compat ["zsh"]
                          :providers {
+                                     :elin {:name "Elin" :module "elin_cmp_source"}
                                      :css_vars {:name "css-vars" :module "css-vars.blink"}
                                      :ripgrep {:name "ripgrep" :module "blink-ripgrep"}
                                      :nerdfont {
                                                 :name "Nerd Fonts" 
                                                 :module "blink-nerdfont" 
                                                 :opts {:insert true :trigger ":-"}
+                                                :score_offset 8
                                                 }
                                      :emoji {
                                              :name "Emoji"
                                              :module "blink-emoji"
                                              :score_offset 15 
                                              :opts {:insert true :trigger ":"}
+                                             :score_offset 8
                                              }
                                      :digraphs {
                                                  :name "digraphs"
                                                  :module "blink.compat.source"
                                                  :opts {:keyword_length 2}
+                                                 :score_offset 8
                                                  }
                                      :dictionary {
                                                   :name "blink-cmp-words"
@@ -80,7 +88,12 @@
                                                          :definition_pointers ["!" "&" "^"]
                                                          }
                                                   }
-                                     :git {:name "Git" :module "blink-cmp-git" :opts {:commit {:enable false}}}
+                                     :git {
+                                           :name "Git"  
+                                           :module "blink-cmp-git" 
+                                           :opts {:commit {:enable false}}
+                                           :score_offset 8
+                                           }
                                      :ghostty {:name "Ghostty" :module "blink-cmp-ghostty"}
                                      :env {
                                            :name "Env"
@@ -98,6 +111,7 @@
                                                             :enabled #(= vim.bo.filetype "gitcommit")
                                                             }
                                      }
+                         :per_filetype {:codecompanion ["codecompanion"]}
                          }
                }
         })
@@ -149,6 +163,10 @@
 
  ;; LISP dialects support 
  "Olical/nfnl"
+
+ "liquidz/elin" ;; Alternative to vim-iced and Conjure
+ "liquidz/elin-format"
+
  (spec "hiphish/rainbow-delimiters.nvim" 
        {:config #(let [rainbow-delimiters (require :rainbow-delimiters.setup)]
                    (rainbow-delimiters.setup {:strategy {
