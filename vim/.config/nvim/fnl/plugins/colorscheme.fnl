@@ -3,6 +3,7 @@
 (module :plugins.colorschemes)
 
 (local {: spec} (require :utils.spec))
+(local highlights (require :config.highlights))
 
 [
  ;; LazyVim overrides 
@@ -12,7 +13,12 @@
  ;;; Additional plugins
  ;;; ----------------------------------------------
  
- (spec "matsuuu/pinkmare" {:lazy false :priority 2000})
+ (spec "matsuuu/pinkmare" 
+       { 
+        :lazy false 
+        :priority 2000
+        :config #(highlights.init)
+        })
  (spec "rose-pine/neovim" {:lazy true :name "rose-pine"}) ;; 2nd favorite theme
  (spec "Mofiqul/dracula.nvim" {:lazy true})
  (spec "NTBBloodbath/doom-one.nvim" {:lazy true})
