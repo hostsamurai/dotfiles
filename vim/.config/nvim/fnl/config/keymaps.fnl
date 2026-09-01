@@ -10,6 +10,7 @@
 (module :config.keymaps)
 
 (local utils (require :utils.helpers))
+(local harper (require :keymaps.harper))
 
 (def- keymap vim.api.nvim_set_keymap)
 
@@ -49,4 +50,5 @@
 (do
   (setup-insert-mode-mappings)
   (setup-terminal-mode-mappings)
-  (setup-mappings))
+  (setup-mappings)
+  (harper.setup-keymap))
