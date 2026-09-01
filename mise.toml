@@ -116,3 +116,4 @@ run = "bb lsp:setup-all"
 "~/.config/emacs"         = { source = "configs/.config/emacs",         mode = "symlink" }
 "~/.config/hypr"          = { source = "configs/.config/hypr",          mode = "symlink" }
 "~/.config/helix"         = { source = "configs/.config/helix",         mode = "symlink" }
+"~/.config/yazi"          = { source = "configs/.config/yazi",          mode = "symlink" }
