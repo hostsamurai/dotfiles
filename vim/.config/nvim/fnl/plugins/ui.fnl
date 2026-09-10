@@ -11,6 +11,18 @@
        {:opts {
                :dim {:enabled true} 
                :input {:enabled true}
+               :image {:enabled true 
+                       :doc { 
+                             :inline false 
+                             ;; Only display the image on hover.
+                             :float true 
+                             :max_width #(if (= vim.g.neovim_mode "skitty")
+                                             5 
+                                             60)
+                             :max_height #(if (= vim.g.neovim_mode "skitty")
+                                              2.5 
+                                              30)
+                             }}
                :picker {:sources {
                                   :files {:hidden true}
                                   :grep {:cmd "rg" :hidden true}
