@@ -1,3 +1,5 @@
 #include "./.Xresources.d/gonvim"
 #include "./.Xresources.d/firefox"
 #include "./.Xresources.d/hyper"
+
+Xcursor.theme: "Layan-border Cursors"
