@@ -41,8 +41,14 @@
                        ]
         :opts {
                :snippets {:preset "mini_snippets"}
+               ;; Disable pressing Enter to accep the selection. Use C-y instead.
+               :keymap {:enter false}
                :sources {
                          :default [
+                                   "lsp" 
+                                   "path" 
+                                   "snippets"
+                                   "buffer"
                                    "elin"
                                    "lazydev"
                                    "emoji"
@@ -56,6 +62,10 @@
                                    ]
                          :compat ["zsh"]
                          :providers {
+                                     :lsp {:score_offset 90}
+                                     :path {:score_offset 25}
+                                     :snippets {:score_offset 85}
+                                     :buffer {:score_offset 20}
                                      :elin {:name "Elin" :module "elin_cmp_source"}
                                      :css_vars {:name "css-vars" :module "css-vars.blink"}
                                      :ripgrep {:name "ripgrep" :module "blink-ripgrep"}
@@ -63,14 +73,14 @@
                                                 :name "Nerd Fonts" 
                                                 :module "blink-nerdfont" 
                                                 :opts {:insert true :trigger ":-"}
-                                                :score_offset 8
+                                                :score_offset 10
                                                 }
                                      :emoji {
                                              :name "Emoji"
                                              :module "blink-emoji"
                                              :score_offset 15 
                                              :opts {:insert true :trigger ":"}
-                                             :score_offset 8
+                                             :score_offset 10
                                              }
                                      :digraphs {
                                                  :name "digraphs"
@@ -82,7 +92,7 @@
                                                   :name "blink-cmp-words"
                                                   :module "blink-cmp-words.dictionary"
                                                   :opts {
-                                                         ;;the number of characters to trigger completion
+                                                         ;; The number of characters to trigger completion
                                                          :dictionary_search_threshold 3
                                                          :score_offset 0
                                                          :definition_pointers ["!" "&" "^"]
