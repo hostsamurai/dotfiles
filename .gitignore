@@ -9,6 +9,8 @@ vim/.config/nvim/sessions
 vim/.config/nvim/tmp
 vim/.config/nvim/undo
 vim/.config/nvim/.netrwhist
+vim/.config/nvim/flsproject.lua
+vim/.config/nvim/lua/matugen-template.lua
 vim/.config/nvim/lua/nfnl
 vim/.config/nvim/fnl/nfnl
 !vim/.config/nvim/lua/config/lazy.lua
@@ -32,6 +34,11 @@ configs/.omp/*
 !configs/.omp/plugins/
 configs/.omp/plugins/*
 !configs/.omp/plugins/package.json
+configs/.config/hypr/*.lua
+
+.clj-kondo 
+.lsp 
+.luarc.json
 
 zsh/.zshrc_work
 
@@ -43,3 +50,5 @@ GRTAGS
 GTAGS
 
 neovide_backtraces.log
+
+.harper-dictionary.txt
