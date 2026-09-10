@@ -7,6 +7,8 @@
 
 [
  ;; LazyVim overrides 
+ ;; TODO: Set to "matugen" whenever we're ready to inherit the color 
+ ;; scheme from Noctalia.
  (spec "LazyVim/LazyVim" {:opts {:colorscheme "pinkmare"}})
 
 
@@ -26,6 +28,9 @@
                             :priority 1000
                             :opts {:style {:name "dracula_blood"}
                                    :italics {:comments true :keywords true}}})
+ (spec "RRethy/base16-nvim" {:lazy true 
+                             :config #(let [matugen (require :matugen)] 
+                                        (matugen.setup))})
 
  ;; Toolkit for developing new color schemes
  (spec "lifepillar/vim-colortemplate" {:lazy true})
