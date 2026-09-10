@@ -152,7 +152,7 @@ alias less='less -R'
 
 alias xl='eza -la --icons=always'
 alias xr='xl -R'           # recursive eza
-alias xs='xl -s=size'      # sort by modified time
+alias xs='xl -s=size'      # sort by size
 alias xt='xl -s=modified'  # sort by modified time
 alias xx='xl -s=extension' # sort by extension
 
@@ -190,7 +190,7 @@ if [[ `uname` == 'Linux' ]]; then
   alias pps='sudo pacman -S '
   alias ppsyu='sudo pacman -Syu'
   alias ppss='pacman -Ss'
-  alias parus='paru -S --aur'
+  alias pppss='paru -S --aur'
 
   alias restart-network='sudo systemctl restart systemd-resolved systemd-networkd.service'
 
