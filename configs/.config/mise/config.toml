@@ -55,6 +55,7 @@ fnox = "latest"
 "npm:markdownlint-cli2" = "0.23.2"
 "npm:eslint" = "latest"
 "npm:pi-nvim-bridge" = "latest"
+"npm:nbb" = "latest"
 
 [tools.deja]
 version = "latest"
