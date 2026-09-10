@@ -1,0 +1,13 @@
+[backdrop]
+enabled = false
+blur_intensity = 0.5
+tint_intensity = 0.3
+
+[theme]
+source = "wallpaper"
+
+[wallpaper]
+transition_on_startup = true
+
+[wallpaper.default]
+path = "~/Pictures/wallpapers/rock_me_amadeus_color_temp.png"
