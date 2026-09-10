@@ -1,0 +1,4 @@
+theme = "heetch_dark"
+
+[editor]
+rainbow-brackets = true
