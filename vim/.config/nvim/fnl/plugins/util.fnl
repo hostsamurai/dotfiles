@@ -6,7 +6,6 @@
 (local {: spec} (require :utils.spec))
 (local {: wk-spec} (require :utils.wk-spec))
 (local utils (require :utils.helpers))
-(local sc-im (utils.safe-require :sc-im))
 (local img-clip (utils.safe-require :img-clip))
 
 [
@@ -83,9 +82,18 @@
 
  ;; Spreadsheets support
  (spec "DAmesberger/sc-im.nvim" {:keys [
-                                        (wk-spec "<leader>zc" #(sc-im.close) {:desc "Close"})
-                                        (wk-spec "<leader>zo" #(sc-im.open_in_scim) {:desc "Open in sc-im"})
-                                        (wk-spec "<leader>zu" #(sc-im.update true) {:desc "Recalculate Table"})
+                                        (wk-spec "<leader>zc" 
+                                                 #(let [sc-im (require :sc-im)] 
+                                                    (sc-im.close)) 
+                                                 {:desc "Close"})
+                                        (wk-spec "<leader>zo" 
+                                                 #(let [sc-im (require :sc-im)]
+                                                    (sc-im.open_in_scim)) 
+                                                 {:desc "Open in sc-im"})
+                                        (wk-spec "<leader>zu" 
+                                                 #(let [sc-im (require :sc-im)]
+                                                    (sc-im.update) true) 
+                                                 {:desc "Recalculate Table"})
                                         ]})
 
  ;; Paste images from system clipboard
