@@ -37,6 +37,9 @@
     (keymap "t" "<M-[>"      "<Esc>"       {:desc "Escape term mode" :noremap true})
     (keymap "t" "<C-v><Esc>" "<Esc>"       {:desc "Escape term mode" :noremap true})))
 
+(defn- setup-misc-buffer-mappings []
+  (keymap "n" "<Space>bR" ":e<CR>" {:desc "Refresh buffer" :noremap true}))
+
 (defn- setup-mappings []
   (do
     ;; Easily switch to the last buffer
@@ -50,5 +53,6 @@
 (do
   (setup-insert-mode-mappings)
   (setup-terminal-mode-mappings)
+  (setup-misc-buffer-mappings)
   (setup-mappings)
   (harper.setup-keymap))
